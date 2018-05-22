@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="数据库名" ></dbname>
+
+    <version value="数据库版本号，用于更新数据库" ></version>
+
+    <list>
+        <!--这里是类映射-->
+    </list>
+</litepal>
