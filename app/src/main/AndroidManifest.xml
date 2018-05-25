@@ -7,6 +7,14 @@
         android:name="com.aopg.heybro.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
 
+    <!-- 这个权限用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <!-- 这个权限用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+     <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+
+
     <!-- Required  一些系统要求的权限，如访问网络等-->
     <uses-permission android:name="com.aopg.heybro.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
@@ -29,6 +37,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="cGgtuW2eaoQMPEuFIoTKRGwwWzl7HrER" >
+        </meta-data>
+        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"> </service>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
