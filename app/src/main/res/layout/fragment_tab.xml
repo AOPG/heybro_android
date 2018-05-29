@@ -8,5 +8,13 @@
     <ImageView
         android:id="@+id/imageId"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="8"/>
+    <TextView
+        android:id="@+id/textId"
+        android:textSize="10dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="0dp"
+        android:layout_weight="5"/>
 </LinearLayout>

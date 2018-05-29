@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import com.aopg.heybro.ui.fragment.FragmentActivity;
 import com.aopg.heybro.ui.fragment.FragmentBasketball;
@@ -37,33 +38,35 @@ public class MainActivity extends AppCompatActivity {
                 Map attr = map.get(LAST_SELECT);
                 View view = (View) attr.get("view");
                 ImageView iv = view.findViewById(R.id.imageId);
+                TextView tv = view.findViewById(R.id.textId);
                 iv.setImageResource((int)attr.get("img"));
                 LAST_SELECT = tabId;
                 //改此次点击的图标
                 if(tabId.equals("discovery")){
                     view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.imageId));
                     iv = view.findViewById(R.id.imageId);
-                    iv.setImageResource(R.drawable.uik_nav_home_selected);
+                    tv = view.findViewById(R.id.textId);
+                    iv.setImageResource(R.drawable.discovery_selected);
                 }
                 if(tabId.equals("activity")){
                     view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.imageId));
                     iv = view.findViewById(R.id.imageId);
-                    iv.setImageResource(R.drawable.uik_nav_weitao_selected);
+                    iv.setImageResource(R.drawable.activity_selected);
                 }
                 if(tabId.equals("basketball")){
                     view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.imageId));
                     iv = view.findViewById(R.id.imageId);
-                    iv.setImageResource(R.drawable.ic_nav_message_selected);
+                    iv.setImageResource(R.drawable.basketball_selected);
                 }
                 if(tabId.equals("friend")){
                     view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.imageId));
                     iv = view.findViewById(R.id.imageId);
-                    iv.setImageResource(R.drawable.uik_nav_cart_selected);
+                    iv.setImageResource(R.drawable.friend_selected);
                 }
                 if(tabId.equals("my")){
                     view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.imageId));
                     iv = view.findViewById(R.id.imageId);
-                    iv.setImageResource(R.drawable.uik_nav_my_selected);
+                    iv.setImageResource(R.drawable.my_selected);
                 }
             }
         });
@@ -76,13 +79,13 @@ public class MainActivity extends AppCompatActivity {
         myTabHost = this.findViewById(android.R.id.tabhost);
         myTabHost.setup(this, getSupportFragmentManager(),
                 android.R.id.tabcontent);
-        addTabSpec("discovery",R.drawable.uik_nav_home_normal, FragmentDiscovery.class);
-        addTabSpec("activity",R.drawable.uik_nav_weitao_normal, FragmentBasketball.class);
-        addTabSpec("basketball",R.drawable.ic_nav_message_normal, FragmentFriend.class);
-        addTabSpec("friend",R.drawable.uik_nav_cart_normal, FragmentActivity.class);
-        addTabSpec("my",R.drawable.uik_nav_my_normal, FragmentMy.class);
+        addTabSpec("discovery","发现",R.drawable.discovery, FragmentDiscovery.class);
+        addTabSpec("activity","活动",R.drawable.activity, FragmentBasketball.class);
+        addTabSpec("basketball","篮球",R.drawable.basketball, FragmentFriend.class);
+        addTabSpec("friend","好友",R.drawable.friend, FragmentActivity.class);
+        addTabSpec("my","我的",R.drawable.my, FragmentMy.class);
         ImageView iv =  (myTabHost.getTabWidget().getChildTabViewAt(2).findViewById(R.id.imageId));
-        iv.setImageResource(R.drawable.ic_nav_message_selected);
+        iv.setImageResource(R.drawable.basketball_selected);
         myTabHost.setCurrentTab(2);
     }
 
@@ -91,24 +94,27 @@ public class MainActivity extends AppCompatActivity {
      * @param fragment
      * @param id tabid
      * */
-    private void addTabSpec(String id,int drawable,Class<?> fragment){
+    private void addTabSpec(String id,String title,int drawable,Class<?> fragment){
         Map<String,Object> attr = new HashMap<>();
-        View viewTab = getTabView(drawable);
+        View viewTab = getTabView(drawable,title);
         TabHost.TabSpec tabSpec = myTabHost.newTabSpec(id)
                 .setIndicator(viewTab);
         myTabHost.addTab(tabSpec,fragment,null);
         attr.put("view",viewTab);
         attr.put("img",drawable);
+        attr.put("title",title);
         map.put(id,attr);
     }
 
     /**
      * 创建tabview
      * */
-    private View getTabView(int drawable) {
+    private View getTabView(int drawable,String title) {
         View view = getLayoutInflater().inflate(R.layout.fragment_tab, null);
         ImageView imageView = view.findViewById(R.id.imageId);
         imageView.setImageResource(drawable);
+        TextView textView = view.findViewById(R.id.textId);
+        textView.setText(title);
         return view;
     }
 
