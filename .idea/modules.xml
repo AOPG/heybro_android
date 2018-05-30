@@ -3,11 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\hey_bro\heybro_android\app\app.iml" filepath="D:\hey_bro\heybro_android\app\app.iml" />
       <module fileurl="file://D:\方向课\项目实训\heybro_android\app\app.iml" filepath="D:\方向课\项目实训\heybro_android\app\app.iml" />
       <module fileurl="file://D:\方向课\项目实训\heybro_android\heybro.iml" filepath="D:\方向课\项目实训\heybro_android\heybro.iml" />
       <module fileurl="file://$PROJECT_DIR$/heybro_android.iml" filepath="$PROJECT_DIR$/heybro_android.iml" />
-      <module fileurl="file://D:\hey_bro\heybro_android\heybro_android.iml" filepath="D:\hey_bro\heybro_android\heybro_android.iml" />
     </modules>
   </component>
 </project>
