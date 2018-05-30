@@ -1,9 +1,11 @@
 package com.aopg.heybro;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -40,33 +42,48 @@ public class MainActivity extends AppCompatActivity {
                 ImageView iv = view.findViewById(R.id.imageId);
                 TextView tv = view.findViewById(R.id.textId);
                 iv.setImageResource((int)attr.get("img"));
+                tv.setTextColor(0xFF2C2C2C);
                 LAST_SELECT = tabId;
                 //改此次点击的图标
                 if(tabId.equals("discovery")){
                     view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.imageId));
                     iv = view.findViewById(R.id.imageId);
+                    view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.textId));
                     tv = view.findViewById(R.id.textId);
                     iv.setImageResource(R.drawable.discovery_selected);
+                    tv.setTextColor(0xFFFFB90F);
                 }
                 if(tabId.equals("activity")){
                     view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.imageId));
                     iv = view.findViewById(R.id.imageId);
+                    view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.textId));
+                    tv = view.findViewById(R.id.textId);
                     iv.setImageResource(R.drawable.activity_selected);
+                    tv.setTextColor(0xFFFFB90F);
                 }
                 if(tabId.equals("basketball")){
                     view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.imageId));
                     iv = view.findViewById(R.id.imageId);
+                    view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.textId));
+                    tv = view.findViewById(R.id.textId);
                     iv.setImageResource(R.drawable.basketball_selected);
+                    tv.setTextColor(0xFFFFB90F);
                 }
                 if(tabId.equals("friend")){
                     view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.imageId));
                     iv = view.findViewById(R.id.imageId);
+                    view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.textId));
+                    tv = view.findViewById(R.id.textId);
                     iv.setImageResource(R.drawable.friend_selected);
+                    tv.setTextColor(0xFFFFB90F);
                 }
                 if(tabId.equals("my")){
                     view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.imageId));
                     iv = view.findViewById(R.id.imageId);
+                    view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.textId));
+                    tv = view.findViewById(R.id.textId);
                     iv.setImageResource(R.drawable.my_selected);
+                    tv.setTextColor(0xFFFFB90F);
                 }
             }
         });
@@ -85,7 +102,9 @@ public class MainActivity extends AppCompatActivity {
         addTabSpec("friend","好友",R.drawable.friend, FragmentActivity.class);
         addTabSpec("my","我的",R.drawable.my, FragmentMy.class);
         ImageView iv =  (myTabHost.getTabWidget().getChildTabViewAt(2).findViewById(R.id.imageId));
+        TextView tv = (myTabHost.getTabWidget().getChildTabViewAt(2).findViewById(R.id.textId));
         iv.setImageResource(R.drawable.basketball_selected);
+        tv.setTextColor(0xFFFFB90F);
         myTabHost.setCurrentTab(2);
     }
 
@@ -102,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
         myTabHost.addTab(tabSpec,fragment,null);
         attr.put("view",viewTab);
         attr.put("img",drawable);
-        attr.put("title",title);
         map.put(id,attr);
     }
 
