@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="148dp"
+        android:layout_height="140dp"
         android:background="@drawable/wodebeijing"
         android:orientation="vertical">
 
@@ -43,32 +43,34 @@
             <!--我的头像 需要实现圆形-->
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
                 android:src="@drawable/image"/>
             <LinearLayout
                 android:layout_width="220dp"
                 android:layout_height="80dp"
                 android:orientation="vertical"
-                android:layout_marginLeft="10dp">
+                android:layout_marginLeft="15dp">
                 <LinearLayout
                     android:layout_width="218dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="简介："
                         android:textColor="#ffffff"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:layout_marginTop="10dp"/>
                     <!--个人简介 -->
                     <TextView
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:textColor="#ffffff"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:layout_marginTop="10dp"
                         android:text="今天天气真好"/>
                 </LinearLayout>
@@ -80,14 +82,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
                         android:textColor="#fffff0"
-                        android:textSize="16dp"
+                        android:textSize="14dp"
                         android:text="ID："/>
                     <!-- 个人ID-->
                     <TextView
                         android:layout_width="150dp"
                         android:layout_height="25dp"
                         android:textColor="#fffff0"
-                        android:textSize="16dp"
+                        android:textSize="14dp"
                         android:text="111111"/>
                 </LinearLayout>
 
@@ -106,7 +108,7 @@
 <TableLayout
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="20dp">
     <TableRow>
         <!-- 等级按钮，有点击事件 -->
         <Button
@@ -140,164 +142,175 @@
 
 </TableLayout>
     <LinearLayout
-        android:layout_width="320dp"
+        android:layout_width="350dp"
         android:layout_height="300dp"
         android:background="#1fffffff"
-        android:layout_marginLeft="18dp"
+        android:layout_marginLeft="5dp"
         android:orientation="vertical">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp">
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp">
             <!-- 扫一扫有点击事件-->
             <ImageView
                 android:id="@+id/saoyisao"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginLeft="40dp"
                 android:src="@drawable/saoyisao" />
             <!-- 竞猜有点击事件-->
             <ImageView
                 android:id="@+id/jingcai"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="60dp"
                 android:src="@drawable/jingcai"/>
             <!-- 我的装备有点击事件-->
             <ImageView
                 android:id="@+id/zhuangbei"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="60dp"
                 android:src="@drawable/zhuangbei"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_width="320dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp">
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="扫一扫"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:textSize="20dp" />
+                android:layout_marginLeft="35dp"
+                android:textSize="16dp" />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="我的竞猜"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:textSize="20dp" />
+                android:layout_marginLeft="40dp"
+                android:textSize="16dp" />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="我的装备"
-                android:textSize="20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
+                android:textSize="16dp"
+                android:layout_marginLeft="40dp"
                 />
         </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="10dp">
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp">
             <!-- 打球日历有点击事件-->
             <ImageView
                 android:id="@+id/rili"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginLeft="40dp"
                 android:src="@drawable/rili"
                 />
             <!-- 我的数据有点击事件-->
             <ImageView
                 android:id="@+id/data"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="60dp"
                 android:src="@drawable/data"/>
             <!-- 商城暂不开放-->
             <ImageView
                 android:id="@+id/shopping"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="60dp"
                 android:src="@drawable/shopping"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_width="320dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp">
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="打球日历"
-                android:textSize="20dp"
+                android:textSize="16dp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="25dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="38dp"
                 android:text="我的数据"
                 android:textColor="#ffffff"
-                android:textSize="20dp" />
+                android:layout_gravity="center"
+                android:textSize="16dp" />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="商城"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="35dp"/>
+                android:layout_marginLeft="50dp"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp">
             <!-- 我的订单暂未开放-->
             <ImageView
                 android:id="@+id/dingdan"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginLeft="40dp"
                 android:src="@drawable/dingdan"
                 />
             <!-- 我的钱包-->
             <ImageView
                 android:id="@+id/qianbao"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="60dp"
                 android:src="@drawable/qianbao"/>
             <!-- 客服与点击事件-->
             <ImageView
                 android:id="@+id/kefu"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="60dp"
                 android:src="@drawable/kefu"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_width="320dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp">
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="我的订单"
-                android:textSize="20dp"
+                android:textSize="16dp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="25dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="38dp"
                 android:text="我的钱包"
                 android:textColor="#ffffff"
-                android:textSize="20dp" />
+                android:layout_gravity="center"
+                android:textSize="16dp" />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="客服"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="35dp"/>
+                android:layout_marginLeft="50dp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
