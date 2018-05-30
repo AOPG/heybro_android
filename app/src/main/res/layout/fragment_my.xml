@@ -40,13 +40,13 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="horizontal">
-            <!--我的头像 -->
+            <!--我的头像 需要实现圆形-->
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginLeft="15dp"
-                android:src="@drawable/ic_launcher_background"/>
+                android:src="@drawable/image"/>
             <LinearLayout
                 android:layout_width="220dp"
                 android:layout_height="80dp"
@@ -69,7 +69,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="#ffffff"
                         android:textSize="22dp"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="10dp"
+                        android:text="今天天气真好"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="218dp"
@@ -80,19 +81,216 @@
                         android:layout_height="25dp"
                         android:textColor="#fffff0"
                         android:textSize="18dp"
-                        android:text="ID:"/>
+                        android:text="ID："/>
                     <!-- 个人ID-->
                     <TextView
                         android:layout_width="150dp"
                         android:layout_height="25dp"
                         android:textColor="#fffff0"
-                        android:textSize="18dp"/>
+                        android:textSize="18dp"
+                        android:text="111111"/>
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
+
         </LinearLayout>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#535050"
+    >
+<TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginTop="10dp">
+    <TableRow>
+        <!-- 等级按钮，有点击事件 -->
+        <Button
+            android:id="@+id/rating"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:text="等级：1级"
+            android:background="#1fffffff"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="12dp"
+            />
+        <!--  擅长位置按钮，有点击事件-->
+        <Button
+            android:id="@+id/position"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:text="擅长位置"
+            android:background="#1fffffff"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="12dp"/>
+        <!-- 战绩按钮，无点击事件 获胜场数/总场数-->
+        <Button
+            android:id="@+id/grade"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:text="战绩1/3"
+            android:background="#1fffffff"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="12dp"/>
+    </TableRow>
 
+</TableLayout>
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="270dp">
+        <TableLayout
+            android:layout_width="360dp"
+            android:layout_height="260dp"
+            android:layout_marginLeft="13dp"
+            android:background="#1fffffff">
+            <TableRow android:gravity="center"
+                android:layout_marginTop="20dp">
+                <!-- 扫一扫有点击事件-->
+                <ImageView
+                    android:id="@+id/saoyisao"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/saoyisao"
+                    />
+                <!-- 竞猜有点击事件-->
+                <ImageView
+                    android:id="@+id/jingcai"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/jingcai"/>
+                <!-- 我的装备有点击事件-->
+                <ImageView
+                    android:id="@+id/zhuangbei"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/zhuangbei"/>
+                <ImageView />
+            </TableRow>
+
+            <TableRow android:gravity="center"
+                android:layout_marginTop="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="扫一扫"
+                    android:textSize="23dp"
+                    android:layout_marginLeft="15dp"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="我的竞猜"
+                    android:textSize="23dp"
+                    android:layout_marginLeft="35dp"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="我的装备"
+                    android:textSize="23dp"
+                    android:layout_marginLeft="30dp"/>
+            </TableRow>
+            <TableRow android:gravity="center" android:layout_marginTop="10dp">
+                <!-- 打球日历有点击事件-->
+                <ImageView
+                    android:id="@+id/rili"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/rili"
+                    />
+                <!-- 我的数据有点击事件-->
+                <ImageView
+                    android:id="@+id/data"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/data"/>
+                <!-- 商城暂不开放-->
+                <ImageView
+                    android:id="@+id/shopping"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/shopping"/>
+                <ImageView />
+            </TableRow>
+            <TableRow android:gravity="center"
+                android:layout_marginTop="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="打球日历"
+                    android:textSize="23dp"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:text="我的数据"
+                    android:textColor="#ffffff"
+                    android:textSize="23dp" />
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="商城"
+                    android:textSize="23dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="25dp"/>
+            </TableRow>
+            <TableRow android:gravity="center" android:layout_marginTop="10dp">
+                <!-- 我的订单暂未开放-->
+                <ImageView
+                    android:id="@+id/dingdan"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/dingdan"
+                    />
+                <!-- 我的钱包-->
+                <ImageView
+                    android:id="@+id/qianbao"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/qianbao"/>
+                <!-- 客服与点击事件-->
+                <ImageView
+                    android:id="@+id/kefu"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/kefu"/>
+                <ImageView />
+            </TableRow>
+            <TableRow android:gravity="center"
+                android:layout_marginTop="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="我的订单"
+                    android:textSize="23dp"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:text="我的钱包"
+                    android:textColor="#ffffff"
+                    android:textSize="23dp" />
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="客服"
+                    android:textSize="23dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="25dp"/>
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+</LinearLayout>
 </LinearLayout>
