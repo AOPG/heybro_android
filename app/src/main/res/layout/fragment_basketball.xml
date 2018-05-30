@@ -50,16 +50,28 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/basket_search"/>
+            <!-- 需要实现日历日期的显示-->
             <Button
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="20dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/basket_calender"/>
-
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#535050">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="#535050"/>
 
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="#535050" />
     </LinearLayout>
 </LinearLayout>
