@@ -26,7 +26,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:textSize="30dp"/>
-            <!-- 设置 会跳转页面-->
+            <!-- 设置 会跳转settings页面-->
             <ImageView
                 android:id="@+id/setting"
                 android:layout_width="0dp"

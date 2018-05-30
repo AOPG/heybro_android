@@ -6,14 +6,189 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#656862">
-        <!-- 返回 有点假事件-->
+        android:background="#656862"
+        android:orientation="horizontal">
+        <!-- 返回 有点击事件-->
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:layout_marginLeft="10dp"
             android:src="@drawable/back"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="设置"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="10dp"
+            android:textSize="28dp"/>
     </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#535050">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
+        android:orientation="vertical">
+        <!-- 账号与安全有点击事件-->
+        <LinearLayout
+            android:id="@+id/zhanghaoanquan"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:background="#1fffffff">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="账号与安全"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="23dp"/>
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:layout_marginLeft="200dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/right"/>
+        </LinearLayout>
+        <!-- 有点击事件-->
+        <LinearLayout
+            android:id="@+id/xiaoxitongzhi"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:background="#1fffffff">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消息通知"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="23dp"/>
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/right"/>
+        </LinearLayout>
+        <!-- 隐私设置有点击事件-->
+        <LinearLayout
+            android:id="@+id/yinsi"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:background="#1fffffff">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="隐私设置"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="23dp"/>
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/right"/>
+        </LinearLayout>
+        <!-- 通用有点击事件-->
+        <LinearLayout
+            android:id="@+id/tongyong"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:background="#1fffffff">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="通用"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="23dp"/>
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:layout_marginLeft="265dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/right"/>
+        </LinearLayout>
+        <!-- 帮助与反馈暂不开放-->
+        <LinearLayout
+            android:id="@+id/help"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:background="#1fffffff">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="帮助与反馈"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="23dp"/>
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:layout_marginLeft="200dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/right"/>
+        </LinearLayout>
+        <!-- 关于微信暂不开放-->
+        <LinearLayout
+            android:id="@+id/guanyu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:background="#1fffffff">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关于微信"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="23dp"/>
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/right"/>
+        </LinearLayout>
+        <!-- 退出登录-->
+        <LinearLayout
+            android:id="@+id/tuichu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:background="#1fffffff"
+            android:gravity="center">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="退出登录"
+    android:textColor="#ff0000"
+    android:textSize="25dp"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
