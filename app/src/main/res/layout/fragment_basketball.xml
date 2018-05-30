@@ -52,7 +52,7 @@
             <!-- 搜索功能-->
             <Button
                 android:id="@+id/basket_search"
-                android:layout_marginLeft="180dp"
+                android:layout_marginLeft="150dp"
                 android:layout_marginTop="20dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -74,12 +74,12 @@
         android:background="#535050">
         <!--约球-->
         <LinearLayout
-            android:layout_width="190dp"
+            android:layout_width="180dp"
             android:layout_height="53dp"
             android:orientation="vertical">
             <Button
                 android:id="@+id/date_ball"
-                android:layout_width="190dp"
+                android:layout_width="180dp"
                 android:layout_height="50dp"
                 android:background="#535050"
                 android:text="约球"
@@ -97,12 +97,12 @@
             android:layout_gravity="center" />
         <!--约赛-->
         <LinearLayout
-            android:layout_width="190dp"
+            android:layout_width="180dp"
             android:layout_height="53dp"
             android:orientation="vertical">
             <Button
                 android:id="@+id/date_game"
-                android:layout_width="190dp"
+                android:layout_width="180dp"
                 android:layout_height="50dp"
                 android:background="#535050"
                 android:text="约赛"
@@ -120,8 +120,8 @@
         <!--a.包裹HorizontalScrollView控件是GirdView横向滚动的基本条件
             b.GirdView外包裹LinearLayout是java代码中参数设置的必要条件-->
         <HorizontalScrollView
-            android:layout_width="320dp"
-            android:layout_height="140dp"
+            android:layout_width="300dp"
+            android:layout_height="170dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp">
             <LinearLayout
@@ -160,7 +160,7 @@
             mContentGv.setNumColumns(size);
         }-->
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="200dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:background="@drawable/basket_class_corner"
@@ -183,13 +183,21 @@
                 android:layout_marginLeft="30dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/basket_btn_corner"/>
+                android:background="@drawable/basket_btn_corner"
+                android:text="创建房间"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
             <Button
                 android:layout_marginTop="40dp"
                 android:layout_marginLeft="110dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/basket_btn_corner"/>
+                android:background="@drawable/basket_btn_corner"
+                android:text="快速匹配"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
         </LinearLayout>
 
     </LinearLayout>
