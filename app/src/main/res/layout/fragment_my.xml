@@ -150,7 +150,7 @@
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="320dp"
-            android:layout_height="35dp"
+            android:layout_height="33dp"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="15dp">
             <!-- 扫一扫有点击事件-->
@@ -185,26 +185,26 @@
                 android:text="扫一扫"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
-                android:textSize="16dp" />
+                android:textSize="15dp" />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="我的竞猜"
                 android:layout_gravity="center"
                 android:layout_marginLeft="45dp"
-                android:textSize="16dp" />
+                android:textSize="15dp" />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="我的装备"
                 android:layout_gravity="center"
-                android:textSize="16dp"
-                android:layout_marginLeft="40dp"
+                android:textSize="15dp"
+                android:layout_marginLeft="43dp"
                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="320dp"
-            android:layout_height="35dp"
+            android:layout_height="33dp"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="15dp">
             <!-- 打球日历有点击事件-->
@@ -238,7 +238,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="打球日历"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"/>
 
@@ -249,18 +249,18 @@
                 android:text="我的数据"
                 android:textColor="#ffffff"
                 android:layout_gravity="center"
-                android:textSize="16dp" />
+                android:textSize="15dp" />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="商城"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="50dp"/>
+                android:layout_marginLeft="53dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="320dp"
-            android:layout_height="35dp"
+            android:layout_height="33dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp">
             <!-- 我的订单暂未开放-->
@@ -294,25 +294,25 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="我的订单"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="25dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="38dp"
+                android:layout_marginLeft="40dp"
                 android:text="我的钱包"
                 android:textColor="#ffffff"
                 android:layout_gravity="center"
-                android:textSize="16dp" />
+                android:textSize="15dp" />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="客服"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="50dp"/>
+                android:layout_marginLeft="55dp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
