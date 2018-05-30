@@ -4,4 +4,95 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        android:background="@drawable/wodebeijing"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+           >
+            <!--我的昵称 -->
+            <TextView
+                android:id="@+id/myName"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:text="昵称"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="30dp"/>
+            <!-- 设置 会跳转页面-->
+            <ImageView
+                android:id="@+id/setting"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1.5"
+                android:src="@drawable/setting"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+            <!--我的头像 -->
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/ic_launcher_background"/>
+            <LinearLayout
+                android:layout_width="220dp"
+                android:layout_height="80dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+                <LinearLayout
+                    android:layout_width="218dp"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="简介："
+                        android:textColor="#ffffff"
+                        android:textSize="22dp"
+                        android:layout_marginTop="10dp"/>
+                    <!--个人简介 -->
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:textSize="22dp"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="218dp"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:textColor="#fffff0"
+                        android:textSize="18dp"
+                        android:text="ID:"/>
+                    <!-- 个人ID-->
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="25dp"
+                        android:textColor="#fffff0"
+                        android:textSize="18dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        </LinearLayout>
+
+
 </LinearLayout>
