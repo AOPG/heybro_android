@@ -163,7 +163,7 @@
             android:layout_width="300dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:background="@drawable/basket_corner_class"
+            android:background="@drawable/basket_class_corner"
             android:orientation="vertical">
 
             <TextView
@@ -179,17 +179,17 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <Button
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginLeft="30dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/basket_corner_btn"/>
+                android:background="@drawable/basket_btn_corner"/>
             <Button
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginLeft="110dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/basket_corner_btn"/>
+                android:background="@drawable/basket_btn_corner"/>
         </LinearLayout>
 
     </LinearLayout>
