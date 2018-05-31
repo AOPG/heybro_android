@@ -24,7 +24,7 @@
             android:layout_marginLeft="80dp"
             android:layout_marginTop="18dp"
             android:src="@drawable/xinxi"/>
-        <!-- 有点击事件-->
+        <!-- 点击跳转到fragment_friend_addfriend页面-->
         <ImageView
             android:id="@+id/add"
             android:layout_marginTop="13dp"
