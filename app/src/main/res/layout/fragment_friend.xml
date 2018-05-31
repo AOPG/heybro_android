@@ -56,12 +56,13 @@
                 android:layout_marginLeft="15dp"
                 android:background="@drawable/cirle"
               >
+
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="6dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
-                    android:src="@drawable/category"/>
+                    android:layout_marginTop="6dp"
+                    android:src="@drawable/category" />
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
