@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -336,7 +331,8 @@
                         android:background="@drawable/basket_spinner_corner"
                         android:text="请输入"
                         android:textColor="#f5f5f5"
-                        android:textSize="15dp"></EditText>
+                        android:textSize="15dp">
+                    </EditText>
                 </RelativeLayout>
                 <!-- 创建房间后 跳到房间界面-->
                 <Button
@@ -352,4 +348,3 @@
         </RelativeLayout>
 
     </LinearLayout>
-</LinearLayout>
