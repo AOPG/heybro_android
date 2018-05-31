@@ -1,10 +1,7 @@
 package com.aopg.heybro.ui.fragment;
 
 
-import android.content.ComponentName;
-import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,11 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
-import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 
 
@@ -31,6 +24,8 @@ public class FragmentBasketball extends Fragment {
     private View rootView;
     private boolean isVisible = true;
     private RelativeLayout relativeLayout;
+    private View ballView;
+    private View gameView;
 
     @Nullable
     @Override
@@ -49,6 +44,9 @@ public class FragmentBasketball extends Fragment {
         }
         relativeLayout = rootView.findViewById(R.id.create);
         relativeLayout.setVisibility(View.GONE);
+        ballView = rootView.findViewById(R.id.ball_selected);
+        gameView = rootView.findViewById(R.id.game_selected);
+        gameView.setVisibility(View.GONE);
         /**
          * 创建房间
          */
@@ -61,6 +59,38 @@ public class FragmentBasketball extends Fragment {
                     relativeLayout.setVisibility(View.VISIBLE);//这一句显示布局
                 } else {
                     relativeLayout.setVisibility(View.GONE);//这一句即隐藏布局
+                    isVisible = true;
+                }
+            }
+        });
+        /**
+         * 约球
+         */
+        Button btn_ball = rootView.findViewById(R.id.date_ball);
+        btn_ball.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isVisible) {
+                    isVisible = false;
+                    ballView.setVisibility(View.VISIBLE);//这一句显示布局
+                    gameView.setVisibility(View.GONE);
+                } else {
+                    isVisible = true;
+                }
+            }
+        });
+        /**
+         * 约赛
+         */
+        Button btn_game = rootView.findViewById(R.id.date_game);
+        btn_game.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isVisible) {
+                    isVisible = false;
+                    gameView.setVisibility(View.VISIBLE);//这一句显示布局
+                    ballView.setVisibility(View.GONE);
+                } else {
                     isVisible = true;
                 }
             }
