@@ -49,4 +49,33 @@
             android:orientation="horizontal"
             android:background="#1fffffff">
     </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#ffffff"/>
+        <LinearLayout
+            android:id="@+id/fensiliebiao"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="#1fffffff">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#ffffff"/>
+        <LinearLayout
+            android:id="@+id/haoyoudongtai"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="#1fffffff">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#ffffff"/>
+
+
+</LinearLayout>
+</LinearLayout>
 </LinearLayout>
