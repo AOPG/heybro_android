@@ -115,7 +115,11 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                 } else {
                     String Uusername = username.getText().toString();
                     String Upassword = password.getText().toString();
-                    doGetSync(Uusername, Upassword);
+//                    doGetSync(Uusername, Upassword);
+                    Intent intent2 = new Intent();
+                    intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
+                    intent2.putExtra("position", userNameFlag);
+                    startActivity(intent2);
                 }
                 break;
 
