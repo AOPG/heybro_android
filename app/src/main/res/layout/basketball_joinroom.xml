@@ -120,7 +120,7 @@
         </LinearLayout>
 
         <!--主要功能-->
-    <RelativeLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#535050"
@@ -242,77 +242,19 @@
                     android:layout_marginLeft="150dp"
                     android:background="@drawable/room_error"/>
                 <RelativeLayout
-                    android:layout_width="160dp"
-                    android:layout_height="30dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="40dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:text="模     式"
-                        android:textColor="#ffffff"
-                        android:textSize="15dp" />
-                    <!-- 下拉菜单  待实现-->
-                    <Spinner
-                        android:id="@+id/spinner1"
+                    android:layout_width="180dp"
+                    android:layout_height="120dp">
+                    <ListView
+                        android:id="@+id/roomDetail_list"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="65dp"
-                        android:background="@drawable/basket_spinner_corner">
-                        <!--<TextView
-                            android:id="@+id/spinner1_model"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/basket_spinner_corner"/>
-                        -->
-                    </Spinner>
+                        android:layout_height="match_parent"
+                        android:background="#535050">
+                    </ListView>
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="160dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="80dp"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:text="等级要求"
-                        android:textColor="#ffffff"
-                        android:textSize="15dp" />
-                    <!-- 下拉菜单  待实现-->
-                    <Spinner
-                        android:id="@+id/spinner2"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="65dp"
-                        android:background="@drawable/basket_spinner_corner"></Spinner>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="160dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="120dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:text="房间人数"
-                        android:textColor="#ffffff"
-                        android:textSize="15dp" />
-                    <!-- 下拉菜单  待实现-->
-                    <Spinner
-                        android:id="@+id/spinner3"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="65dp"
-                        android:background="@drawable/basket_spinner_corner"></Spinner>
-                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="160dp"
@@ -346,7 +288,7 @@
                     android:layout_marginLeft="70dp"
                     android:layout_marginTop="200dp"
                     android:background="@drawable/basket_room_establish"
-                    android:text="完成创建"
+                    android:text="加入房间"
                     android:textColor="#ffffff"
                     android:textSize="20dp" />
             </RelativeLayout>

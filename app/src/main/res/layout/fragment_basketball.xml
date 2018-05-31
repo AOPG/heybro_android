@@ -116,7 +116,7 @@
         android:layout_height="match_parent"
         android:background="#535050"
         android:orientation="vertical">
-        <!-- 房间显示-->
+        <!-- 房间显示    点击每个房间可查看房间详情 加入房间-->
         <!--a.包裹HorizontalScrollView控件是GirdView横向滚动的基本条件
             b.GirdView外包裹LinearLayout是java代码中参数设置的必要条件-->
         <HorizontalScrollView
