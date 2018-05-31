@@ -197,6 +197,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/btn_create"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginLeft="30dp"
@@ -208,6 +209,7 @@
                         android:textStyle="bold" />
 
                     <Button
+                        android:id="@+id/btn_match"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginLeft="110dp"
@@ -221,20 +223,12 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/create"
                 android:layout_width="200dp"
                 android:layout_height="250dp"
                 android:layout_margin="80dp"
                 android:background="@drawable/basket_room_corner"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/roomNum"
-                    android:layout_width="55dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="10dp"
-                    android:text="100020"
-                    android:textColor="#ffffff"
-                    android:textSize="15sp" />
 
                 <RelativeLayout
                     android:layout_width="160dp"
@@ -285,6 +279,18 @@
                         android:layout_height="30dp"
                         android:layout_marginLeft="65dp"
                         android:background="@drawable/basket_spinner_corner"></Spinner>
+
+                    <TextView
+                        android:id="@+id/roomNum"
+                        android:layout_width="55dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="40dp"
+                        android:text="100020"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout

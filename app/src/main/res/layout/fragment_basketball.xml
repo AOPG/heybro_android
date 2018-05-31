@@ -179,6 +179,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <Button
+                android:id="@+id/btn_create"
                 android:layout_marginTop="40dp"
                 android:layout_marginLeft="30dp"
                 android:layout_width="100dp"
@@ -189,6 +190,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"/>
             <Button
+                android:id="@+id/btn_match"
                 android:layout_marginTop="40dp"
                 android:layout_marginLeft="110dp"
                 android:layout_width="100dp"
