@@ -51,16 +51,17 @@
             android:background="#1fffffff">
             <!-- 需要实现圆形-->
             <LinearLayout
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp"
-                android:background="#2FB7EC">
+                android:background="@drawable/cirle"
+              >
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginLeft="3dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="5dp"
                     android:src="@drawable/Category"/>
             </LinearLayout>
             <TextView
@@ -91,17 +92,18 @@
             android:background="#1fffffff">
             <!-- 需要实现圆形-->
             <LinearLayout
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp"
-                android:background="#CF2FEC">
+                android:background="@drawable/cirle1">
+
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginLeft="3dp"
-                    android:src="@drawable/Category"/>
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/Category" />
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -136,12 +138,12 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp"
-                android:background="#F99B16">
+                android:background="@drawable/cirle2">
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginLeft="3dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
                     android:src="@drawable/refresh"/>
             </LinearLayout>
             <TextView
@@ -182,7 +184,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="15dp"
-                    android:background="#ff0000">
+                    android:background="@drawable/cirle3">
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
@@ -277,7 +279,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/pic"/>
+                    android:src="@drawable/pic" />
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
