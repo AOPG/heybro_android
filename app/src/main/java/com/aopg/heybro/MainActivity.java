@@ -95,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
         myTabHost.setup(this, getSupportFragmentManager(),
                 android.R.id.tabcontent);
         addTabSpec("discovery","发现",R.drawable.discovery, FragmentDiscovery.class);
-        addTabSpec("activity","活动",R.drawable.activity, FragmentBasketball.class);
-        addTabSpec("basketball","篮球",R.drawable.basketball, FragmentFriend.class);
-        addTabSpec("friend","好友",R.drawable.friend, FragmentActivity.class);
+        addTabSpec("activity","活动",R.drawable.activity, FragmentActivity.class);
+        addTabSpec("basketball","篮球",R.drawable.basketball, FragmentBasketball.class);
+        addTabSpec("friend","好友",R.drawable.friend, FragmentFriend.class);
         addTabSpec("my","我的",R.drawable.my, FragmentMy.class);
         ImageView iv =  (myTabHost.getTabWidget().getChildTabViewAt(2).findViewById(R.id.imageId));
         TextView tv = (myTabHost.getTabWidget().getChildTabViewAt(2).findViewById(R.id.textId));
