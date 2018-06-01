@@ -44,7 +44,7 @@
     android:layout_height="30dp"
     android:layout_marginTop="5dp"
     android:layout_marginLeft="15dp"
-    android:hint="输入手机号/ID号搜索"
+    android:hint="输入昵称/ID号搜索"
     android:textColor="#ffffff"
     android:background="@null"
     />
@@ -135,7 +135,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff" />
         <LinearLayout
             android:id="@+id/fujinhaoyou2"
@@ -191,7 +191,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff" />
         <LinearLayout
             android:id="@+id/fujinhaoyou3"
@@ -247,7 +247,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -327,7 +327,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff" />
         <LinearLayout
             android:id="@+id/tuijianhaoyou2"
@@ -383,7 +383,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff" />
         <LinearLayout
             android:id="@+id/tuijianhaoyou3"
@@ -439,7 +439,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff" />
     </LinearLayout>
 

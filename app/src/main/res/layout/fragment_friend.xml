@@ -24,7 +24,7 @@
             android:layout_marginLeft="80dp"
             android:layout_marginTop="18dp"
             android:src="@drawable/xinxi"/>
-        <!-- 有点击事件-->
+        <!-- 点击跳转到fragment_friend_addfriend页面-->
         <ImageView
             android:id="@+id/add"
             android:layout_marginTop="13dp"
@@ -40,7 +40,7 @@
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff"/>
         <!--关注列表 有点击事件-->
         <LinearLayout
@@ -76,13 +76,13 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginLeft="200dp"
+                android:layout_marginLeft="195dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
     </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff"/>
         <LinearLayout
             android:id="@+id/fensiliebiao"
@@ -122,7 +122,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff"/>
 
         <LinearLayout
@@ -162,11 +162,11 @@
         </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:background="#ffffff" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff"
             android:layout_marginTop="15dp"/>
             <LinearLayout
@@ -208,7 +208,7 @@
             </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff" />
 
         <LinearLayout
@@ -247,7 +247,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff" />
 
         <LinearLayout
@@ -305,7 +305,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ffffff" />
 
         </LinearLayout>

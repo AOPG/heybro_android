@@ -40,11 +40,12 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/login_user"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/login_user"
                         android:layout_width="200dp"
                         android:layout_height="40dp"
-                        android:text="手机号/邮箱/账号"
+                        android:hint="手机号/邮箱/账号"
+                        android:textColorHint="#ffffff"
                         android:layout_margin="15dp"
                         android:textColor="#ffffff"
                         android:textSize="15dp"/>
@@ -64,20 +65,23 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/login_password"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/login_password"
                         android:layout_width="160dp"
                         android:layout_height="40dp"
-                        android:text="登陆密码"
-                        android:layout_margin="15dp"
+                        android:singleLine="true"
+                        android:password="true"
+                        android:hint="登陆密码"
+                        android:textColorHint="#ffffff"
                         android:textColor="#ffffff"
+                        android:layout_margin="15dp"
                         android:textSize="15dp"/>
                     <!--找回密码，暂时不实现-->
                     <ImageView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/login_ask"/>
+                        android:layout_marginTop="10dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/login_ask"/>
                 </LinearLayout>
                 <View  android:layout_height="1dp"
                     android:layout_width="300dp"

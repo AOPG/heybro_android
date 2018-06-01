@@ -43,13 +43,19 @@
         </meta-data>
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"> </service>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".StartActivty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivity">
+
+        </activity>
+
+        <activity android:name=".LoginActivty"></activity>
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity
