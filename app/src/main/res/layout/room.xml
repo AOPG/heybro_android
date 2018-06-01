@@ -34,6 +34,7 @@
             android:layout_height="30dp"
             android:background="@drawable/room_msg"/>
     </LinearLayout>
+    <!--参考实现地址 https://blog.csdn.net/eastmoon502136/article/details/50650350-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,18 +49,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#AAAAAA">
+            android:layout_height="60dp"
+            android:background="#716A6A">
             <Button
                 android:id="@+id/send_yuyin"
-                android:layout_margin="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_height="30dp"
                 android:layout_width="30dp"
                 android:background="@drawable/room_yuyin"/>
             <EditText
                 android:id="@+id/input_msg"
-                android:layout_margin="3dp"
-                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:layout_height="40dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:hint="单行输入"
@@ -67,9 +69,11 @@
                 android:background="@drawable/room_input_msg"/>
             <Button
                 android:id="@+id/send_msg"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="发送"/>
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:background="@drawable/room_biaoqing"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
