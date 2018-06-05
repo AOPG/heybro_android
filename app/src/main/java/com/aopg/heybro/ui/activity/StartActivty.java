@@ -1,9 +1,11 @@
-package com.aopg.heybro;
+package com.aopg.heybro.ui.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.aopg.heybro.R;
 
 /**
  * Created by Administrator on 2018/5/31.
