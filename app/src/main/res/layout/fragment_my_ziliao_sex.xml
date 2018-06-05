@@ -9,7 +9,6 @@
         android:layout_height="50dp"
         android:background="#656862"
         android:orientation="horizontal">
-        <!-- 有点击事件 返回-->
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -25,7 +24,6 @@
             android:text="我的资料"
             android:textColor="#ffffff"
             android:textSize="20dp" />
-        <!--有点击事件 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,17 +34,11 @@
             android:textSize="20dp" />
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#535050">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:background="#535050"
             android:orientation="vertical">
-            <!-- 头像 有点击事件 更换头像-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -61,7 +53,7 @@
                     android:text="头像"
                     android:textColor="#ffffff"
                     android:textSize="16dp" />
-                <!--需要实现圆形 -->
+                <!--通过数据库获得头像 需要实现圆形 -->
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -76,7 +68,6 @@
                     android:layout_marginTop="15dp"
                     android:src="@drawable/right" />
             </LinearLayout>
-            <!-- 昵称 在本页可修改-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -93,16 +84,14 @@
                     android:textColor="#ffffff"
                     android:textSize="16dp" />
 
-                <EditText
+                <TextView
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="53dp"
                     android:layout_marginTop="12dp"
-                    android:background="@null"
                     android:gravity="right"
-                    android:hint="昵称"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff" />
+                    android:text="昵称"
+                    android:textColor="#ffffff"/>
 
                 <ImageView
                     android:layout_width="25dp"
@@ -111,6 +100,7 @@
                     android:layout_marginTop="15dp"
                     android:src="@drawable/right" />
             </LinearLayout>
+            <!--ID 不可修改 需要通过数据库获得ID号码-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -137,7 +127,6 @@
                     android:textColor="#ffffff" />
             </LinearLayout>
 
-            <!-- 地区有点击事件 跳转到fragment_my_ziliao页面-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -153,6 +142,7 @@
                     android:text="地区"
                     android:textColor="#ffffff"
                     android:textSize="16dp" />
+
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
@@ -169,7 +159,6 @@
                     android:layout_marginTop="15dp"
                     android:src="@drawable/right" />
             </LinearLayout>
-            <!--简介 跟姓名一样在本页修改 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -185,16 +174,14 @@
                     android:textColor="#ffffff"
                     android:textSize="16dp" />
 
-                <EditText
+                <TextView
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="53dp"
                     android:layout_marginTop="15dp"
-                    android:background="@null"
                     android:gravity="right"
-                    android:hint="今天天气真好啊"
+                    android:text="今天天气真好啊"
                     android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
                     android:textSize="14dp" />
 
                 <ImageView
@@ -229,7 +216,6 @@
                     android:layout_marginTop="15dp"
                     android:src="@drawable/right" />
             </LinearLayout>
-            <!--性别 有点击事件 跳转到fragment_my_ziliao_sex页面 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -262,7 +248,6 @@
                     android:layout_marginTop="15dp"
                     android:src="@drawable/right" />
             </LinearLayout>
-            <!-- 生日 有点击事件跟 地区 性别 类似 跳转到fragment_my_ziliao_date页面-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -298,5 +283,63 @@
                     android:src="@drawable/right" />
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="-202dp"
+        android:background="#ffffff"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <!-- 有点击事件 点击取消 关闭当前页-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="取消"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:layout_marginLeft="20dp"
+                    />
+                <!-- 有点击事件 点击完成 即跳转到fragment_my_ziliao页面，并将选中的数据传到fragment_my_ziliao页面-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="完成"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:layout_marginLeft="250dp"
+                    />
+            </LinearLayout>
+            <!-- 竖直选择器代码 可参考
+           @AILayout(R.layout.main) public class MainActivity extends AIActivity {
+            public static final String TAG = MainActivity.class.getSimpleName();
+             private static final String[] PLANETS = new String[]{"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Uranus", "Neptune", "Pluto"};
+             @AIView(R.id.main_wv) private WheelView wva;
+             @Override public void onCreate(Bundle savedInstanceState) {
+             super.onCreate(savedInstanceState);
+             wva.setOffset(1);
+              wva.setItems(Arrays.asList(PLANETS));
+              wva.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+               @Override public void onSelected(int selectedIndex, String item) {
+               Logger.d(TAG, "selectedIndex: " + selectedIndex + ", item: " + item); } }); }
+               @AIClick({R.id.main_show_dialog_btn}) public void onClickCallbackSample(View view) {
+               switch (view.getId()) { case R.id.main_show_dialog_btn: View outerView = LayoutInflater.from(context).inflate(R.layout.wheel_view, null);
+               WheelView wv = (WheelView) outerView.findViewById(R.id.wheel_view_wv); wv.setOffset(2);
+               wv.setItems(Arrays.asList(PLANETS));
+               wv.setSeletion(3);
+               wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+               @Override public void onSelected(int selectedIndex, String item) {
+                Logger.d(TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item); } });
+                new AlertDialog.Builder(context) .setTitle("WheelView in Dialog") .setView(outerView) .setPositiveButton("OK", null) .show();
+                break; } } }
+            -->
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
