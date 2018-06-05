@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.aopg.heybro.R;
+import com.aopg.heybro.ui.ActivtyManage.ActivitiesManager;
 
 /**
  *
@@ -18,7 +19,7 @@ public class StartActivty extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
-
+        ActivitiesManager.getInstance().addActivity(this);
         MyAsyncTask asyncTask = new MyAsyncTask();
         asyncTask.execute();
     }
