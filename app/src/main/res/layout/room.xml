@@ -25,7 +25,7 @@
             android:layout_marginLeft="80dp"
             android:layout_marginTop="15dp"
             android:textSize="20dp"/>
-        <!--房间具体信息-->
+        <!--点击按钮查看房间具体信息，房主跳到room_detailmsg_master 成员跳到成员里-->
         <Button
             android:id="@+id/room_setting"
             android:layout_marginLeft="60dp"
@@ -35,11 +35,13 @@
             android:background="@drawable/room_msg"/>
     </LinearLayout>
     <!--参考实现地址 https://blog.csdn.net/eastmoon502136/article/details/50650350-->
+    <!--聊天界面-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#535050"
         android:orientation="vertical">
+        <!-- 聊天界面-->
         <ListView
             android:id="@+id/msg_list_view"
             android:layout_height="0dp"
@@ -51,6 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#716A6A">
+            <!-- 语音-->
             <Button
                 android:id="@+id/send_yuyin"
                 android:layout_marginLeft="5dp"
@@ -58,6 +61,7 @@
                 android:layout_height="30dp"
                 android:layout_width="30dp"
                 android:background="@drawable/room_yuyin"/>
+            <!-- 文本输入-->
             <EditText
                 android:id="@+id/input_msg"
                 android:layout_margin="5dp"
@@ -67,6 +71,7 @@
                 android:hint="单行输入"
                 android:maxLines="2"
                 android:background="@drawable/room_input_msg"/>
+            <!--表情-->
             <Button
                 android:id="@+id/send_msg"
                 android:layout_marginTop="5dp"
