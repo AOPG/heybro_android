@@ -40,7 +40,9 @@ public class FragmentMy extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }
-
+        /**
+         * 跳转设置界面
+         */
         ImageView setting = rootView.findViewById(R.id.setting);
         setting.setOnClickListener(new View.OnClickListener() {
             @Override

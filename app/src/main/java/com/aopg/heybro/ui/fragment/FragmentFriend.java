@@ -1,6 +1,7 @@
 package com.aopg.heybro.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,12 +10,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.aopg.heybro.R;
+import com.aopg.heybro.ui.activity.AddFriendActivity;
 
 
 /**
  * Created by 王伟健 on 2018-03-16.
+ * 我的好友
  */
 
 public class FragmentFriend extends Fragment {
@@ -36,6 +40,17 @@ public class FragmentFriend extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }
+        /**
+         * 跳转添加好友界面
+         */
+        ImageView addFriend = rootView.findViewById(R.id.add);
+        addFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addIntent = new Intent(getActivity(), AddFriendActivity.class);
+                startActivity(addIntent);
+            }
+        });
         return rootView;
     }
 }

@@ -55,7 +55,7 @@ public class FragmentBasketball extends Fragment {
             @Override
             public void onClick(View view) {
                 if (isVisible) {
-                    isVisible = false;
+                    isVisible = false;//设置其他模块不能打开
                     relativeLayout.setVisibility(View.VISIBLE);//这一句显示布局
                 }
             }
@@ -68,7 +68,7 @@ public class FragmentBasketball extends Fragment {
             @Override
             public void onClick(View view) {
                 relativeLayout.setVisibility(View.GONE);
-                isVisible = true;
+                isVisible = true;//设置其他模块可以打开
             }
         });
         /**
