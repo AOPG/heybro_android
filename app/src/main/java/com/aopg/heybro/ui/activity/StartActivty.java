@@ -1,12 +1,15 @@
-package com.aopg.heybro;
+package com.aopg.heybro.ui.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.aopg.heybro.R;
+
 /**
- * Created by Administrator on 2018/5/31.
+ *
+ *  Created by  administrator on 2018/5/31.
  */
 
 public class StartActivty extends AppCompatActivity {
@@ -36,6 +39,7 @@ public class StartActivty extends AppCompatActivity {
             }
             return null;
         }
+
 
         @Override
         protected void onProgressUpdate(Object[] values) {

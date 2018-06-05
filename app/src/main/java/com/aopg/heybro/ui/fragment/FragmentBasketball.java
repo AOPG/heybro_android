@@ -57,9 +57,18 @@ public class FragmentBasketball extends Fragment {
                 if (isVisible) {
                     isVisible = false;
                     relativeLayout.setVisibility(View.VISIBLE);//这一句显示布局
-                } else {
-                    isVisible = true;
                 }
+            }
+        });
+        /**
+         * 关闭创建房间
+         */
+        Button create_close = rootView.findViewById(R.id.create_close);
+        create_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                relativeLayout.setVisibility(View.GONE);
+                isVisible = true;
             }
         });
         /**
@@ -70,12 +79,9 @@ public class FragmentBasketball extends Fragment {
             @Override
             public void onClick(View view) {
                 if (isVisible) {
-                    isVisible = false;
                     ballView.setVisibility(View.VISIBLE);//这一句显示布局
                     gameView.setVisibility(View.GONE);
-                } else {
-                    isVisible = true;
-                }
+               }
             }
         });
         /**
@@ -86,11 +92,8 @@ public class FragmentBasketball extends Fragment {
             @Override
             public void onClick(View view) {
                 if (isVisible) {
-                    isVisible = false;
                     gameView.setVisibility(View.VISIBLE);//这一句显示布局
                     ballView.setVisibility(View.GONE);
-                } else {
-                    isVisible = true;
                 }
             }
         });

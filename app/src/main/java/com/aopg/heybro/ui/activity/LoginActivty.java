@@ -1,4 +1,4 @@
-package com.aopg.heybro;
+package com.aopg.heybro.ui.activity;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.aopg.heybro.MainActivity;
+import com.aopg.heybro.R;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -103,7 +106,6 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
         }).start();
 
     }
-
 
     @Override
     public void onClick(View v) {
