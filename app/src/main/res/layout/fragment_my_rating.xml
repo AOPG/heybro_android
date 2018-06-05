@@ -346,7 +346,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="true"
-                    android:textColor="@drawable/setting_radiobutton"
+                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -367,7 +367,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:textColor="@drawable/setting_radiobutton"
+                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -388,7 +388,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:textColor="@drawable/setting_radiobutton"
+                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -409,7 +409,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:textColor="@drawable/setting_radiobutton"
+                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -430,7 +430,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:textColor="@drawable/setting_radiobutton"
+                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -451,7 +451,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:textColor="@drawable/setting_radiobutton"
+                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -472,7 +472,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:textColor="@drawable/setting_radiobutton"
+                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -493,7 +493,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:textColor="@drawable/setting_radiobutton"
+                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -514,7 +514,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:textColor="@drawable/setting_radiobutton"
+                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
