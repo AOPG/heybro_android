@@ -8,7 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import com.aopg.heybro.R;
 
 /**
- * Created by Administrator on 2018/5/31.
+ *
+ *  Created by  administrator on 2018/5/31.
  */
 
 public class StartActivty extends AppCompatActivity {
