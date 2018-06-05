@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@drawable/wodebeijing"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+           >
+            <!--我的昵称 -->
+            <TextView
+                android:id="@+id/myName"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:text="昵称"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="26dp"/>
+            <!-- 设置 会跳转settings页面-->
+            <ImageView
+                android:id="@+id/setting"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1.5"
+                android:src="@drawable/setting"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:orientation="horizontal">
+            <!--我的头像 需要实现圆形-->
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/image"/>
+            <LinearLayout
+                android:layout_width="220dp"
+                android:layout_height="80dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp">
+                <LinearLayout
+                    android:layout_width="218dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="简介："
+                        android:textColor="#ffffff"
+                        android:textSize="16dp"
+                        android:layout_marginTop="10dp"/>
+                    <!--个人简介 -->
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:textSize="16dp"
+                        android:layout_marginTop="10dp"
+                        android:text="今天天气真好"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="218dp"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:textColor="#fffff0"
+                        android:textSize="14dp"
+                        android:text="ID："/>
+                    <!-- 个人ID-->
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="25dp"
+                        android:textColor="#fffff0"
+                        android:textSize="14dp"
+                        android:text="111111"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#535050"
+    >
+<TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginTop="20dp">
+    <TableRow>
+        <!-- 等级按钮，有点击事件 -->
+        <Button
+            android:id="@+id/rating"
+            android:layout_width="110dp"
+            android:layout_height="38dp"
+            android:text="等级：1级"
+            android:background="#1fffffff"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="8dp"
+            />
+        <!--  擅长位置按钮，有点击事件-->
+        <Button
+            android:id="@+id/position"
+            android:layout_width="110dp"
+            android:layout_height="38dp"
+            android:text="擅长位置"
+            android:background="#1fffffff"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="8dp"/>
+        <!-- 战绩按钮，无点击事件 获胜场数/总场数-->
+        <Button
+            android:id="@+id/grade"
+            android:layout_width="110dp"
+            android:layout_height="38dp"
+            android:text="战绩1/3"
+            android:background="#1fffffff"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="8dp"/>
+    </TableRow>
+
+</TableLayout>
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="305dp"
+        android:background="#1fffffff"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp">
+            <!-- 扫一扫有点击事件-->
+            <ImageView
+                android:id="@+id/saoyisao"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="40dp"
+                android:src="@drawable/saoyisao" />
+            <!-- 竞猜有点击事件-->
+            <ImageView
+                android:id="@+id/jingcai"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="70dp"
+                android:src="@drawable/jingcai"/>
+            <!-- 我的装备有点击事件-->
+            <ImageView
+                android:id="@+id/zhuangbei"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="70dp"
+                android:src="@drawable/zhuangbei"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="扫一扫"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:textSize="15dp" />
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="我的竞猜"
+                android:layout_gravity="center"
+                android:layout_marginLeft="45dp"
+                android:textSize="15dp" />
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="我的装备"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:layout_marginLeft="43dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp">
+            <!-- 打球日历有点击事件-->
+            <ImageView
+                android:id="@+id/rili"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="40dp"
+                android:src="@drawable/rili"
+                />
+            <!-- 我的数据有点击事件-->
+            <ImageView
+                android:id="@+id/data"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="70dp"
+                android:src="@drawable/data"/>
+            <!-- 商城暂不开放-->
+            <ImageView
+                android:id="@+id/shopping"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="70dp"
+                android:src="@drawable/shopping"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="打球日历"
+                android:textSize="15dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:text="我的数据"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                android:textSize="15dp" />
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="商城"
+                android:textSize="15dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="53dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="33dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp">
+            <!-- 我的订单暂未开放-->
+            <ImageView
+                android:id="@+id/dingdan"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="40dp"
+                android:src="@drawable/dingdan"
+                />
+            <!-- 我的钱包-->
+            <ImageView
+                android:id="@+id/qianbao"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="70dp"
+                android:src="@drawable/qianbao"/>
+            <!-- 客服与点击事件-->
+            <ImageView
+                android:id="@+id/kefu"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="70dp"
+                android:src="@drawable/kefu"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="我的订单"
+                android:textSize="15dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="25dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:text="我的钱包"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                android:textSize="15dp" />
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="客服"
+                android:textSize="15dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="55dp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="-350dp"
+        android:layout_marginLeft="30dp"
+        android:background="#bf000000">
+<!-- 级别到了就选中，并且将字体颜色改为白色，第一个为默认选中的-->
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="260dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/room_error"
+            android:id="@+id/imageView" />
+        <ScrollView
+            android:layout_width="260dp"
+            android:layout_height="280dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/scrollView2">
+            <LinearLayout
+                android:layout_width="220dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/cb11"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="true"
+                    android:button="@drawable/setting_radiobutton1"
+                    />
+
+                <TextView
+                    android:id="@+id/cb12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="球后卫(PG)"
+                    android:textColor="#ffffff"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="220dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/cb21"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="false"
+                    android:button="@drawable/setting_radiobutton1"
+                    />
+
+                <TextView
+                    android:id="@+id/cb22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="得分后卫(SG)"
+                    android:textColor="#bbbbbb"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="220dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/cb31"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="false"
+                    android:button="@drawable/setting_radiobutton1"
+                    />
+
+                <TextView
+                    android:id="@+id/cb32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="中锋(C)"
+                    android:textColor="#bbbbbb"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="220dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/cb41"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="false"
+                    android:button="@drawable/setting_radiobutton1"
+                    />
+
+                <TextView
+                    android:id="@+id/rd42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="小前锋(SF)"
+                    android:textColor="#bbbbbb"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="220dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/cb51"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="false"
+                    android:button="@drawable/setting_radiobutton1"
+                    />
+
+                <TextView
+                    android:id="@+id/cb52"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="大前锋(PF)"
+                    android:textColor="#bbbbbb"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+</LinearLayout>
+</LinearLayout>
