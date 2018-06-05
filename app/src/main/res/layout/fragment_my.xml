@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:orientation="horizontal">
-            <!--我的头像 需要实现圆形-->
+            <!--我的头像 需要实现圆形 有点击事件，跳转到fragment_my_ziliao-->
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="70dp"
@@ -152,7 +152,7 @@
             android:layout_height="33dp"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="15dp">
-            <!-- 扫一扫有点击事件-->
+            <!-- 扫一扫有点击事件,跳转到fragment_my_saoyisao页面-->
             <ImageView
                 android:id="@+id/saoyisao"
                 android:layout_width="30dp"

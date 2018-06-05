@@ -16,9 +16,8 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
            >
-            <!--我的昵称 -->
+            <!-- 昵称 通过数据库获取-->
             <TextView
-                android:id="@+id/myName"
                 android:layout_width="0dp"
                 android:layout_weight="7"
                 android:layout_height="wrap_content"
@@ -27,9 +26,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:textSize="26dp"/>
-            <!-- 设置 会跳转settings页面-->
             <ImageView
-                android:id="@+id/setting"
                 android:layout_width="0dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="10dp"
@@ -41,9 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:orientation="horizontal">
-            <!--我的头像 需要实现圆形-->
+            <!--我的头像 需要实现圆形 通过数据库获取-->
             <ImageView
-                android:id="@+id/image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="15dp"
@@ -66,7 +62,7 @@
                         android:textColor="#ffffff"
                         android:textSize="16dp"
                         android:layout_marginTop="10dp"/>
-                    <!--个人简介 -->
+                    <!-- 个人简介 通过数据库获得-->
                     <TextView
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
@@ -85,7 +81,7 @@
                         android:textColor="#fffff0"
                         android:textSize="14dp"
                         android:text="ID："/>
-                    <!-- 个人ID-->
+                    <!-- 个人ID 通过数据库获得-->
                     <TextView
                         android:layout_width="150dp"
                         android:layout_height="25dp"
@@ -111,9 +107,7 @@
     android:layout_height="50dp"
     android:layout_marginTop="20dp">
     <TableRow>
-        <!-- 等级按钮，有点击事件 -->
         <Button
-            android:id="@+id/rating"
             android:layout_width="110dp"
             android:layout_height="38dp"
             android:text="等级：1级"
@@ -121,18 +115,15 @@
             android:textColor="#ffffff"
             android:layout_marginLeft="8dp"
             />
-        <!--  擅长位置按钮，有点击事件-->
         <Button
-            android:id="@+id/position"
             android:layout_width="110dp"
             android:layout_height="38dp"
             android:text="擅长位置"
             android:background="#1fffffff"
             android:textColor="#ffffff"
             android:layout_marginLeft="8dp"/>
-        <!-- 战绩按钮，无点击事件 获胜场数/总场数-->
+        <!-- 战绩按钮， 获胜场数/总场数 通过数据库获得-->
         <Button
-            android:id="@+id/grade"
             android:layout_width="110dp"
             android:layout_height="38dp"
             android:text="战绩1/3"
@@ -154,23 +145,17 @@
             android:layout_height="33dp"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="15dp">
-            <!-- 扫一扫有点击事件-->
             <ImageView
-                android:id="@+id/saoyisao"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="40dp"
                 android:src="@drawable/saoyisao" />
-            <!-- 竞猜有点击事件-->
             <ImageView
-                android:id="@+id/jingcai"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="70dp"
                 android:src="@drawable/jingcai"/>
-            <!-- 我的装备有点击事件-->
             <ImageView
-                android:id="@+id/zhuangbei"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="70dp"
@@ -203,33 +188,30 @@
                 android:layout_marginLeft="43dp"
                 />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="320dp"
             android:layout_height="33dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="15dp">
-            <!-- 打球日历有点击事件-->
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp">
+
             <ImageView
-                android:id="@+id/rili"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="40dp"
-                android:src="@drawable/rili"
-                />
-            <!-- 我的数据有点击事件-->
+                android:src="@drawable/rili" />
+
             <ImageView
-                android:id="@+id/data"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="70dp"
-                android:src="@drawable/data"/>
-            <!-- 商城暂不开放-->
+                android:src="@drawable/data" />
+
             <ImageView
-                android:id="@+id/shopping"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="70dp"
-                android:src="@drawable/shopping"/>
+                android:src="@drawable/shopping" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="320dp"
@@ -264,24 +246,18 @@
             android:layout_height="33dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp">
-            <!-- 我的订单暂未开放-->
             <ImageView
-                android:id="@+id/dingdan"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="40dp"
                 android:src="@drawable/dingdan"
                 />
-            <!-- 我的钱包-->
             <ImageView
-                android:id="@+id/qianbao"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="70dp"
                 android:src="@drawable/qianbao"/>
-            <!-- 客服与点击事件-->
             <ImageView
-                android:id="@+id/kefu"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="70dp"
@@ -316,12 +292,17 @@
                 android:layout_marginLeft="55dp"/>
         </LinearLayout>
     </LinearLayout>
+
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="320dp"
         android:layout_marginTop="-350dp"
         android:layout_marginLeft="30dp"
         android:background="#bf000000">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 <!-- 级别到了就选中，并且将字体颜色改为白色，第一个为默认选中的-->
         <ImageView
             android:layout_width="25dp"
@@ -329,16 +310,10 @@
             android:layout_marginLeft="260dp"
             android:layout_marginTop="15dp"
             android:src="@drawable/room_error"
-            android:id="@+id/imageView" />
-        <ScrollView
-            android:layout_width="260dp"
-            android:layout_height="280dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/scrollView2">
+            android:id="@+id/finish2" />
             <LinearLayout
-                android:layout_width="220dp"
-                android:layout_height="35dp"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <RadioButton
@@ -346,7 +321,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="true"
-                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -358,8 +332,8 @@
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="220dp"
-                android:layout_height="35dp"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <RadioButton
@@ -367,7 +341,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -379,8 +352,8 @@
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="220dp"
-                android:layout_height="35dp"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <RadioButton
@@ -388,7 +361,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -400,8 +372,8 @@
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="220dp"
-                android:layout_height="35dp"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <RadioButton
@@ -409,7 +381,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -421,8 +392,8 @@
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="220dp"
-                android:layout_height="35dp"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <RadioButton
@@ -430,7 +401,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -442,8 +412,8 @@
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="220dp"
-                android:layout_height="35dp"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <RadioButton
@@ -451,7 +421,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -463,8 +432,8 @@
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="220dp"
-                android:layout_height="35dp"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <RadioButton
@@ -472,7 +441,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -485,7 +453,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="220dp"
-                android:layout_height="35dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <RadioButton
@@ -493,7 +461,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -506,7 +473,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="220dp"
-                android:layout_height="35dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <RadioButton
@@ -514,7 +481,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:checked="false"
-                    android:button="@drawable/setting_radiobutton1"
                     />
 
                 <TextView
@@ -525,8 +491,8 @@
                     android:textColor="#bbbbbb"
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
-        </ScrollView>
-
+        </LinearLayout>
     </RelativeLayout>
+
 </LinearLayout>
 </LinearLayout>
