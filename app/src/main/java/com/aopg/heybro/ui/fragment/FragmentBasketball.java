@@ -58,7 +58,6 @@ public class FragmentBasketball extends Fragment {
                     isVisible = false;
                     relativeLayout.setVisibility(View.VISIBLE);//这一句显示布局
                 } else {
-                    relativeLayout.setVisibility(View.GONE);//这一句即隐藏布局
                     isVisible = true;
                 }
             }
