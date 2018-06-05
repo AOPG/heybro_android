@@ -56,7 +56,7 @@
         </activity>
 
         <activity android:name=".LoginActivty"></activity>
-
+        <activity android:name=".ui.activity.SettingActivity"></activity>
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"

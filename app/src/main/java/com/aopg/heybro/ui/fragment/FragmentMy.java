@@ -1,6 +1,7 @@
 package com.aopg.heybro.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,8 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.aopg.heybro.R;
+import com.aopg.heybro.ui.activity.SettingActivity;
 
 
 /**
@@ -37,6 +40,15 @@ public class FragmentMy extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }
+
+        ImageView setting = rootView.findViewById(R.id.setting);
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent settingIntent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(settingIntent);
+            }
+        });
         return rootView;
     }
 }

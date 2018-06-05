@@ -204,6 +204,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/btn_create"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginLeft="30dp"
@@ -215,6 +216,7 @@
                         android:textStyle="bold" />
 
                     <Button
+                        android:id="@+id/btn_join"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginLeft="110dp"
