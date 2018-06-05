@@ -12,8 +12,7 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.aopg.heybro.R;
-import com.aopg.heybro.ui.ActivtyManage.ActivitiesManager;
+import com.aopg.heybro.ui.Common.ActivitiesManager;
 import com.aopg.heybro.ui.fragment.FragmentActivity;
 import com.aopg.heybro.ui.fragment.FragmentBasketball;
 import com.aopg.heybro.ui.fragment.FragmentDiscovery;

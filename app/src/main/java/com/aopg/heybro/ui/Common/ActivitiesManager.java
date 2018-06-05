@@ -1,4 +1,4 @@
-package com.aopg.heybro.ui.ActivtyManage;
+package com.aopg.heybro.ui.Common;
 
 import android.app.Activity;
 

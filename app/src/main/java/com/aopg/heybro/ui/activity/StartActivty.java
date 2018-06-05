@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.aopg.heybro.R;
-import com.aopg.heybro.ui.ActivtyManage.ActivitiesManager;
+import com.aopg.heybro.ui.Common.ActivitiesManager;
 
 /**
  *
