@@ -37,6 +37,7 @@ public class StartActivty extends AppCompatActivity {
             return null;
         }
 
+
         @Override
         protected void onProgressUpdate(Object[] values) {
             super.onProgressUpdate(values);
