@@ -34,7 +34,7 @@
         android:layout_height="match_parent"
 
         android:orientation="vertical">
-        <!-- 账号与安全有点击事件-->
+        <!-- 账号与安全有点击事件 跳转到fragment_my_settings_zhanghao界面-->
         <LinearLayout
             android:id="@+id/zhanghaoanquan"
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
         </LinearLayout>
-        <!-- 有点击事件-->
+        <!-- 消息通知有点击事件 跳转到fragment_my_settings_tongzhi界面-->
         <LinearLayout
             android:id="@+id/xiaoxitongzhi"
             android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
         </LinearLayout>
-        <!-- 隐私设置有点击事件-->
+        <!-- 隐私设置有点击事件 跳转到fragment_my_settings_yinsi界面-->
         <LinearLayout
             android:id="@+id/yinsi"
             android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
         </LinearLayout>
-        <!-- 通用有点击事件-->
+        <!-- 通用有点击事件 跳转到fragment_my_settings_tongyong界面-->
         <LinearLayout
             android:id="@+id/tongyong"
             android:layout_width="match_parent"
