@@ -4,37 +4,57 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp">
-
     <LinearLayout
-        android:id="@+id/left_layout"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_gravity="left"
-        android:background="@drawable/left_messages">
-
-        <TextView
-            android:id="@+id/left_msg"
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <!--左边头像-->
+        <ImageView
+            android:id="@+id/head_left"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:src="@drawable/pic"/>
+        <!--左边信息-->
+        <LinearLayout
+            android:id="@+id/left_layout"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:textColor="#fff"/>
+            android:layout_width="wrap_content"
+            android:layout_gravity="left"
+            android:background="@drawable/left_messages">
+            <TextView
+                android:id="@+id/left_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:textColor="#fff"/>
+        </LinearLayout>
     </LinearLayout>
-
     <LinearLayout
-        android:id="@+id/right_layout"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:background="@drawable/right_messages">
-
-        <TextView
-            android:id="@+id/right_msg"
-            android:layout_width="wrap_content"
+        android:orientation="horizontal">
+    <!--右边信息-->
+        <LinearLayout
+            android:id="@+id/right_layout"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"/>
+            android:layout_width="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/right_messages">
 
+            <TextView
+                android:id="@+id/right_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+        <!--右边头像-->
+        <ImageView
+            android:id="@+id/head_right"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/pic"/>
     </LinearLayout>
-
 </LinearLayout>
