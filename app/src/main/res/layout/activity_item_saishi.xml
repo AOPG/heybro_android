@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="150dp"
+    android:layout_marginLeft="30dp"
+    android:orientation="vertical"
+    android:background="@drawable/activity_item_corner2">
+        <!-- 图片需要实现四个圆角-->
+        <ImageView
+            android:layout_width="260dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/activity_item2"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="石家庄市第二届“华润万象城”杯篮球超级联赛"/>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#B4B4B4"
+    android:text="距离活动结束还有3天"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"/>
+</LinearLayout>
