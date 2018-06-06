@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--四个角变为圆角-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#EEC900" />
+    <solid android:color="#104E8B"/>
     <corners android:topLeftRadius="10dp"
         android:topRightRadius="10dp"
         android:bottomRightRadius="10dp"
