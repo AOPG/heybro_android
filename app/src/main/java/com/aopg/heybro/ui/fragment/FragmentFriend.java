@@ -21,7 +21,7 @@ import com.aopg.heybro.ui.activity.MyMessageActivity;
 
 /**
  * Created by 王伟健 on 2018-03-16.
- * 我的好友
+ * 好友界面
  */
 
 public class FragmentFriend extends Fragment {

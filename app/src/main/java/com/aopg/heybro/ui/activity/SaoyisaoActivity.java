@@ -10,18 +10,17 @@ import com.aopg.heybro.R;
 
 /**
  * Created by 壑过忘川 on 2018/6/6.
- * 通用设置界面
+ * 扫一扫界面
  */
 
-public class CommonSettingActivity extends Activity {
-    @Override
+public class SaoyisaoActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_my_settings_tongyong);
+        setContentView(R.layout.fragment_my_saoyisao);
 
-        ImageView commonset_back = findViewById(R.id.commonset_back);
+        ImageView saoyisao_back = findViewById(R.id.saoyisao_back);
         //返回按钮
-        commonset_back.setOnClickListener(new View.OnClickListener() {
+        saoyisao_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();

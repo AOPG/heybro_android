@@ -59,6 +59,7 @@
         <activity android:name=".ui.activity.CodeSafeActivity"></activity>
         <activity android:name=".ui.activity.PrivateSettingActivity"></activity>
         <activity android:name=".ui.activity.CommonSettingActivity"></activity>
+        <activity android:name=".ui.activity.SaoyisaoActivity"></activity>
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
@@ -129,6 +130,7 @@
 
         <!-- Required SDK核心功能-->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" android:exported="false"/>
+
 
         <!-- Required  . Enable it you can get statistics data with channel -->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>

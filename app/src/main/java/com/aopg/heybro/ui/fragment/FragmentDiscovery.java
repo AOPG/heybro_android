@@ -18,6 +18,7 @@ import com.aopg.heybro.ui.Common.MyViewPageLB;
 
 /**
  * Created by 王伟健 on 2018-03-16.
+ * 发现界面
  */
 
 public class FragmentDiscovery extends Fragment {

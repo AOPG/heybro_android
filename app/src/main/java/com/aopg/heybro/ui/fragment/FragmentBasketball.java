@@ -36,7 +36,7 @@ public class FragmentBasketball extends Fragment {
         Log.e("", "onCreateView");
         if (rootView == null) {
             Log.e("", "FragmentBasketball");
-            rootView = inflater.inflate(R.layout.basketball_establish,container,false);
+            rootView = inflater.inflate(R.layout.fragment_basketball,container,false);
         }
         ViewGroup parent = (ViewGroup) rootView.getParent();
         if (parent != null) {

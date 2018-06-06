@@ -10,6 +10,7 @@
         android:orientation="horizontal">
         <!-- 返回 有点击事件-->
         <ImageView
+            android:id="@+id/saoyisao_back"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginTop="15dp"

@@ -9,8 +9,8 @@ import com.aopg.heybro.R;
 import com.aopg.heybro.ui.Common.ActivitiesManager;
 
 /**
- *
  *  Created by  administrator on 2018/5/31.
+ *  开始动画
  */
 
 public class StartActivty extends AppCompatActivity {
