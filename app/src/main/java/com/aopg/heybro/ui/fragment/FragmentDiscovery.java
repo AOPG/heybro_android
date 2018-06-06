@@ -50,10 +50,12 @@ public class FragmentDiscovery extends Fragment {
         // 缓存的rootView需要判断是否已经被加过parent，如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
         ViewGroup parent = (ViewGroup) rootView.getParent();
 
-
-        LinearLayout llPoints = (LinearLayout) rootView.findViewById(R.id.ll_points);
-        ViewPager mVp = (ViewPager) rootView.findViewById(R.id.vp);
-        MyViewPageLB myViewPageLB = new MyViewPageLB(rootView.getContext(),mVp,llPoints);
+        if (Virtualdiscoverdata.flag2 != 1) {
+            Virtualdiscoverdata.flag2 = 1;
+            LinearLayout llPoints = (LinearLayout) rootView.findViewById(R.id.ll_points);
+            ViewPager mVp = (ViewPager) rootView.findViewById(R.id.vp);
+            MyViewPageLB myViewPageLB = new MyViewPageLB(rootView.getContext(), mVp, llPoints);
+        }
 
         initUI();
 

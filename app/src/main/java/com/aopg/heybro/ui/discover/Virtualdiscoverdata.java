@@ -12,7 +12,8 @@ import java.util.Map;
 
 public class Virtualdiscoverdata {
     private List<Map<String,Object>> list;
-    public static int flag = 0;
+    public static int flag1 = 0;
+    public static int flag2 = 0;
 
     public List<Map<String,Object>> dataResource(){
         list = new ArrayList<>();

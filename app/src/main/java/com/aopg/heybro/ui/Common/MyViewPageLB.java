@@ -41,8 +41,7 @@ public class MyViewPageLB  extends AppCompatActivity {
         this.mVp = mVp;
         this.llPoints = llPoints;
         images = getImages();
-        if (Virtualdiscoverdata.flag != 1) {
-            Virtualdiscoverdata.flag = 1;
+
             for (int i = 0; i < images.length; i++) {
                 ImageView iv = new ImageView(ap);
                 iv.setBackgroundResource(images[i]);
@@ -111,7 +110,7 @@ public class MyViewPageLB  extends AppCompatActivity {
                     }
                 }
             }).start();
-        }
+        
 
     }
 
