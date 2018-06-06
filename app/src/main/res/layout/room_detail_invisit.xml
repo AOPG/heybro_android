@@ -23,21 +23,21 @@
             android:layout_marginLeft="120dp"
             android:layout_marginTop="15dp"
             android:textSize="20dp"/>
+        <!--确定-->
         <Button
             android:id="@+id/ensure_invisit"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="10dp"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ensure_invisit"/>
-
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#535050"
         android:orientation="vertical">
-        <!-- 下边整个LinearLayout有点击事件会跳转到    页面-->
+        <!-- 搜索-->
         <LinearLayout
             android:id="@+id/find"
             android:layout_width="match_parent"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:background="#535050"
             android:orientation="vertical">
-            <!-- 聊天界面-->
+            <!-- 好友显示-->
             <ListView
                 android:id="@+id/invisitfriend_view"
                 android:layout_height="0dp"
