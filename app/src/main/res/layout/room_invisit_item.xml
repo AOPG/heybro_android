@@ -9,8 +9,18 @@
         android:orientation="horizontal"
         android:layout_marginTop="2dp"
         android:background="#535050">
-        <!--使图片变成圆形 -->
+        <!--多选框-->
+        <CheckBox
+            android:id="@+id/ckb"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/checkbox_selector"
+            android:button="@null"/>
+        <!--使图片变成圆形 好友头像-->
         <ImageView
+            android:id="@+id/friend_img"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginTop="10dp"
@@ -22,28 +32,53 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="2dp"
             android:orientation="vertical">
-            <!-- 昵称需要数据库获取-->
+            <!-- 昵称需要数据库获取  好友昵称-->
             <TextView
+                android:id="@+id/friend_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="昵称"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
                 android:textSize="12dp"/>
-            <!-- 上次登录后面的时间需要动态获取-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="上次登录：昨天"
-                android:textSize="12dp"
-                android:textColor="#ffffff"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:text="上一场：获胜"
-                android:textSize="12dp"
-                android:textStyle="bold"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="horizontal">
+                <!-- 上次登录后面的时间需要动态获取-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上次登录："
+                    android:textSize="12dp"
+                    android:textColor="#ffffff"/>
+                <!--上次登录的时间-->
+                <TextView
+                    android:id="@+id/loadtime"
+                    android:layout_width="1400dp"
+                    android:layout_height="20dp"
+                    android:text="这里的数据需要获取"
+                    android:textColor="#ffffff"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="horizontal">
+                <!-- 上次登录后面的时间需要动态获取-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上一场："
+                    android:textSize="12dp"
+                    android:textColor="#ffffff"/>
+                <!--上一场或输或赢或无-->
+                <TextView
+                    android:id="@+id/winORlose"
+                    android:layout_width="1400dp"
+                    android:layout_height="20dp"
+                    android:text="获胜"
+                    android:textColor="#ffffff"/>
+            </LinearLayout>
         </LinearLayout>
         <ImageView
             android:layout_width="25dp"
