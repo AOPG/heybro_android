@@ -35,6 +35,8 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //baidu定位sdk
     implementation files('libs/BaiduLBS_Android.jar')
+    //jMessage
+    implementation files('libs/jmessage-sdk-android-2.6.0.jar')
     //jpush
     implementation files('libs/jcore-android-1.2.0.jar')
     implementation files('libs/jpush-android-3.1.2.jar')

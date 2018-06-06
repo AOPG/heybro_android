@@ -1,8 +1,6 @@
 package com.aopg.heybro.ui.fragment;
 
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
