@@ -107,6 +107,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center">
+                <!-- 点击该图片 跳转到fragment_activity_saishi页面-->
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"

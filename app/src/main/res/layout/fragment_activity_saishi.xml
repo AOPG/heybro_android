@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
-            android:text="训练"
+            android:text="赛事"
             android:layout_marginLeft="140dp"
             android:layout_marginTop="13dp"
             android:textSize="20dp"/>
