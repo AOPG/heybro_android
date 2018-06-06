@@ -9,18 +9,18 @@ import android.widget.ImageView;
 import com.aopg.heybro.R;
 
 /**
- * Created by 壑过忘川 on 2018/6/5.
- * 添加好友界面
+ * Created by 壑过忘川 on 2018/6/6.
+ * 账号与安全界面
  */
 
-public class AddFriendActivity extends Activity{
-    @Override
+public class CodeSafeActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_friend_addfriend);
+        setContentView(R.layout.fragment_my_settings_zhanghao);
+
+        ImageView code_back = findViewById(R.id.code_back);
         //返回按钮
-        ImageView addFriend_back = findViewById(R.id.addfriend_back);
-        addFriend_back.setOnClickListener(new View.OnClickListener() {
+        code_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();

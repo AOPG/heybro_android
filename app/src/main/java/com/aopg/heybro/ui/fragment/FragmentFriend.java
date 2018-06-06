@@ -11,9 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.activity.AddFriendActivity;
+import com.aopg.heybro.ui.activity.MyConcernActivity;
+import com.aopg.heybro.ui.activity.MyMessageActivity;
 
 
 /**
@@ -49,6 +52,28 @@ public class FragmentFriend extends Fragment {
             public void onClick(View view) {
                 Intent addIntent = new Intent(getActivity(), AddFriendActivity.class);
                 startActivity(addIntent);
+            }
+        });
+        /**
+         * 跳转消息界面
+         */
+        ImageView myMessage = rootView.findViewById(R.id.xinxi);
+        myMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent messageIntent = new Intent(getActivity(), MyMessageActivity.class);
+                startActivity(messageIntent);
+            }
+        });
+        /**
+         * 跳转关注列表界面
+         */
+        LinearLayout concern = rootView.findViewById(R.id.guanzhuliebiao);
+        concern.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent concernIntent = new Intent(getActivity(), MyConcernActivity.class);
+                startActivity(concernIntent);
             }
         });
         return rootView;

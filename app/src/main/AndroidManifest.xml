@@ -54,7 +54,11 @@
         <activity android:name=".ui.activity.LoginActivty"></activity>
         <activity android:name=".ui.activity.SettingActivity"></activity>
         <activity android:name=".ui.activity.AddFriendActivity"></activity>
-
+        <activity android:name=".ui.activity.MyConcernActivity"></activity>
+        <activity android:name=".ui.activity.MyMessageActivity"></activity>
+        <activity android:name=".ui.activity.CodeSafeActivity"></activity>
+        <activity android:name=".ui.activity.PrivateSettingActivity"></activity>
+        <activity android:name=".ui.activity.CommonSettingActivity"></activity>
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"

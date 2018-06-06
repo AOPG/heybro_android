@@ -10,6 +10,7 @@
         android:orientation="horizontal">
         <!-- 返回 有点击事件-->
         <ImageView
+            android:id="@+id/message_back"
             android:layout_width="22dp"
             android:layout_height="19dp"
             android:layout_marginLeft="10dp"
