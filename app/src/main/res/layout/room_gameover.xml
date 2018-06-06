@@ -210,41 +210,49 @@
                 android:textSize="12dp"
                 android:gravity="center"
                 android:id="@+id/textView" />
+            <!--单选框图片大小需要JAVA代码去实现
+            mNextButton=(Button)findViewById(R.id.next_button);
+            Drawable drawable=getResources().getDrawable(R.drawable.im14);
+            drawable.setBounds(0,0,40,40);
+            mNextButton.setCompoundDrawables(null,null,drawable,null); -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp">
-                <!--比赛获胜选项-->
-            <RadioButton
-                android:id="@+id/radioWin"
-                android:layout_marginLeft="20dp"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView"
-                android:text=" 胜"
-                android:textSize="40dp"
-                android:textColor="#E51C23"
-                android:checked="false"
-                android:clickable="false"
-                android:button="@drawable/radio_button_style" />
-                <!--比赛失败选项-->
-            <RadioButton
-                android:id="@+id/radioLose"
-                android:layout_marginLeft="40dp"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView"
-                android:text=" 负"
-                android:textSize="40dp"
-                android:textColor="#5C70E1"
-                android:checked="false"
-                android:clickable="false"
-                android:button="@drawable/radio_button_style" />
+                <RadioGroup
+                    android:id="@+id/zhanjiID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+                    <!--比赛获胜选项-->
+                    <RadioButton
+                        android:id="@+id/radioWin"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text=" 胜"
+                        android:textSize="40dp"
+                        android:textColor="#E51C23"
+                        android:checked="false"
+                        android:clickable="false"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/radio_button_style"/>
+                    <!--比赛失败选项-->
+                    <RadioButton
+                        android:id="@+id/radioLose"
+                        android:layout_marginLeft="40dp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text=" 负"
+                        android:textSize="40dp"
+                        android:textColor="#5C70E1"
+                        android:checked="false"
+                        android:clickable="false"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/radio_button_style"/>
+                </RadioGroup>
+
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="90dp"
