@@ -45,8 +45,10 @@ public class FragmentMy extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }
-        final RelativeLayout relativeLayout = rootView.findViewById(R.id.position_show);
-        relativeLayout.setVisibility(View.GONE);
+        final RelativeLayout myPosition = rootView.findViewById(R.id.position_show);
+        myPosition.setVisibility(View.GONE);
+        final RelativeLayout myRating = rootView.findViewById(R.id.rating_show);
+        myRating.setVisibility(View.GONE);
         /**
          * 擅长位置的显示
          */
@@ -56,7 +58,20 @@ public class FragmentMy extends Fragment {
             public void onClick(View view) {
                 if (isVisible) {
                     isVisible = false;//设置其他模块不能打开
-                    relativeLayout.setVisibility(View.VISIBLE);//这一句显示布局
+                    myPosition.setVisibility(View.VISIBLE);//这一句显示布局
+                }
+            }
+        });
+        /**
+         * 我的等级的显示
+         */
+        Button my_rating = rootView.findViewById(R.id.rating);
+        my_rating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isVisible) {
+                    isVisible = false;//设置其他模块不能打开
+                    myRating.setVisibility(View.VISIBLE);//这一句显示布局
                 }
             }
         });
@@ -67,7 +82,18 @@ public class FragmentMy extends Fragment {
         position_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                relativeLayout.setVisibility(View.GONE);
+                myPosition.setVisibility(View.GONE);
+                isVisible = true;//设置其他模块可以打开
+            }
+        });
+        /**
+         * 关闭我的等级
+         */
+        ImageView rating_close = rootView.findViewById(R.id.rating_close);
+        rating_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myRating.setVisibility(View.GONE);
                 isVisible = true;//设置其他模块可以打开
             }
         });

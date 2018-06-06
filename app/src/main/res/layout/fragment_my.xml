@@ -436,5 +436,206 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rating_show"
+        android:layout_width="300dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="-350dp"
+        android:layout_marginLeft="30dp"
+        android:background="#bf000000">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!-- 级别到了就选中，并且将字体颜色改为白色，第一个为默认选中的-->
+            <ImageView
+                android:id="@+id/rating_close"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="260dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/room_error" />
+            <LinearLayout
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rd11"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="true"
+                    />
+
+                <TextView
+                    android:id="@+id/rd12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Ⅰ级 冷板凳"
+                    android:textColor="#ffffff"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rd21"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="false"
+                    />
+
+                <TextView
+                    android:id="@+id/rd22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Ⅱ级 小马扎"
+                    android:textColor="#bbbbbb"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rd31"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="false"
+                    />
+
+                <TextView
+                    android:id="@+id/rd32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Ⅲ级 看台围观"
+                    android:textColor="#bbbbbb"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rd41"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="false"
+                    />
+
+                <TextView
+                    android:id="@+id/rd421"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Ⅳ级 替补"
+                    android:textColor="#bbbbbb"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rd51"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="false"
+                    />
+
+                <TextView
+                    android:id="@+id/rd52"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Ⅵ级 你和帅气之间只差一个投篮"
+                    android:textColor="#bbbbbb"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rd61"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="false"
+                    />
+
+                <TextView
+                    android:id="@+id/rd62"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Ⅶ级 你正在吸引女神的注意力"
+                    android:textColor="#bbbbbb"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rd71"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="false"
+                    />
+
+                <TextView
+                    android:id="@+id/rd72"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Ⅷ级 有小可爱给你送水"
+                    android:textColor="#bbbbbb"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rd81"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="false"
+                    />
+
+                <TextView
+                    android:id="@+id/rd82"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Ⅸ级 你一上场就是焦点"
+                    android:textColor="#bbbbbb"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rd91"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:checked="false"
+                    />
+
+                <TextView
+                    android:id="@+id/rd92"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Ⅹ级 MVP非你莫属"
+                    android:textColor="#bbbbbb"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
 </LinearLayout>
