@@ -54,7 +54,7 @@ public class ShowMessageActivity extends Activity {
 
     public static final String EXTRA_MSGID = "msgid";
 
-    private final String TAG = ShowMessageActivity.class.getSimpleName();
+   // private final String TAG = ShowMessageActivity.class.getSimpleName();
     private ImageView mIv_showImage;
     private TextView mTv_showText;
     private Button mPlay;

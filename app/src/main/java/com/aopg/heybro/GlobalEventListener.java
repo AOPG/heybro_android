@@ -1,9 +1,11 @@
 package com.aopg.heybro;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
 import com.aopg.heybro.im.createmessage.ShowMessageActivity;
+import com.aopg.heybro.ui.activity.SingleChartActivity;
 
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.enums.ConversationType;
@@ -35,20 +37,23 @@ public class GlobalEventListener {
 
     private void jumpToActivity(Message msg) {
         UserInfo fromUser = msg.getFromUser();
-        final Intent notificationIntent = new Intent(appContext, ShowMessageActivity.class);
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent notificationIntent;
+
         if (msg.getTargetType() == ConversationType.group) {
+            notificationIntent = new Intent(appContext, ShowMessageActivity.class);
             GroupInfo groupInfo = (GroupInfo) msg.getTargetInfo();
             notificationIntent.putExtra(ShowMessageActivity.EXTRA_IS_GROUP, true);
             notificationIntent.putExtra(ShowMessageActivity.EXTRA_GROUPID, groupInfo.getGroupID());
         } else {
+            notificationIntent = new Intent("single_message");
             notificationIntent.putExtra(ShowMessageActivity.EXTRA_IS_GROUP, false);
         }
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         notificationIntent.putExtra(ShowMessageActivity.EXTRA_FROM_USERNAME, fromUser.getUserName());
         notificationIntent.putExtra(ShowMessageActivity.EXTRA_FROM_APPKEY, fromUser.getAppKey());
         notificationIntent.putExtra(ShowMessageActivity.EXTRA_MSG_TYPE, msg.getContentType().toString());
         notificationIntent.putExtra(ShowMessageActivity.EXTRA_MSGID, msg.getId());
-        appContext.startActivity(notificationIntent);
+        appContext.sendBroadcast(notificationIntent);
     }
 }

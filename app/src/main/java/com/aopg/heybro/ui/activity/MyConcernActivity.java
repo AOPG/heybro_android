@@ -36,7 +36,7 @@ public class MyConcernActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MyConcernActivity.this,SingleChartActivity.class);
-                intent.putExtra("username",999999);
+                intent.putExtra("username","999999");
                 startActivity(intent);
             }
         });

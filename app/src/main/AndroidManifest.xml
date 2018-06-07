@@ -75,6 +75,7 @@
         <activity android:name=".ui.activity.PrivateSettingActivity"></activity>
         <activity android:name=".ui.activity.CommonSettingActivity"></activity>
         <activity android:name=".ui.activity.SaoyisaoActivity"></activity>
+        <activity android:name=".ui.activity.SingleChartActivity"></activity>
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
