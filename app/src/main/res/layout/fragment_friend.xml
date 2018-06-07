@@ -16,7 +16,7 @@
             android:layout_marginLeft="160dp"
             android:layout_marginTop="13dp"
             android:textSize="20dp"/>
-        <!-- 有点击事件-->
+        <!-- 有点击事件 跳转到fragment_friend_message页面-->
         <ImageView
             android:id="@+id/xinxi"
             android:layout_width="25dp"
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#ffffff"/>
-        <!--关注列表 有点击事件-->
+        <!--关注列表 有点击事件 跳转到fragment_friend_guanzhu页面-->
         <LinearLayout
             android:id="@+id/guanzhuliebiao"
             android:layout_width="match_parent"
