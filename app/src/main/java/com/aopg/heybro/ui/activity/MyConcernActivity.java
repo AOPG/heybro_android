@@ -26,6 +26,21 @@ public class MyConcernActivity extends Activity {
                 onBackPressed();
             }
         });
+
+        /***************测试im模块start***************/
+
+        View view = findViewById(R.id.user_test);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        /***************测试im模块end*****************/
+
+
+
     }
     public void onBackPressed() {
         //返回
