@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aopg.heybro.MainActivity;
@@ -38,7 +39,7 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
     private static final int REQUEST_PERMISSION = 2;
     private OkHttpClient okHttp;
     private static final String TAG = "app";
-    private String BASE_URL = "http://192.168.23.1:8082/android/averageUser/";
+    private String BASE_URL = "http://101.200.59.121:8082/android/averageUser/";
     private EditText username;
     private EditText password;
     private String userNameFlag = null;
@@ -54,6 +55,19 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
 
         Button subBtn1 = findViewById(R.id.login);
         subBtn1.setOnClickListener(this);
+
+        //注册界面
+        TextView registerBtn = findViewById(R.id.login_register);
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent();
+                intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
+                intent2.putExtra("position", userNameFlag);
+                startActivity(intent2);
+            }
+        });
+
 
 
         //创建OkHttpClient对象
@@ -128,8 +142,6 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                     if (response.isSuccessful()) {
 
                         String flag = response.body().string();
-                        System.out.println(flag);
-                        System.out.println("2222");
                         if (flag.equals("true")) {
                             userNameFlag = username;
                             Intent intent2 = new Intent();
@@ -163,11 +175,11 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                 } else {
                     String Uusername = username.getText().toString();
                     String Upassword = password.getText().toString();
-//                    doGetSync(Uusername, Upassword);
-                    Intent intent2 = new Intent();
-                    intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
-                    intent2.putExtra("position", userNameFlag);
-                    startActivity(intent2);
+                    doGetSync(Uusername, Upassword);
+//                    Intent intent2 = new Intent();
+//                    intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
+//                    intent2.putExtra("position", userNameFlag);
+//                    startActivity(intent2);
                 }
                 break;
 
