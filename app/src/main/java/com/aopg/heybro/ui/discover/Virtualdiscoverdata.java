@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2018/3/23.
+ * Created by 王攀 on 2018-06-06.
+ * 虚拟数据
  */
-
 public class Virtualdiscoverdata {
     private List<Map<String,Object>> list;
     public static int flag1 = 0;

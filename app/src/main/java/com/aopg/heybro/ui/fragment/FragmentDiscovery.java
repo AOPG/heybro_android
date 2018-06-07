@@ -27,6 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Created by 王伟健 on 2018-03-16.
+ * Changed by 王攀 on 2018-06-06
+ * 发现界面
+ */
+
 public class FragmentDiscovery extends Fragment {
 
     private  List<Map<String,Object>> list;

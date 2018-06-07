@@ -33,6 +33,11 @@ import java.io.PushbackInputStream;
  import sun.misc.CharacterDecoder;
 
   /**
+   * Created by 王攀 on 2018-06-06.
+   * 解码
+   */
+
+  /**
    32    * This class implements a BASE64 Character decoder as specified in RFC1521.
    33    *
    34    * This RFC is part of the MIME specification which is published by the
@@ -57,9 +62,6 @@ import java.io.PushbackInputStream;
    53    *    "BASE64Decoder: Not enough bytes for an atom."
    54    * </pre>
    55    *
-   56    * @author      Chuck McManis
-   57    * @see         CharacterEncoder
-   58    * @see         BASE64Decoder
    59    */
  
   public class BASE64Decoder extends CharacterDecoder {

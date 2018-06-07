@@ -37,10 +37,12 @@ import sun.misc.CharacterEncoder;
  * 
  * This means that the encoded text will simply start with the first line of
  * encoded text and end with the last line of encoded text.
- * 
- * @author Chuck McManis
- * @see CharacterEncoder
- * @see BASE64Decoder
+ *
+ */
+
+/**
+ * Created by 王攀 on 2018-06-06.
+ * 编码
  */
 public class BASE64Encoder extends CharacterEncoder
 {

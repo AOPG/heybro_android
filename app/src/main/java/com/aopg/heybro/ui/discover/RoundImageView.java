@@ -16,8 +16,12 @@ import android.util.AttributeSet;
 
 /**
  * 自定义的圆形ImageView，可以直接当组件在布局中使用。
- * @author caizhiming
  *
+ */
+
+/**
+ * Created by 王攀 on 2018-06-06.
+ * 圆形头像
  */
 public class RoundImageView extends android.support.v7.widget.AppCompatImageView {
 

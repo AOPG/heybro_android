@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/3/20.
+ * Created by 王攀 on 2018-06-05.
+ * 轮播图的实现
  */
 
 public class MyViewPageLB  extends AppCompatActivity {

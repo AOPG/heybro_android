@@ -28,8 +28,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by Administrator on 2018/5/31.
- * 登录界面
+ * Created by 王攀 on 2018/5/31.
+ * 登录Activty
  */
 
 public class LoginActivty extends AppCompatActivity implements View.OnClickListener {

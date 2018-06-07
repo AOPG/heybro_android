@@ -7,6 +7,11 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+/**
+ * Created by 王攀 on 2018-06-05.
+ * 轮播图的实现
+ */
+
 public class MyViewPageLBF extends PagerAdapter {
 
     private List<ImageView> mList;

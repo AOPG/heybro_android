@@ -15,6 +15,11 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.Scroller;
 
+/**
+ * Created by 王攀 on 2018-06-06.
+ * 发现模块左右滑动
+ */
+
 public class HorizontalListView extends AdapterView<ListAdapter> {
 
     public boolean mAlwaysOverrideTouch = true;

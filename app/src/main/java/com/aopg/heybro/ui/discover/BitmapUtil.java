@@ -30,8 +30,9 @@ import java.util.logging.Logger;
  * 图片加载及转化工具 ----------------------------------------------------------------------- 延伸：一个Bitmap到底占用多大内存？系统给每个应用程序分配多大内存？ Bitmap占用的内存为：像素总数
  * * 每个像素占用的内存。在Android中， Bitmap有四种像素类型：ARGB_8888、ARGB_4444、ARGB_565、ALPHA_8， 他们每个像素占用的字节数分别为4、2、2、1。因此，一个2000*1000的ARGB_8888
  * 类型的Bitmap占用的内存为2000*1000*4=8000000B=8MB。
- *
- * @author chen.lin
+ */
+/**
+ * Created by 王攀 on 2018-06-06.
  *
  */
 public class BitmapUtil {

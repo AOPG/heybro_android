@@ -15,7 +15,8 @@ import java.util.Map;
 
 
 /**
- * Created by Administrator on 2018/3/9.
+ * Created by 王攀 on 2018-06-06.
+ * 发现模块的下滑listView
  */
 
 public class CustomerAdapter extends BaseAdapter{

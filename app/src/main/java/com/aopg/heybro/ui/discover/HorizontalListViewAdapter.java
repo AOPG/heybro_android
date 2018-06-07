@@ -19,6 +19,11 @@ import static cn.jpush.android.api.JPushInterface.a.h;
 import static cn.jpush.android.api.JPushInterface.a.w;
 import static com.baidu.location.g.j.p;
 
+/**
+ * Created by 王攀 on 2018-06-06.
+ * 发现模块左右滑动
+ */
+
 public class HorizontalListViewAdapter extends BaseAdapter {
     private int[] mIconIDs;
     private String[] mTitles;
