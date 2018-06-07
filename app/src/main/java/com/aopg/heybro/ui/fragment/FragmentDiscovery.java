@@ -23,7 +23,6 @@ import com.aopg.heybro.ui.discover.HorizontalListView;
 import com.aopg.heybro.ui.discover.HorizontalListViewAdapter;
 import com.aopg.heybro.ui.discover.Virtualdiscoverdata;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

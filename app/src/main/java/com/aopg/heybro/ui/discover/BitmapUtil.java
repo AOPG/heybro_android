@@ -31,6 +31,7 @@ import java.util.logging.Logger;
  * * 每个像素占用的内存。在Android中， Bitmap有四种像素类型：ARGB_8888、ARGB_4444、ARGB_565、ALPHA_8， 他们每个像素占用的字节数分别为4、2、2、1。因此，一个2000*1000的ARGB_8888
  * 类型的Bitmap占用的内存为2000*1000*4=8000000B=8MB。
  */
+
 /**
  * Created by 王攀 on 2018-06-06.
  *

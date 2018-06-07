@@ -20,6 +20,7 @@ import android.widget.Scroller;
  * 发现模块左右滑动
  */
 
+
 public class HorizontalListView extends AdapterView<ListAdapter> {
 
     public boolean mAlwaysOverrideTouch = true;

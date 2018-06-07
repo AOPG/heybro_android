@@ -19,6 +19,7 @@ import com.aopg.heybro.ui.discover.Virtualdiscoverdata;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Created by 王攀 on 2018-06-05.
  * 轮播图的实现

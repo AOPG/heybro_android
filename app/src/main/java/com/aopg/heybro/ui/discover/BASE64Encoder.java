@@ -44,6 +44,7 @@ import sun.misc.CharacterEncoder;
  * Created by 王攀 on 2018-06-06.
  * 编码
  */
+
 public class BASE64Encoder extends CharacterEncoder
 {
 

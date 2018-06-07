@@ -63,7 +63,8 @@ import java.io.PushbackInputStream;
    54    * </pre>
    55    *
    59    */
- 
+
+
   public class BASE64Decoder extends CharacterDecoder {
  
 /** This class has 4 bytes per atom */

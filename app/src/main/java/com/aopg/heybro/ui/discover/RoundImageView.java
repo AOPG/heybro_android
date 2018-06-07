@@ -23,6 +23,7 @@ import android.util.AttributeSet;
  * Created by 王攀 on 2018-06-06.
  * 圆形头像
  */
+
 public class RoundImageView extends android.support.v7.widget.AppCompatImageView {
 
     public RoundImageView(Context context, AttributeSet attrs) {

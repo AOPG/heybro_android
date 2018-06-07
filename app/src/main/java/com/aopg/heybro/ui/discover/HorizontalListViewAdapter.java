@@ -17,7 +17,6 @@ import com.aopg.heybro.R;
 
 import static cn.jpush.android.api.JPushInterface.a.h;
 import static cn.jpush.android.api.JPushInterface.a.w;
-import static com.baidu.location.g.j.p;
 
 /**
  * Created by 王攀 on 2018-06-06.
