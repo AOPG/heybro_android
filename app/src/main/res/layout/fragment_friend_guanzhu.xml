@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -27,13 +28,14 @@
 
 
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#535050">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <!-- 下边整个LinearLayout有点击事件会跳转到    页面-->
         <LinearLayout
@@ -70,6 +72,8 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:textSize="13dp"/>
+
+
         <HorizontalScrollView
             android:layout_width="315dp"
             android:layout_height="170dp"
@@ -117,6 +121,16 @@
             android:orientation="vertical"
             android:layout_marginTop="10dp">
             <!--其item是friend_item2-->
+            <!--测试数据，im，模块-->
+            <LinearLayout
+                android:id="@+id/plkj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="999999"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
             <ListView
                 android:id="@+id/friend_item2"
                 android:layout_width="match_parent"

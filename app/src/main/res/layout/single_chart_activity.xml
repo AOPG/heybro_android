@@ -10,14 +10,15 @@
         android:orientation="horizontal">
         <!-- 返回 有点击事件-->
         <ImageView
+            android:id="@+id/back"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginTop="17dp"
             android:layout_marginLeft="10dp"
             android:src="@drawable/back"/>
-        <!--房间名称-->
+        <!--对方名称-->
         <TextView
-            android:id="@+id/roomName"
+            android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
@@ -25,9 +26,9 @@
             android:layout_marginLeft="80dp"
             android:layout_marginTop="15dp"
             android:textSize="20dp"/>
-        <!--点击按钮查看房间具体信息，房主跳到room_detailmsg_master 成员跳到成员里-->
+        <!--点击按钮查看对方具体信息-->
         <Button
-            android:id="@+id/room_setting"
+            android:id="@+id/user_info"
             android:layout_marginLeft="60dp"
             android:layout_marginTop="17dp"
             android:layout_width="30dp"
@@ -45,8 +46,6 @@
         <ListView
             android:id="@+id/msg_list_view"
             android:layout_height="0dp"
-            android:stackFromBottom="true"
-            android:transcriptMode="alwaysScroll"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:divider="#0000"/>
