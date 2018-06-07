@@ -244,7 +244,7 @@
                 <RelativeLayout
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_width="180dp"
+                    android:layout_width="160dp"
                     android:layout_height="120dp">
                     <ListView
                         android:id="@+id/roomDetail_list"

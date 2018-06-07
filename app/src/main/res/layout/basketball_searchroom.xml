@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="#101010"
+            android:orientation="horizontal">
+            <!--需要下拉搜索提示框-->
+            <!--设置默认文本的样式
+                int id = searchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+                TextView textView = (TextView) searchView.findViewById(id);
+                textView.setTextColor(Color.RED);//字体颜色
+                textView.setTextSize(20);//字体、提示字体大小
+                textView.setHintTextColor(Color.BLUE);//提示字体颜色*-->
+            <SearchView
+                android:id="@+id/searchroom"
+                android:layout_marginLeft="30dp"
+                android:layout_gravity="center"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:background="#716A6A"
+                android:queryHint="输入房间号、房间名称" />
+            <TextView
+                android:id="@+id/searchroom_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="取消"
+                android:textSize="25dp"
+                android:textColor="#ffffff"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#716A6A"
+            android:orientation="vertical">
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/roomlist"
+                android:layout_weight="1">
+            </ListView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
