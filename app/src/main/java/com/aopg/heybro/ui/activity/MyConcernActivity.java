@@ -1,6 +1,7 @@
 package com.aopg.heybro.ui.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -33,7 +34,10 @@ public class MyConcernActivity extends Activity {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent();
+                intent.setClass(MyConcernActivity.this,SingleChartActivity.class);
+                intent.putExtra("username",999999);
+                startActivity(intent);
             }
         });
 

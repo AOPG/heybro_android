@@ -1,6 +1,7 @@
 package com.aopg.heybro.ui.activity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +23,8 @@ import com.aopg.heybro.ui.Common.ActivitiesManager;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.api.BasicCallback;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -33,6 +36,7 @@ import okhttp3.Response;
  */
 
 public class LoginActivty extends AppCompatActivity implements View.OnClickListener {
+    private ProgressDialog mProgressDialog = null;
     private static final int REQUEST_CODE = 1;
     private static final int REQUEST_PERMISSION = 2;
     private OkHttpClient okHttp;
@@ -53,6 +57,7 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
 
         Button subBtn1 = findViewById(R.id.login);
         subBtn1.setOnClickListener(this);
+
 
 
         //创建OkHttpClient对象
@@ -163,13 +168,42 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                     String Uusername = username.getText().toString();
                     String Upassword = password.getText().toString();
 //                    doGetSync(Uusername, Upassword);
-                    Intent intent2 = new Intent();
-                    intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
-                    intent2.putExtra("position", userNameFlag);
-                    startActivity(intent2);
+                    initJmessageUser(Uusername,Upassword);
                 }
                 break;
 
         }
+    }
+
+
+    private void initJmessageUser(String username,String password){
+        mProgressDialog = ProgressDialog.show(LoginActivty.this, "提示：", "正在加载中。。。");
+        mProgressDialog.setCanceledOnTouchOutside(true);
+//        final String userName = mEd_userName.getText().toString();
+//        final String password = mEd_password.getText().toString();
+        /**=================     调用SDk登陆接口    =================*/
+        JMessageClient.login(username, password, new BasicCallback() {
+            @Override
+            public void gotResult(int responseCode, String LoginDesc) {
+                if (responseCode == 0) {
+                    mProgressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                    Log.i("MainActivity", "JMessageClient.login" + ", responseCode = " + responseCode + " ; LoginDesc = " + LoginDesc);
+
+                    Intent intent2 = new Intent();
+                    intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
+                    intent2.putExtra("position", userNameFlag);
+                    startActivity(intent2);
+//                    Intent intent = new Intent();
+//                    intent.setClass(getApplicationContext(), TypeActivity.class);
+//                    startActivity(intent);
+//                    finish();
+                } else {
+                    mProgressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), "登录失败", Toast.LENGTH_SHORT).show();
+                    Log.i("MainActivity", "JMessageClient.login" + ", responseCode = " + responseCode + " ; LoginDesc = " + LoginDesc);
+                }
+            }
+        });
     }
 }

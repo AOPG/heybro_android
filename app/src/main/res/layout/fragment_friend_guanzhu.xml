@@ -29,7 +29,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#535050"
         android:orientation="vertical">
         <!-- 下边整个LinearLayout有点击事件会跳转到    页面-->
