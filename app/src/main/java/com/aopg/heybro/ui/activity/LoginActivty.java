@@ -182,6 +182,7 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
 //                    startActivity(intent2);
                 }
                 break;
+
         }
     }
 }
