@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/activity_item_corner2">
+    <!-- 图片需要圆角实现-->
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="昵称"
+        android:layout_marginLeft="20dp"
+        android:textColor="#ffffff"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        />
+    <!-- 若已经关注是备注的代码  若没有关注则是以下按钮-->
+    <!--
+    <ImageView
+        android:layout_width="22dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ensure_invisit"
+        android:layout_marginLeft="140dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="已关注"/>
+        -->
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:background="@drawable/friend_item"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="10dp"
+        android:hint="关注"
+        android:textColorHint="#8BC34A"
+        />
+</LinearLayout>

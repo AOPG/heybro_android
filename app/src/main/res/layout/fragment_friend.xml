@@ -84,6 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#ffffff"/>
+        <!-- 有点击事件 跳转fragment_frined_fensi页面 -->
         <LinearLayout
             android:id="@+id/fensiliebiao"
             android:layout_width="match_parent"
@@ -116,7 +117,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginLeft="200dp"
+                android:layout_marginLeft="195dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
         </LinearLayout>
@@ -156,7 +157,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginLeft="200dp"
+                android:layout_marginLeft="195dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
         </LinearLayout>
@@ -169,11 +170,12 @@
             android:layout_height="1dp"
             android:background="#ffffff"
             android:layout_marginTop="15dp"/>
+        <!-- 下拉按钮实现下拉下边模块的这个功能 一般情况就是展开状态 除非点击则隐藏该模块
+        当处于隐藏模块时则将 图标更换为xiala图标-->
             <LinearLayout
                 android:id="@+id/wodefangjian"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-
                 android:background="#1fffffff"
                 android:orientation="horizontal">
                 <LinearLayout
@@ -198,13 +200,13 @@
                     android:textColor="#ffffff"
                     android:textSize="15dp"
                     android:textStyle="bold"/>
-                <!-- 下拉按钮实现下拉下边模块的这个功能-->
+
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginLeft="190dp"
                     android:layout_marginTop="15dp"
-                    android:src="@drawable/xiala"/>
+                    android:src="@drawable/xiangshang"/>
             </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -217,7 +219,6 @@
             android:layout_height="66dp"
             android:background="#1fffffff"
             android:orientation="horizontal">
-
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
