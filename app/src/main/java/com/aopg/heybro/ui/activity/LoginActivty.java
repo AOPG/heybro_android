@@ -66,7 +66,7 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent();
-                intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
+                intent2.setComponent(new ComponentName(LoginActivty.this, RegisterActivty.class));
                 intent2.putExtra("position", userNameFlag);
                 startActivity(intent2);
             }
@@ -124,12 +124,9 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
     /*
       同步get请求
        */
-    private void doGetSync(final String username, String password) {
+    private void doGetSync(final String username, final String password) {
         Log.e(TAG, "doGetSync: ");
         //创建请求对象
-
-        System.out.println(username);
-        System.out.println(password);
         Request request = new Request.Builder()
                 .get()
                 .url(BASE_URL + "ASLogin?userName=" + username + "&userPass=" + password)
@@ -146,15 +143,20 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                     if (response.isSuccessful()) {
 
                         String flag = response.body().string();
+                        System.out.println(flag);
                         if (flag.equals("true")) {
+
                             userNameFlag = username;
-                            Intent intent2 = new Intent();
-                            intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
-                            intent2.putExtra("position", userNameFlag);
-                            startActivity(intent2);
+//                            Intent intent2 = new Intent();
+//                            intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
+//                            intent2.putExtra("position", userNameFlag);
+//                            startActivity(intent2);
+                            initJmessageUser(username,password);
+
+
                         } else {
                             Looper.prepare();
-                            Toast.makeText(getApplicationContext(), "登陆失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "登录失败", Toast.LENGTH_SHORT).show();
                             Looper.loop();
                         }
 
@@ -184,7 +186,7 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
 //                    intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
 //                    intent2.putExtra("position", userNameFlag);
 //                    startActivity(intent2);
-                    initJmessageUser(Uusername,Upassword);
+//                    initJmessageUser(Uusername,Upassword);
                 }
                 break;
         }
@@ -192,8 +194,8 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
 
 
     private void initJmessageUser(String username,String password){
-        mProgressDialog = ProgressDialog.show(LoginActivty.this, "提示：", "正在加载中。。。");
-        mProgressDialog.setCanceledOnTouchOutside(true);
+//        mProgressDialog = ProgressDialog.show(LoginActivty.this, "提示：", "正在加载中。。。");
+//        mProgressDialog.setCanceledOnTouchOutside(true);
 //        final String userName = mEd_userName.getText().toString();
 //        final String password = mEd_password.getText().toString();
         /**=================     调用SDk登陆接口    =================*/
@@ -201,7 +203,7 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
             @Override
             public void gotResult(int responseCode, String LoginDesc) {
                 if (responseCode == 0) {
-                    mProgressDialog.dismiss();
+//                    mProgressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
                     Log.i("MainActivity", "JMessageClient.login" + ", responseCode = " + responseCode + " ; LoginDesc = " + LoginDesc);
 
@@ -211,7 +213,7 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent2);
 
                 } else {
-                    mProgressDialog.dismiss();
+//                    mProgressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "登录失败", Toast.LENGTH_SHORT).show();
                     Log.i("MainActivity", "JMessageClient.login" + ", responseCode = " + responseCode + " ; LoginDesc = " + LoginDesc);
                 }
