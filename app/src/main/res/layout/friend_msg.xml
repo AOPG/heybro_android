@@ -252,7 +252,9 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <!--关注好友-->
+    <!--关注好友 这时针对于 未关注的好友 若是已关注的好友则由  关注  变为发送消息
+    若是未关注点击该按钮会提示toast提示关注成功
+    如果是好友则点击发送消息 跳转到single_chat_activity页面-->
     <Button
         android:id="@+id/guanzhu"
         android:layout_width="match_parent"

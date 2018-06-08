@@ -213,6 +213,7 @@
             android:layout_height="1dp"
             android:background="#ffffff" />
 
+        <!--有点击事件 跳转到room页面 -->
         <LinearLayout
             android:id="@+id/fangjian"
             android:layout_width="match_parent"
@@ -273,6 +274,7 @@
                 android:layout_marginTop="20dp">
 
                 <!-- 以下图片需要实现圆角现暂不实现-->
+                <!--点击每个图片都跳到其相应的friend_msg页面 -->
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
