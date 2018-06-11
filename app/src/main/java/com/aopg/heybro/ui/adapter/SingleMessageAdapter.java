@@ -9,7 +9,9 @@ import android.widget.TextView;
 import com.aopg.heybro.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 王伟健 on 2018-06-07.
@@ -17,16 +19,18 @@ import java.util.List;
 
 public class SingleMessageAdapter extends BaseAdapter {
     private Context context;
-    private List<String> messages = new ArrayList<String>();
+    private List<Map<String,String>> messages = new ArrayList<>();
+    private Map<String,String> message;
 
     public SingleMessageAdapter(Context context) {
         this.context = context;
     }
 
+
     /** 添加item数据 */
-    public void addMessage(String text) {
+    public void addMessage(Map<String,String> message) {
         if (messages != null)
-            messages.add(text);// 添加数据
+            messages.add(message);// 添加数据
     }
 
     /** 移除item数据 */
@@ -55,12 +59,16 @@ public class SingleMessageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView==null){
+        message = messages.get(position);
+        String userCode =  message.get("userCode");
+        if (userCode=="1234"){
             convertView = View.inflate(context, R.layout.room_chatitem_me, null);
+        }else if (userCode!="1234"){
+            convertView = View.inflate(context, R.layout.room_chatitem_others, null);
         }
-        String text = messages.get(position);
+        String text = message.get("text");
         // 设置文本
-        ((TextView) convertView.findViewById(R.id.right_msg)).setText(text);
+        ((TextView) convertView.findViewById(R.id.msg)).setText(text);
         return convertView;
     }
 

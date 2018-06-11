@@ -65,7 +65,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.aopg.heybro"></activity>
         <activity android:name=".ui.activity.LoginActivty"></activity>
         <activity android:name=".ui.activity.SettingActivity"></activity>
         <activity android:name=".ui.activity.AddFriendActivity"></activity>
@@ -75,7 +77,9 @@
         <activity android:name=".ui.activity.PrivateSettingActivity"></activity>
         <activity android:name=".ui.activity.CommonSettingActivity"></activity>
         <activity android:name=".ui.activity.SaoyisaoActivity"></activity>
-        <activity android:name=".ui.activity.SingleChartActivity"></activity>
+        <activity android:name=".ui.activity.SingleChartActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.aopg.heybro"></activity>
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"

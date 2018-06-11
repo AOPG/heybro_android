@@ -17,19 +17,34 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
+import com.aopg.heybro.entity.User;
 import com.aopg.heybro.ui.Common.ActivitiesManager;
+import com.aopg.heybro.ui.discover.BASE64Encoder;
+
+import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Base64;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.api.BasicCallback;
+import okhttp3.Authenticator;
 import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Credentials;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.Route;
 
 
 /**
@@ -39,13 +54,11 @@ import okhttp3.Response;
 
 public class LoginActivty extends AppCompatActivity implements View.OnClickListener {
     private ProgressDialog mProgressDialog = null;
-    private static final int REQUEST_CODE = 1;
-    private static final int REQUEST_PERMISSION = 2;
     private OkHttpClient okHttp;
     private static final String TAG = "app";
-    private String BASE_URL = "http://101.200.59.121:8082/android/averageUser/";
-    private EditText username;
-    private EditText password;
+    private String BASE_URL = "http://101.200.59.121:8082/android/";
+    private EditText usernameEt;
+    private EditText passwordEt;
     private String userNameFlag = null;
 
     @Override
@@ -54,8 +67,8 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.login);
         ActivitiesManager.getInstance().addActivity(this);
 
-        username = findViewById(R.id.login_user);
-        password = findViewById(R.id.login_password);
+        usernameEt = findViewById(R.id.login_user);
+        passwordEt = findViewById(R.id.login_password);
 
         Button subBtn1 = findViewById(R.id.login);
         subBtn1.setOnClickListener(this);
@@ -66,7 +79,7 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent();
-                intent2.setComponent(new ComponentName(LoginActivty.this, RegisterActivty.class));
+                intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
                 intent2.putExtra("position", userNameFlag);
                 startActivity(intent2);
             }
@@ -74,10 +87,19 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
 
 
 
-        //创建OkHttpClient对象
+        //创建OkHttpClient对象，添加认证头部信息
         okHttp = new OkHttpClient.Builder()
                 .connectTimeout(90, TimeUnit.SECONDS)
                 .readTimeout(90, TimeUnit.SECONDS)
+                .authenticator(new Authenticator()
+                {
+                    @Override
+                    public Request authenticate(Route route, Response response) throws IOException
+                    {//401，认证
+                        String credential = Credentials.basic("heybro", "heybro");
+                        return response.request().newBuilder().header("Authorization", credential).build();
+                    }
+                })
                 .build();
     }
 
@@ -121,72 +143,83 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
     };
 
 
-    /*
-      同步get请求
-       */
-    private void doGetSync(final String username, final String password) {
-        Log.e(TAG, "doGetSync: ");
-        //创建请求对象
-        Request request = new Request.Builder()
-                .get()
-                .url(BASE_URL + "ASLogin?userName=" + username + "&userPass=" + password)
+    private boolean doLogin(final String username,final String password){
+
+        RequestBody requestBody=new FormBody.Builder()
+                .add("username",username)
+                .add("password",password)
+                .add("grant_type","password")
                 .build();
-
-        //创建call对象，并执行请求，获得响应
-        final Call call = okHttp.newCall(request);
-
-        new Thread(new Runnable() {
+        Request request=new Request.Builder()
+                .url(BASE_URL+"oauth/token")
+                .post(requestBody)
+                .build();
+        Call call=okHttp.newCall(request);
+        call.enqueue(new Callback() {
             @Override
-            public void run() {
-                try {
-                    Response response = call.execute();
-                    if (response.isSuccessful()) {
+            public void onFailure(Call call, IOException e) {
+                Log.e("++++++++++++++",e.getMessage());
+                e.printStackTrace();
+            }
 
-                        String flag = response.body().string();
-                        System.out.println(flag);
-                        if (flag.equals("true")) {
-
-                            userNameFlag = username;
-//                            Intent intent2 = new Intent();
-//                            intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
-//                            intent2.putExtra("position", userNameFlag);
-//                            startActivity(intent2);
+            @Override
+            public void onResponse(Call call, Response response) throws
+                    IOException {
+                JSONObject jsonRes = JSONObject.parseObject(response.body().string());
+                String error = jsonRes.getString("error");
+                if (error!=null&&error!=""&&error!="null"){
+                    String msgRes = jsonRes.getString("error_description");
+                    Looper.prepare();
+                    Toast.makeText(getApplicationContext(), msgRes, Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }else {
+                    String accessToken = jsonRes.getString("access_token");
+                    String refreshToken = jsonRes.getString("refresh_token");
+                    Integer expiresIn = jsonRes.getInteger("expires_in");
+                    User user = new User();
+                    user.setAccessToken(accessToken);
+                    user.setRefreshToken(refreshToken);
+                    user.setExpiresIn(expiresIn);
+                    user.setLoginTime(new java.util.Date().getTime());
+                    user.setIsLogin(1);
+                    Looper.prepare();
+                    int isHave = DataSupport.where("userName = ?", username).count(User.class);
+                    if (isHave>0){
+                        int upCount = user.updateAll("userName = ?",username);
+                        if (upCount>0){
+                            Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
                             initJmessageUser(username,password);
-
-
-                        } else {
-                            Looper.prepare();
+                        }else {
                             Toast.makeText(getApplicationContext(), "登录失败", Toast.LENGTH_SHORT).show();
-                            Looper.loop();
                         }
-
-                    } else {
-                        Log.e(TAG, response.code() + "");
+                    }else {
+                        user.setUsername(username);
+                        user.save();
+                        if (user.save()) {
+                            Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                            initJmessageUser(username,password);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "登录失败", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    Looper.loop();
                 }
             }
-        }).start();
-
+        });
+        return false;
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login:
-                //  doGetSync();
-                if (username.length() == 0 || password.length() == 0) {
+                if (usernameEt.length() == 0 || passwordEt.length() == 0) {
                     Toast.makeText(getApplicationContext(), "账号或密码输入为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    String Uusername = username.getText().toString();
-                    String Upassword = password.getText().toString();
-                    doGetSync(Uusername, Upassword);
-//                    Intent intent2 = new Intent();
-//                    intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
-//                    intent2.putExtra("position", userNameFlag);
-//                    startActivity(intent2);
-//                    initJmessageUser(Uusername,Upassword);
+                    String username = usernameEt.getText().toString();
+                    String password = passwordEt.getText().toString();
+                    doLogin(username, password);
+
                 }
                 break;
         }
@@ -194,28 +227,25 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
 
 
     private void initJmessageUser(String username,String password){
-//        mProgressDialog = ProgressDialog.show(LoginActivty.this, "提示：", "正在加载中。。。");
-//        mProgressDialog.setCanceledOnTouchOutside(true);
-//        final String userName = mEd_userName.getText().toString();
-//        final String password = mEd_password.getText().toString();
+        mProgressDialog = ProgressDialog.show(LoginActivty.this, "提示:", "正在加载中...");
+        mProgressDialog.setCanceledOnTouchOutside(true);
         /**=================     调用SDk登陆接口    =================*/
         JMessageClient.login(username, password, new BasicCallback() {
             @Override
             public void gotResult(int responseCode, String LoginDesc) {
                 if (responseCode == 0) {
-//                    mProgressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
-                    Log.i("MainActivity", "JMessageClient.login" + ", responseCode = " + responseCode + " ; LoginDesc = " + LoginDesc);
-
-                    Intent intent2 = new Intent();
-                    intent2.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
-                    intent2.putExtra("position", userNameFlag);
-                    startActivity(intent2);
+                    mProgressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), "登录聊天服务器成功", Toast.LENGTH_SHORT).show();
+                    Log.e("MainActivity", "JMessageClient.login" + ", responseCode = " + responseCode + " ; LoginDesc = " + LoginDesc);
+                    Intent intent = new Intent();
+                    intent.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
+                    intent.putExtra("position", userNameFlag);
+                    startActivity(intent);
 
                 } else {
-//                    mProgressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "登录失败", Toast.LENGTH_SHORT).show();
-                    Log.i("MainActivity", "JMessageClient.login" + ", responseCode = " + responseCode + " ; LoginDesc = " + LoginDesc);
+                    mProgressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), "登录聊天服务器失败", Toast.LENGTH_SHORT).show();
+                    Log.e("MainActivity", "JMessageClient.login" + ", responseCode = " + responseCode + " ; LoginDesc = " + LoginDesc);
                 }
             }
         });

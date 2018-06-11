@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
-    <dbname value="数据库名" ></dbname>
+    <dbname value="heybro"></dbname>
 
-    <version value="数据库版本号，用于更新数据库" ></version>
+    <version value="5" ></version>
 
     <list>
-        <!--这里是类映射-->
+        <mapping class="com.aopg.heybro.entity.User"></mapping>
+        <mapping class="com.aopg.heybro.entity.Fans"></mapping>
+        <mapping class="com.aopg.heybro.entity.Concern"></mapping>
+        <mapping class="com.aopg.heybro.entity.ChatRecord"></mapping>
     </list>
 </litepal>

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.aopg.heybro.R;
 
@@ -32,7 +31,7 @@ public class MyConcernActivity extends Activity {
 
         /***************测试im模块start***************/
 
-        View view = findViewById(R.id.plkj);
+        View view = findViewById(R.id.user_test);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

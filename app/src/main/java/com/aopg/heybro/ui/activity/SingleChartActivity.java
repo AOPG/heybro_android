@@ -14,11 +14,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.adapter.SingleMessageAdapter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.content.FileContent;
@@ -41,7 +47,7 @@ import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_MSG_TYP
  */
 
 public class SingleChartActivity extends AppCompatActivity {
-    private static final String TAG = "CreateSigTextMessage";
+    private static final String TAG = "SingleChartActivity";
     private String username;
     private EditText userMessage;
     private Button sendMessage;
@@ -49,6 +55,8 @@ public class SingleChartActivity extends AppCompatActivity {
     private Message message;
     private ListView messageLv;
     private SingleMessageAdapter singleMessageAdapter;
+    private TextView usernameTv;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +65,32 @@ public class SingleChartActivity extends AppCompatActivity {
         initData();
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        username = getIntent().getStringExtra("username");
+        usernameTv.setText(username);
+    }
 
     private void initView() {
         setContentView(R.layout.single_chart_activity);
+        back = findViewById(R.id.back);
         messageLv = findViewById(R.id.msg_list_view);
         singleMessageAdapter = new SingleMessageAdapter(this);
         messageLv.setAdapter(singleMessageAdapter);
         userMessage = findViewById(R.id.input_msg);
         sendMessage = findViewById(R.id.send_msg);
+        usernameTv = findViewById(R.id.user_name);
         username = getIntent().getStringExtra("username");
-
+        usernameTv.setText(username);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SingleChartActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +136,14 @@ public class SingleChartActivity extends AppCompatActivity {
 
                     //发送消息
                     JMessageClient.sendMessage(message, options);
+
+                    //在聊天界面上添加信息
+                    Map<String,String> messageView = new HashMap<>();
+                    messageView.put("userCode","1234");
+                    messageView.put("text",textContent.getText());
+                    singleMessageAdapter.addMessage(messageView);
+                    singleMessageAdapter.notifyDataSetChanged();
+                    userMessage.setText("");
                 } else {
                     Toast.makeText(getApplicationContext(), "消息不能为空", Toast.LENGTH_SHORT).show();
                 }
@@ -127,17 +159,13 @@ public class SingleChartActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-         //   textView.setText(intent.getExtras().getString("data"));
             String msgTypeString = intent.getStringExtra(EXTRA_MSG_TYPE);
             contentType = ContentType.valueOf(msgTypeString);
-            boolean isGroup = intent.getBooleanExtra(EXTRA_IS_GROUP, false);
-            long gid = intent.getLongExtra(EXTRA_GROUPID, 0);
             String user = intent.getStringExtra(EXTRA_FROM_USERNAME);
-            String appkey = intent.getStringExtra(EXTRA_FROM_APPKEY);
             int msgid = intent.getIntExtra(EXTRA_MSGID, 0);
             Conversation conversation;
 
-            conversation = JMessageClient.getSingleConversation(user, appkey);
+            conversation = JMessageClient.getSingleConversation(user);
             Log.e(TAG, "initData: 收到来自用户：" + user + "的消息\n" );
             if (conversation == null) {
                 Toast.makeText(getApplicationContext(), "会话对象为null", Toast.LENGTH_SHORT).show();
@@ -148,7 +176,10 @@ public class SingleChartActivity extends AppCompatActivity {
             switch (contentType) {
                 case text:
                     TextContent textContent = (TextContent) message.getContent();
-                    singleMessageAdapter.addMessage(textContent.getText());
+                    Map<String,String> message = new HashMap<>();
+                    message.put("userCode",user);
+                    message.put("text",textContent.getText());
+                    singleMessageAdapter.addMessage(message);
                     singleMessageAdapter.notifyDataSetChanged();
                     Log.e(TAG, "文本消息" + "\n消息内容 = " + textContent.getText());
                     break;

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#656862"
@@ -13,28 +13,28 @@
             android:id="@+id/back"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginTop="17dp"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:src="@drawable/back"/>
         <!--对方名称-->
         <TextView
+            android:layout_centerInParent="true"
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:text="师大篮球小分队"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="15dp"
             android:textSize="20dp"/>
         <!--点击按钮查看对方具体信息-->
         <Button
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:id="@+id/user_info"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="17dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/room_msg"/>
-    </LinearLayout>
+    </RelativeLayout>
     <!--参考实现地址 https://blog.csdn.net/eastmoon502136/article/details/50650350-->
     <!--聊天界面-->
     <LinearLayout
