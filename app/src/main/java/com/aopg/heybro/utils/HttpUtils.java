@@ -16,7 +16,7 @@ import okhttp3.Route;
 
 public class HttpUtils {
     private static final String TAG = "app";
-    public static String BASE_URL = "http://101.200.59.121:8082/android/";
+    public static String BASE_URL = "http://192.168.23.1:8082/android/";
 
     public static OkHttpClient init(OkHttpClient client){
         //创建OkHttpClient对象，添加认证头部信息

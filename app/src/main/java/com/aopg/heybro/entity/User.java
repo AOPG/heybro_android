@@ -15,7 +15,7 @@ public class User extends DataSupport {
     private String userSex;
     private String userPhone;
     private String userMail;
-    private String userInfo;
+    private String userIntro;
     private String userPortrait;
     private String userSignature;
     private String homepageBack;
@@ -72,12 +72,12 @@ public class User extends DataSupport {
         this.userMail = userMail;
     }
 
-    public String getUserInfo() {
-        return userInfo;
+    public String getUserIntro() {
+        return userIntro;
     }
 
-    public void setUserInfo(String userInfo) {
-        this.userInfo = userInfo;
+    public void setUserIntro(String userIntro) {
+        this.userIntro = userIntro;
     }
 
     public String getUserPortrait() {
