@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:text="昵称"
         android:layout_marginLeft="20dp"
-        android:textColor="#ffffff"
+        android:textColor="#000"
         android:textSize="17dp"
         android:textStyle="bold"
       />

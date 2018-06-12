@@ -3,7 +3,9 @@ package com.aopg.heybro.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,6 +40,7 @@ import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 public class MyConcernActivity extends Activity {
     private OkHttpClient client;
     List<Concern> concerns;
+    private MainHandler mainHandler = new MainHandler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,11 +89,8 @@ public class MyConcernActivity extends Activity {
                         concern.save();
                         concerns.add(concern);
                     }
-//                    Looper.prepare();
-//                    MyConcernAdapter adapter = new MyConcernAdapter(MyConcernActivity.this,concerns);
-//                    ListView concernsLv = findViewById(R.id.concerns);
-//                    concernsLv.setAdapter(adapter);
-//                    Looper.loop();
+                    Message message = mainHandler.obtainMessage(0,"formCallBack");
+                    mainHandler.sendMessage(message);
                 }
             }
         });
@@ -102,5 +102,18 @@ public class MyConcernActivity extends Activity {
     public void onBackPressed() {
         //返回
         super.onBackPressed();
+    }
+
+    private class MainHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 0:
+                    MyConcernAdapter adapter = new MyConcernAdapter(MyConcernActivity.this,concerns);
+                    ListView concernsLv = findViewById(R.id.concerns);
+                    concernsLv.setAdapter(adapter);
+            }
+        }
     }
 }

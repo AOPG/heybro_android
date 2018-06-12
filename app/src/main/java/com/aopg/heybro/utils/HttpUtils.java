@@ -16,7 +16,7 @@ import okhttp3.Route;
 
 public class HttpUtils {
     private static final String TAG = "app";
-    public static String BASE_URL = "http://192.168.23.1:8082/android/";
+    public static String BASE_URL = "http://101.200.59.121:8082/android/";
     public static String BUILD_URL(String uri){
         if (LoginInfo.user.getAccessToken()!=null&&LoginInfo.user.getAccessToken()!=""){
             return BASE_URL+uri+"&access_token="+LoginInfo.user.getAccessToken();

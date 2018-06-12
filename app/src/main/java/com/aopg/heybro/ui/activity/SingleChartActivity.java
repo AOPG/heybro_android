@@ -82,7 +82,7 @@ public class SingleChartActivity extends AppCompatActivity {
         userMessage = findViewById(R.id.input_msg);
         sendMessage = findViewById(R.id.send_msg);
         usernameTv = findViewById(R.id.user_name);
-        username = getIntent().getStringExtra("username");
+        username = getIntent().getStringExtra("note");
         usernameTv.setText(username);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
