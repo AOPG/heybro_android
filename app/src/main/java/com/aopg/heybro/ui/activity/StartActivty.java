@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.User;
+import com.aopg.heybro.im.InitIM;
 import com.aopg.heybro.ui.Common.ActivitiesManager;
+import com.aopg.heybro.utils.LoginInfo;
 
 import org.litepal.crud.DataSupport;
 
@@ -59,10 +61,12 @@ public class StartActivty extends AppCompatActivity {
             user = DataSupport.where("isLogin = ?","1").findFirst(User.class);
             Intent intent;
             if (null!=user){
+                LoginInfo.user = user;
                 intent = new Intent(StartActivty.this, MainActivity.class);
             }else {
                 intent = new Intent(StartActivty.this, LoginActivty.class);
             }
+
             startActivity(intent);
             overridePendingTransition(R.anim.in_anim,R.anim.init_anim);
         }

@@ -57,7 +57,9 @@
             android:value="cGgtuW2eaoQMPEuFIoTKRGwwWzl7HrER" >
         </meta-data>
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"> </service>
+        <service android:name=".UserInfoService">
 
+        </service>
         <activity android:name=".ui.activity.StartActivty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
