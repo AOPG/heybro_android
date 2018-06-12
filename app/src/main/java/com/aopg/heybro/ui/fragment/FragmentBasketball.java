@@ -5,13 +5,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.Button;
-import android.widget.RelativeLayout;
+
 import com.aopg.heybro.R;
+import com.aopg.heybro.ui.adapter.BasketBallFragmentPagerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 /**
@@ -19,13 +26,17 @@ import com.aopg.heybro.R;
  * 篮球页面
  */
 
-public class FragmentBasketball extends Fragment {
+public class FragmentBasketball extends Fragment{
 
     private View rootView;
-    private boolean isVisible = true;
-    private RelativeLayout relativeLayout;
-    private View ballView;
-    private View gameView;
+    private Button btn_ball;
+    private Button btn_game;
+    private ViewPager myViewPager;
+    private List<Fragment> list;
+    private BasketBallFragmentPagerAdapter adapter;
+    private View ball_selected;
+    private View game_selected;
+
 
     @Nullable
     @Override
@@ -42,81 +53,73 @@ public class FragmentBasketball extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }
-        relativeLayout = rootView.findViewById(R.id.create);
-        relativeLayout.setVisibility(View.GONE);
-        ballView = rootView.findViewById(R.id.ball_selected);
-        gameView = rootView.findViewById(R.id.game_selected);
-        gameView.setVisibility(View.GONE);
-        /**
-         * 创建房间
-         */
-        Button btn_create = rootView.findViewById(R.id.btn_create);
-        btn_create.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isVisible) {
-                    isVisible = false;//设置其他模块不能打开
-                    relativeLayout.setVisibility(View.VISIBLE);//这一句显示布局
-                }
-            }
-        });
-        /**
-         * 关闭创建房间
-         */
-        Button create_close = rootView.findViewById(R.id.create_close);
-        create_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                relativeLayout.setVisibility(View.GONE);
-                isVisible = true;//设置其他模块可以打开
-            }
-        });
-        /**
-         * 约球
-         */
-        Button btn_ball = rootView.findViewById(R.id.date_ball);
+        initView();
+        // 设置菜单栏的点击事件
         btn_ball.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isVisible) {
-                    ballView.setVisibility(View.VISIBLE);//这一句显示布局
-                    gameView.setVisibility(View.GONE);
-               }
+                myViewPager.setCurrentItem(0);
+                ball_selected.setVisibility(View.VISIBLE);
+                game_selected.setVisibility(View.GONE);
             }
         });
-        /**
-         * 约赛
-         */
-        Button btn_game = rootView.findViewById(R.id.date_game);
         btn_game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isVisible) {
-                    gameView.setVisibility(View.VISIBLE);//这一句显示布局
-                    ballView.setVisibility(View.GONE);
-                }
+                myViewPager.setCurrentItem(1);
+                game_selected.setVisibility(View.VISIBLE);
+                ball_selected.setVisibility(View.GONE);
             }
         });
+        myViewPager.setOnPageChangeListener(new MyPagerChangeListener());
+        //把Fragment添加到List集合里面
+        list = new ArrayList<>();
+        list.add(new FragmentBall());
+        list.add(new FragmentGame());
+        adapter = new BasketBallFragmentPagerAdapter(getChildFragmentManager(), list);
+        myViewPager.setAdapter(adapter);
+        myViewPager.setCurrentItem(0);  //初始化显示第一个页面
+        game_selected.setVisibility(View.GONE);
         return rootView;
     }
     /**
-     * 房间显示
+     * 初始化控件
+     * */
+    private void initView(){
+        ball_selected = rootView.findViewById(R.id.ball_selected);
+        game_selected = rootView.findViewById(R.id.game_selected);
+        btn_ball = rootView.findViewById(R.id.date_ball);
+        btn_game = rootView.findViewById(R.id.date_game);
+        myViewPager = rootView.findViewById(R.id.basketball_viewPager);
+    }
+    /**
+     * 设置一个ViewPager的侦听事件，当左右滑动ViewPager时菜单栏被选中状态跟着改变
+     *
      */
-//    private void changeGridView() {
-//        // item宽度
-//        int itemWidth = DensityUtil.dip2px(this, 100);
-//        // item之间的间隔
-//        int itemPaddingH = DensityUtil.dip2px(this, 1);
-//        int size = datas.size();
-//        // 计算GridView宽度
-//        int gridviewWidth = size * (itemWidth + itemPaddingH);
-//
-//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//                gridviewWidth, LinearLayout.LayoutParams.MATCH_PARENT);
-//        mContentGv.setLayoutParams(params);
-//        mContentGv.setColumnWidth(itemWidth);
-//        mContentGv.setHorizontalSpacing(itemPaddingH);
-//        mContentGv.setStretchMode(GridView.NO_STRETCH);
-//        mContentGv.setNumColumns(size);
-//    }
+    public class MyPagerChangeListener implements ViewPager.OnPageChangeListener {
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+        }
+
+        @Override
+        public void onPageSelected(int arg0) {
+            switch (arg0) {
+                case 0:
+                    ball_selected = rootView.findViewById(R.id.ball_selected);
+                    ball_selected.setVisibility(View.VISIBLE);
+                    game_selected.setVisibility(View.GONE);
+                    break;
+                case 1:
+                    game_selected = rootView.findViewById(R.id.game_selected);
+                    game_selected.setVisibility(View.VISIBLE);
+                    ball_selected.setVisibility(View.GONE);
+                    break;
+            }
+        }
+    }
 }
