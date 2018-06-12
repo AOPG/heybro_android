@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.aopg.heybro.R;
+import com.aopg.heybro.ui.activity.MyInfoActivity;
 import com.aopg.heybro.ui.activity.SaoyisaoActivity;
 import com.aopg.heybro.ui.activity.SettingActivity;
 
@@ -49,6 +50,18 @@ public class FragmentMy extends Fragment {
         myPosition.setVisibility(View.GONE);
         final RelativeLayout myRating = rootView.findViewById(R.id.rating_show);
         myRating.setVisibility(View.GONE);
+
+        /**
+         * 我的资料界面
+         */
+        ImageView myImage = rootView.findViewById(R.id.image);
+        myImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myInfoIntent = new Intent(getActivity(), MyInfoActivity.class);
+                startActivity(myInfoIntent);
+            }
+        });
         /**
          * 擅长位置的显示
          */
