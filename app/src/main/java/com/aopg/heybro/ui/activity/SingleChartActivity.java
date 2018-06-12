@@ -69,7 +69,7 @@ public class SingleChartActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        username = getIntent().getStringExtra("username");
+        username = getIntent().getStringExtra("note");
         usernameTv.setText(username);
     }
 

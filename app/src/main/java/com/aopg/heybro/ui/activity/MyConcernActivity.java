@@ -3,11 +3,31 @@ package com.aopg.heybro.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.R;
+import com.aopg.heybro.entity.Concern;
+import com.aopg.heybro.ui.adapter.MyConcernAdapter;
+import com.aopg.heybro.utils.HttpUtils;
+import com.aopg.heybro.utils.LoginInfo;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
 
 /**
@@ -16,6 +36,9 @@ import com.aopg.heybro.R;
  */
 
 public class MyConcernActivity extends Activity {
+    private OkHttpClient client;
+    List<Concern> concerns;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,20 +52,52 @@ public class MyConcernActivity extends Activity {
             }
         });
 
-        /***************测试im模块start***************/
+        client = HttpUtils.init(client);
 
-        View view = findViewById(R.id.user_test);
-        view.setOnClickListener(new View.OnClickListener() {
+
+
+
+        Request request = new Request.Builder().
+                url(BUILD_URL("concern/getConcernIndex?userCode=" + LoginInfo.user.getUserCode())).build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {//4.回调方法
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MyConcernActivity.this,SingleChartActivity.class);
-                intent.putExtra("username","999999");
-                startActivity(intent);
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                concerns = new ArrayList<>();
+                String result = response.body().string();
+                JSONArray concernInfo =
+                        ((JSONObject)((JSONObject.parseObject(result)).get("data"))).getJSONArray("list");
+                String success = (JSONObject.parseObject(result)).getString("success");
+                if (null!=success&&success.equals("true")) {
+                    for (int i = 0; i < concernInfo.size(); i++) {
+                        Concern concern = new Concern();
+                        String userConcernCode =
+                                ((JSONObject)concernInfo.get(i)).getString("userConcernCode");
+                        String userNote =
+                                ((JSONObject)concernInfo.get(i)).getString("userNote");
+                        concern.setUserConcernCode(userConcernCode);
+                        concern.setUserNote(userNote);
+                        concern.setUserCode(LoginInfo.user.getUserCode());
+                        concern.save();
+                        concerns.add(concern);
+                    }
+//                    Looper.prepare();
+//                    MyConcernAdapter adapter = new MyConcernAdapter(MyConcernActivity.this,concerns);
+//                    ListView concernsLv = findViewById(R.id.concerns);
+//                    concernsLv.setAdapter(adapter);
+//                    Looper.loop();
+                }
             }
         });
 
-        /***************测试im模块end*****************/
+
+
+
     }
     public void onBackPressed() {
         //返回
