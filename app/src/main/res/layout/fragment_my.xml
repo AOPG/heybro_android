@@ -66,6 +66,7 @@
                         android:layout_marginTop="10dp"/>
                     <!--个人简介 -->
                     <TextView
+                        android:id="@+id/user_intro"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:textColor="#ffffff"
@@ -85,6 +86,7 @@
                         android:text="ID："/>
                     <!-- 个人ID-->
                     <TextView
+                        android:id="@+id/user_code"
                         android:layout_width="150dp"
                         android:layout_height="25dp"
                         android:textColor="#fffff0"

@@ -1,8 +1,14 @@
 package com.aopg.heybro.ui.fragment;
 
 
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,11 +19,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
+import com.aopg.heybro.UserInfoService;
 import com.aopg.heybro.ui.activity.MyInfoActivity;
 import com.aopg.heybro.ui.activity.SaoyisaoActivity;
 import com.aopg.heybro.ui.activity.SettingActivity;
+import com.aopg.heybro.utils.LoginInfo;
 
 
 /**
@@ -27,8 +37,9 @@ import com.aopg.heybro.ui.activity.SettingActivity;
 
 public class FragmentMy extends Fragment {
 
-    private View rootView;
+    private static View rootView;
     private boolean isVisible = true;
+    private MainActivity mActivity;
 
     @Nullable
     @Override
@@ -36,10 +47,13 @@ public class FragmentMy extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+        LoginInfo.FragmentMYISCREATE=1;
+        this.getActivity().startService(new Intent(this.getActivity(), UserInfoService.class));
         Log.e("", "onCreateView");
         if (rootView == null) {
             Log.e("", "FragmentMy");
             rootView = inflater.inflate(R.layout.fragment_my,container,false);
+
         }
         // 缓存的rootView需要判断是否已经被加过parent，如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
         ViewGroup parent = (ViewGroup) rootView.getParent();
@@ -132,6 +146,37 @@ public class FragmentMy extends Fragment {
                 startActivity(saoyisaoIntent);
             }
         });
+
+
+
         return rootView;
+    }
+
+    public static void loadInfo(){
+        TextView userIntroTv = rootView.findViewById(R.id.user_intro);
+        userIntroTv.setText(LoginInfo.user.getUserIntro());
+        TextView userNickNameTv = rootView.findViewById(R.id.myName);
+        userNickNameTv.setText(LoginInfo.user.getNickName());
+        TextView userIdTv = rootView.findViewById(R.id.user_code);
+        userIdTv.setText(LoginInfo.user.getUserCode());
+        Button ratingTv = rootView.findViewById(R.id.rating);
+        ratingTv.setText("等级："+LoginInfo.user.getUserGrade()+"级");
+    }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    loadInfo();
+                    break;
+            }
+        }
+    };
+
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = (MainActivity) activity;
+        mActivity.setHandler(handler);
     }
 }

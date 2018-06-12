@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,20 +28,42 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+    private Handler mHandler;
     private FragmentTabHost myTabHost;
     private Map<String,Map<String,Object>> map;
     private static String LAST_SELECT = "basketball";
+    MyBroadcastReceiver mbcr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ActivitiesManager.getInstance().addActivity(this);
-
-        startService(new Intent(this, UserInfoService.class));
-
         map = new HashMap<>();
         initTabHost();
+
+        ActivitiesManager.getInstance().addActivity(this);
+
+        mbcr = new MyBroadcastReceiver();
+        //动态注册一个广播
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("FragmentMy");
+        registerReceiver(mbcr, filter);// 注册
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                while (true){
+                    startService(new Intent(MainActivity.this, UserInfoService.class));
+                    try {
+                        sleep(300000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }.start();
+
         //底部tabhost改变图标
         myTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -187,4 +211,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    //动态创建广播接收者
+    class MyBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //对接收到的广播进行处理，intent里面包含数据
+            Message msg = mHandler.obtainMessage();
+            msg.what =0;
+            mHandler.sendMessage(msg);
+        }
+    }
+
+    public void setHandler(Handler handler) {
+        mHandler = handler;
+    }
 }
