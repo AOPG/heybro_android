@@ -77,7 +77,7 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setComponent(new ComponentName(LoginActivty.this, MainActivity.class));
+                intent.setComponent(new ComponentName(LoginActivty.this, RegisterActivty.class));
                 intent.putExtra("position", userNameFlag);
                 startActivity(intent);
             }

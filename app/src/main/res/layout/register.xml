@@ -46,19 +46,21 @@
                     android:layout_height="50dp"
                     android:orientation="horizontal">
                     <TextView
+                        android:id="@+id/RigsterPhone"
                         android:layout_marginTop="20dp"
                         android:layout_width="110dp"
                         android:layout_height="30dp"
                         android:text="手机号  +86"
                         android:textColor="#ffffff"
                         android:textSize="20dp"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/register_phone"
                         android:layout_width="120dp"
                         android:layout_height="40dp"
-                        android:text="手机号"
+                        android:hint="手机号"
+                        android:textColorHint="#A49D9D"
                         android:layout_margin="20dp"
-                        android:textColor="#A49D9D"
+                        android:textColor="#ffffff"
                         android:textSize="15dp"/>
                 </LinearLayout>
                 <View
@@ -80,16 +82,17 @@
                         android:text="验证码"
                         android:textColor="#ffffff"
                         android:textSize="20dp"/>
-                    <TextView
-                        android:id="@+id/register_yanzheng"
+                    <EditText
+                        android:id="@+id/register_validation"
                         android:layout_width="80dp"
                         android:layout_height="40dp"
-                        android:text="4位数字"
+                        android:hint="4位数字"
+                        android:textColorHint="#A49D9D"
                         android:layout_marginTop="20dp"
-                        android:textColor="#A49D9D"
+                        android:textColor="#ffffff"
                         android:textSize="15dp"/>
                     <Button
-                        android:id="@+id/register_yanzheng_btn"
+                        android:id="@+id/register_validation_btn"
                         android:layout_marginTop="20dp"
                         android:layout_width="100dp"
                         android:layout_height="30dp"
@@ -114,16 +117,19 @@
                         android:text="密码"
                         android:textColor="#ffffff"
                         android:textSize="20dp"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/register_password"
                         android:layout_width="140dp"
                         android:layout_height="40dp"
-                        android:text="密码"
+                        android:password="true"
+                        android:hint="密码"
+                        android:textColorHint="#A49D9D"
                         android:layout_marginTop="20dp"
-                        android:textColor="#A49D9D"
+                        android:textColor="#ffffff"
                         android:textSize="15dp"/>
 
                     <Button
+                        android:id="@+id/register_show"
                         android:layout_marginTop="20dp"
                         android:layout_width="25dp"
                         android:layout_height="25dp"

@@ -83,6 +83,7 @@
         <activity android:name=".ui.activity.SingleChartActivity"
             android:launchMode="singleTask"
             android:taskAffinity="com.aopg.heybro"></activity>
+        <activity android:name=".ui.activity.RegisterActivty"></activity>
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
