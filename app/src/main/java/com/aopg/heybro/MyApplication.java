@@ -2,7 +2,7 @@ package com.aopg.heybro;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
+import com.baidu.mapapi.SDKInitializer;
 import org.litepal.LitePalApplication;
 import org.litepal.tablemanager.Connector;
 

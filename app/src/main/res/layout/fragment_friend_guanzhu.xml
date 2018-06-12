@@ -29,10 +29,10 @@
 
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#535050">
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="#535050">-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -117,25 +117,15 @@
     }-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_marginTop="10dp">
             <!--其item是friend_item2-->
-            <!--测试数据，im，模块-->
-            <LinearLayout
-                android:id="@+id/user_test"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="999999"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
             <ListView
-                android:id="@+id/friend_item2"
+                android:id="@+id/concerns"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"></ListView>
+                android:layout_height="match_parent"/>
         </LinearLayout>
     </LinearLayout>
-    </ScrollView>
+    <!--</ScrollView>-->
 </LinearLayout>
