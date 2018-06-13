@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_mode">
+        <item>无限制</item>
+        <item>1V1</item>
+        <item>3V3</item>
+        <item>5V5</item>
+    </string-array>
+    <string-array name="spinner_rate">
+        <item>无限制</item>
+        <item>Ⅰ-Ⅲ</item>
+        <item>Ⅳ-Ⅵ</item>
+        <item>Ⅶ-Ⅸ</item>
+    </string-array>
+    <string-array name="spinner_num">
+        <item>10人以下</item>
+        <item>2</item>
+        <item>6</item>
+        <item>10</item>
+    </string-array>
+</resources>

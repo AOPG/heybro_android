@@ -37,20 +37,21 @@
                 android:text="模     式"
                 android:textColor="#ffffff"
                 android:textSize="15dp" />
-            <!-- 下拉菜单  待实现-->
+            <!-- 下拉菜单-->
             <Spinner
-                android:id="@+id/spinner1"
+                android:id="@+id/spinner_mode"
+                android:entries="@array/spinner_mode"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginLeft="65dp"
-                android:background="@drawable/basket_spinner_corner">
+                android:spinnerMode="dialog"
+                android:background="@drawable/basket_spinner_corner" />
                 <!--<TextView
                     android:id="@+id/spinner1_model"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/basket_spinner_corner"/>
                 -->
-            </Spinner>
         </RelativeLayout>
 
         <RelativeLayout
@@ -68,11 +69,13 @@
                 android:textSize="15dp" />
             <!-- 下拉菜单  待实现-->
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/spinner_rate"
+                android:entries="@array/spinner_rate"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginLeft="65dp"
-                android:background="@drawable/basket_spinner_corner"></Spinner>
+                android:spinnerMode="dialog"
+                android:background="@drawable/basket_spinner_corner" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -90,11 +93,13 @@
                 android:textSize="15dp" />
             <!-- 下拉菜单  待实现-->
             <Spinner
-                android:id="@+id/spinner3"
+                android:id="@+id/spinner_num"
+                android:entries="@array/spinner_num"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginLeft="65dp"
-                android:background="@drawable/basket_spinner_corner"></Spinner>
+                android:spinnerMode="dialog"
+                android:background="@drawable/basket_spinner_corner" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -112,7 +117,7 @@
                 android:textSize="15dp" />
             <!-- 下拉菜单  待实现-->
             <EditText
-                android:id="@+id/spinner4"
+                android:id="@+id/set_roomPassword"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginLeft="65dp"
@@ -124,6 +129,7 @@
         </RelativeLayout>
         <!-- 创建房间后 跳到房间界面-->
         <Button
+            android:id="@+id/btn_create_finish"
             android:layout_width="120dp"
             android:layout_height="40dp"
             android:layout_marginLeft="70dp"

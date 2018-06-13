@@ -116,7 +116,7 @@
             android:id="@+id/rating"
             android:layout_width="110dp"
             android:layout_height="38dp"
-            android:text="等级：1级"
+            android:text="等级:1级"
             android:background="#1fffffff"
             android:textColor="#ffffff"
             android:layout_marginLeft="8dp"
@@ -473,7 +473,7 @@
                     android:id="@+id/rd12"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Ⅰ级 冷板凳"
+                    android:text="Ⅰ级 看台围观"
                     android:textColor="#ffffff"
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
@@ -493,7 +493,7 @@
                     android:id="@+id/rd22"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Ⅱ级 小马扎"
+                    android:text="Ⅱ级 冷板凳"
                     android:textColor="#bbbbbb"
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
@@ -513,7 +513,7 @@
                     android:id="@+id/rd32"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Ⅲ级 看台围观"
+                    android:text="Ⅲ级 替补"
                     android:textColor="#bbbbbb"
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
@@ -533,7 +533,7 @@
                     android:id="@+id/rd421"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Ⅳ级 替补"
+                    android:text="Ⅳ级 第六人"
                     android:textColor="#bbbbbb"
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
@@ -553,7 +553,7 @@
                     android:id="@+id/rd52"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Ⅵ级 你和帅气之间只差一个投篮"
+                    android:text="Ⅴ级 角色球员"
                     android:textColor="#bbbbbb"
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
@@ -573,7 +573,7 @@
                     android:id="@+id/rd62"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Ⅶ级 你正在吸引女神的注意力"
+                    android:text="Ⅵ级 你正在吸引女神的注意力"
                     android:textColor="#bbbbbb"
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
@@ -593,7 +593,7 @@
                     android:id="@+id/rd72"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Ⅷ级 有小可爱给你送水"
+                    android:text="Ⅶ级 有小可爱给你送水"
                     android:textColor="#bbbbbb"
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
@@ -613,7 +613,7 @@
                     android:id="@+id/rd82"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Ⅸ级 你一上场就是焦点"
+                    android:text="Ⅷ级 你一上场就是焦点"
                     android:textColor="#bbbbbb"
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
@@ -633,7 +633,7 @@
                     android:id="@+id/rd92"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Ⅹ级 MVP非你莫属"
+                    android:text="Ⅸ级 MVP非你莫属"
                     android:textColor="#bbbbbb"
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
