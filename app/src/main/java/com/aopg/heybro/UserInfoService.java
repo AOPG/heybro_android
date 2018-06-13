@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 
 import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.entity.User;
+import com.aopg.heybro.im.InitIM;
+import com.aopg.heybro.ui.activity.LoginActivty;
 import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
 
@@ -62,7 +64,6 @@ public class UserInfoService extends IntentService {
                             parseObject((JSONObject.parseObject(result)).getString("data"));
                     String success = (JSONObject.parseObject(result)).getString("success");
                     if (null!=success&&success.equals("true")) {
-
                         LoginInfo.user.setNickName(userInfo.getString("userNickname"));
                         LoginInfo.user.setUserSignature(userInfo.getString("userSignature"));
                         LoginInfo.user.setUserGrade(userInfo.getInteger("userGrade"));
@@ -80,12 +81,15 @@ public class UserInfoService extends IntentService {
                             Intent intent = new Intent("FragmentMy");
                             sendBroadcast(intent);
                         }
+                        if (LoginInfo.ISLOGINIM==0){
+                            InitIM.initJmessageUser(LoginInfo.user.getUsername(),
+                                    LoginInfo.user.getUserCode(),UserInfoService.this);
+                        }
                     } else {
 
                     }
                 }
             });
-
     }
 
     @Override

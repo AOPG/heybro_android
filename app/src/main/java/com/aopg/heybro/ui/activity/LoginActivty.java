@@ -175,7 +175,6 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                         int upCount = user.updateAll("userName = ?",username);
                         if (upCount>0){
                             Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
-                            InitIM.initJmessageUser(username,password,LoginActivty.this);
                             startActivity(intent);
                         }else {
                             Toast.makeText(getApplicationContext(), "登录失败", Toast.LENGTH_SHORT).show();
@@ -186,7 +185,6 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                         LoginInfo.user = user;
                         if (user.save()) {
                             Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
-                            InitIM.initJmessageUser(username,password,LoginActivty.this);
                             startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(), "登录失败", Toast.LENGTH_SHORT).show();

@@ -18,8 +18,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.aopg.heybro.im.InitIM;
 import com.aopg.heybro.ui.Common.ActivitiesManager;
+import com.aopg.heybro.ui.activity.LoginActivty;
 import com.aopg.heybro.ui.fragment.FragmentActivity;
 import com.aopg.heybro.ui.fragment.FragmentBasketball;
 import com.aopg.heybro.ui.fragment.FragmentDiscovery;
@@ -30,6 +33,9 @@ import com.baidu.mapapi.SDKInitializer;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import cn.jpush.im.android.api.event.LoginStateChangeEvent;
+import cn.jpush.im.android.api.model.UserInfo;
 
 public class MainActivity extends AppCompatActivity {
     private Handler mHandler;
@@ -50,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         baiduMapLocationUtil.init(this);
         map = new HashMap<>();
         initTabHost();
-
         ActivitiesManager.getInstance().addActivity(this);
 
         mbcr = new MyBroadcastReceiver();
@@ -243,5 +248,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void setHandler(Handler handler) {
         mHandler = handler;
+    }
+
+
+    public void onEvent(LoginStateChangeEvent event) {
+        LoginStateChangeEvent.Reason reason = event.getReason();
+        UserInfo myInfo = event.getMyInfo();
+        Intent intent = new Intent(getApplicationContext(), LoginActivty.class);
+        Toast.makeText(getApplicationContext(),"您在其他设备登录!如不是您登录，请及时修改密码！",Toast.LENGTH_SHORT);
+        startActivity(intent);
     }
 }

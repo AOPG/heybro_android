@@ -9,4 +9,5 @@ import com.aopg.heybro.entity.User;
 public class LoginInfo {
     public static User user = new User();
     public static Integer FragmentMYISCREATE = 0;
+    public static Integer ISLOGINIM = 0;
 }
