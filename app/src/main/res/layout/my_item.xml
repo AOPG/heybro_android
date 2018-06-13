@@ -36,32 +36,16 @@
         android:orientation="vertical"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="得分:"
-            android:textColor="#ffffff"/>
+            android:text="得分:0"
+            android:textColor="#ffffff" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="盖帽:"
-            android:textColor="#ffffff"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="篮板:"
-            android:textColor="#ffffff"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="抢断:"
+            android:text="盖帽:0"
             android:textColor="#ffffff"/>
     </LinearLayout>
     <LinearLayout
@@ -73,12 +57,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="助攻:"
+            android:text="篮板:0"
             android:textColor="#ffffff"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="失误:"
+            android:text="抢断:0"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="助攻:0"
+            android:textColor="#ffffff"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="失误:0"
             android:textColor="#ffffff"/>
     </LinearLayout>
 </LinearLayout>
