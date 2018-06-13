@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.aopg.heybro.ui.fragment.FragmentBasketball;
 import com.aopg.heybro.ui.fragment.FragmentDiscovery;
 import com.aopg.heybro.ui.fragment.FragmentFriend;
 import com.aopg.heybro.ui.fragment.FragmentMy;
+import com.aopg.heybro.utils.BaiduMapLocationUtil;
 import com.baidu.mapapi.SDKInitializer;
 
 import java.util.HashMap;
@@ -35,14 +37,17 @@ public class MainActivity extends AppCompatActivity {
     private Map<String,Map<String,Object>> map;
     private static String LAST_SELECT = "basketball";
     MyBroadcastReceiver mbcr;
+    private BaiduMapLocationUtil baiduMapLocationUtil;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         //注意该方法要再setContentView方法之前实现
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
+        baiduMapLocationUtil.init(this);
         map = new HashMap<>();
         initTabHost();
 
@@ -126,6 +131,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        baiduMapLocationUtil.onStop();
     }
 
     /**
