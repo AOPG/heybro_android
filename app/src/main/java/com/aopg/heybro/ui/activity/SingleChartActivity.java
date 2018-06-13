@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.adapter.SingleMessageAdapter;
+import com.aopg.heybro.utils.LoginInfo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,15 +49,16 @@ import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_MSG_TYP
 
 public class SingleChartActivity extends AppCompatActivity {
     private static final String TAG = "SingleChartActivity";
-    private String username;
+    private String note;
     private EditText userMessage;
     private Button sendMessage;
     private ContentType contentType;
     private Message message;
     private ListView messageLv;
     private SingleMessageAdapter singleMessageAdapter;
-    private TextView usernameTv;
+    private TextView noteTv;
     private ImageView back;
+    private String userConcernCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +71,8 @@ public class SingleChartActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        username = getIntent().getStringExtra("note");
-        usernameTv.setText(username);
+        note = getIntent().getStringExtra("note");
+        noteTv.setText(note);
     }
 
     private void initView() {
@@ -81,9 +83,11 @@ public class SingleChartActivity extends AppCompatActivity {
         messageLv.setAdapter(singleMessageAdapter);
         userMessage = findViewById(R.id.input_msg);
         sendMessage = findViewById(R.id.send_msg);
-        usernameTv = findViewById(R.id.user_name);
-        username = getIntent().getStringExtra("note");
-        usernameTv.setText(username);
+        noteTv = findViewById(R.id.user_name);
+
+        userConcernCode = getIntent().getStringExtra("userConcernCode");
+        note = getIntent().getStringExtra("note");
+        noteTv.setText(note);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +98,7 @@ public class SingleChartActivity extends AppCompatActivity {
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = username;
+                String name = userConcernCode;
                 String text = userMessage.getText().toString();
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(text)) {
 
@@ -110,7 +114,7 @@ public class SingleChartActivity extends AppCompatActivity {
                    // textContent.setStringExtra(extraKey, extraValue);
 
                     //创建message实体，设置消息发送回调。
-                    Message message = mConversation.createSendMessage(textContent, username);
+                    Message message = mConversation.createSendMessage(textContent, userConcernCode);
                     message.setOnSendCompleteCallback(new BasicCallback() {
                         @Override
                         public void gotResult(int i, String s) {
@@ -139,7 +143,7 @@ public class SingleChartActivity extends AppCompatActivity {
 
                     //在聊天界面上添加信息
                     Map<String,String> messageView = new HashMap<>();
-                    messageView.put("userCode","1234");
+                    messageView.put("userCode", LoginInfo.user.getUserCode());
                     messageView.put("text",textContent.getText());
                     singleMessageAdapter.addMessage(messageView);
                     singleMessageAdapter.notifyDataSetChanged();

@@ -62,7 +62,7 @@ public class SingleMessageAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         message = messages.get(position);
         String userCode =  message.get("userCode");
-        if (userCode== LoginInfo.user.getUserCode()){
+        if (userCode == LoginInfo.user.getUserCode()){
             convertView = View.inflate(context, R.layout.room_chatitem_me, null);
         }else if (userCode!= LoginInfo.user.getUserCode()){
             convertView = View.inflate(context, R.layout.room_chatitem_others, null);
