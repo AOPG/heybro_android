@@ -9,9 +9,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import com.aopg.heybro.R;
+import com.aopg.heybro.ui.room.HorizontaRoomlListViewAdapter;
+import com.aopg.heybro.ui.room.HorizontalRoomListView;
 
 
 /**
@@ -24,6 +27,8 @@ public class FragmentBall extends Fragment {
     private View createRoomView;
     private View joinRoomView;
     private PopupWindow window;
+    HorizontalRoomListView hListView;
+    HorizontaRoomlListViewAdapter hListViewAdapter;
 
 
     @Nullable
@@ -40,6 +45,10 @@ public class FragmentBall extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }
+
+        //房间部分
+        initUI();
+
         /**
          * 创建房间
          */
@@ -101,5 +110,63 @@ public class FragmentBall extends Fragment {
             }
         });
         return rootView;
+    }
+
+
+    //房间部分
+    public void initUI(){
+        hListView = (HorizontalRoomListView)rootView.findViewById(R.id.ball_horizon_listview);
+        String[] roomCode = {"20180613001", "20180613002", "20180613003", "20180613004",
+                "20180613005","20180613006"};
+        String[] roomTitle = {"快来打球吧！", "快来打球吧！", "快来打球吧！",
+                "快来打球吧！","快来打球吧！","快来打球吧！"};
+        String[] roomNum = {"1/10", "2/10", "3/10", "4/10","5/10","6/10"};
+        final int[] idss = {R.drawable.room_corner, R.drawable.room_corner,
+                R.drawable.room_corner, R.drawable.room_corner,R.drawable.room_corner
+                ,R.drawable.room_corner};
+
+        hListViewAdapter = new HorizontaRoomlListViewAdapter(rootView.getContext(),idss,
+                roomCode,roomTitle,roomNum);
+        hListView.setAdapter(hListViewAdapter);
+        //      hListView.setOnItemSelectedListener(new OnItemSelectedListener() {
+        //
+        //          @Override
+        //          public void onItemSelected(AdapterView<?> parent, View view,
+        //                  int position, long id) {
+        //              // TODO Auto-generated method stub
+        //              if(olderSelected != null){
+        //                  olderSelected.setSelected(false); //上一个选中的View恢复原背景
+        //              }
+        //              olderSelected = view;
+        //              view.setSelected(true);
+        //          }
+        //
+        //          @Override
+        //          public void onNothingSelected(AdapterView<?> parent) {
+        //              // TODO Auto-generated method stub
+        //
+        //          }
+        //      });
+        hListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // TODO Auto-generated method stub
+//              if(olderSelectView == null){
+//                  olderSelectView = view;
+//              }else{
+//                  olderSelectView.setSelected(false);
+//                  olderSelectView = null;
+//              }
+//              olderSelectView = view;
+//              view.setSelected(true);
+//                previewImg.setImageResource(ids[position]);
+                hListViewAdapter.setSelectIndex(position);
+                hListViewAdapter.notifyDataSetChanged();
+
+            }
+        });
+
     }
 }

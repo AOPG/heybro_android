@@ -12,10 +12,16 @@ import java.util.Map;
  */
 
 public class Virtualdiscoverdata {
+
+    //发现模块
     private List<Map<String,Object>> list;
+
+    //轮播图控制
     public static int flag1 = 0;
     public static int flag2 = 0;
 
+
+    //发现模块
     public List<Map<String,Object>> dataResource(){
         list = new ArrayList<>();
 

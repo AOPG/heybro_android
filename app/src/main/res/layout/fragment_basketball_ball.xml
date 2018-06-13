@@ -9,9 +9,31 @@
         android:layout_height="match_parent"
         android:background="#535050"
         android:orientation="vertical">
+
+
+
+
         <!-- 房间显示-->
-        <!--a.包裹HorizontalScrollView控件是GirdView横向滚动的基本条件
-            b.GirdView外包裹LinearLayout是java代码中参数设置的必要条件-->
+
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="170dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp">
+
+            <com.aopg.heybro.ui.room.HorizontalRoomListView
+                android:id="@+id/ball_horizon_listview"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_alignParentTop="true"
+                >
+            </com.aopg.heybro.ui.room.HorizontalRoomListView>
+
+
+        </LinearLayout>
+        <!--&lt;!&ndash;a.包裹HorizontalScrollView控件是GirdView横向滚动的基本条件
+            b.GirdView外包裹LinearLayout是java代码中参数设置的必要条件&ndash;&gt;
         <HorizontalScrollView
             android:layout_width="300dp"
             android:layout_height="170dp"
@@ -22,7 +44,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:orientation="horizontal">
-                <!--需要通过具体代码实现左右滑动 具体代码示例见下面备注-->
+                &lt;!&ndash;需要通过具体代码实现左右滑动 具体代码示例见下面备注&ndash;&gt;
                 <GridView
                     android:id="@+id/grid"
                     android:layout_width="wrap_content"
@@ -31,7 +53,7 @@
                 </GridView>
 
             </LinearLayout>
-        </HorizontalScrollView>
+        </HorizontalScrollView>-->
         <!--/**
          * 将GridView改成单行横向布局
         */

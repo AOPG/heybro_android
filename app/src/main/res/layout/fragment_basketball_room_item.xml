@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/room_Layout"
+    android:layout_width="100dp"
+    android:layout_height="160dp"
+    android:paddingLeft="2dip"
+    android:paddingRight="2dip"
+    android:paddingTop="2dip"
+    android:paddingBottom="2dip"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:clickable="true">
+
+
+    <!--房间编号-->
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:background="@drawable/room_corner">
+        <TextView
+            android:id="@+id/ball_room_code"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="1000178"
+            android:textColor="#000000"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="16dp"/>
+
+
+    </LinearLayout>
+
+    <!--房间名称-->
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:background="@drawable/room_cornertr">
+
+        <TextView
+            android:id="@+id/ball_room_name"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:text="师大篮球竞争小比赛"/>
+    </LinearLayout>
+
+
+
+
+    <!--房间数量-->
+    <LinearLayout
+        android:background="@drawable/room_cornertr"
+        android:layout_width="100dp"
+        android:layout_height="30dp">
+        
+        <TextView
+            android:id="@+id/ball_room_num"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:text="3/5"
+            android:textSize="16dp"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:textColor="#000000"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

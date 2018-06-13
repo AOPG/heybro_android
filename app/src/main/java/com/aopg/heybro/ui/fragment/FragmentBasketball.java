@@ -15,6 +15,7 @@ import android.widget.Button;
 
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.adapter.BasketBallFragmentPagerAdapter;
+import com.aopg.heybro.ui.room.CustomViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class FragmentBasketball extends Fragment{
     private View rootView;
     private Button btn_ball;
     private Button btn_game;
-    private ViewPager myViewPager;
+    private CustomViewPager myViewPager;
     private List<Fragment> list;
     private BasketBallFragmentPagerAdapter adapter;
     private View ball_selected;
@@ -72,6 +73,7 @@ public class FragmentBasketball extends Fragment{
             }
         });
         myViewPager.setOnPageChangeListener(new MyPagerChangeListener());
+        myViewPager.setScanScroll(false);
         //把Fragment添加到List集合里面
         list = new ArrayList<>();
         list.add(new FragmentBall());
