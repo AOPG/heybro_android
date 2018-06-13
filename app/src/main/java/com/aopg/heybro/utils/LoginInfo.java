@@ -8,6 +8,8 @@ import com.aopg.heybro.entity.User;
 
 public class LoginInfo {
     public static User user = new User();
+    //0为未创建FragementMy界面，1为已创建
     public static Integer FragmentMYISCREATE = 0;
+    //0为未登录IM，1为已登录IM
     public static Integer ISLOGINIM = 0;
 }

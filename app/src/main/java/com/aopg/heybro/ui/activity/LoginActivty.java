@@ -19,8 +19,9 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
+import com.aopg.heybro.UserInfoService;
 import com.aopg.heybro.entity.User;
-import com.aopg.heybro.im.InitIM;
+
 import com.aopg.heybro.ui.Common.ActivitiesManager;
 import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
@@ -28,24 +29,13 @@ import com.aopg.heybro.utils.LoginInfo;
 import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.Base64;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import cn.jpush.im.android.api.JMessageClient;
-import cn.jpush.im.api.BasicCallback;
-import okhttp3.Authenticator;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Credentials;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.Route;
 
 
 /**
@@ -174,6 +164,8 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                     if (isHave>0){
                         int upCount = user.updateAll("userName = ?",username);
                         if (upCount>0){
+                            LoginInfo.user =  DataSupport.where("userName = ?", username).findFirst(User.class);
+                            startService(new Intent(LoginActivty.this, UserInfoService.class));
                             Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                         }else {
@@ -184,6 +176,7 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                         user.save();
                         LoginInfo.user = user;
                         if (user.save()) {
+                            startService(new Intent(LoginActivty.this, UserInfoService.class));
                             Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                         } else {
@@ -207,12 +200,8 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                     String username = usernameEt.getText().toString();
                     String password = passwordEt.getText().toString();
                     doLogin(username, password);
-
                 }
                 break;
         }
     }
-
-
-
 }

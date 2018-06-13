@@ -93,12 +93,13 @@ public class BaiduMapLocationUtil {
                 sb.append(location.getSatelliteNumber());
             }
             //tv.setText(tv.getText() + "\n" + sb.toString());
+            System.out.println(sb.toString());
         }
     }
     /**
      * 关闭定位功能
      */
-    public void onStop() {
+    public static void onStop() {
         mLocationClient.stop();
     }
 }

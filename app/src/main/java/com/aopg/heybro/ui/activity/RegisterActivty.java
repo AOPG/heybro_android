@@ -148,7 +148,8 @@ public class RegisterActivty extends AppCompatActivity{
         registerValidation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendCode("86","15732167182");
+                EditText phoneET = findViewById(R.id.register_phone);
+                sendCode("86",phoneET.getText().toString());
             }
         });
 

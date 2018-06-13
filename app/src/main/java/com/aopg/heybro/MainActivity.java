@@ -1,12 +1,14 @@
 package com.aopg.heybro;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTabHost;
@@ -29,11 +31,13 @@ import com.aopg.heybro.ui.fragment.FragmentDiscovery;
 import com.aopg.heybro.ui.fragment.FragmentFriend;
 import com.aopg.heybro.ui.fragment.FragmentMy;
 import com.aopg.heybro.utils.BaiduMapLocationUtil;
+import com.aopg.heybro.utils.LoginInfo;
 import com.baidu.mapapi.SDKInitializer;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.event.LoginStateChangeEvent;
 import cn.jpush.im.android.api.model.UserInfo;
 
@@ -52,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         //注意该方法要再setContentView方法之前实现
         SDKInitializer.initialize(getApplicationContext());
+        //注册jMessage
+        JMessageClient.registerEventReceiver(this);
+
         setContentView(R.layout.activity_main);
         baiduMapLocationUtil.init(this);
         map = new HashMap<>();
@@ -140,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
         baiduMapLocationUtil.onStop();
     }
 
@@ -252,10 +258,34 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onEvent(LoginStateChangeEvent event) {
-        LoginStateChangeEvent.Reason reason = event.getReason();
-        UserInfo myInfo = event.getMyInfo();
-        Intent intent = new Intent(getApplicationContext(), LoginActivty.class);
-        Toast.makeText(getApplicationContext(),"您在其他设备登录!如不是您登录，请及时修改密码！",Toast.LENGTH_SHORT);
-        startActivity(intent);
+        System.out.println("------------------监听到事件-------------------");
+        Looper.prepare();
+        forceLogoutDig();
+        Looper.loop();
+        System.out.println("------------------已跳转-------------------");
+    }
+
+    public void forceLogoutDig(){
+        AlertDialog alertDialog;
+        alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("强制下线提醒");
+        alertDialog.setMessage("您的账号在其他地方登录!如果不是您本人操作，" +
+                "请尽快更改密码，以免造成财产损失。");
+        alertDialog.setButton("确定", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case AlertDialog.BUTTON_POSITIVE:// "确认"按钮退出程序
+                        Intent intent = new Intent(MainActivity.this, LoginActivty.class);
+                        LoginInfo.ISLOGINIM=0;
+                        LoginInfo.user.setIsLogin(0);
+                        LoginInfo.user.updateAll("userName = ?",LoginInfo.user.getUsername());
+                        startActivity(intent);
+                        break;
+                }
+            }
+        });
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
     }
 }
