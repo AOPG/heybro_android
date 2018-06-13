@@ -69,6 +69,15 @@ public class SettingActivity extends Activity {
                 startActivity(commonSettingIntent);
             }
         });
+        /**
+         * 退出登录*/
+        LinearLayout quitSetting = findViewById(R.id.tongyong);
+        quitSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
     public void onBackPressed() {
         //返回

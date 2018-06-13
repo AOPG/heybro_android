@@ -265,6 +265,7 @@
             </LinearLayout>
             <!-- 生日 有点击事件跟 地区 性别 类似 跳转到fragment_my_ziliao_date页面-->
             <LinearLayout
+                android:id="@+id/birthday"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
