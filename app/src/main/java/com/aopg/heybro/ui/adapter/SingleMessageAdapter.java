@@ -4,12 +4,18 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.aopg.heybro.R;
+import com.aopg.heybro.entity.ChatRecord;
+import com.aopg.heybro.entity.Concern;
 import com.aopg.heybro.utils.LoginInfo;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,18 +26,26 @@ import java.util.Map;
 
 public class SingleMessageAdapter extends BaseAdapter {
     private Context context;
-    private List<Map<String,String>> messages = new ArrayList<>();
-    private Map<String,String> message;
+    private List<ChatRecord> messages;
+    private ChatRecord chatRecord;
+    private ListView messageLv;
 
-    public SingleMessageAdapter(Context context) {
+    public SingleMessageAdapter(Context context, String userConcernCode, ListView messageLv) {
         this.context = context;
+
+        messages = DataSupport.where("userCode = ? and theOrtherCode = ?",
+                LoginInfo.user.getUserCode()+"",userConcernCode).limit(20).order("Date desc").find(ChatRecord.class);
+        Collections.reverse(messages);
+        this.messageLv = messageLv;
+
     }
 
 
     /** 添加item数据 */
-    public void addMessage(Map<String,String> message) {
+    public void addMessage(ChatRecord chatRecord) {
         if (messages != null)
-            messages.add(message);// 添加数据
+            messages.add(chatRecord);// 添加数据
+        messageLv.smoothScrollToPosition(messageLv.getCount() - 1);
     }
 
     /** 移除item数据 */
@@ -60,14 +74,14 @@ public class SingleMessageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        message = messages.get(position);
-        String userCode =  message.get("userCode");
-        if (userCode == LoginInfo.user.getUserCode()){
+        chatRecord = messages.get(position);
+        String userCode =  chatRecord.getUserCode();
+        if (!chatRecord.isToMe()){
             convertView = View.inflate(context, R.layout.room_chatitem_me, null);
-        }else if (userCode!= LoginInfo.user.getUserCode()){
+        }else {
             convertView = View.inflate(context, R.layout.room_chatitem_others, null);
         }
-        String text = message.get("text");
+        String text = chatRecord.getMessage();
         // 设置文本
         ((TextView) convertView.findViewById(R.id.msg)).setText(text);
         return convertView;

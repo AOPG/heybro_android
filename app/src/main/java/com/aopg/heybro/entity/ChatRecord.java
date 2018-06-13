@@ -14,7 +14,7 @@ public class ChatRecord extends DataSupport {
     //时间戳
     private long Date;
     private boolean isToMe;
-
+    private String message;
 
     public String getUserCode() {
         return userCode;
@@ -46,5 +46,13 @@ public class ChatRecord extends DataSupport {
 
     public void setToMe(boolean toMe) {
         isToMe = toMe;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

@@ -21,9 +21,11 @@ import android.widget.Toast;
 
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
+import com.aopg.heybro.entity.ChatRecord;
 import com.aopg.heybro.ui.adapter.SingleMessageAdapter;
 import com.aopg.heybro.utils.LoginInfo;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,16 +78,17 @@ public class SingleChartActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        userConcernCode = getIntent().getStringExtra("userConcernCode");
         setContentView(R.layout.single_chart_activity);
         back = findViewById(R.id.back);
         messageLv = findViewById(R.id.msg_list_view);
-        singleMessageAdapter = new SingleMessageAdapter(this);
+        singleMessageAdapter = new SingleMessageAdapter(this,userConcernCode,messageLv);
         messageLv.setAdapter(singleMessageAdapter);
         userMessage = findViewById(R.id.input_msg);
         sendMessage = findViewById(R.id.send_msg);
         noteTv = findViewById(R.id.user_name);
 
-        userConcernCode = getIntent().getStringExtra("userConcernCode");
+
         note = getIntent().getStringExtra("note");
         noteTv.setText(note);
         back.setOnClickListener(new View.OnClickListener() {
@@ -98,8 +101,8 @@ public class SingleChartActivity extends AppCompatActivity {
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = userConcernCode;
-                String text = userMessage.getText().toString();
+                final String name = userConcernCode;
+                final String text = userMessage.getText().toString();
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(text)) {
 
                     //通过username和appkey拿到会话对象，通过指定appkey可以创建一个和跨应用用户的会话对象，从而实现跨应用的消息发送
@@ -114,6 +117,13 @@ public class SingleChartActivity extends AppCompatActivity {
                    // textContent.setStringExtra(extraKey, extraValue);
 
                     //创建message实体，设置消息发送回调。
+                    ChatRecord chatRecord = new ChatRecord();
+                    chatRecord.setUserCode(LoginInfo.user.getUserCode());
+                    chatRecord.setTheOrtherCode(name);
+                    chatRecord.setDate(new Date().getTime());
+                    chatRecord.setToMe(false);
+                    chatRecord.setMessage(text);
+                    chatRecord.save();
                     Message message = mConversation.createSendMessage(textContent, userConcernCode);
                     message.setOnSendCompleteCallback(new BasicCallback() {
                         @Override
@@ -142,10 +152,7 @@ public class SingleChartActivity extends AppCompatActivity {
                     JMessageClient.sendMessage(message, options);
 
                     //在聊天界面上添加信息
-                    Map<String,String> messageView = new HashMap<>();
-                    messageView.put("userCode", LoginInfo.user.getUserCode());
-                    messageView.put("text",textContent.getText());
-                    singleMessageAdapter.addMessage(messageView);
+                    singleMessageAdapter.addMessage(chatRecord);
                     singleMessageAdapter.notifyDataSetChanged();
                     userMessage.setText("");
                 } else {
@@ -180,10 +187,15 @@ public class SingleChartActivity extends AppCompatActivity {
             switch (contentType) {
                 case text:
                     TextContent textContent = (TextContent) message.getContent();
-                    Map<String,String> message = new HashMap<>();
-                    message.put("userCode",user);
-                    message.put("text",textContent.getText());
-                    singleMessageAdapter.addMessage(message);
+
+                    ChatRecord chatRecord = new ChatRecord();
+                    chatRecord.setUserCode(LoginInfo.user.getUserCode());
+                    chatRecord.setTheOrtherCode(user);
+                    chatRecord.setMessage(textContent.getText());
+                    chatRecord.setDate(new Date().getTime());
+                    chatRecord.setToMe(true);
+                    chatRecord.save();
+                    singleMessageAdapter.addMessage(chatRecord);
                     singleMessageAdapter.notifyDataSetChanged();
                     Log.e(TAG, "文本消息" + "\n消息内容 = " + textContent.getText());
                     break;
