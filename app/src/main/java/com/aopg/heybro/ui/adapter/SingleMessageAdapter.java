@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.aopg.heybro.R;
+import com.aopg.heybro.utils.LoginInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,9 +62,9 @@ public class SingleMessageAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         message = messages.get(position);
         String userCode =  message.get("userCode");
-        if (userCode=="1234"){
+        if (userCode == LoginInfo.user.getUserCode()){
             convertView = View.inflate(context, R.layout.room_chatitem_me, null);
-        }else if (userCode!="1234"){
+        }else if (userCode!= LoginInfo.user.getUserCode()){
             convertView = View.inflate(context, R.layout.room_chatitem_others, null);
         }
         String text = message.get("text");

@@ -53,6 +53,7 @@ public class MyConcernAdapter extends BaseAdapter {
         }
         TextView noteTv = convertView.findViewById(R.id.note);
         final String note = concerns.get(position).getUserNote();
+        final String userConcernCode = concerns.get(position).getUserConcernCode();
         noteTv.setText(note);
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +61,7 @@ public class MyConcernAdapter extends BaseAdapter {
                 Intent intent = new Intent();
                 intent.setClass(context,SingleChartActivity.class);
                 intent.putExtra("note",note);
+                intent.putExtra("userConcernCode",userConcernCode);
                 context.startActivity(intent);
             }
         });
