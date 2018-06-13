@@ -29,6 +29,7 @@ public class MapActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tv = (TextView) findViewById(R.id.tv);
         // 初始化
         mLocationClient = new LocationClient(getApplicationContext());
         // 设置定位參数
