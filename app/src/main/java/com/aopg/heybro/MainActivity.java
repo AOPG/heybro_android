@@ -23,6 +23,7 @@ import com.aopg.heybro.ui.fragment.FragmentBasketball;
 import com.aopg.heybro.ui.fragment.FragmentDiscovery;
 import com.aopg.heybro.ui.fragment.FragmentFriend;
 import com.aopg.heybro.ui.fragment.FragmentMy;
+import com.baidu.mapapi.SDKInitializer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //在使用SDK各组件之前初始化context信息，传入ApplicationContext
+        //注意该方法要再setContentView方法之前实现
+        SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
         map = new HashMap<>();
         initTabHost();

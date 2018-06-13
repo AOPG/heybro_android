@@ -15,7 +15,7 @@ android {
         config {
             keyAlias 'heybro'
             keyPassword 'heybro'
-            storeFile file('D:/studiospace/heybro/aopg.jks')
+            storeFile file('C:/Users/L/Desktop/aopg.jks')
             storePassword '123456'
         }
     }
@@ -32,6 +32,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
     sourceSets {
