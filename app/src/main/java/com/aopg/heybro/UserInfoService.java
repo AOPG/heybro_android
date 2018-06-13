@@ -43,6 +43,7 @@ public class UserInfoService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
+        System.out.println("service被调用！--------------------------------------");
             client = HttpUtils.init(client);
             Request request = new Request.Builder().
                     url(BUILD_URL("averageUser/userInfo?username=" + LoginInfo.user.getUsername())).build();
@@ -55,6 +56,7 @@ public class UserInfoService extends IntentService {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
+                    System.out.println("接受消息--------------------------------------");
                     String result = response.body().string();
                     JSONObject userInfo = JSONObject.
                             parseObject((JSONObject.parseObject(result)).getString("data"));
@@ -71,15 +73,15 @@ public class UserInfoService extends IntentService {
                         LoginInfo.user.setUserCode(userInfo.getString("userCode"));
                         LoginInfo.user.setUserPortrait(userInfo.getString("userPortrait"));
                         LoginInfo.user.setHomepageBack(userInfo.getString("homepageBack"));
-                        System.out.println(LoginInfo.user.getNickName());
+                        System.out.println("正在向内存中写入数据--------------------------------");
                         LoginInfo.user.updateAll("userName = ?",userInfo.getString("userName"));
                         if (LoginInfo.FragmentMYISCREATE==1){
+                            System.out.println("向MainActivity发送广播！--------------------------------");
                             Intent intent = new Intent("FragmentMy");
                             sendBroadcast(intent);
                         }
                     } else {
-//                        User user = new User();
-//                        user.
+
                     }
                 }
             });
@@ -91,4 +93,8 @@ public class UserInfoService extends IntentService {
         super.onCreate();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

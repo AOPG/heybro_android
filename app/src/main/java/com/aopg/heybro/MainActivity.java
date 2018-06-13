@@ -11,6 +11,7 @@ import android.os.Message;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 super.run();
                 while (true){
+                    Log.e("mainactivity",
+                            "------------------------启动service--------------------------");
                     startService(new Intent(MainActivity.this, UserInfoService.class));
                     try {
                         sleep(300000);

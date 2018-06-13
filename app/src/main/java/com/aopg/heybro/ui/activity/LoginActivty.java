@@ -23,6 +23,7 @@ import com.aopg.heybro.entity.User;
 import com.aopg.heybro.im.InitIM;
 import com.aopg.heybro.ui.Common.ActivitiesManager;
 import com.aopg.heybro.utils.HttpUtils;
+import com.aopg.heybro.utils.LoginInfo;
 
 import org.litepal.crud.DataSupport;
 
@@ -182,6 +183,7 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                     }else {
                         user.setUsername(username);
                         user.save();
+                        LoginInfo.user = user;
                         if (user.save()) {
                             Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
                             InitIM.initJmessageUser(username,password,LoginActivty.this);

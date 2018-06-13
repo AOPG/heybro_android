@@ -47,14 +47,16 @@ public class FragmentMy extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+
         LoginInfo.FragmentMYISCREATE=1;
-        this.getActivity().startService(new Intent(this.getActivity(), UserInfoService.class));
         Log.e("", "onCreateView");
         if (rootView == null) {
             Log.e("", "FragmentMy");
             rootView = inflater.inflate(R.layout.fragment_my,container,false);
 
         }
+        loadInfo();
+        this.getActivity().startService(new Intent(this.getActivity(), UserInfoService.class));
         // 缓存的rootView需要判断是否已经被加过parent，如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
         ViewGroup parent = (ViewGroup) rootView.getParent();
         if (parent != null) {
@@ -153,6 +155,7 @@ public class FragmentMy extends Fragment {
     }
 
     public static void loadInfo(){
+        System.out.println("正在从内存中读取数据--------------------------------");
         TextView userIntroTv = rootView.findViewById(R.id.user_intro);
         userIntroTv.setText(LoginInfo.user.getUserIntro());
         TextView userNickNameTv = rootView.findViewById(R.id.myName);
@@ -168,6 +171,7 @@ public class FragmentMy extends Fragment {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
+                    System.out.println("收到mainactivity的消息！--------------------------------");
                     loadInfo();
                     break;
             }
