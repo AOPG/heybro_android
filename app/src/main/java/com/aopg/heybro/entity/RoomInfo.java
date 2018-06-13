@@ -15,7 +15,7 @@ public class RoomInfo extends DataSupport {
     //房间名称
     private String roomName;
     //存储用户信息
-    private List<Map<String,Object>> userList;
+    //private List<Map<String,Object>> userList;
 
     public String getRoomId() {
         return roomId;
@@ -33,11 +33,11 @@ public class RoomInfo extends DataSupport {
         this.roomName = roomName;
     }
 
-    public List<Map<String, Object>> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<Map<String, Object>> userList) {
-        this.userList = userList;
-    }
+//    public List<Map<String, Object>> getUserList() {
+//        return userList;
+//    }
+//
+//    public void setUserList(List<Map<String, Object>> userList) {
+//        this.userList = userList;
+//    }
 }
