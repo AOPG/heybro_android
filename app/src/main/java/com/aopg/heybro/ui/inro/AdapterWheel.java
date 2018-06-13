@@ -19,7 +19,6 @@ package com.aopg.heybro.ui.inro;
 
 import android.content.Context;
 
-import com.andrew.datechoosewheelviewdemo.widget.WheelAdapter;
 
 /**
  * Adapter class for old wheel adapter (deprecated WheelAdapter class).
