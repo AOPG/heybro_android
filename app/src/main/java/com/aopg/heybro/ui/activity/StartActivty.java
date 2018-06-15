@@ -63,7 +63,6 @@ public class StartActivty extends AppCompatActivity {
             if (null!=user){
                 LoginInfo.user = user;
                 intent = new Intent(StartActivty.this, MainActivity.class);
-//                InitIM.initJmessageUser(user.getUserCode(),user.getUsername(),StartActivty.this);
             }else {
                 intent = new Intent(StartActivty.this, LoginActivty.class);
             }

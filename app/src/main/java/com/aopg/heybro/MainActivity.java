@@ -39,7 +39,6 @@ import java.util.Map;
 
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.event.LoginStateChangeEvent;
-import cn.jpush.im.android.api.model.UserInfo;
 
 public class MainActivity extends AppCompatActivity {
     private Handler mHandler;
@@ -249,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
             Message msg = mHandler.obtainMessage();
             msg.what =0;
             mHandler.sendMessage(msg);
+            context.unregisterReceiver(this);
         }
     }
 
