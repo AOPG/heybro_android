@@ -10,7 +10,7 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.Nullable;
+
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,9 +20,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.aopg.heybro.im.InitIM;
+import com.aopg.heybro.entity.User;
 import com.aopg.heybro.ui.Common.ActivitiesManager;
 import com.aopg.heybro.ui.activity.LoginActivty;
 import com.aopg.heybro.ui.fragment.FragmentActivity;
@@ -33,6 +32,8 @@ import com.aopg.heybro.ui.fragment.FragmentMy;
 import com.aopg.heybro.utils.BaiduMapLocationUtil;
 import com.aopg.heybro.utils.LoginInfo;
 import com.baidu.mapapi.SDKInitializer;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate( Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        LoginInfo.user =  DataSupport.where("isLogin = ?", "1").findFirst(User.class);
+
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         //注意该方法要再setContentView方法之前实现
         SDKInitializer.initialize(getApplicationContext());

@@ -164,7 +164,6 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                     if (isHave>0){
                         int upCount = user.updateAll("userName = ?",username);
                         if (upCount>0){
-                            LoginInfo.user =  DataSupport.where("userName = ?", username).findFirst(User.class);
                             startService(new Intent(LoginActivty.this, UserInfoService.class));
                             Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
                             startActivity(intent);
@@ -173,9 +172,8 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
                         }
                     }else {
                         user.setUsername(username);
-                        user.save();
-                        LoginInfo.user = user;
-                        if (user.save()) {
+                        boolean flag =  user.save();
+                        if (flag) {
                             startService(new Intent(LoginActivty.this, UserInfoService.class));
                             Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
                             startActivity(intent);
