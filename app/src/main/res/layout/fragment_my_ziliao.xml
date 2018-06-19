@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="210dp"
                     android:layout_marginTop="15dp"
-                    android:text="111111"
+                    android:text="你猜"
                     android:textColor="#ffffff" />
             </LinearLayout>
 
