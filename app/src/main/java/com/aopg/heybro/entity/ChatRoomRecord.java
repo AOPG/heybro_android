@@ -15,6 +15,9 @@ public class ChatRoomRecord extends DataSupport {
     private String userCode;
     //消息内容
     private String message;
+    //时间戳
+    private long Date;
+
 
     public String getRoomId() {
         return roomId;
@@ -46,5 +49,13 @@ public class ChatRoomRecord extends DataSupport {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public long getDate() {
+        return Date;
+    }
+
+    public void setDate(long date) {
+        Date = date;
     }
 }

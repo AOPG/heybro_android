@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.activity.AddFriendActivity;
+import com.aopg.heybro.ui.activity.ChartRoomActivity;
 import com.aopg.heybro.ui.activity.MyConcernActivity;
 import com.aopg.heybro.ui.activity.MyMessageActivity;
 
@@ -74,6 +75,20 @@ public class FragmentFriend extends Fragment {
             public void onClick(View view) {
                 Intent concernIntent = new Intent(getActivity(), MyConcernActivity.class);
                 startActivity(concernIntent);
+            }
+        });
+
+        /**
+         * 跳转我的房间界面
+         * */
+        LinearLayout wodefangjian = rootView.findViewById(R.id.wodefangjian);
+        wodefangjian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent wodefangjianIntent = new Intent(getActivity(), ChartRoomActivity.class);
+                wodefangjianIntent.putExtra("roomId","26998403");
+                wodefangjianIntent.putExtra("roomName","AOPG约起来");
+                startActivity(wodefangjianIntent);
             }
         });
         return rootView;

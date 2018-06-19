@@ -164,8 +164,8 @@ public class SingleChartActivity extends AppCompatActivity {
     private void initData() {
         IntentFilter filter = new IntentFilter("single_message");
         registerReceiver(broadcastReceiver, filter);
-
     }
+
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 
         @Override

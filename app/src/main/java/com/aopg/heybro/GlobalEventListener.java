@@ -40,7 +40,7 @@ public class GlobalEventListener {
         Intent notificationIntent;
 
         if (msg.getTargetType() == ConversationType.group) {
-            notificationIntent = new Intent(appContext, ShowMessageActivity.class);
+            notificationIntent = new Intent("group_message");
             GroupInfo groupInfo = (GroupInfo) msg.getTargetInfo();
             notificationIntent.putExtra(ShowMessageActivity.EXTRA_IS_GROUP, true);
             notificationIntent.putExtra(ShowMessageActivity.EXTRA_GROUPID, groupInfo.getGroupID());
