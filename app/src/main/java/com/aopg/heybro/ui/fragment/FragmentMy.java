@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +21,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.UserInfoService;
 import com.aopg.heybro.ui.activity.MyInfoActivity;
+import com.aopg.heybro.ui.activity.Myrili;
 import com.aopg.heybro.ui.activity.SaoyisaoActivity;
 import com.aopg.heybro.ui.activity.SettingActivity;
 import com.aopg.heybro.utils.LoginInfo;
+
+import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
 
 
 /**
@@ -148,9 +153,119 @@ public class FragmentMy extends Fragment {
                 startActivity(saoyisaoIntent);
             }
         });
+        /**
+         * 竞猜
+         * */
+        ImageView jingcai=rootView.findViewById(R.id.jingcai);
+        jingcai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Toast toastTip
+                        = Toast.makeText(getApplicationContext(),
+                        "该模块待开发",
+                        Toast.LENGTH_LONG);
+                toastTip.setGravity(Gravity.CENTER, 0, 0);
+                toastTip.show();
 
+            }
+        });
+        /**
+         * 装备
+         * */
+        ImageView zhuangbei=rootView.findViewById(R.id.zhuangbei);
+        jingcai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Toast toastTip
+                        = Toast.makeText(getApplicationContext(),
+                        "该模块待开发",
+                        Toast.LENGTH_LONG);
+                toastTip.setGravity(Gravity.CENTER, 0, 0);
+                toastTip.show();
+
+            }
+        });
+        /**
+         * 打球日历
+         * */
+        ImageView rili=rootView.findViewById(R.id.rili);
+        rili.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rili = new Intent(getActivity(), Myrili.class);
+                startActivity(rili);
+            }
+        });
+        /**
+         * 商城
+         * */
+        ImageView shopping=rootView.findViewById(R.id.shopping);
+        jingcai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast toastTip
+                        = Toast.makeText(getApplicationContext(),
+                        "该模块待开发",
+                        Toast.LENGTH_LONG);
+                toastTip.setGravity(Gravity.CENTER, 0, 0);
+                toastTip.show();
+
+            }
+        });
+        /**
+         * 订单
+         * */
+        ImageView dingdan=rootView.findViewById(R.id.dingdan);
+        jingcai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast toastTip
+                        = Toast.makeText(getApplicationContext(),
+                        "该模块待开发",
+                        Toast.LENGTH_LONG);
+                toastTip.setGravity(Gravity.CENTER, 0, 0);
+                toastTip.show();
+
+            }
+        });
+        /**
+         * 钱包
+         * */
+        ImageView qianbao=rootView.findViewById(R.id.qianbao);
+        jingcai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast toastTip
+                        = Toast.makeText(getApplicationContext(),
+                        "该模块待开发",
+                        Toast.LENGTH_LONG);
+                toastTip.setGravity(Gravity.CENTER, 0, 0);
+                toastTip.show();
+
+            }
+        });
+        /**
+         * 客服
+         * */
+        ImageView kefu=rootView.findViewById(R.id.kefu);
+        jingcai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast toastTip
+                        = Toast.makeText(getApplicationContext(),
+                        "该模块待开发",
+                        Toast.LENGTH_LONG);
+                toastTip.setGravity(Gravity.CENTER, 0, 0);
+                toastTip.show();
+
+            }
+        });
         return rootView;
     }
 

@@ -56,7 +56,7 @@
                 android:text="头像"
                 android:textColor="#ffffff"
                 android:textSize="16dp" />
-            <!--通过数据库获得头像 需要实现圆形 -->
+            <!--通过数据库获得头像 需要实现圆形-->
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -104,7 +104,7 @@
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right" />
         </LinearLayout>
-        <!--ID 不可修改 需要通过数据库获得ID号码-->
+       <!-- ID 不可修改 需要通过数据库获得ID号码-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -120,7 +120,7 @@
                 android:text="ID号码"
                 android:textColor="#ffffff"
                 android:textSize="16dp" />
-            <!-- 需要通过数据库获取ID-->
+            <!--需要通过数据库获取ID-->
             <TextView
                 android:id="@+id/id"
                 android:layout_width="wrap_content"
@@ -291,45 +291,4 @@
                 android:src="@drawable/right" />
         </LinearLayout>
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="-202dp"
-        android:background="#ffffff">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-                <!-- 有点击事件 点击取消 关闭当前页-->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="取消"
-                    android:textColor="#000000"
-                    android:textSize="16dp" />
-                <!-- 有点击事件 点击完成 即跳转到fragment_my_ziliao页面，并将选中的数据传到fragment_my_ziliao页面-->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="250dp"
-                    android:text="完成"
-                    android:textColor="#000000"
-                    android:textSize="16dp" />
-            </LinearLayout>
-            <!-- 竖直选择器 待实现参考http://www.cnblogs.com/tiantianbyconan/p/3819304.html-->
-        </LinearLayout>
-    </RelativeLayout>
-
-    <DatePicker
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </LinearLayout>
