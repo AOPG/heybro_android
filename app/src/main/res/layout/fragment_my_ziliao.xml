@@ -27,12 +27,14 @@
             android:textColor="#ffffff"
             android:textSize="20dp" />
         <!--有点击事件 -->
-        <TextView
+        <Button
+            android:id="@+id/xiugai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp"
+            android:layout_marginLeft="80dp"
             android:layout_marginTop="15dp"
             android:text="完成"
+            android:background="null"
             android:textColor="#ffffff"
             android:textSize="20dp" />
     </LinearLayout>
@@ -79,6 +81,7 @@
             </LinearLayout>
             <!-- 昵称 在本页可修改-->
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
@@ -95,6 +98,7 @@
                     android:textSize="16dp" />
 
                 <EditText
+                    android:id="@+id/myName"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="53dp"
@@ -129,7 +133,7 @@
                     android:textSize="16dp" />
                 <!-- 需要通过数据库获取ID-->
                 <TextView
-                    android:id="@+id/id"
+                    android:id="@+id/userId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="210dp"
@@ -155,6 +159,7 @@
                     android:textColor="#ffffff"
                     android:textSize="16dp" />
                 <TextView
+                    android:id="@+id/user_location"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="150dp"
@@ -187,6 +192,7 @@
                     android:textSize="16dp" />
 
                 <EditText
+                    android:id="@+id/user_intro"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="53dp"
@@ -207,7 +213,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/yinsi"
+                android:id="@+id/erweima"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
@@ -232,6 +238,7 @@
             </LinearLayout>
             <!--性别 有点击事件 跳转到fragment_my_ziliao_sex页面 -->
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
@@ -248,12 +255,12 @@
                     android:textSize="16dp" />
 
                 <TextView
+                    android:id="@+id/sex"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="150dp"
                     android:layout_marginTop="15dp"
                     android:gravity="right"
-                    android:text="女"
                     android:textColor="#ffffff" />
 
                 <ImageView

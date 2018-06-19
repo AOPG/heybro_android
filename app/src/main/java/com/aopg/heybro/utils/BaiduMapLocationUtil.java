@@ -30,7 +30,6 @@ public class BaiduMapLocationUtil {
         mLocationClient.start();
         //启动定位
     }
-
     public static LocationClientOption initOption() {
         LocationClientOption option = new LocationClientOption();
 

@@ -8,7 +8,6 @@
         android:layout_margin="80dp"
         android:background="@drawable/basket_room_corner"
         android:orientation="vertical">
-
         <TextView
             android:id="@+id/roomNum"
             android:layout_width="55dp"
@@ -34,6 +33,24 @@
             <TextView
                 android:layout_width="60dp"
                 android:layout_height="30dp"
+                android:text="房间名称"
+                android:textColor="#ffffff"
+                android:textSize="15dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginLeft="65dp"
+                android:background="@drawable/basket_spinner_corner" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="72dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="30dp"
                 android:text="模     式"
                 android:textColor="#ffffff"
                 android:textSize="15dp" />
@@ -42,7 +59,7 @@
                 android:id="@+id/spinner_mode"
                 android:entries="@array/spinner_mode"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="65dp"
                 android:spinnerMode="dialog"
                 android:background="@drawable/basket_spinner_corner" />
@@ -58,7 +75,7 @@
             android:layout_width="160dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="102dp"
             android:orientation="horizontal">
 
             <TextView
@@ -72,7 +89,7 @@
                 android:id="@+id/spinner_rate"
                 android:entries="@array/spinner_rate"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="65dp"
                 android:spinnerMode="dialog"
                 android:background="@drawable/basket_spinner_corner" />
@@ -82,7 +99,7 @@
             android:layout_width="160dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="132dp"
             android:orientation="horizontal">
 
             <TextView
@@ -96,7 +113,7 @@
                 android:id="@+id/spinner_num"
                 android:entries="@array/spinner_num"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="65dp"
                 android:spinnerMode="dialog"
                 android:background="@drawable/basket_spinner_corner" />
@@ -106,7 +123,7 @@
             android:layout_width="160dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="162dp"
             android:orientation="horizontal">
 
             <TextView
@@ -119,7 +136,7 @@
             <EditText
                 android:id="@+id/set_roomPassword"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="65dp"
                 android:background="@drawable/basket_spinner_corner"
                 android:text="请输入"
