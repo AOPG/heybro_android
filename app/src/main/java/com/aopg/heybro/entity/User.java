@@ -30,6 +30,7 @@ public class User extends DataSupport {
     private Integer expiresIn;
     private Long loginTime;
     private Integer isLogin;
+    private Long birthday;
 
 
     public String getUsername() {
@@ -198,5 +199,13 @@ public class User extends DataSupport {
 
     public void setIsLogin(Integer isLogin) {
         this.isLogin = isLogin;
+    }
+
+    public Long getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Long birthday) {
+        this.birthday = birthday;
     }
 }
