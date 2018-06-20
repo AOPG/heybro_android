@@ -61,8 +61,7 @@ public class SearchFriendActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_friend_addfriend);
         btn_search =findViewById(R.id.search_ensure);
         userCode=findViewById(R.id.search_friend);
-
-
+        friendView = getLayoutInflater().inflate(R.layout.search_friend_msg, null);
 //        ImageView concern_back = findViewById(R.id.concern_back);
 //        concern_back.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -75,14 +74,8 @@ public class SearchFriendActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (v.getId() == R.id.search_ensure) {
                     user_code_txt = userCode.getText().toString();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            sendRequest(user_code_txt);
-                        }
-                    }).start();
+                    sendRequest(user_code_txt);
                 }
-                friendView = getLayoutInflater().inflate(R.layout.search_friend_msg, null);
                 if (null == window || !window.isShowing()) {
                     window = new PopupWindow(friendView, 850, 1000, true);
                     // 设置PopupWindow是否能响应外部点击事件
@@ -143,9 +136,10 @@ public class SearchFriendActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
-                case 0:
+                case 1:
+
                     SearchfriendAdapter adapter = new SearchfriendAdapter(SearchFriendActivity.this,users);
-                    ListView userlv=findViewById(R.id.friend_lv);
+                    ListView userlv=friendView.findViewById(R.id.friend_lv);
                     userlv.setAdapter(adapter);
             }
         }
