@@ -1,7 +1,6 @@
 package com.aopg.heybro.ui.activity;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -39,32 +38,73 @@ public class MyInfoActivity extends Activity {
             }
         });
         //头像
+        LinearLayout image=findViewById(R.id.image1);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         //昵称
-        EditText nicheng=findViewById(R.id.myName);
-        String name= String.valueOf(nicheng.getText());
+        final EditText nicheng=findViewById(R.id.user_name);
+        nicheng.setHint(LoginInfo.user.getUsername());
+        final String[] name = {LoginInfo.user.getUsername()};
+        nicheng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                name[0] = String.valueOf(nicheng.getText());
+            }
+        });
+
         //ID(不可修改)
-        TextView id=findViewById(R.id.userId);
+        TextView ID=findViewById(R.id.user_code);
+        ID.setText(LoginInfo.user.getUserIntro());
+        String id= String.valueOf(ID.getText());
         //地区
-        TextView userpo=findViewById(R.id.user_location);
-        userpo.setText(LoginInfo.user.getUserProvince()+"  "+LoginInfo.user.getUserCity());
+
+//        TextView userpo=findViewById(R.id.user_location);
+ //       Intent intent1 = new Intent();       //获取已有的intent对象
+ //       Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
+//        String provice= bundle1.getString("provice");
+//        String city=bundle1.getString("city");
+//        if (provice==""||provice==null||provice.equals("")||city.equals("")||city==null||city==""){
+ //           userpo.setText(LoginInfo.user.getUserProvince()+"  "+LoginInfo.user.getUserCity());
+ //       }else{
+//            userpo.setText(provice+"  "+city);
+ //       }
+ //       userpo.setOnClickListener(new View.OnClickListener() {
+ //           @Override
+ //           public void onClick(View v) {
+ //               Intent poIntent = new Intent(getApplicationContext(), Myposition.class);
+  //              startActivity(poIntent);
+ //           }
+//        });
+
         //简介
-        EditText userintro=findViewById(R.id.user_intro);
-        String intro= String.valueOf(userintro.getText());
+        final EditText userintro=findViewById(R.id.user_intro);
+       userintro.setHint(LoginInfo.user.getUserIntro());
+        final String[] intro = {LoginInfo.user.getUserIntro()};
+        userintro.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                intro[0] = String.valueOf(userintro.getText());
+            }
+        });
+
         //性别
         TextView sex=findViewById(R.id.sex);
-        Intent intent = this.getIntent();        //获取已有的intent对象
-        Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
-        String s = bundle.getString("sex");    //获取Bundle里面的字符串
-        if (s==null||s.equals("")||s==""){
-            sex.setText(LoginInfo.user.getUserSex());
-        }else {
-            sex.setText(s);
-        }
+     //   Intent intent = new Intent();//获取已有的intent对象
+    //    Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
+   //    String s= bundle.getString("sex");    //获取Bundle里面的字符串
+   //     if (s==null||s==""||s.equals("")){
+   //         sex.setText(LoginInfo.user.getUserSex());
+  //      }else{
+  //         sex.setText(s);
+ //       }
         sex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent sexIntent = new Intent(getApplicationContext(), Mysex.class);
+               Intent sexIntent = new Intent(getApplicationContext(), Mysex.class);
                 startActivity(sexIntent);
             }
         });
@@ -82,23 +122,25 @@ public class MyInfoActivity extends Activity {
             }
         });
         //生日
-        LinearLayout mybirtnday=findViewById(R.id.birthday);
-        mybirtnday.setOnClickListener(new View.OnClickListener() {
-            private TextView mShowContentTextView;
-            @Override
-            public void onClick(View v) {
-                DateChooseWheelViewDialog endDateChooseDialog = new DateChooseWheelViewDialog(MyInfoActivity.this,
-                        new DateChooseWheelViewDialog.DateChooseInterface() {
-                            @Override
-                            public void getDateTime(String time, boolean longTimeChecked) {
-                                mShowContentTextView.setText(time);
-                            }
-                        });
-                endDateChooseDialog.setTimePickerGone(true);
-                endDateChooseDialog.setDateDialogTitle("结束时间");
-                endDateChooseDialog.showDateChooseDialog();
-            }
-        });
+ //       final TextView mybirtnday=findViewById(R.id.birthday);
+ //       mybirtnday.setText(String.valueOf(LoginInfo.user.getBirthday()));
+//        mybirtnday.setOnClickListener(new View.OnClickListener() {
+ //           @Override
+  //          public void onClick(View v) {
+//                DateChooseWheelViewDialog endDateChooseDialog = new DateChooseWheelViewDialog(MyInfoActivity.this,
+//                        new DateChooseWheelViewDialog.DateChooseInterface() {
+//                            @Override
+ //                           public void getDateTime(String time, boolean longTimeChecked) {
+ //                               mybirtnday.setText(time);
+//                            }
+ //                       });
+ //               endDateChooseDialog.setTimePickerGone(true);
+ //               endDateChooseDialog.setDateDialogTitle("选择生日");
+ //               endDateChooseDialog.showDateChooseDialog();
+//            }
+ //       });
+ //       String birth= String.valueOf(mybirtnday.getText());
+  //      long b=new java.util.Date(birth).getTime();
         //修改
         Button xiugai=findViewById(R.id.xiugai);
         xiugai.setOnClickListener(new View.OnClickListener() {
