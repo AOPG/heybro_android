@@ -44,7 +44,7 @@ public class SearchfriendAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView==null){
-            convertView = View.inflate(context, R.layout.search_friend_msg, null);
+            convertView = View.inflate(context, R.layout.search_friend_msg_item, null);
         }
         final TextView userName=convertView.findViewById(R.id.userName);
         final TextView userCode=convertView.findViewById(R.id.userId);
