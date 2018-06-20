@@ -19,6 +19,7 @@ import com.aopg.heybro.utils.LoginInfo;
 
 public class Mysex extends Activity {
     public static int FLAG=0;
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final RadioGroup sexs=findViewById(R.id.sexs);
