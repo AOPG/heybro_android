@@ -152,6 +152,8 @@ public class MyInfoActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+
+
             }
         });
 
