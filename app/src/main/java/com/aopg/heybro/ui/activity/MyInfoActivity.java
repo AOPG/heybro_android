@@ -92,9 +92,10 @@ public class MyInfoActivity extends Activity {
         });
 
         //性别
-        TextView sex=findViewById(R.id.sex);
+        TextView sex=findViewById(R.id.user_sex);
         String s=null;
         if (FLAG==0){
+            System.out.print(LoginInfo.user.getUserSex());
             sex.setText(LoginInfo.user.getUserSex());
         }else{
             Intent intent = getIntent();//获取已有的intent对象

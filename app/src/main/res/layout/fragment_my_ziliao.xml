@@ -254,7 +254,7 @@
                     android:textSize="16dp" />
 
                 <TextView
-                    android:id="@+id/sex"
+                    android:id="@+id/user_sex"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="150dp"

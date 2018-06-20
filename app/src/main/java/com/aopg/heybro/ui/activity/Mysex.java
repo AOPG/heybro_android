@@ -28,8 +28,10 @@ public class Mysex extends Activity {
         setContentView(R.layout.fragment_my_ziliao_sex);
         System.out.print(LoginInfo.user.getUserSex());
         if ("男".equals(LoginInfo.user.getUserSex())){
-            sex0.setChecked(true);
+           sex0.setChecked(true);
+           sex1.setChecked(false);
         }else {
+            sex0.setChecked(false);
             sex1.setChecked(true);
         }
         sex.setOnClickListener(new View.OnClickListener() {
