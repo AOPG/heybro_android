@@ -41,6 +41,7 @@
             android:background="#1fffffff">
 
 <EditText
+    android:id="@+id/search_friend"
     android:layout_width="240dp"
     android:layout_height="30dp"
     android:layout_marginTop="5dp"
@@ -51,12 +52,13 @@
     />
             <!-- 搜索 有点击事件-->
     <ImageView
+        android:id="@+id/search_ensure"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginTop="7dp"
         android:layout_marginLeft="50dp"
-        android:src="@drawable/search"
-        />
+        android:src="@drawable/search"/>
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
