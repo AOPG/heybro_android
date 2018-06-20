@@ -18,6 +18,7 @@ import com.aopg.heybro.utils.LoginInfo;
  */
 
 public class Mysex extends Activity {
+    public static int FLAG=0;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final RadioGroup sexs=findViewById(R.id.sexs);
@@ -28,13 +29,12 @@ public class Mysex extends Activity {
         if (LoginInfo.user.getUserSex().equals("男")){
             sex0.setChecked(true);
         }else {
-            sex1.setChecked(false);
+            sex1.setChecked(true);
         }
-
-
         sex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FLAG=1;
                String sexid= String.valueOf(sexs.getCheckedRadioButtonId());
                String sexw;
                 if (sexid.equals("male")){
@@ -48,6 +48,7 @@ public class Mysex extends Activity {
                 bundle.putString("sex", sexw);     //装入数据
                 sex.putExtras(bundle);
                 startActivity(sex);
+
 
             }
         });
