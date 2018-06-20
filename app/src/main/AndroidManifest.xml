@@ -80,6 +80,9 @@
         <activity android:name=".ui.activity.CommonSettingActivity"></activity>
         <activity android:name=".ui.activity.SaoyisaoActivity"></activity>
         <activity android:name=".ui.activity.MyInfoActivity"></activity>
+        <activity android:name=".ui.activity.Myrili"></activity>
+        <activity android:name=".ui.activity.Myposition"></activity>
+        <activity android:name=".ui.activity.Mysex"></activity>
         <activity android:name=".ui.activity.SingleChartActivity"
             android:launchMode="singleTask"
             android:taskAffinity="com.aopg.heybro"></activity>

@@ -39,6 +39,7 @@ public class MyInfoActivity extends Activity {
         });
         //头像
 
+
         //昵称
         final EditText nicheng=findViewById(R.id.user_name);
         nicheng.setHint(LoginInfo.user.getUsername());
