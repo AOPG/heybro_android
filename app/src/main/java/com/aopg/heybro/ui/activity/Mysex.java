@@ -49,6 +49,7 @@ public class Mysex extends Activity {
                 sex.putExtras(bundle);
                 startActivity(sex);
 
+
             }
         });
     }
