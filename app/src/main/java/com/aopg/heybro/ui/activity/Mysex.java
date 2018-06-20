@@ -22,6 +22,7 @@ public class Mysex extends Activity {
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_my_ziliao_sex);
         final RadioGroup sexs=findViewById(R.id.sexs);
         RadioButton sex0=findViewById(R.id.male);
         RadioButton sex1=findViewById(R.id.female);

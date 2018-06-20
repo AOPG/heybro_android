@@ -102,6 +102,7 @@ public class MyInfoActivity extends Activity {
             Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
             s= bundle.getString("sex");    //获取Bundle里面的字符串
             sex.setText(s);
+            FLAG=0;
         }
 
         sex.setOnClickListener(new View.OnClickListener() {
