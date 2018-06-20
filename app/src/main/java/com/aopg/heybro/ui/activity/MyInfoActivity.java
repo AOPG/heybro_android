@@ -55,7 +55,15 @@ public class MyInfoActivity extends Activity {
         String id= String.valueOf(ID.getText());
         //地区
         TextView userpo=findViewById(R.id.user_location);
-        userpo.setText(LoginInfo.user.getUserProvince()+"  "+LoginInfo.user.getUserCity());
+        Intent intent1 = this.getIntent();        //获取已有的intent对象
+        Bundle bundle1 = intent1.getExtras();    //获取intent里面的bundle对象
+        String provice = bundle1.getString("provice");
+        String city=bundle1.getString("city");
+        if (provice==null||provice==""||provice.equals("")||city==null||city==""||city.equals("")){
+            userpo.setText(LoginInfo.user.getUserProvince()+"  "+LoginInfo.user.getUserCity());
+        }else {
+            userpo.setText(provice+"  "+city);
+        }
         userpo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

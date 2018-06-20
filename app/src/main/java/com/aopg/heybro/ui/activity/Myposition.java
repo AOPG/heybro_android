@@ -1,6 +1,7 @@
 package com.aopg.heybro.ui.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
@@ -114,7 +115,12 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
         }
     }
     private void showSelectedResult() {
-        Toast.makeText(getApplicationContext(), "当前选中:"+baseActivity.getmCurrentProviceName()+","+baseActivity.getmCurrentCityName()+","
-                +baseActivity.getmCurrentDistrictName()+","+baseActivity.getmCurrentZipCode(), Toast.LENGTH_SHORT).show();
+        Intent pos = new Intent(getApplicationContext(), MyInfoActivity.class);
+        Bundle bundle = new Bundle();                           //创建Bundle对象
+        bundle.putString("provice", baseActivity.getmCurrentProviceName()); //装入数据
+        bundle.putString("city",baseActivity.getmCurrentCityName());
+        bundle.putString("district",baseActivity.getmCurrentDistrictName());
+        pos.putExtras(bundle);
+        startActivity(pos);
     }
 }
