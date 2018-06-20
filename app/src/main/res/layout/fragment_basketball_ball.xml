@@ -82,6 +82,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/my_rate_ball"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="50dp"

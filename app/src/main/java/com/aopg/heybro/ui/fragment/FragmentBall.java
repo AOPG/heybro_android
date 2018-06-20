@@ -1,5 +1,6 @@
 package com.aopg.heybro.ui.fragment;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,12 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.BasketRoomInfo;
 import com.aopg.heybro.entity.Concern;
+import com.aopg.heybro.ui.activity.ChartRoomActivity;
 import com.aopg.heybro.ui.room.HorizontaRoomlListViewAdapter;
 import com.aopg.heybro.ui.room.HorizontalRoomListView;
 import com.aopg.heybro.utils.HttpUtils;
@@ -69,7 +72,8 @@ public class FragmentBall extends Fragment{
         if (parent != null) {
             parent.removeView(rootView);
         }
-
+        TextView myRate = rootView.findViewById(R.id.my_rate_ball);
+        myRate.setText("当前等级:    "+LoginInfo.user.getUserGrade());
         //房间部分
         initUI();
         //创建房间
@@ -118,7 +122,22 @@ public class FragmentBall extends Fragment{
                 rateSpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        basketRoomInfo.setRate(getActivity().getResources().getStringArray(R.array.spinner_rate)[i]);
+                        if(getActivity().getResources().getStringArray(R.array.spinner_rate)[i].equals("无限制")){
+                            basketRoomInfo.setRateLow(0);
+                            basketRoomInfo.setRateHigh(0);
+                        }else if(getActivity().getResources().getStringArray(R.array.spinner_rate)[i].equals("Ⅰ-Ⅲ")){
+                            basketRoomInfo.setRateLow(1);
+                            basketRoomInfo.setRateHigh(3);
+                        }else if(getActivity().getResources().getStringArray(R.array.spinner_rate)[i].equals("Ⅳ-Ⅵ")){
+                            basketRoomInfo.setRateLow(4);
+                            basketRoomInfo.setRateHigh(6);
+                        }else if(getActivity().getResources().getStringArray(R.array.spinner_rate)[i].equals("Ⅶ-Ⅸ")){
+                            basketRoomInfo.setRateLow(7);
+                            basketRoomInfo.setRateHigh(9);
+                        }else{
+                            basketRoomInfo.setRateLow(0);
+                            basketRoomInfo.setRateHigh(0);
+                        }
                     }
 
                     @Override
@@ -208,7 +227,7 @@ public class FragmentBall extends Fragment{
     /**
      * 向远程数据库添加房间信息
      */
-    public void httpInsertRoom(BasketRoomInfo basketRoomInfo,String password){
+    public void httpInsertRoom(final BasketRoomInfo basketRoomInfo, String password){
         client = HttpUtils.init(client);
         Request request;
         if(password != null&&!password.equals("")) {
@@ -216,14 +235,16 @@ public class FragmentBall extends Fragment{
             request = new Request.Builder().
                     url(BUILD_URL("basketRoom/createRoom?roomName="
                             + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
-                            + "&mode=" + basketRoomInfo.getMode() + "&rate=" + basketRoomInfo.getRate()
+                            + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
+                            +"&rateHigh="+basketRoomInfo.getRateHigh()
                             + "&num=" + basketRoomInfo.getNum() + "&password=" + basketRoomInfo.getPassword()
                             + "&userCode=" + basketRoomInfo.getMaster().getUserCode())).build();
         }else{
             request = new Request.Builder().
                     url(BUILD_URL("basketRoom/createRoom?roomName="
                             + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
-                            + "&mode=" + basketRoomInfo.getMode() + "&rate=" + basketRoomInfo.getRate()
+                            + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
+                            +"&rateHigh="+basketRoomInfo.getRateHigh()
                             + "&num=" + basketRoomInfo.getNum() + "&userCode=" + basketRoomInfo.getMaster().getUserCode())).build();
         }
         Call call = client.newCall(request);
@@ -237,6 +258,18 @@ public class FragmentBall extends Fragment{
             public void onResponse(Call call, Response response) throws IOException {
                 String result = response.body().string();
                 Log.e("msg",result);
+                JSONObject roomInfo =
+                        (JSONObject)((JSONObject)((JSONObject.parseObject(result)).get("data"))).get("room");
+                String success = (JSONObject.parseObject(result)).getString("success");
+                if(null!=success&&success.equals("true")) {
+                    TextView tvRoom = createRoomView.findViewById(R.id.roomId);
+                    String roomId = tvRoom.getText().toString();
+                    String roomName = roomInfo.getString("roomName");
+                    Intent roomIntent = new Intent(getActivity(), ChartRoomActivity.class);
+                    roomIntent.putExtra("roomId",roomId);
+                    roomIntent.putExtra("roomName",roomName);
+                    startActivity(roomIntent);
+                }
             }
         });
     }

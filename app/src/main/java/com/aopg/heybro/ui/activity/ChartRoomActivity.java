@@ -83,7 +83,7 @@ public class ChartRoomActivity extends AppCompatActivity {
     private void initView() {
         roomId = getIntent().getStringExtra("roomId");
         setContentView(R.layout.chart_room);
-        back = findViewById(R.id.back);
+        back = findViewById(R.id.room_back);
         messageLv = findViewById(R.id.msg_list_view);
         chartRoomMessageAdapter = new ChartRoomMessageAdapter(this,roomId,messageLv);
         messageLv.setAdapter(chartRoomMessageAdapter);

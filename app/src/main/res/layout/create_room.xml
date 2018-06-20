@@ -9,7 +9,7 @@
         android:background="@drawable/basket_room_corner"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/roomNum"
+            android:id="@+id/roomId"
             android:layout_width="55dp"
             android:layout_height="30dp"
             android:layout_margin="10dp"

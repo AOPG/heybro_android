@@ -14,8 +14,10 @@ public class BasketRoomInfo {
     private int type;
     //模式
     private String mode;
-    //等级限制
-    private String rate;
+    //最低等级限制
+    private int rateLow;
+    //最高等级限制
+    private int rateHigh;
     //人数限制
     private int num;
     //房间密码
@@ -26,12 +28,13 @@ public class BasketRoomInfo {
     public BasketRoomInfo() {
 
     }
-    public BasketRoomInfo(int roomId, String roomName, int type, String mode, String rate, int num,String password,User master) {
+    public BasketRoomInfo(int roomId, String roomName, int type, String mode, int rateLow, int rateHigh, int num, String password, User master) {
         this.roomId = roomId;
         this.roomName = roomName;
         this.type = type;
         this.mode = mode;
-        this.rate = rate;
+        this.rateLow = rateLow;
+        this.rateHigh = rateHigh;
         this.num = num;
         this.password = password;
         this.master = master;
@@ -69,12 +72,20 @@ public class BasketRoomInfo {
         this.mode = mode;
     }
 
-    public String getRate() {
-        return rate;
+    public int getRateLow() {
+        return rateLow;
     }
 
-    public void setRate(String rate) {
-        this.rate = rate;
+    public void setRateLow(int rateLow) {
+        this.rateLow = rateLow;
+    }
+
+    public int getRateHigh() {
+        return rateHigh;
+    }
+
+    public void setRateHigh(int rateHigh) {
+        this.rateHigh = rateHigh;
     }
 
     public int getNum() {

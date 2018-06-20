@@ -116,7 +116,7 @@
             android:id="@+id/rating"
             android:layout_width="110dp"
             android:layout_height="38dp"
-            android:text="等级:1级"
+            android:text="等级:3级"
             android:background="#1fffffff"
             android:textColor="#ffffff"
             android:layout_marginLeft="8dp"
