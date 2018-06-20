@@ -174,7 +174,7 @@ public class FragmentMy extends Fragment {
          * 装备
          * */
         ImageView zhuangbei=rootView.findViewById(R.id.zhuangbei);
-        jingcai.setOnClickListener(new View.OnClickListener() {
+        zhuangbei.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -202,7 +202,7 @@ public class FragmentMy extends Fragment {
          * 商城
          * */
         ImageView shopping=rootView.findViewById(R.id.shopping);
-        jingcai.setOnClickListener(new View.OnClickListener() {
+        shopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -219,7 +219,7 @@ public class FragmentMy extends Fragment {
          * 订单
          * */
         ImageView dingdan=rootView.findViewById(R.id.dingdan);
-        jingcai.setOnClickListener(new View.OnClickListener() {
+        dingdan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -236,7 +236,7 @@ public class FragmentMy extends Fragment {
          * 钱包
          * */
         ImageView qianbao=rootView.findViewById(R.id.qianbao);
-        jingcai.setOnClickListener(new View.OnClickListener() {
+        qianbao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -253,7 +253,7 @@ public class FragmentMy extends Fragment {
          * 客服
          * */
         ImageView kefu=rootView.findViewById(R.id.kefu);
-        jingcai.setOnClickListener(new View.OnClickListener() {
+        kefu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
