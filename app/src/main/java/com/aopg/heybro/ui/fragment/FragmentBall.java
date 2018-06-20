@@ -169,7 +169,7 @@ public class FragmentBall extends Fragment{
                            password = passwordSet.getText().toString();
                         }
                         basketRoomInfo.setType(0);
-                        basketRoomInfo.setMaster(LoginInfo.user);
+                        basketRoomInfo.setMaster(LoginInfo.user.getUserCode());
                         httpInsertRoom(basketRoomInfo,password);
                     }
                 });
@@ -235,14 +235,14 @@ public class FragmentBall extends Fragment{
                             + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
                             +"&rateHigh="+basketRoomInfo.getRateHigh()
                             + "&num=" + basketRoomInfo.getNum() + "&password=" + basketRoomInfo.getPassword()
-                            + "&userCode=" + basketRoomInfo.getMaster().getUserCode())).build();
+                            + "&userCode=" + basketRoomInfo.getMaster())).build();
         }else{
             request = new Request.Builder().
                     url(BUILD_URL("basketRoom/createRoom?roomName="
                             + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
                             + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
                             +"&rateHigh="+basketRoomInfo.getRateHigh()
-                            + "&num=" + basketRoomInfo.getNum() + "&userCode=" + basketRoomInfo.getMaster().getUserCode())).build();
+                            + "&num=" + basketRoomInfo.getNum() + "&userCode=" + basketRoomInfo.getMaster())).build();
         }
         Call call = client.newCall(request);
         call.enqueue(new Callback() {//4.回调方法
