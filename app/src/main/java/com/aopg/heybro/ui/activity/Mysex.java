@@ -28,7 +28,7 @@ public class Mysex extends Activity {
         if (LoginInfo.user.getUserSex().equals("男")){
             sex0.setChecked(true);
         }else {
-            sex1.setChecked(false);
+            sex1.setChecked(true);
         }
 
 

@@ -93,14 +93,14 @@ public class MyInfoActivity extends Activity {
 
         //性别
         TextView sex=findViewById(R.id.sex);
-     //   Intent intent = new Intent();//获取已有的intent对象
-    //    Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
-   //    String s= bundle.getString("sex");    //获取Bundle里面的字符串
-   //     if (s==null||s==""||s.equals("")){
-   //         sex.setText(LoginInfo.user.getUserSex());
-  //      }else{
-  //         sex.setText(s);
- //       }
+        Intent intent = new Intent();//获取已有的intent对象
+        Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
+      String s= bundle.getString("sex");    //获取Bundle里面的字符串
+        if (s==null||s==""||"".equals(s)){
+            sex.setText(LoginInfo.user.getUserSex());
+        }else{
+           sex.setText(s);
+       }
         sex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
