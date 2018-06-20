@@ -124,25 +124,25 @@ public class MyInfoActivity extends Activity {
             }
         });
         //生日
-        final TextView mybirtnday=findViewById(R.id.birthday);
-        mybirtnday.setText(String.valueOf(LoginInfo.user.getBirthday()));
-        mybirtnday.setOnClickListener(new View.OnClickListener() {
+       final TextView mybirtnday=findViewById(R.id.birthday);
+       mybirtnday.setText(String.valueOf(LoginInfo.user.getBirthday()));
+       mybirtnday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DateChooseWheelViewDialog endDateChooseDialog = new DateChooseWheelViewDialog(MyInfoActivity.this,
-                        new DateChooseWheelViewDialog.DateChooseInterface() {
-                            @Override
-                            public void getDateTime(String time, boolean longTimeChecked) {
-                                mybirtnday.setText(time);
+                       new DateChooseWheelViewDialog.DateChooseInterface() {
+                           @Override
+                           public void getDateTime(String time, boolean longTimeChecked) {
+                               mybirtnday.setText(time);
                             }
-                        });
-               endDateChooseDialog.setTimePickerGone(true);
+    });
+              endDateChooseDialog.setTimePickerGone(true);
                endDateChooseDialog.setDateDialogTitle("选择生日");
                endDateChooseDialog.showDateChooseDialog();
             }
         });
-        String birth= String.valueOf(mybirtnday.getText());
-        long b=new java.util.Date(birth).getTime();
+  //      String birth= String.valueOf(mybirtnday.getText());
+ //       long b=new java.util.Date(birth).getTime();
         //修改
         Button xiugai=findViewById(R.id.xiugai);
         xiugai.setOnClickListener(new View.OnClickListener() {
