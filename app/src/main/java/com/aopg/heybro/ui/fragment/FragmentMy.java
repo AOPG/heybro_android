@@ -31,8 +31,11 @@ import com.aopg.heybro.ui.activity.Myrili;
 import com.aopg.heybro.ui.activity.SaoyisaoActivity;
 import com.aopg.heybro.ui.activity.SettingActivity;
 import com.aopg.heybro.utils.LoginInfo;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
+import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
 
 
 /**
@@ -269,7 +272,7 @@ public class FragmentMy extends Fragment {
         return rootView;
     }
 
-    public static void loadInfo(){
+    public void loadInfo(){
         System.out.println("正在从内存中读取数据--------------------------------");
         TextView userIntroTv = rootView.findViewById(R.id.user_intro);
         userIntroTv.setText(LoginInfo.user.getUserIntro());
@@ -279,6 +282,15 @@ public class FragmentMy extends Fragment {
         userIdTv.setText(LoginInfo.user.getUserCode());
         Button ratingTv = rootView.findViewById(R.id.rating);
         ratingTv.setText("等级："+LoginInfo.user.getUserGrade()+"级");
+        ImageView image = rootView.findViewById(R.id.image);
+
+        RequestOptions options = new RequestOptions()
+                .fallback(R.drawable.image).centerCrop();
+
+        Glide.with(this)
+                .load(BASE_URL+LoginInfo.user.getUserPortrait())
+                .apply(options)
+                .into(image);
     }
 
     Handler handler = new Handler() {
