@@ -22,6 +22,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.aopg.heybro.entity.User;
+import com.aopg.heybro.service.TimerTaskService;
 import com.aopg.heybro.ui.Common.ActivitiesManager;
 import com.aopg.heybro.ui.activity.LoginActivty;
 import com.aopg.heybro.ui.fragment.FragmentActivity;
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         LoginInfo.user =  DataSupport.where("isLogin = ?", "1").findFirst(User.class);
-
+        startTimerTaskService();
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         //注意该方法要再setContentView方法之前实现
         SDKInitializer.initialize(getApplicationContext());
@@ -292,5 +293,10 @@ public class MainActivity extends AppCompatActivity {
         });
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
+    }
+
+    public void startTimerTaskService(){
+        Intent it=new Intent(this, TimerTaskService.class);
+        startService(it);
     }
 }
