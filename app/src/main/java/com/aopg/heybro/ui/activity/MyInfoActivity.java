@@ -18,6 +18,7 @@ import com.aopg.heybro.ui.inro.DateChooseWheelViewDialog;
 import com.aopg.heybro.utils.LoginInfo;
 
 import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
+import static com.aopg.heybro.ui.activity.Mysex.FLAG;
 
 /**
  * Created by 壑过忘川 on 2018/6/6.
@@ -63,7 +64,7 @@ public class MyInfoActivity extends Activity {
         //地区
 
 //        TextView userpo=findViewById(R.id.user_location);
- //       Intent intent1 = new Intent();       //获取已有的intent对象
+ //       Intent intent1 =  getIntent();;       //获取已有的intent对象
  //       Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
 //        String provice= bundle1.getString("provice");
 //        String city=bundle1.getString("city");
@@ -93,14 +94,16 @@ public class MyInfoActivity extends Activity {
 
         //性别
         TextView sex=findViewById(R.id.sex);
-        Intent intent = getIntent();//获取已有的intent对象
-        Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
-      String s= bundle.getString("sex");    //获取Bundle里面的字符串
-        if (s==null||s==""||"".equals(s)){
+        String s=null;
+        if (FLAG==0){
             sex.setText(LoginInfo.user.getUserSex());
         }else{
-           sex.setText(s);
-       }
+            Intent intent = getIntent();//获取已有的intent对象
+            Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
+            s= bundle.getString("sex");    //获取Bundle里面的字符串
+            sex.setText(s);
+        }
+
         sex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
