@@ -44,7 +44,7 @@ import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 public class FragmentGame extends Fragment {
     private View rootView;
     private View createRoomView;
-    private View joinRoomView;
+    private View matchRoomView;
     private PopupWindow window;
     HorizontalRoomListView hListView;
     HorizontaRoomlListViewAdapter hListViewAdapter;
@@ -73,7 +73,7 @@ public class FragmentGame extends Fragment {
         //创建房间
         createRoom();
         //快速匹配
-        joinRoom();
+        matchRoom();
 
         return rootView;
     }
@@ -189,14 +189,14 @@ public class FragmentGame extends Fragment {
     /**
      * 快速匹配
      */
-    public void joinRoom(){
-        final Button btn_join = rootView.findViewById(R.id.btn_join);
+    public void matchRoom(){
+        final Button btn_join = rootView.findViewById(R.id.btn_match);
         btn_join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                joinRoomView = LayoutInflater.from(getContext()).inflate(R.layout.join_room,null,false);
+                matchRoomView = LayoutInflater.from(getContext()).inflate(R.layout.match_room,null,false);
                 if(null == window || !window.isShowing()) {
-                    window = new PopupWindow(joinRoomView, 850, 1000, true);
+                    window = new PopupWindow(matchRoomView, 850, 1000, true);
                     // 设置PopupWindow是否能响应外部点击事件
                     window.setOutsideTouchable(false);
                     // 设置PopupWindow是否能响应点击事件
@@ -206,8 +206,8 @@ public class FragmentGame extends Fragment {
                 /**
                  * 关闭快速匹配
                  */
-                Button join_close = joinRoomView.findViewById(R.id.join_close);
-                join_close.setOnClickListener(new View.OnClickListener() {
+                Button match_close = matchRoomView.findViewById(R.id.match_close);
+                match_close.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if(null != window && window.isShowing()){
