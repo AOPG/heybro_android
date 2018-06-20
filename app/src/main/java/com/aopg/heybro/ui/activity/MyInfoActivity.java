@@ -136,12 +136,15 @@ public class MyInfoActivity extends Activity {
                                mybirtnday.setText(time);
                             }
     });
-              endDateChooseDialog.setTimePickerGone(true);
+               endDateChooseDialog.setTimePickerGone(true);
                endDateChooseDialog.setDateDialogTitle("选择生日");
                endDateChooseDialog.showDateChooseDialog();
             }
         });
-  //      String birth= String.valueOf(mybirtnday.getText());
+
+
+        String birth= String.valueOf(mybirtnday.getText());
+        System.out.print(birth);
  //       long b=new java.util.Date(birth).getTime();
         //修改
         Button xiugai=findViewById(R.id.xiugai);
