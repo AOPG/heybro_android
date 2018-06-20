@@ -17,12 +17,9 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.BasketRoomInfo;
-import com.aopg.heybro.entity.Concern;
 import com.aopg.heybro.ui.activity.ChartRoomActivity;
 import com.aopg.heybro.ui.room.HorizontaRoomlListViewAdapter;
 import com.aopg.heybro.ui.room.HorizontalRoomListView;
@@ -48,7 +45,7 @@ import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 public class FragmentBall extends Fragment{
     private View rootView;
     private View createRoomView;
-    private View joinRoomView;
+    private View matchRoomView;
     private PopupWindow window;
     HorizontalRoomListView hListView;
     HorizontaRoomlListViewAdapter hListViewAdapter;
@@ -79,7 +76,7 @@ public class FragmentBall extends Fragment{
         //创建房间
         createRoom();
         //快速匹配
-        joinRoom();
+        matchRoom();
         return rootView;
     }
     /**
@@ -172,7 +169,7 @@ public class FragmentBall extends Fragment{
                            password = passwordSet.getText().toString();
                         }
                         basketRoomInfo.setType(0);
-                        basketRoomInfo.setMaster(LoginInfo.user);
+                        basketRoomInfo.setMaster(LoginInfo.user.getUserCode());
                         httpInsertRoom(basketRoomInfo,password);
                     }
                 });
@@ -194,14 +191,14 @@ public class FragmentBall extends Fragment{
     /**
      * 快速匹配
      */
-    public void joinRoom(){
-        final Button btn_join = rootView.findViewById(R.id.btn_join);
+    public void matchRoom(){
+        final Button btn_join = rootView.findViewById(R.id.btn_match);
         btn_join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                joinRoomView = LayoutInflater.from(getContext()).inflate(R.layout.join_room,null,false);
+                matchRoomView = LayoutInflater.from(getContext()).inflate(R.layout.match_room,null,false);
                 if(null == window || !window.isShowing()) {
-                    window = new PopupWindow(joinRoomView, 850, 1000, true);
+                    window = new PopupWindow(matchRoomView, 850, 1000, true);
                     // 设置PopupWindow是否能响应外部点击事件
                     window.setOutsideTouchable(false);
                     // 设置PopupWindow是否能响应点击事件
@@ -211,8 +208,8 @@ public class FragmentBall extends Fragment{
                 /**
                  * 关闭快速匹配
                  */
-                Button join_close = joinRoomView.findViewById(R.id.join_close);
-                join_close.setOnClickListener(new View.OnClickListener() {
+                Button match_close = matchRoomView.findViewById(R.id.match_close);
+                match_close.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if(null != window && window.isShowing()){
@@ -238,14 +235,14 @@ public class FragmentBall extends Fragment{
                             + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
                             +"&rateHigh="+basketRoomInfo.getRateHigh()
                             + "&num=" + basketRoomInfo.getNum() + "&password=" + basketRoomInfo.getPassword()
-                            + "&userCode=" + basketRoomInfo.getMaster().getUserCode())).build();
+                            + "&userCode=" + basketRoomInfo.getMaster())).build();
         }else{
             request = new Request.Builder().
                     url(BUILD_URL("basketRoom/createRoom?roomName="
                             + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
                             + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
                             +"&rateHigh="+basketRoomInfo.getRateHigh()
-                            + "&num=" + basketRoomInfo.getNum() + "&userCode=" + basketRoomInfo.getMaster().getUserCode())).build();
+                            + "&num=" + basketRoomInfo.getNum() + "&userCode=" + basketRoomInfo.getMaster())).build();
         }
         Call call = client.newCall(request);
         call.enqueue(new Callback() {//4.回调方法

@@ -22,13 +22,13 @@ public class BasketRoomInfo {
     private int num;
     //房间密码
     private String password;
-    //房主信息
-    private User master = new User();
+    //房主编码
+    private String master;
 
     public BasketRoomInfo() {
 
     }
-    public BasketRoomInfo(int roomId, String roomName, int type, String mode, int rateLow, int rateHigh, int num, String password, User master) {
+    public BasketRoomInfo(int roomId, String roomName, int type, String mode, int rateLow, int rateHigh, int num, String password, String master) {
         this.roomId = roomId;
         this.roomName = roomName;
         this.type = type;
@@ -104,11 +104,11 @@ public class BasketRoomInfo {
         this.password = password;
     }
 
-    public User getMaster() {
+    public String getMaster() {
         return master;
     }
 
-    public void setMaster(User master) {
+    public void setMaster(String master) {
         this.master = master;
     }
 }

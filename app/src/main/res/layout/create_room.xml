@@ -65,12 +65,6 @@
                 android:spinnerMode="dialog"
 
                 android:background="@drawable/basket_spinner_corner" />
-                <!--<TextView
-                    android:id="@+id/spinner1_model"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/basket_spinner_corner"/>
-                -->
         </RelativeLayout>
 
         <RelativeLayout
@@ -109,7 +103,6 @@
                 android:text="房间人数"
                 android:textColor="#ffffff"
                 android:textSize="15dp" />
-            <!-- 下拉菜单  待实现-->
             <Spinner
                 android:id="@+id/spinner_num"
                 android:entries="@array/spinner_num"
