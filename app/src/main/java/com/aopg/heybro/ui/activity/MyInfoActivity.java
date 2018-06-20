@@ -48,8 +48,8 @@ public class MyInfoActivity extends Activity {
         });
         //昵称
         final EditText nicheng=findViewById(R.id.user_name);
-        nicheng.setHint(LoginInfo.user.getUsername());
-        final String[] name = {LoginInfo.user.getUsername()};
+        nicheng.setHint(LoginInfo.user.getNickName());
+        final String[] name = {LoginInfo.user.getNickName()};
         nicheng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -59,10 +59,9 @@ public class MyInfoActivity extends Activity {
 
         //ID(不可修改)
         TextView ID=findViewById(R.id.user_code);
-        ID.setText(LoginInfo.user.getUserIntro());
+        ID.setText(LoginInfo.user.getUserCode());
         String id= String.valueOf(ID.getText());
         //地区
-
 //        TextView userpo=findViewById(R.id.user_location);
  //       Intent intent1 =  getIntent();;       //获取已有的intent对象
  //       Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
@@ -125,25 +124,25 @@ public class MyInfoActivity extends Activity {
             }
         });
         //生日
- //       final TextView mybirtnday=findViewById(R.id.birthday);
- //       mybirtnday.setText(String.valueOf(LoginInfo.user.getBirthday()));
-//        mybirtnday.setOnClickListener(new View.OnClickListener() {
- //           @Override
-  //          public void onClick(View v) {
-//                DateChooseWheelViewDialog endDateChooseDialog = new DateChooseWheelViewDialog(MyInfoActivity.this,
-//                        new DateChooseWheelViewDialog.DateChooseInterface() {
-//                            @Override
- //                           public void getDateTime(String time, boolean longTimeChecked) {
- //                               mybirtnday.setText(time);
-//                            }
- //                       });
- //               endDateChooseDialog.setTimePickerGone(true);
- //               endDateChooseDialog.setDateDialogTitle("选择生日");
- //               endDateChooseDialog.showDateChooseDialog();
-//            }
- //       });
- //       String birth= String.valueOf(mybirtnday.getText());
-  //      long b=new java.util.Date(birth).getTime();
+        final TextView mybirtnday=findViewById(R.id.birthday);
+        mybirtnday.setText(String.valueOf(LoginInfo.user.getBirthday()));
+        mybirtnday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DateChooseWheelViewDialog endDateChooseDialog = new DateChooseWheelViewDialog(MyInfoActivity.this,
+                        new DateChooseWheelViewDialog.DateChooseInterface() {
+                            @Override
+                            public void getDateTime(String time, boolean longTimeChecked) {
+                                mybirtnday.setText(time);
+                            }
+                        });
+               endDateChooseDialog.setTimePickerGone(true);
+               endDateChooseDialog.setDateDialogTitle("选择生日");
+               endDateChooseDialog.showDateChooseDialog();
+            }
+        });
+        String birth= String.valueOf(mybirtnday.getText());
+        long b=new java.util.Date(birth).getTime();
         //修改
         Button xiugai=findViewById(R.id.xiugai);
         xiugai.setOnClickListener(new View.OnClickListener() {

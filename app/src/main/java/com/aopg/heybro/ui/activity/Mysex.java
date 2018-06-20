@@ -26,7 +26,8 @@ public class Mysex extends Activity {
         RadioButton sex1=findViewById(R.id.female);
         Button sex=findViewById(R.id.sexsure);
         setContentView(R.layout.fragment_my_ziliao_sex);
-        if (LoginInfo.user.getUserSex().equals("男")){
+        System.out.print(LoginInfo.user.getUserSex());
+        if ("男".equals(LoginInfo.user.getUserSex())){
             sex0.setChecked(true);
         }else {
             sex1.setChecked(true);
