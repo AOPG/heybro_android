@@ -51,6 +51,7 @@
             android:orientation="vertical">
             <!-- 头像 有点击事件 更换头像-->
             <LinearLayout
+                android:id="@+id/image1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="#1fffffff"
@@ -66,6 +67,7 @@
                     android:textSize="16dp" />
                 <!--需要实现圆形 -->
                 <ImageView
+                    android:id="@+id/user_img"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="220dp"
@@ -132,7 +134,7 @@
                     android:textSize="16dp" />
                 <!-- 需要通过数据库获取ID-->
                 <TextView
-                    android:id="@+id/userId"
+                    android:id="@+id/user_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="210dp"
