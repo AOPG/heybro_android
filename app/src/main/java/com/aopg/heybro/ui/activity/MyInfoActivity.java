@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aopg.heybro.R;
-import com.aopg.heybro.ui.inro.DateChooseWheelViewDialog;
 import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -107,9 +106,9 @@ public class MyInfoActivity extends Activity {
 
         //性别
         TextView sex=findViewById(R.id.user_sex);
+        System.out.print(LoginInfo.user.getUserSex());//测试打印性别
         String s=null;
         if (FLAG==0){
-            System.out.print(LoginInfo.user.getUserSex());
             sex.setText(LoginInfo.user.getUserSex());
         }else{
             Intent intent = getIntent();//获取已有的intent对象
