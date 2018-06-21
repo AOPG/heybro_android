@@ -47,6 +47,13 @@ import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
  * Created by L on 2018/6/19.
  */
 
+/*
+*
+*报废的
+*
+*
+*
+* */
 public class SearchFriendActivity extends AppCompatActivity {
     List<User> users;
     private ImageView btn_search;
@@ -61,7 +68,7 @@ public class SearchFriendActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_friend_addfriend);
         btn_search =findViewById(R.id.search_ensure);
         userCode=findViewById(R.id.search_friend);
-        friendView = getLayoutInflater().inflate(R.layout.search_friend_msg, null);
+
 //        ImageView concern_back = findViewById(R.id.concern_back);
 //        concern_back.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -72,6 +79,8 @@ public class SearchFriendActivity extends AppCompatActivity {
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                friendView = getLayoutInflater().inflate(R.layout.search_friend_msg, null);
+                System.out.println("测试");
                 if (v.getId() == R.id.search_ensure) {
                     user_code_txt = userCode.getText().toString();
                     sendRequest(user_code_txt);
