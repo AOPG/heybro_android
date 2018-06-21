@@ -2,61 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#535050"
     android:orientation="vertical">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#656862"
         android:orientation="horizontal">
         <TextView
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:text="好友"
-            android:layout_marginLeft="160dp"
-            android:layout_marginTop="13dp"
-            android:textSize="20dp"/>
+            android:textSize="18dp"/>
         <!-- 有点击事件 跳转到fragment_friend_message页面-->
         <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/add"
             android:id="@+id/xinxi"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="18dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
             android:src="@drawable/xinxi"/>
         <!-- 点击跳转到fragment_friend_addfriend页面-->
         <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:id="@+id/add"
-            android:layout_marginTop="13dp"
-            android:layout_marginLeft="15dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/add"/>
-    </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#535050"
         android:orientation="vertical">
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.1dp"
             android:background="#ffffff"/>
         <!--关注列表 有点击事件 跳转到fragment_friend_guanzhu页面-->
-        <LinearLayout
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:id="@+id/guanzhuliebiao"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:background="#1fffffff">
             <LinearLayout
+                android:id="@+id/guanzhuImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:background="@drawable/cirle"
-              >
-
+                android:layout_centerVertical="true"
+                android:background="@drawable/cirle">
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -65,37 +67,40 @@
                     android:src="@drawable/category" />
             </LinearLayout>
             <TextView
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/guanzhuImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="关注列表"
-                android:layout_marginTop="18dp"
                 android:layout_marginLeft="25dp"
                 android:textColor="#ffffff"
-                android:textSize="15dp"
-                android:textStyle="bold"/>
+                android:textSize="15dp" />
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_marginLeft="195dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
-    </LinearLayout>
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.1dp"
             android:background="#ffffff"/>
         <!-- 有点击事件 跳转fragment_frined_fensi页面 -->
-        <LinearLayout
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:id="@+id/fensiliebiao"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:background="#1fffffff">
             <LinearLayout
+                android:layout_centerVertical="true"
+                android:id="@+id/fensiImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
                 android:background="@drawable/cirle1">
 
                 <ImageView
@@ -106,37 +111,40 @@
                     android:src="@drawable/category" />
             </LinearLayout>
             <TextView
+                android:layout_marginLeft="25dp"
+                android:layout_toRightOf="@id/fensiImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="粉丝列表"
-                android:layout_marginTop="18dp"
-                android:layout_marginLeft="25dp"
+                android:layout_centerVertical="true"
                 android:textColor="#ffffff"
-                android:textSize="15dp"
-                android:textStyle="bold"/>
+                android:textSize="15dp" />
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_marginLeft="195dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
-        </LinearLayout>
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.1dp"
             android:background="#ffffff"/>
 
-        <LinearLayout
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:id="@+id/haoyoudongtai"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#1fffffff"
             android:orientation="horizontal">
             <LinearLayout
+                android:id="@+id/dongtaiImage"
+                android:layout_centerVertical="true"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
                 android:background="@drawable/cirle2">
                 <ImageView
                     android:layout_width="20dp"
@@ -146,43 +154,46 @@
                     android:src="@drawable/refresh"/>
             </LinearLayout>
             <TextView
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/dongtaiImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="好友动态"
-                android:layout_marginTop="18dp"
                 android:layout_marginLeft="25dp"
                 android:textColor="#ffffff"
-                android:textSize="15dp"
-                android:textStyle="bold"/>
+                android:textSize="15dp" />
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_marginLeft="195dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
-        </LinearLayout>
+        </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.1dp"
                 android:background="#ffffff" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.1dp"
             android:background="#ffffff"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="20dp"/>
         <!-- 下拉按钮实现下拉下边模块的这个功能 一般情况就是展开状态 除非点击则隐藏该模块
         当处于隐藏模块时则将 图标更换为xiala图标-->
-            <LinearLayout
+            <RelativeLayout
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:id="@+id/wodefangjian"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="#1fffffff"
                 android:orientation="horizontal">
                 <LinearLayout
+                    android:id="@+id/fangjianImage"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_centerVertical="true"
                     android:background="@drawable/cirle3">
                     <ImageView
                         android:layout_width="25dp"
@@ -190,126 +201,132 @@
                         android:layout_marginTop="3dp"
                         android:layout_marginLeft="3dp"
                         android:src="@drawable/eye"/>
-            </LinearLayout>
+                </LinearLayout>
                 <TextView
+                    android:layout_toRightOf="@id/fangjianImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="我的房间"
-                    android:layout_marginTop="15dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"
                     android:textColor="#ffffff"
-                    android:textSize="15dp"
-                    android:textStyle="bold"/>
+                    android:textSize="15dp" />
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="190dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginLeft="195dp"
                     android:layout_marginTop="15dp"
                     android:src="@drawable/xiangshang"/>
-            </LinearLayout>
+            </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.1dp"
             android:background="#ffffff" />
 
         <!--有点击事件 跳转到room页面 -->
-        <LinearLayout
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:id="@+id/fangjian"
             android:layout_width="match_parent"
             android:layout_height="66dp"
             android:background="#1fffffff"
             android:orientation="horizontal">
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="2"
+            <com.aopg.heybro.utils.teamhead.view.SynthesizedImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/roomImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/pic" />
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_weight="5"
-                android:text="房间名称"
-                android:textColor="#BBBBBB"
-                android:textSize="15dp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_weight="2"
-                android:text="3/6"
-                android:textColor="#BBBBBB"
-                android:textSize="15dp" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ffffff" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:orientation="vertical"
-            android:background="#1fffffff">
-            <TextView
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/roomImage"
+                android:id="@+id/roomName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="附近"
-                android:textSize="20dp"
-                android:textColor="#9FF43C"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="20dp"/>
-            <!-- 本该实现图片的无限左右滚动，现在先不实现-->
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:orientation="horizontal"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp">
+                android:text="房间名称"
+                android:layout_marginLeft="12dp"
+                android:textColor="#BBBBBB"
+                android:textSize="15dp" />
 
-                <!-- 以下图片需要实现圆角现暂不实现-->
-                <!--点击每个图片都跳到其相应的friend_msg页面 -->
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/pic" />
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/pic"/>
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/pic"/>
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/pic"/>
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/pic"/>
-            </LinearLayout>
-        </LinearLayout>
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/roomPeopleNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="3/6"
+                android:fontFamily="sans-serif-ligh"
+                android:textColor="#BBBBBB"
+                android:textSize="13dp" />
+
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.1dp"
             android:background="#ffffff" />
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:orientation="vertical"-->
+            <!--android:background="#1fffffff">-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="附近"-->
+                <!--android:textSize="20dp"-->
+                <!--android:textColor="#9FF43C"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:layout_marginLeft="20dp"/>-->
+            <!--&lt;!&ndash; 本该实现图片的无限左右滚动，现在先不实现&ndash;&gt;-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="300dp"-->
+                <!--android:layout_height="80dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginTop="20dp">-->
+
+                <!--&lt;!&ndash; 以下图片需要实现圆角现暂不实现&ndash;&gt;-->
+                <!--&lt;!&ndash;点击每个图片都跳到其相应的friend_msg页面 &ndash;&gt;-->
+                <!--<ImageView-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:src="@drawable/pic" />-->
+                <!--<ImageView-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:src="@drawable/pic"/>-->
+                <!--<ImageView-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:src="@drawable/pic"/>-->
+                <!--<ImageView-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:src="@drawable/pic"/>-->
+                <!--<ImageView-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:src="@drawable/pic"/>-->
+            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="#ffffff" />-->
 
         </LinearLayout>
 </LinearLayout>

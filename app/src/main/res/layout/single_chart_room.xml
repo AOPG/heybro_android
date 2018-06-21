@@ -3,37 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
+    <RelativeLayout
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#656862"
         android:orientation="horizontal">
         <!-- 返回 有点击事件-->
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginLeft="10dp"
+            android:id="@+id/room_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
             android:src="@drawable/back"/>
         <!--房间名称-->
         <TextView
+            android:layout_centerInParent="true"
             android:id="@+id/roomName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:text="师大篮球小分队"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="15dp"
-            android:textSize="20dp"/>
+            android:textSize="18dp"/>
         <!--点击按钮查看房间具体信息，房主跳到room_detailmsg_master 成员跳到成员里-->
         <Button
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:id="@+id/room_setting"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="17dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:background="@drawable/room_msg"/>
-    </LinearLayout>
+    </RelativeLayout>
     <!--参考实现地址 https://blog.csdn.net/eastmoon502136/article/details/50650350-->
     <!--聊天界面-->
     <LinearLayout

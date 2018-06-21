@@ -26,10 +26,10 @@ public class ChartRoomMessageAdapter extends BaseAdapter {
     private ChatRoomRecord chatRoomRecord;
     private ListView messageLv;
 
-    public ChartRoomMessageAdapter(Context context, String roomId, ListView messageLv) {
+    public ChartRoomMessageAdapter(Context context, Long roomId, ListView messageLv) {
         this.context = context;
 
-        messages = DataSupport.where("roomId = ?",roomId).limit(20).order("Date desc").find(ChatRoomRecord.class);
+        messages = DataSupport.where("roomId = ?",roomId+"").limit(20).order("Date desc").find(ChatRoomRecord.class);
         Collections.reverse(messages);
         this.messageLv = messageLv;
 

@@ -113,4 +113,12 @@ public class BasketRoomInfo {
     public void setMaster(String master) {
         this.master = master;
     }
+
+    public int getRoomRealNum() {
+        return roomRealNum;
+    }
+
+    public void setRoomRealNum(int roomRealNum) {
+        this.roomRealNum = roomRealNum;
+    }
 }

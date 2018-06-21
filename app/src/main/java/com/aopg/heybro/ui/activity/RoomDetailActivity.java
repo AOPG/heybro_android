@@ -48,7 +48,7 @@ public class RoomDetailActivity extends AppCompatActivity {
     private TextView roomModelTv;
     private TextView roomPasswordTv;
     private String roomName;
-    private String roomId;
+    private Long roomId;
     private String roomModel;
     private String roomPassword;
     private ImageView back;
@@ -72,7 +72,7 @@ public class RoomDetailActivity extends AppCompatActivity {
         super.onNewIntent(intent);
         setIntent(intent);
         roomName = getIntent().getStringExtra("roomName");
-        roomId = getIntent().getStringExtra("roomId");
+        roomId = getIntent().getLongExtra("roomId",-1L);
         roomNameTv.setText(roomName);
     }
 
@@ -81,7 +81,7 @@ public class RoomDetailActivity extends AppCompatActivity {
         roomModelTv = findViewById(R.id.roomModel);
         roomPasswordTv = findViewById(R.id.roomPassword);
         back = findViewById(R.id.back);
-        roomId = getIntent().getStringExtra("roomId");
+        roomId = getIntent().getLongExtra("roomId",-1L);
         roomNameTv.setText(getIntent().getStringExtra("roomName"));
         userGrid = findViewById(R.id.user_list);
         back.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +113,7 @@ public class RoomDetailActivity extends AppCompatActivity {
                     basketRoomInfo.setRoomName(roomInfo.getString("roomName"));
                     basketRoomInfo.setRoomId(Long.parseLong(roomInfo.getString("roomId")));
                     basketRoomInfo.setPassword(roomInfo.getString("roomPass"));
+                    basketRoomInfo.setMode(roomInfo.getString("roomMode"));
                     List<User> userList = new ArrayList<>();
                     for (int i = 0; i < userInfo.size(); i++) {
                         User user = new User();
@@ -145,7 +146,7 @@ public class RoomDetailActivity extends AppCompatActivity {
                         Map roomAndUserInfo = (Map) msg.obj;
                         List<User> userList = (List<User>) roomAndUserInfo.get("userList");
                         BasketRoomInfo basketRoomInfo = (BasketRoomInfo) roomAndUserInfo.get("roomInfo");
-                        roomId = basketRoomInfo.getRoomId()+"";
+                        roomId = basketRoomInfo.getRoomId();
                         roomModel = basketRoomInfo.getMode();
                         roomModelTv.setText(roomModel);
                         roomName = basketRoomInfo.getRoomName();

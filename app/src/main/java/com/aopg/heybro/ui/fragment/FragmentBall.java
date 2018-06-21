@@ -389,7 +389,7 @@ public class FragmentBall extends Fragment{
                         (JSONObject)((JSONObject)((JSONObject.parseObject(result)).get("data"))).get("room");
                 String success = (JSONObject.parseObject(result)).getString("success");
                 if(null!=success&&success.equals("true")) {
-                    String roomId = roomInfo.getString("roomId");
+                    Long roomId = Long.parseLong(roomInfo.getString("roomId"));
                     String roomName = roomInfo.getString("roomName");
                     Intent roomIntent = new Intent(getActivity(), ChartRoomActivity.class);
                     roomIntent.putExtra("roomId",roomId);

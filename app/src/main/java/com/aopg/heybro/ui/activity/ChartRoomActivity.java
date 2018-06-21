@@ -58,7 +58,7 @@ public class ChartRoomActivity extends AppCompatActivity {
     private ChartRoomMessageAdapter chartRoomMessageAdapter;
     private TextView roomNameTv;
     private ImageView back;
-    private String roomId;
+    private Long roomId;
     private Button roomDetail;
 
     @Override
@@ -66,7 +66,7 @@ public class ChartRoomActivity extends AppCompatActivity {
         super.onNewIntent(intent);
         setIntent(intent);
         roomName = getIntent().getStringExtra("roomName");
-        roomId = getIntent().getStringExtra("roomId");
+        roomId = getIntent().getLongExtra("roomId",0L);
         roomNameTv.setText(roomName);
     }
 
@@ -79,7 +79,7 @@ public class ChartRoomActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        roomId = getIntent().getStringExtra("roomId");
+        roomId = getIntent().getLongExtra("roomId",0L);
         setContentView(R.layout.chart_room);
         back = findViewById(R.id.room_back);
         messageLv = findViewById(R.id.msg_list_view);
@@ -114,7 +114,7 @@ public class ChartRoomActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Long groupId = -1L;
                 try {
-                    groupId = Long.parseLong(roomId);
+                    groupId = roomId;
                 } catch (NumberFormatException e) {
                     Toast.makeText(getApplicationContext(), "群组id解析失败", Toast.LENGTH_SHORT).show();
                 }
@@ -136,7 +136,7 @@ public class ChartRoomActivity extends AppCompatActivity {
                     ChatRoomRecord chatRoomRecord = new ChatRoomRecord();
                     chatRoomRecord.setUserCode(LoginInfo.user.getUserCode());
                     chatRoomRecord.setMessage(text);
-                    chatRoomRecord.setRoomId(roomId);
+                    chatRoomRecord.setRoomId(roomId+"");
                     chatRoomRecord.setRoomName(roomName);
                     chatRoomRecord.setDate(new Date().getTime());
                     chatRoomRecord.save();
