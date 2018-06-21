@@ -20,7 +20,6 @@ import java.util.Queue;
  * 房间模块左右滑动
  */
 
-
 public class HorizontalRoomListView extends AdapterView<ListAdapter> {
 
     public boolean mAlwaysOverrideTouch = true;

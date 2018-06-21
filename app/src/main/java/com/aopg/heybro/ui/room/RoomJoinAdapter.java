@@ -22,6 +22,7 @@ import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
  * Created by 王攀 on 2018/6/20.
  */
 
+
 public class RoomJoinAdapter extends BaseAdapter {
     private List<Map<String,Object>> data;
     private Context context;

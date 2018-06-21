@@ -20,6 +20,7 @@ import com.aopg.heybro.ui.discover.BitmapUtil;
  *  房间模块左右滑动
  */
 
+
 public class HorizontaRoomlListViewAdapter extends BaseAdapter {
 //    private int[] mIconIDs;
     private String[] roomCode;

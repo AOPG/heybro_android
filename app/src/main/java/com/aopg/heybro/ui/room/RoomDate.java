@@ -33,6 +33,7 @@ import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationConte
  *  房间在数据库中查找的数据
  */
 
+
 public class RoomDate {
 
     private String roomId;

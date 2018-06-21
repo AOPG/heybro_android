@@ -4,6 +4,7 @@ package com.aopg.heybro.ui.room;
  * Created by Administrator on 2018/6/20.
  */
 
+
 public class RoomUser {
 
     private String userName;

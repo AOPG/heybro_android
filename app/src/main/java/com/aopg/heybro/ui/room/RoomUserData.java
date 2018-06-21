@@ -11,6 +11,7 @@ import java.util.Map;
  * Created by 王攀 on 2018/6/20.
  */
 
+
 public class RoomUserData {
     private List<Map<String,Object>> list;
 
