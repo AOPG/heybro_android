@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.aopg.heybro.R;
@@ -16,6 +17,7 @@ import com.aopg.heybro.ui.adapter.SearchRoomAdapter;
 
 public class SearchRoomActivity extends Activity {
     private SearchRoomAdapter searchRoomAdapter;
+    private ListView roomList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,11 @@ public class SearchRoomActivity extends Activity {
                 onBackPressed();
             }
         });
+        /**
+         * 显示房间
+         */
+        roomList = findViewById(R.id.roomlist);
+
     }
     public void onBackPressed() {
         //返回

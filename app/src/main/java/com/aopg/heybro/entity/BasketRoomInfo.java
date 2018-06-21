@@ -20,6 +20,8 @@ public class BasketRoomInfo {
     private int rateHigh;
     //人数限制
     private int num;
+    //房间当前人数
+    private int roomRealNum;
     //房间密码
     private String password;
     //房主编码
