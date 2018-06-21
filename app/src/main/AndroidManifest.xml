@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aopg.heybro">
 
+
     <!-- Required -->
     <permission
         android:name="com.aopg.heybro.permission.JPUSH_MESSAGE"
@@ -67,6 +68,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"
+            android:hardwareAccelerated="true"
             android:launchMode="singleTask"
             android:taskAffinity="com.aopg.heybro"></activity>
         <activity android:name=".ui.activity.LoginActivty"></activity>

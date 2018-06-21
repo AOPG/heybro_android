@@ -11,6 +11,7 @@ import java.util.Map;
  * 虚拟数据
  */
 
+
 public class Virtualdiscoverdata {
 
     //发现模块
@@ -23,6 +24,7 @@ public class Virtualdiscoverdata {
 
     //发现模块
     public List<Map<String,Object>> dataResource(){
+
         list = new ArrayList<>();
 
         Map<String,Object> map = new HashMap<>();

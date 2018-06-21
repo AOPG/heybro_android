@@ -41,6 +41,7 @@ import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
  * 比赛界面
  */
 
+
 public class FragmentGame extends Fragment {
     private View rootView;
     private View createRoomView;
@@ -280,7 +281,7 @@ public class FragmentGame extends Fragment {
                 R.drawable.room_corner, R.drawable.room_corner,R.drawable.room_corner
                 ,R.drawable.room_corner};
 
-        hListViewAdapter = new HorizontaRoomlListViewAdapter(rootView.getContext(),idss,
+        hListViewAdapter = new HorizontaRoomlListViewAdapter(rootView.getContext(),
                 roomCode,roomTitle,roomNum);
         hListView.setAdapter(hListViewAdapter);
         //      hListView.setOnItemSelectedListener(new OnItemSelectedListener() {

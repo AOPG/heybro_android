@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.aopg.heybro.R;
 
@@ -36,10 +35,10 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
     }
 
     private void setUpViews() {
-        mViewProvince = (WheelView) findViewById(R.id.id_province);
-        mViewCity = (WheelView) findViewById(R.id.id_city);
-        mViewDistrict = (WheelView) findViewById(R.id.id_district);
-        mBtnConfirm = (Button) findViewById(R.id.btn_confirm);
+        mViewProvince =  findViewById(R.id.id_province);
+        mViewCity =  findViewById(R.id.id_city);
+        mViewDistrict = findViewById(R.id.id_district);
+        mBtnConfirm =  findViewById(R.id.btn_confirm);
     }
 
     private void setUpListener() {
@@ -57,16 +56,16 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
         baseActivity.initProvinceDatas();
         mViewProvince.setViewAdapter(new ArrayWheelAdapter<String>(getApplicationContext(), baseActivity.getmProvinceDatas()));
         // 设置可见条目数量
-        mViewProvince.setVisibleItems(7);
-        mViewCity.setVisibleItems(7);
-        mViewDistrict.setVisibleItems(7);
+        mViewProvince.setVisibleItems(6);
+        mViewCity.setVisibleItems(6);
+        mViewDistrict.setVisibleItems(6);
         updateCities();
         updateAreas();
     }
 
     @Override
-    public void onChanged(com.aopg.heybro.ui.position.WheelView wheel, int oldValue, int newValue) {
-// TODO Auto-generated method stub
+    public void onChanged(WheelView wheel, int oldValue, int newValue) {
+// //TODO Auto-generated method stub
         if (wheel == mViewProvince) {
             updateCities();
         } else if (wheel == mViewCity) {
