@@ -232,7 +232,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_weight="5"
-                android:text="房间姓名"
+                android:text="房间名称"
                 android:textColor="#BBBBBB"
                 android:textSize="15dp" />
 
@@ -242,7 +242,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_weight="2"
-                android:text="3/5"
+                android:text="3/6"
                 android:textColor="#BBBBBB"
                 android:textSize="15dp" />
 

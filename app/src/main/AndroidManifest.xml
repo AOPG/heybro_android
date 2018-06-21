@@ -90,6 +90,7 @@
             android:launchMode="singleTask"
             android:taskAffinity="com.aopg.heybro"></activity>
         <activity android:name=".ui.activity.RoomDetailActivity"></activity>
+        <activity android:name=".ui.activity.SearchRoomActivity"></activity>
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"

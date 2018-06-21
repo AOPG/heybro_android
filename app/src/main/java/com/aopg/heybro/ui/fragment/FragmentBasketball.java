@@ -1,6 +1,7 @@
 package com.aopg.heybro.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.GridView;
 
 import com.aopg.heybro.R;
+import com.aopg.heybro.ui.activity.SearchRoomActivity;
+import com.aopg.heybro.ui.activity.SettingActivity;
 import com.aopg.heybro.ui.adapter.BasketBallFragmentPagerAdapter;
 import com.aopg.heybro.ui.room.CustomViewPager;
 
@@ -38,7 +41,7 @@ public class FragmentBasketball extends Fragment{
     private BasketBallFragmentPagerAdapter adapter;
     private View ball_selected;
     private View game_selected;
-
+    private Button btn_searchRoom;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -56,6 +59,9 @@ public class FragmentBasketball extends Fragment{
         }
         initView();
         // 设置菜单栏的点击事件
+        /**
+         * 选择打球
+         */
         btn_ball.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,12 +70,25 @@ public class FragmentBasketball extends Fragment{
                 game_selected.setVisibility(View.GONE);
             }
         });
+        /**
+         * 选择比赛
+         */
         btn_game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 myViewPager.setCurrentItem(1);
                 game_selected.setVisibility(View.VISIBLE);
                 ball_selected.setVisibility(View.GONE);
+            }
+        });
+        /**
+         * 搜索房间
+         */
+        btn_searchRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent searchRoomIntent = new Intent(getActivity(), SearchRoomActivity.class);
+                startActivity(searchRoomIntent);
             }
         });
         myViewPager.setOnPageChangeListener(new MyPagerChangeListener());
@@ -93,6 +112,7 @@ public class FragmentBasketball extends Fragment{
         btn_ball = rootView.findViewById(R.id.date_ball);
         btn_game = rootView.findViewById(R.id.date_game);
         myViewPager = rootView.findViewById(R.id.basketball_viewPager);
+        btn_searchRoom = rootView.findViewById(R.id.basket_search);
     }
     /**
      * 设置一个ViewPager的侦听事件，当左右滑动ViewPager时菜单栏被选中状态跟着改变

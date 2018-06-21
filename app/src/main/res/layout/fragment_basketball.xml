@@ -16,22 +16,24 @@
             android:id="@+id/weather"
             android:layout_width="100dp"
             android:layout_height="80dp"
-            android:alpha="0.8" >
+            android:alpha="0.8">
+
             <ImageView
                 android:id="@+id/weather_img"
                 android:layout_width="80dp"
                 android:layout_height="60dp"
-                android:src="@drawable/weather_sunny"/>
+                android:src="@drawable/weather_sunny" />
+
             <TextView
                 android:id="@+id/weather_txt1"
                 android:layout_width="100dp"
                 android:layout_height="80dp"
-                android:text="晴 20°"
-                android:textSize="30sp"
-                android:textColor="#101010"
                 android:paddingLeft="10dp"
                 android:paddingTop="20dp"
-                android:textStyle="bold"/>
+                android:text="晴 20°"
+                android:textColor="#101010"
+                android:textSize="30sp"
+                android:textStyle="bold" />
             <!--中文设置加粗就需要在代码中获取到当前TextView在进行设置:复制代码 代码
             TextView tv = (TextView)findViewById(R.id.tv);
             TextPaint tp = tv.getPaint();
@@ -40,12 +42,13 @@
                 android:id="@+id/weather_txt2"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                android:text="PM 2.5  30"
-                android:textSize="15sp"
-                android:textColor="#101010"
+                android:layout_marginTop="60dp"
                 android:paddingLeft="10dp"
-                android:layout_marginTop="60dp" />
+                android:text="PM 2.5  30"
+                android:textColor="#101010"
+                android:textSize="15sp" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -53,19 +56,19 @@
             <!-- 搜索功能-->
             <Button
                 android:id="@+id/basket_search"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/basket_search"/>
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/basket_search" />
             <!-- 需要实现日历日期的显示-->
             <Button
                 android:id="@+id/basket_calendar"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/basket_calender"/>
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/basket_calender" />
         </LinearLayout>
     </LinearLayout>
     <!-- 打球模式菜单栏-->

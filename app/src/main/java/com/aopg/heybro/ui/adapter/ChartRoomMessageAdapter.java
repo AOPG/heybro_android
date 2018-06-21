@@ -8,7 +8,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.aopg.heybro.R;
-import com.aopg.heybro.entity.ChatRecord;
 import com.aopg.heybro.entity.ChatRoomRecord;
 import com.aopg.heybro.utils.LoginInfo;
 
