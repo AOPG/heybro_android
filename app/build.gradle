@@ -15,7 +15,7 @@ android {
         config {
             keyAlias 'heybro'
             keyPassword 'heybro'
-            storeFile file('C:/Users/L/Desktop/aopg.jks')
+            storeFile file('D:/project/training/heybro_android/aopg.jks')
             storePassword '123456'
         }
     }
