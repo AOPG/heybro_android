@@ -57,9 +57,6 @@ public class MyConcernActivity extends Activity {
 
         client = HttpUtils.init(client);
 
-
-
-
         Request request = new Request.Builder().
                 url(BUILD_URL("concern/getConcernIndex?userCode=" + LoginInfo.user.getUserCode())).build();
         Call call = client.newCall(request);
