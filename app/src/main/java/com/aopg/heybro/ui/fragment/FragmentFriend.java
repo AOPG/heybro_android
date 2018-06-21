@@ -12,12 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.activity.AddFriendActivity;
 import com.aopg.heybro.ui.activity.ChartRoomActivity;
 import com.aopg.heybro.ui.activity.MyConcernActivity;
 import com.aopg.heybro.ui.activity.MyMessageActivity;
+import com.aopg.heybro.utils.LoginInfo;
+
+import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
 
 
 /**
@@ -86,9 +90,14 @@ public class FragmentFriend extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent wodefangjianIntent = new Intent(getActivity(), ChartRoomActivity.class);
-                wodefangjianIntent.putExtra("roomId","26998403");
-                wodefangjianIntent.putExtra("roomName","AOPG约起来");
-                startActivity(wodefangjianIntent);
+                if (LoginInfo.user.getRoomId()==0){
+                    Toast.makeText(getApplicationContext(),"您当前没有任何房间!",Toast.LENGTH_SHORT);
+                }else {
+                    wodefangjianIntent.putExtra("roomId",LoginInfo.user.getRoomId());
+                    wodefangjianIntent.putExtra("roomName","AOPG约起来");
+                    startActivity(wodefangjianIntent);
+                }
+
             }
         });
         return rootView;

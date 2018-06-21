@@ -77,7 +77,10 @@ public class UserInfoService extends IntentService {
                         LoginInfo.user.setUserPortrait(userInfo.getString("userPortrait"));
                         LoginInfo.user.setHomepageBack(userInfo.getString("homepageBack"));
                         LoginInfo.user.setRoomId(Long.parseLong(userDetailInfo.getString("roomId")));
-
+                        LoginInfo.user.setBirthday(Long.parseLong(userInfo.getString("birthday")));
+                        LoginInfo.user.setUserProvince(userInfo.getString("userProvince"));
+                        LoginInfo.user.setUserCity(userInfo.getString("userCity"));
+                        LoginInfo.user.setUserSex(userInfo.getString("userSex"));
                         System.out.println("正在向内存中写入数据--------------------------------");
                         LoginInfo.user.updateAll("userName = ?",userInfo.getString("userName"));
                         if (LoginInfo.FragmentMYISCREATE==1){
