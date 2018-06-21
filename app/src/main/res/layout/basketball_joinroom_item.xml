@@ -26,7 +26,7 @@
             android:textColor="#BBBBBB"
             android:textSize="15dp"/>
         <TextView
-            android:id="@+id/user_jianjie"
+            android:id="@+id/user_Intro"
             android:layout_width="100dp"
             android:layout_height="20dp"
             android:text="Let's get it!"

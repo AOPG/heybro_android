@@ -280,7 +280,7 @@ public class FragmentGame extends Fragment {
                 R.drawable.room_corner, R.drawable.room_corner,R.drawable.room_corner
                 ,R.drawable.room_corner};
 
-        hListViewAdapter = new HorizontaRoomlListViewAdapter(rootView.getContext(),idss,
+        hListViewAdapter = new HorizontaRoomlListViewAdapter(rootView.getContext(),
                 roomCode,roomTitle,roomNum);
         hListView.setAdapter(hListViewAdapter);
         //      hListView.setOnItemSelectedListener(new OnItemSelectedListener() {

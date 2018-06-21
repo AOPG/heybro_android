@@ -23,6 +23,7 @@ public class Virtualdiscoverdata {
 
     //发现模块
     public List<Map<String,Object>> dataResource(){
+
         list = new ArrayList<>();
 
         Map<String,Object> map = new HashMap<>();

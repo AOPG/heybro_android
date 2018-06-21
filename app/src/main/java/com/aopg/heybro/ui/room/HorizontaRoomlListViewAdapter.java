@@ -21,7 +21,7 @@ import com.aopg.heybro.ui.discover.BitmapUtil;
  */
 
 public class HorizontaRoomlListViewAdapter extends BaseAdapter {
-    private int[] mIconIDs;
+//    private int[] mIconIDs;
     private String[] roomCode;
     private String[] roomTitle;
     private String[] roomNum;
@@ -29,12 +29,12 @@ public class HorizontaRoomlListViewAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private int selectIndex = -1;
 
-    public HorizontaRoomlListViewAdapter(Context context, int[] idss,String[] roomCode, String[] roomTitle, String[] roomNum) {
+    public HorizontaRoomlListViewAdapter(Context context,String[] roomCode, String[] roomTitle, String[] roomNum) {
         this.mContext = context;
         this.roomTitle = roomTitle;
         this.roomCode = roomCode;
         this.roomNum = roomNum;
-        this.mIconIDs = idss;
+//        this.mIconIDs = idss;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);//LayoutInflater.from(mContext);
     }
 
@@ -57,14 +57,14 @@ public class HorizontaRoomlListViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder;
-        LinearLayout disLayout;
+//        LinearLayout disLayout;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.fragment_basketball_room_item, null);
+            convertView = mInflater.inflate(R.layout.basketball_list_item, null);
             holder.room_code = (TextView) convertView.findViewById(R.id.ball_room_code);
             holder.room_name = (TextView) convertView.findViewById(R.id.ball_room_name);
             holder.room_num = (TextView) convertView.findViewById(R.id.ball_room_num);
-            holder.disLayout = (LinearLayout)convertView.findViewById(R.id.room_Layout);
+//            holder.disLayout = (LinearLayout)convertView.findViewById(R.id.room_Layout);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -78,7 +78,7 @@ public class HorizontaRoomlListViewAdapter extends BaseAdapter {
         holder.room_code.setText(roomCode[position]);
         holder.room_name.setText(roomTitle[position]);
         holder.room_num.setText(roomNum[position]);
-        holder.disLayout.setBackgroundResource(mIconIDs[position]);
+//        holder.disLayout.setBackgroundResource(mIconIDs[position]);
 
 
         return convertView;
@@ -88,7 +88,7 @@ public class HorizontaRoomlListViewAdapter extends BaseAdapter {
         private TextView room_code;
         private TextView room_name;
         private TextView room_num;
-        private LinearLayout disLayout;
+//        private LinearLayout disLayout;
     }
 
     private Bitmap getPropThumnail(int id) {
