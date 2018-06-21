@@ -8,7 +8,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.aopg.heybro.R;
-import com.aopg.heybro.ui.adapter.SearchRoomAdapter;
+//import com.aopg.heybro.ui.adapter.SearchRoomAdapter;
 
 /**
  * Created by 壑过忘川 on 2018/6/21.
@@ -16,7 +16,7 @@ import com.aopg.heybro.ui.adapter.SearchRoomAdapter;
  */
 
 public class SearchRoomActivity extends Activity {
-    private SearchRoomAdapter searchRoomAdapter;
+  //  private SearchRoomAdapter searchRoomAdapter;
     private ListView roomList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

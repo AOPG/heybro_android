@@ -36,22 +36,6 @@ import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
  * Created by 壑过忘川 on 2018/6/5.
  * 添加好友界面
  */
-
-
-/*
-*
-*报废的
-*
-*
-*
-* */
-
-
-
-
-
-
-
 public class AddFriendActivity extends Activity{
     List<User> users;
     private ImageView btn_search;
@@ -91,13 +75,6 @@ public class AddFriendActivity extends Activity{
                 if (v.getId() == R.id.search_ensure) {
                     user_code_txt = userCode.getText().toString();
                     sendRequest(user_code_txt);
-                }
-                if (null == window || !window.isShowing()) {
-                    window = new PopupWindow(friendView, 850, 1000, true);
-                    // 设置PopupWindow是否能响应外部点击事件
-                    window.setOutsideTouchable(false);
-                    // 设置PopupWindow是否能响应点击事件
-                    window.setTouchable(true);
                     window.showAtLocation(v, Gravity.LEFT, 20, -200);
                 }
             }
@@ -136,6 +113,13 @@ public class AddFriendActivity extends Activity{
                     }
                     Message message = mainHandler.obtainMessage(1,"formCallBack");
                     mainHandler.sendMessage(message);
+                    if (null == window || !window.isShowing()) {
+                        window = new PopupWindow(friendView, 850, 1000, true);
+                        // 设置PopupWindow是否能响应外部点击事件
+                        window.setOutsideTouchable(false);
+                        // 设置PopupWindow是否能响应点击事件
+                        window.setTouchable(true);
+                    }
                 }
             }
         });
@@ -150,7 +134,6 @@ public class AddFriendActivity extends Activity{
             super.handleMessage(msg);
             switch (msg.what){
                 case 1:
-
                     SearchfriendAdapter adapter = new SearchfriendAdapter(AddFriendActivity.this,users);
                     ListView userlv=friendView.findViewById(R.id.friend_lv);
                     userlv.setAdapter(adapter);
