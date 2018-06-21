@@ -16,9 +16,13 @@ import android.widget.Toast;
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.inro.DateChooseWheelViewDialog;
 import com.aopg.heybro.utils.LoginInfo;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
+import static com.aopg.heybro.ui.activity.Myposition.FLAG0;
 import static com.aopg.heybro.ui.activity.Mysex.FLAG;
+import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
 
 /**
  * Created by 壑过忘川 on 2018/6/6.
@@ -38,9 +42,18 @@ public class MyInfoActivity extends Activity {
                 onBackPressed();
             }
         });
-        //头像
-        LinearLayout image=findViewById(R.id.image1);
-        image.setOnClickListener(new View.OnClickListener() {
+        //头像显示
+        ImageView image=findViewById(R.id.image);
+        RequestOptions options = new RequestOptions()
+                .fallback(R.drawable.image).centerCrop();
+
+        Glide.with(this)
+                .load(BASE_URL+LoginInfo.user.getUserPortrait())
+                .apply(options)
+                .into(image);
+        //头像上传
+        LinearLayout ima=findViewById(R.id.image1);
+        ima.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -62,23 +75,24 @@ public class MyInfoActivity extends Activity {
         ID.setText(LoginInfo.user.getUserCode());
         String id= String.valueOf(ID.getText());
         //地区
-//        TextView userpo=findViewById(R.id.user_location);
- //       Intent intent1 =  getIntent();;       //获取已有的intent对象
- //       Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
-//        String provice= bundle1.getString("provice");
-//        String city=bundle1.getString("city");
-//        if (provice==""||provice==null||provice.equals("")||city.equals("")||city==null||city==""){
- //           userpo.setText(LoginInfo.user.getUserProvince()+"  "+LoginInfo.user.getUserCity());
- //       }else{
-//            userpo.setText(provice+"  "+city);
- //       }
- //       userpo.setOnClickListener(new View.OnClickListener() {
- //           @Override
- //           public void onClick(View v) {
- //               Intent poIntent = new Intent(getApplicationContext(), Myposition.class);
-  //              startActivity(poIntent);
- //           }
-//        });
+        TextView userpo=findViewById(R.id.user_location);
+        if(FLAG0==0){
+            userpo.setText(LoginInfo.user.getUserProvince()+"  "+LoginInfo.user.getUserCity());
+        }else {
+            Intent intent1 =  getIntent();;       //获取已有的intent对象
+            Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
+            String provice= bundle1.getString("provice");
+            String city=bundle1.getString("city");
+            userpo.setText(provice+"  "+city);
+            FLAG0=0;
+        }
+        userpo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent poIntent = new Intent(getApplicationContext(), Myposition.class);
+                startActivity(poIntent);
+                  }
+               });
 
         //简介
         final EditText userintro=findViewById(R.id.user_intro);
@@ -152,8 +166,6 @@ public class MyInfoActivity extends Activity {
         xiugai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
 
             }
         });

@@ -58,6 +58,7 @@
                 android:textSize="16dp" />
             <!--通过数据库获得头像 需要实现圆形-->
             <ImageView
+                android:id="@+id/image"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="220dp"
@@ -89,12 +90,12 @@
                 android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/user_name"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="53dp"
                 android:layout_marginTop="12dp"
                 android:gravity="right"
-                android:text="昵称"
                 android:textColor="#ffffff" />
 
             <ImageView
@@ -122,7 +123,7 @@
                 android:textSize="16dp" />
             <!--需要通过数据库获取ID-->
             <TextView
-                android:id="@+id/id"
+                android:id="@+id/user_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="210dp"
@@ -148,6 +149,7 @@
                 android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/user_location"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="150dp"
@@ -180,6 +182,7 @@
                 android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/user_intro"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="53dp"
@@ -239,12 +242,12 @@
                 android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/user_sex"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="150dp"
                 android:layout_marginTop="15dp"
                 android:gravity="right"
-                android:text="女"
                 android:textColor="#ffffff" />
 
             <ImageView
@@ -272,13 +275,13 @@
                 android:textSize="16dp" />
 
             <EditText
+                android:id="@+id/birthday"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="53dp"
                 android:layout_marginTop="15dp"
                 android:background="@null"
                 android:gravity="right"
-                android:hint="1997-02-08"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff"
                 android:textSize="14dp" />

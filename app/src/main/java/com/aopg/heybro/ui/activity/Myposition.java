@@ -25,6 +25,7 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
     private WheelView mViewDistrict;
     private Button mBtnConfirm;
     private BaseActivity baseActivity;
+    public static int FLAG0=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +116,7 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
         }
     }
     private void showSelectedResult() {
+        FLAG0=1;
         Intent pos = new Intent(getApplicationContext(), MyInfoActivity.class);
         Bundle bundle = new Bundle();                           //创建Bundle对象
         bundle.putString("provice", baseActivity.getmCurrentProviceName()); //装入数据

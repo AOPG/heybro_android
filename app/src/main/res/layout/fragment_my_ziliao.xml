@@ -67,7 +67,7 @@
                     android:textSize="16dp" />
                 <!--需要实现圆形 -->
                 <ImageView
-                    android:id="@+id/user_img"
+                    android:id="@+id/image"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="220dp"

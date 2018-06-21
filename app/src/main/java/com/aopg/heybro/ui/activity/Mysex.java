@@ -23,11 +23,11 @@ public class Mysex extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_my_ziliao_sex);
+
         final RadioGroup sexs=findViewById(R.id.sexs);
         RadioButton sex0=findViewById(R.id.male);
         RadioButton sex1=findViewById(R.id.female);
         Button sex=findViewById(R.id.sexsure);
-        setContentView(R.layout.fragment_my_ziliao_sex);
         System.out.print(LoginInfo.user.getUserSex());
         if ("男".equals(LoginInfo.user.getUserSex())){
            sex0.setChecked(true);
@@ -53,8 +53,6 @@ public class Mysex extends Activity {
                 bundle.putString("sex", sexw);     //装入数据
                 sex.putExtras(bundle);
                 startActivity(sex);
-
-
             }
         });
     }
