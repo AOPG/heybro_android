@@ -19,24 +19,21 @@ import android.widget.Toast;
 
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
-import com.aopg.heybro.entity.ChatRecord;
+
 import com.aopg.heybro.entity.ChatRoomRecord;
 import com.aopg.heybro.ui.adapter.ChartRoomMessageAdapter;
-import com.aopg.heybro.ui.adapter.SingleMessageAdapter;
+
 import com.aopg.heybro.utils.LoginInfo;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-import cn.jiguang.api.JCoreInterface;
+import java.util.Date;
+
+
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.content.TextContent;
 import cn.jpush.im.android.api.enums.ContentType;
 import cn.jpush.im.android.api.model.Conversation;
-import cn.jpush.im.android.api.model.GroupInfo;
 import cn.jpush.im.android.api.model.Message;
-import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.android.api.options.MessageSendingOptions;
 import cn.jpush.im.api.BasicCallback;
 

@@ -111,7 +111,7 @@ public class RoomDetailActivity extends AppCompatActivity {
                     BasketRoomInfo basketRoomInfo = new BasketRoomInfo();
                     basketRoomInfo.setMaster(roomInfo.getString("roomMasterCode"));
                     basketRoomInfo.setRoomName(roomInfo.getString("roomName"));
-                    basketRoomInfo.setRoomId(Integer.parseInt(roomInfo.getString("roomId")));
+                    basketRoomInfo.setRoomId(Long.parseLong(roomInfo.getString("roomId")));
                     basketRoomInfo.setPassword(roomInfo.getString("roomPass"));
                     List<User> userList = new ArrayList<>();
                     for (int i = 0; i < userInfo.size(); i++) {

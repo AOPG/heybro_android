@@ -1,6 +1,7 @@
 package com.aopg.heybro.ui.fragment;
 
 import android.content.Intent;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +18,8 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.BasketRoomInfo;
@@ -28,6 +31,8 @@ import com.aopg.heybro.utils.LoginInfo;
 
 import java.io.IOException;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.callback.CreateGroupCallback;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -50,10 +55,10 @@ public class FragmentBall extends Fragment{
     HorizontalRoomListView hListView;
     HorizontaRoomlListViewAdapter hListViewAdapter;
 
+    private CreateGroupCallback callback;
     private BasketRoomInfo basketRoomInfo;
     private OkHttpClient client;
     private String password;//房间密码（可选）
-
 
     @Nullable
     @Override
@@ -170,7 +175,10 @@ public class FragmentBall extends Fragment{
                         }
                         basketRoomInfo.setType(0);
                         basketRoomInfo.setMaster(LoginInfo.user.getUserCode());
-                        httpInsertRoom(basketRoomInfo,password);
+                        basketRoomInfo.setRoomId(-1L);
+                        //设置房间Id
+                        createImRoom(basketRoomInfo.getRoomName(),"");
+
                     }
                 });
                 /**
@@ -230,7 +238,7 @@ public class FragmentBall extends Fragment{
         if(password != null&&!password.equals("")) {
             basketRoomInfo.setPassword(password);
             request = new Request.Builder().
-                    url(BUILD_URL("basketRoom/createRoom?roomName="
+                    url(BUILD_URL("basketRoom/createRoom?roomId="+basketRoomInfo.getRoomId()+"&roomName="
                             + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
                             + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
                             +"&rateHigh="+basketRoomInfo.getRateHigh()
@@ -238,7 +246,7 @@ public class FragmentBall extends Fragment{
                             + "&userCode=" + basketRoomInfo.getMaster())).build();
         }else{
             request = new Request.Builder().
-                    url(BUILD_URL("basketRoom/createRoom?roomName="
+                    url(BUILD_URL("basketRoom/createRoom?roomId="+basketRoomInfo.getRoomId()+"&roomName="
                             + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
                             + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
                             +"&rateHigh="+basketRoomInfo.getRateHigh()
@@ -259,8 +267,7 @@ public class FragmentBall extends Fragment{
                         (JSONObject)((JSONObject)((JSONObject.parseObject(result)).get("data"))).get("room");
                 String success = (JSONObject.parseObject(result)).getString("success");
                 if(null!=success&&success.equals("true")) {
-                    TextView tvRoom = createRoomView.findViewById(R.id.roomId);
-                    String roomId = tvRoom.getText().toString();
+                    String roomId = roomInfo.getString("roomId");
                     String roomName = roomInfo.getString("roomName");
                     Intent roomIntent = new Intent(getActivity(), ChartRoomActivity.class);
                     roomIntent.putExtra("roomId",roomId);
@@ -298,4 +305,17 @@ public class FragmentBall extends Fragment{
 
     }
 
+    private void createImRoom(String roomName,String roomDesc){
+        callback = new CreateGroupCallback() {
+            @Override
+            public void gotResult(int responseCode, String responseMsg, long groupId) {
+                if (responseCode == 0) {
+                    //创建成功
+                    basketRoomInfo.setRoomId(groupId);
+                    httpInsertRoom(basketRoomInfo,password);
+                }
+            }
+        };
+        JMessageClient.createGroup(roomName, roomDesc, callback);
+    }
 }

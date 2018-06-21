@@ -7,7 +7,7 @@ package com.aopg.heybro.entity;
 
 public class BasketRoomInfo {
     //房间id
-    private int roomId;
+    private Long roomId;
     //房间名称
     private String roomName;
     //类型
@@ -28,7 +28,7 @@ public class BasketRoomInfo {
     public BasketRoomInfo() {
 
     }
-    public BasketRoomInfo(int roomId, String roomName, int type, String mode, int rateLow, int rateHigh, int num, String password, String master) {
+    public BasketRoomInfo(Long roomId, String roomName, int type, String mode, int rateLow, int rateHigh, int num, String password, String master) {
         this.roomId = roomId;
         this.roomName = roomName;
         this.type = type;
@@ -40,11 +40,11 @@ public class BasketRoomInfo {
         this.master = master;
     }
 
-    public int getRoomId() {
+    public Long getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(int roomId) {
+    public void setRoomId(Long roomId) {
         this.roomId = roomId;
     }
 
