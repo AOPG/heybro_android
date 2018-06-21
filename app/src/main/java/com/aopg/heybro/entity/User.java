@@ -31,6 +31,7 @@ public class User extends DataSupport {
     private Long loginTime;
     private Integer isLogin;
     private Long birthday;
+    private Long roomId;
 
 
     public String getUsername() {
@@ -207,5 +208,13 @@ public class User extends DataSupport {
 
     public void setBirthday(Long birthday) {
         this.birthday = birthday;
+    }
+
+    public Long getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
     }
 }

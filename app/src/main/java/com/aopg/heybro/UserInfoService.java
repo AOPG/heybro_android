@@ -60,10 +60,12 @@ public class UserInfoService extends IntentService {
                 public void onResponse(Call call, Response response) throws IOException {
                     System.out.println("接受消息--------------------------------------");
                     String result = response.body().string();
-                    JSONObject userInfo = JSONObject.
-                            parseObject((JSONObject.parseObject(result)).getString("data"));
+
                     String success = (JSONObject.parseObject(result)).getString("success");
                     if (null!=success&&success.equals("true")) {
+                        JSONObject userInfo = JSONObject.
+                                parseObject((JSONObject.parseObject(result)).getString("data"));
+                        JSONObject userDetailInfo = userInfo.getJSONObject("userInfo");
                         LoginInfo.user.setNickName(userInfo.getString("userNickname"));
                         LoginInfo.user.setUserSignature(userInfo.getString("userSignature"));
                         LoginInfo.user.setUserGrade(userInfo.getInteger("userGrade"));
@@ -74,6 +76,8 @@ public class UserInfoService extends IntentService {
                         LoginInfo.user.setUserCode(userInfo.getString("userCode"));
                         LoginInfo.user.setUserPortrait(userInfo.getString("userPortrait"));
                         LoginInfo.user.setHomepageBack(userInfo.getString("homepageBack"));
+                        LoginInfo.user.setRoomId(Long.parseLong(userDetailInfo.getString("roomId")));
+
                         System.out.println("正在向内存中写入数据--------------------------------");
                         LoginInfo.user.updateAll("userName = ?",userInfo.getString("userName"));
                         if (LoginInfo.FragmentMYISCREATE==1){
