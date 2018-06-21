@@ -62,6 +62,7 @@ public class ChartRoomActivity extends AppCompatActivity {
     private TextView roomNameTv;
     private ImageView back;
     private String roomId;
+    private Button roomDetail;
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -90,8 +91,7 @@ public class ChartRoomActivity extends AppCompatActivity {
         userMessage = findViewById(R.id.input_msg);
         sendMessage = findViewById(R.id.send_msg);
         roomNameTv = findViewById(R.id.roomName);
-
-
+        roomDetail = findViewById(R.id.room_setting);
         roomName = getIntent().getStringExtra("roomName");
         roomNameTv.setText(roomName);
         back.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +101,17 @@ public class ChartRoomActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        roomDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChartRoomActivity.this,RoomDetailActivity.class);
+                intent.putExtra("roomName",roomName);
+                intent.putExtra("roomId",roomId);
+                startActivity(intent);
+            }
+        });
+
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
