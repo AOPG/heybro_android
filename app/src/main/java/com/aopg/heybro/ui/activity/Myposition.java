@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.aopg.heybro.R;
 
@@ -45,8 +46,8 @@ public class Myposition extends BaseActivity implements View.OnClickListener, On
                 .apply(options)
                 .into(image);
         //昵称
-        final EditText nicheng=findViewById(R.id.user_name);
-        nicheng.setHint(LoginInfo.user.getNickName());
+        final TextView nicheng=findViewById(R.id.user_name);
+        nicheng.setText(LoginInfo.user.getNickName());
         final String[] name = {LoginInfo.user.getNickName()};
         nicheng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
