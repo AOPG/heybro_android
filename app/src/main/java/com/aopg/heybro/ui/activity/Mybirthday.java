@@ -52,12 +52,12 @@ public class Mybirthday extends Activity {
         TextView mybirtnday=findViewById(R.id.birthday);
         mybirtnday.setText(String.valueOf(LoginInfo.user.getBirthday()));
         //
-        DateChooseWheelViewDialog endDateChooseDialog = new DateChooseWheelViewDialog(getApplicationContext(),
+        DateChooseWheelViewDialog endDateChooseDialog = new DateChooseWheelViewDialog(Mybirthday.this,
                 new DateChooseWheelViewDialog.DateChooseInterface() {
                     @Override
                     public void getDateTime(String time, boolean longTimeChecked) {
                         FLAG1=1;
-                        Intent birIntent = new Intent();
+                        Intent birIntent = new Intent(Mybirthday.this,MyInfoActivity.class);
                         Bundle bundle = new Bundle();                           //创建Bundle对象
                         bundle.putString("birthday", time);     //装入数据
                         birIntent.putExtras(bundle);

@@ -29,7 +29,7 @@ import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
 public class Myposition extends BaseActivity implements View.OnClickListener, OnWheelChangedListener {
     private WheelView mViewProvince;
     private WheelView mViewCity;
-    private WheelView mViewDistrict;
+    //private WheelView mViewDistrict;
     private Button mBtnConfirm;
     public static int FLAG0=0;
     @Override
@@ -63,7 +63,7 @@ public class Myposition extends BaseActivity implements View.OnClickListener, On
     private void setUpViews() {
         mViewProvince =  findViewById(R.id.id_province);
         mViewCity =  findViewById(R.id.id_city);
-        mViewDistrict = findViewById(R.id.id_district);
+        //mViewDistrict = findViewById(R.id.id_district);
         mBtnConfirm =  findViewById(R.id.btn_confirm);
     }
 
@@ -73,7 +73,7 @@ public class Myposition extends BaseActivity implements View.OnClickListener, On
         // 添加change事件
         mViewCity.addChangingListener(this);
         // 添加change事件
-        mViewDistrict.addChangingListener(this);
+        //mViewDistrict.addChangingListener(this);
         // 添加onclick事件
         mBtnConfirm.setOnClickListener(this);
     }
@@ -84,22 +84,22 @@ public class Myposition extends BaseActivity implements View.OnClickListener, On
         // 设置可见条目数量
         mViewProvince.setVisibleItems(6);
         mViewCity.setVisibleItems(6);
-        mViewDistrict.setVisibleItems(6);
+        //mViewDistrict.setVisibleItems(6);
         updateCities();
         updateAreas();
     }
 
     @Override
     public void onChanged(WheelView wheel, int oldValue, int newValue) {
-// //TODO Auto-generated method stub
         if (wheel == mViewProvince) {
             updateCities();
         } else if (wheel == mViewCity) {
             updateAreas();
-        } else if (wheel == mViewDistrict) {
-            setmCurrentDistrictName( getmCitisDatasMap().get(getmCurrentCityName())[newValue]);
-            setmCurrentZipCode( getmZipcodeDatasMap().get(getmCurrentDistrictName()));
         }
+//        } else if (wheel == mViewDistrict) {
+//            setmCurrentDistrictName(getmCitisDatasMap().get(getmCurrentCityName())[newValue]);
+//            setmCurrentZipCode( getmZipcodeDatasMap().get(getmCurrentDistrictName()));
+//        }
     }
     /**
      * 根据当前的市，更新区WheelView的信息
@@ -113,8 +113,8 @@ public class Myposition extends BaseActivity implements View.OnClickListener, On
             areas = new String[] { "" };
         }
 
-        mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(this, areas));
-        mViewDistrict.setCurrentItem(0);
+        //mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(this, areas));
+        //mViewDistrict.setCurrentItem(0);
     }
 
     /**
