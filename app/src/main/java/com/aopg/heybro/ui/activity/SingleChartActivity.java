@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -19,12 +20,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
+import com.aopg.heybro.entity.BasketRoomInfo;
 import com.aopg.heybro.entity.ChatRecord;
+import com.aopg.heybro.entity.User;
 import com.aopg.heybro.ui.adapter.SingleMessageAdapter;
+import com.aopg.heybro.ui.fragment.FragmentFriend;
+import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
+import com.aopg.heybro.utils.teamhead.utils.DensityUtils;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,13 +46,20 @@ import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.android.api.options.MessageSendingOptions;
 import cn.jpush.im.api.BasicCallback;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
+import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
 import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_FROM_APPKEY;
 import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_FROM_USERNAME;
 import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_GROUPID;
 import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_IS_GROUP;
 import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_MSGID;
 import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_MSG_TYPE;
+import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
 /**
  * Created by 王伟健 on 2018-06-07.
@@ -61,6 +77,9 @@ public class SingleChartActivity extends AppCompatActivity {
     private TextView noteTv;
     private ImageView back;
     private String userConcernCode;
+    private OkHttpClient client;
+    private User concernUser;
+    private MainHandler mainHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,16 +97,18 @@ public class SingleChartActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        mainHandler = new MainHandler();
+        concernUser = new User();
         userConcernCode = getIntent().getStringExtra("userConcernCode");
+        concernUser.setUserCode(userConcernCode);
+        loadUserInfoByUserCode(userConcernCode);
         setContentView(R.layout.single_chart_activity);
         back = findViewById(R.id.back);
         messageLv = findViewById(R.id.msg_list_view);
-        singleMessageAdapter = new SingleMessageAdapter(this,userConcernCode,messageLv);
-        messageLv.setAdapter(singleMessageAdapter);
+
         userMessage = findViewById(R.id.input_msg);
         sendMessage = findViewById(R.id.send_msg);
         noteTv = findViewById(R.id.user_name);
-
 
         note = getIntent().getStringExtra("note");
         noteTv.setText(note);
@@ -98,9 +119,13 @@ public class SingleChartActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        sendMessage.setClickable(false);
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!sendMessage.isClickable()){
+                    Toast.makeText(SingleChartActivity.this,"正在加载用户信息,请稍后",Toast.LENGTH_SHORT);
+                }
                 final String name = userConcernCode;
                 final String text = userMessage.getText().toString();
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(text)) {
@@ -187,7 +212,6 @@ public class SingleChartActivity extends AppCompatActivity {
             switch (contentType) {
                 case text:
                     TextContent textContent = (TextContent) message.getContent();
-
                     ChatRecord chatRecord = new ChatRecord();
                     chatRecord.setUserCode(LoginInfo.user.getUserCode());
                     chatRecord.setTheOrtherCode(user);
@@ -202,6 +226,69 @@ public class SingleChartActivity extends AppCompatActivity {
             }
         }
     };
+
+
+    private void loadUserInfoByUserCode(String userCode){
+        client = HttpUtils.init(client);
+        Request request = new Request.Builder().
+                url(BUILD_URL("averageUser/userInfoByCode?userCode=" + userCode)).build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {//4.回调方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                android.os.Message message = mainHandler.obtainMessage(501,"");
+                mainHandler.sendMessage(message);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                String success = (JSONObject.parseObject(result)).getString("success");
+                if (null!=success&&success.equals("true")) {
+                    JSONObject userInfo = JSONObject.
+                            parseObject((JSONObject.parseObject(result)).getString("data"));
+                    JSONObject userDetailInfo = userInfo.getJSONObject("userInfo");
+                    concernUser.setNickName(userInfo.getString("userNickname"));
+                    concernUser.setUserSignature(userInfo.getString("userSignature"));
+                    concernUser.setUserGrade(userInfo.getInteger("userGrade"));
+                    concernUser.setUserPhone(userInfo.getString("userPhone"));
+                    concernUser.setUserMail(userInfo.getString("userMail"));
+                    concernUser.setUserCode(userInfo.getString("userCode"));
+                    concernUser.setUserIntro(userInfo.getString("userIntro"));
+                    concernUser.setUserCode(userInfo.getString("userCode"));
+                    concernUser.setUserPortrait(userInfo.getString("userPortrait"));
+                    concernUser.setHomepageBack(userInfo.getString("homepageBack"));
+                    concernUser.setRoomId(Long.parseLong(userDetailInfo.getString("roomId")));
+                    concernUser.setBirthday(Long.parseLong(userInfo.getString("birthday")));
+                    concernUser.setUserProvince(userInfo.getString("userProvince"));
+                    concernUser.setUserCity(userInfo.getString("userCity"));
+                    concernUser.setUserSex(userInfo.getString("userSex"));
+                    android.os.Message message = mainHandler.obtainMessage(500,"");
+                    mainHandler.sendMessage(message);
+                }
+            }
+        });
+    }
+
+
+    private class MainHandler extends Handler {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 500:
+                    singleMessageAdapter = new SingleMessageAdapter(SingleChartActivity.this,userConcernCode,messageLv,concernUser);
+                    messageLv.setAdapter(singleMessageAdapter);
+                    sendMessage.setClickable(true);
+                    break;
+                case 501:
+                    singleMessageAdapter = new SingleMessageAdapter(SingleChartActivity.this,userConcernCode,messageLv,concernUser);
+                    messageLv.setAdapter(singleMessageAdapter);
+            }
+        }
+    }
+
 
     @Override
     protected void onDestroy() {
