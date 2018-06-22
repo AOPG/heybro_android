@@ -42,6 +42,8 @@ import java.util.Map;
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.event.LoginStateChangeEvent;
 
+import static com.aopg.heybro.utils.ThreadUtils.findAllThreads;
+
 public class MainActivity extends AppCompatActivity {
     private Handler mHandler;
     private FragmentTabHost myTabHost;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private static String LAST_SELECT = "basketball";
     MyBroadcastReceiver mbcr;
     private BaiduMapLocationUtil baiduMapLocationUtil;
+    public static Integer CMD_STOP_USER_INFO_SERVICE = 0;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -74,24 +77,8 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter();
         filter.addAction("FragmentMy");
         registerReceiver(mbcr, filter);// 注册
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                while (true){
-                    Log.e("mainactivity",
-                            "------------------------启动service--------------------------");
-                    startService(new Intent(MainActivity.this, UserInfoService.class));
-                    try {
-                        sleep(300000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        }.start();
-
+        Thread userInfoThread = new UserInfoThread();
+        userInfoThread.start();
         //底部tabhost改变图标
         myTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -153,6 +140,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         baiduMapLocationUtil.onStop();
+    }
+
+    class UserInfoThread extends Thread{
+        // 用于停止线程
+        private boolean stopMe = true;
+
+        public void stopMe() {
+            Log.e("userInfoThread","我被终止了！");
+            stopMe = false;
+        }
+
+        @Override
+        public void run() {
+            while (stopMe) {
+                this.setName("userInfoThread");
+                Log.e("mainactivity",
+                        "------------------------启动service--------------------------");
+                MainActivity.this.startService(new Intent(MainActivity.this, UserInfoService.class));
+                try {
+                    sleep(300000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /**
@@ -282,6 +294,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case AlertDialog.BUTTON_POSITIVE:// "确认"按钮退出程序
+                        Thread[] threads = findAllThreads();
+                        for (int i = 0; i < threads.length; i++) {
+                            if (threads[i].getName().equals("userInfoThread")){
+                                ((UserInfoThread)threads[i]).stopMe();
+                            }
+                        }
+
                         Intent intent = new Intent(MainActivity.this, LoginActivty.class);
                         LoginInfo.ISLOGINIM=0;
                         LoginInfo.user.setIsLogin(0);
