@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.text.SimpleDateFormat;
 
+import static com.aopg.heybro.ui.activity.Mybirthday.FLAG1;
 import static com.aopg.heybro.ui.activity.Myposition.FLAG0;
 import static com.aopg.heybro.ui.activity.Mysex.FLAG;
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
@@ -143,26 +144,21 @@ public class MyInfoActivity extends Activity {
        final TextView mybirtnday=findViewById(R.id.birthday);
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         String bir=sf.format(LoginInfo.user.getBirthday());
-        mybirtnday.setText(bir);
-//       mybirtnday.setOnClickListener(new View.OnClickListener() {
- //           @Override
- //           public void onClick(View v) {
-//                DateChooseWheelViewDialog endDateChooseDialog = new DateChooseWheelViewDialog(MyInfoActivity.this,
- //                      new DateChooseWheelViewDialog.DateChooseInterface() {
-//                           @Override
-//                           public void getDateTime(String time, boolean longTimeChecked) {
-//                               mybirtnday.setText(time);
-  //                          }
-//    });
-//               endDateChooseDialog.setTimePickerGone(true);
- //              endDateChooseDialog.setDateDialogTitle("选择生日");
- //              endDateChooseDialog.showDateChooseDialog();
- //           }
-//        });
-
-//        String birth= String.valueOf(mybirtnday.getText());
-//        System.out.print(birth);
- //       long b=new java.util.Date(birth).getTime();
+        if (FLAG1==0){
+            mybirtnday.setText(bir);
+        }else{
+            Intent intent=getIntent();
+            Bundle b=intent.getExtras();
+            bir=b.getString("birthday");
+            mybirtnday.setText(bir);
+        }
+        mybirtnday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent birth = new Intent(getApplicationContext(), Mybirthday.class);
+                startActivity(birth);
+            }
+        });
         //修改
         Button xiugai=findViewById(R.id.xiugai);
         xiugai.setOnClickListener(new View.OnClickListener() {

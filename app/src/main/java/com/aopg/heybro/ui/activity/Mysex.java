@@ -38,7 +38,7 @@ public class Mysex extends Activity {
                 .load(BASE_URL+LoginInfo.user.getUserPortrait())
                 .apply(options)
                 .into(image);
-//昵称
+       //昵称
         final TextView nicheng=findViewById(R.id.user_name);
         nicheng.setText(LoginInfo.user.getNickName());
         final String[] name = {LoginInfo.user.getNickName()};
@@ -52,7 +52,7 @@ public class Mysex extends Activity {
         //ID(不可修改)
         TextView ID=findViewById(R.id.user_code);
         ID.setText(LoginInfo.user.getUserCode());
-//性别
+        //性别
         TextView sexx=findViewById(R.id.user_sex);
         sexx.setText(LoginInfo.user.getUserSex());
         //生日
