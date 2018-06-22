@@ -25,12 +25,11 @@ import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
  * Created by 陈燕博 on 2018/6/19.
  */
 
-public class Myposition extends Activity implements View.OnClickListener, OnWheelChangedListener {
+public class Myposition extends BaseActivity implements View.OnClickListener, OnWheelChangedListener {
     private WheelView mViewProvince;
     private WheelView mViewCity;
     private WheelView mViewDistrict;
     private Button mBtnConfirm;
-    private BaseActivity baseActivity;
     public static int FLAG0=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +78,8 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
     }
 
     public void setUpData() {
-        baseActivity.initProvinceDatas();
-        mViewProvince.setViewAdapter(new ArrayWheelAdapter<String>(getApplicationContext(), baseActivity.getmProvinceDatas()));
+        initProvinceDatas();
+        mViewProvince.setViewAdapter(new ArrayWheelAdapter<String>(getApplicationContext(), getmProvinceDatas()));
         // 设置可见条目数量
         mViewProvince.setVisibleItems(6);
         mViewCity.setVisibleItems(6);
@@ -97,8 +96,8 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
         } else if (wheel == mViewCity) {
             updateAreas();
         } else if (wheel == mViewDistrict) {
-            baseActivity.setmCurrentDistrictName( baseActivity.getmCitisDatasMap().get(baseActivity.getmCurrentCityName())[newValue]);
-            baseActivity.setmCurrentZipCode( baseActivity.getmZipcodeDatasMap().get(baseActivity.getmCurrentDistrictName()));
+            setmCurrentDistrictName( getmCitisDatasMap().get(getmCurrentCityName())[newValue]);
+            setmCurrentZipCode( getmZipcodeDatasMap().get(getmCurrentDistrictName()));
         }
     }
     /**
@@ -106,8 +105,8 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
      */
     private void updateAreas() {
         int pCurrent = mViewCity.getCurrentItem();
-        baseActivity.setmCurrentCityName( baseActivity.getmCitisDatasMap().get(baseActivity.getmCurrentProviceName())[pCurrent]);
-        String[] areas = baseActivity.getmDistrictDatasMap().get(baseActivity.getmCurrentCityName());
+        setmCurrentCityName( getmCitisDatasMap().get(getmCurrentProviceName())[pCurrent]);
+        String[] areas = getmDistrictDatasMap().get(getmCurrentCityName());
 
         if (areas == null) {
             areas = new String[] { "" };
@@ -122,8 +121,8 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
      */
     private void updateCities() {
         int pCurrent = mViewProvince.getCurrentItem();
-        baseActivity.setmCurrentProviceName( baseActivity.getmProvinceDatas()[pCurrent]);
-        String[] cities = baseActivity.getmCitisDatasMap().get(baseActivity.getmCurrentProviceName());
+        setmCurrentProviceName(getmProvinceDatas()[pCurrent]);
+        String[] cities = getmCitisDatasMap().get(getmCurrentProviceName());
         if (cities == null) {
             cities = new String[] { "" };
         }
@@ -145,9 +144,9 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
         FLAG0=1;
         Intent pos = new Intent(getApplicationContext(), MyInfoActivity.class);
         Bundle bundle = new Bundle();                           //创建Bundle对象
-        bundle.putString("province", baseActivity.getmCurrentProviceName()); //装入数据
-        bundle.putString("city",baseActivity.getmCurrentCityName());
-        bundle.putString("district",baseActivity.getmCurrentDistrictName());
+        bundle.putString("province",getmCurrentProviceName()); //装入数据
+        bundle.putString("city",getmCurrentCityName());
+        bundle.putString("district",getmCurrentDistrictName());
         pos.putExtras(bundle);
         startActivity(pos);
     }
