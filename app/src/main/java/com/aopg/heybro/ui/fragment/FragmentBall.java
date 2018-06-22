@@ -200,21 +200,24 @@ public class FragmentBall extends Fragment{
                  * 完成创建
                  */
                 Button btn_create_finish = createRoomView.findViewById(R.id.btn_create_finish);
-                btn_create_finish.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        basketRoomInfo.setRoomName( roomName.getText().toString());
-                        if(passwordSet.getText().toString() != null){
-                            password = passwordSet.getText().toString();
+                    btn_create_finish.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(LoginInfo.user.getRoomId() == 0||LoginInfo.user.getRoomId() == null) {
+                                basketRoomInfo.setRoomName(roomName.getText().toString());
+                                if (passwordSet.getText().toString() != null) {
+                                    password = passwordSet.getText().toString();
+                                }
+                                basketRoomInfo.setType(0);
+                                basketRoomInfo.setMaster(LoginInfo.user.getUserCode());
+                                basketRoomInfo.setRoomId(-1L);
+                                //设置房间Id
+                                createImRoom(basketRoomInfo.getRoomName(), "");
+                            }else{
+                                Toast.makeText(getApplicationContext(), "您已经创建或者加入一个房间，无需再创建", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        basketRoomInfo.setType(0);
-                        basketRoomInfo.setMaster(LoginInfo.user.getUserCode());
-                        basketRoomInfo.setRoomId(-1L);
-                        //设置房间Id
-                        createImRoom(basketRoomInfo.getRoomName(),"");
-
-                    }
-                });
+                    });
                 /**
                  * 关闭创建房间
                  */
@@ -584,8 +587,6 @@ public class FragmentBall extends Fragment{
                         }
                     }
                 };
-
-
             }
         });
 

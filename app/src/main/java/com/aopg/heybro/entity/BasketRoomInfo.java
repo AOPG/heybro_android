@@ -30,7 +30,7 @@ public class BasketRoomInfo {
     public BasketRoomInfo() {
 
     }
-    public BasketRoomInfo(Long roomId, String roomName, int type, String mode, int rateLow, int rateHigh, int num, String password, String master) {
+    public BasketRoomInfo(Long roomId, String roomName, int type, String mode, int rateLow, int rateHigh, int num, int roomRealNum, String password, String master) {
         this.roomId = roomId;
         this.roomName = roomName;
         this.type = type;
@@ -38,6 +38,7 @@ public class BasketRoomInfo {
         this.rateLow = rateLow;
         this.rateHigh = rateHigh;
         this.num = num;
+        this.roomRealNum = roomRealNum;
         this.password = password;
         this.master = master;
     }
@@ -98,6 +99,14 @@ public class BasketRoomInfo {
         this.num = num;
     }
 
+    public int getRoomRealNum() {
+        return roomRealNum;
+    }
+
+    public void setRoomRealNum(int roomRealNum) {
+        this.roomRealNum = roomRealNum;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -114,11 +123,4 @@ public class BasketRoomInfo {
         this.master = master;
     }
 
-    public int getRoomRealNum() {
-        return roomRealNum;
-    }
-
-    public void setRoomRealNum(int roomRealNum) {
-        this.roomRealNum = roomRealNum;
-    }
 }
