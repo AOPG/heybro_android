@@ -2,7 +2,6 @@ package com.aopg.heybro.ui.fragment;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -77,10 +76,12 @@ public class FragmentBall extends Fragment{
     List<Map<String,Object>> roomUserList;
     private  List<Map<String,Object>> list;
     private Integer roomId = 0;
-    private View joinRoomView;
+    private Integer ballRoomPeo = 0;
+    private Integer ballRoomNum = 0;
+    private String ballRoomName = "";
     private View viewRoomView;
-    HorizontalRoomListView hListView;
-    HorizontaRoomlListViewAdapter hListViewAdapter;
+    private HorizontalRoomListView hListView;
+    private HorizontaRoomlListViewAdapter hListViewAdapter;
     private Handler ReduceHandler;
     private Integer joinFlag = 1;
     private String joinRoomPass;
@@ -289,7 +290,7 @@ public class FragmentBall extends Fragment{
 
                     }
 
-                    Message message = handler.obtainMessage(0,"formCallBack");
+                    Message message = handler.obtainMessage(0,"formCallBackk");
                     handler.sendMessage(message);
 
                 }
@@ -316,10 +317,6 @@ public class FragmentBall extends Fragment{
         };
 
     }
-
-
-
-
 
     /**
      * 快速匹配
@@ -436,7 +433,9 @@ public class FragmentBall extends Fragment{
 
         if (roomDateList.size()>0){
             for (int i = 0;i<roomDateList.size();i++){
-                roomCode[i] = ""+nwdate+roomDateList.get(i).getRoomId();
+                System.out.println(roomDateList.size());
+                System.out.println(roomDateList.get(i).getRoomId());
+                roomCode[i] = roomDateList.get(i).getRoomId();
                 roomTitle[i] = roomDateList.get(i).getRoomName();
                 roomNum[i] = ""+roomDateList.get(i).getRoomPro()+"/"+roomDateList.get(i).getRoomNum();
             }
@@ -458,8 +457,17 @@ public class FragmentBall extends Fragment{
 
                 hListViewAdapter.setSelectIndex(position);
                 hListViewAdapter.notifyDataSetChanged();
+                System.out.println(roomDateList.get(position).getRoomId()+222);
+
+
                 roomId = Integer.parseInt(roomDateList.get(position).getRoomId());
+                System.out.println(roomDateList.get(position).getRoomPro().length());
+                if (roomDateList.get(position).getRoomPro().length()>0 ) {
+                    ballRoomPeo = Integer.parseInt(roomDateList.get(position).getRoomPro());
+                }
+                ballRoomNum = Integer.parseInt(roomDateList.get(position).getRoomNum());
                 roomPass = roomDateList.get(position).getRoomPass();
+                ballRoomName = roomDateList.get(position).getRoomName();
 
                 /**
                  * 查询房间详情信息
@@ -575,7 +583,13 @@ public class FragmentBall extends Fragment{
                                             flag = 0;
                                         }
 
+                                        if (ballRoomPeo >= ballRoomNum && flag == 1){
+                                            Toast.makeText(getApplicationContext(), "房间已满！", Toast.LENGTH_SHORT).show();
+                                            flag = 0;
+                                        }
+
                                         if (flag == 1){
+                                            System.out.println(LoginInfo.user.getUserCode());
                                             Toast.makeText(getApplicationContext(), "登陆成功！", Toast.LENGTH_SHORT).show();
                                         }
                                     }

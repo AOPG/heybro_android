@@ -408,7 +408,9 @@ public class FragmentGame extends Fragment {
 
         if (roomDateList.size()>0){
             for (int i = 0;i<roomDateList.size();i++){
-                roomCode[i] = ""+nwdate+roomDateList.get(i).getRoomId();
+                System.out.println(roomDateList.size());
+                System.out.println(roomDateList.get(i).getRoomId());
+                roomCode[i] = roomDateList.get(i).getRoomId();
                 roomTitle[i] = roomDateList.get(i).getRoomName();
                 roomNum[i] = ""+roomDateList.get(i).getRoomPro()+"/"+roomDateList.get(i).getRoomNum();
             }
