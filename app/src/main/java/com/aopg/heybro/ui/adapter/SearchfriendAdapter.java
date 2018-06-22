@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.Concern;
 import com.aopg.heybro.entity.User;
-import com.aopg.heybro.ui.activity.SearchFriendActivity;
 import com.aopg.heybro.ui.activity.SingleChartActivity;
 
 import java.util.List;
