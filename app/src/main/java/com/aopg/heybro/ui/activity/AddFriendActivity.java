@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
@@ -44,6 +44,7 @@ public class AddFriendActivity extends Activity{
     private String user_code_txt;
     private View friendView;
     private PopupWindow window;
+    private LinearLayout searchwindow;
     private MainHandler mainHandler = new MainHandler();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class AddFriendActivity extends Activity{
         setContentView(R.layout.fragment_friend_addfriend);
         //返回按钮
         ImageView addFriend_back = findViewById(R.id.addfriend_back);
+        searchwindow = findViewById(R.id.find);
         addFriend_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +77,14 @@ public class AddFriendActivity extends Activity{
                 if (v.getId() == R.id.search_ensure) {
                     user_code_txt = userCode.getText().toString();
                     sendRequest(user_code_txt);
-                    window.showAtLocation(v, Gravity.LEFT, 20, -200);
+//                    if (null == window || !window.isShowing()) {
+//                        window = new PopupWindow(friendView, 850, 1000, true);
+//                        // 设置PopupWindow是否能响应外部点击事件
+//                        window.setOutsideTouchable(false);
+//                        // 设置PopupWindow是否能响应点击事件
+//                        window.setTouchable(true);
+//                        window.showAsDropDown(searchwindow);
+//                    }
                 }
             }
         });
@@ -103,7 +112,7 @@ public class AddFriendActivity extends Activity{
                 if (null!=success&&success.equals("true")) {
                     for (int i = 0; i < UserInfo.size(); i++) {
                         User user = new User();
-                        if(((JSONObject)UserInfo.get(i)).getString("userCode")==user_code_txt) {
+                        if(((JSONObject)UserInfo.get(i)).getString("userCode").equals(user_code_txt)) {
                             String userName =
                                     ((JSONObject) UserInfo.get(i)).getString("userName");
                             user.setUsername(userName);
@@ -113,16 +122,22 @@ public class AddFriendActivity extends Activity{
                     }
                     Message message = mainHandler.obtainMessage(1,"formCallBack");
                     mainHandler.sendMessage(message);
-                    if (null == window || !window.isShowing()) {
-                        window = new PopupWindow(friendView, 850, 1000, true);
-                        // 设置PopupWindow是否能响应外部点击事件
-                        window.setOutsideTouchable(false);
-                        // 设置PopupWindow是否能响应点击事件
-                        window.setTouchable(true);
-                    }
                 }
             }
         });
+    }
+    public void showUserInfo(){
+        if (null == window || !window.isShowing()) {
+            window = new PopupWindow(friendView, 850, 1000, true);
+            // 设置PopupWindow是否能响应外部点击事件
+            window.setOutsideTouchable(false);
+            // 设置PopupWindow是否能响应点击事件
+            window.setTouchable(true);
+            window.showAsDropDown(searchwindow);
+            SearchfriendAdapter adapter = new SearchfriendAdapter(AddFriendActivity.this,R.layout.search_friend_msg_item,users);
+            ListView userlv = friendView.findViewById(R.id.friend_lv);
+            userlv.setAdapter(adapter);
+        }
     }
     public void onBackPressed() {
         //返回
@@ -134,9 +149,7 @@ public class AddFriendActivity extends Activity{
             super.handleMessage(msg);
             switch (msg.what){
                 case 1:
-                    SearchfriendAdapter adapter = new SearchfriendAdapter(AddFriendActivity.this,users);
-                    ListView userlv=friendView.findViewById(R.id.friend_lv);
-                    userlv.setAdapter(adapter);
+                    showUserInfo();
             }
         }
     }

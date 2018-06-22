@@ -18,7 +18,9 @@ import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
+import java.text.SimpleDateFormat;
+
+import static com.aopg.heybro.ui.activity.Mybirthday.FLAG1;
 import static com.aopg.heybro.ui.activity.Myposition.FLAG0;
 import static com.aopg.heybro.ui.activity.Mysex.FLAG;
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
@@ -80,7 +82,7 @@ public class MyInfoActivity extends Activity {
         }else {
             Intent intent1 =  getIntent();;       //获取已有的intent对象
             Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
-            String provice= bundle1.getString("provice");
+            String provice= bundle1.getString("province");
             String city=bundle1.getString("city");
             userpo.setText(provice+"  "+city);
             FLAG0=0;
@@ -139,27 +141,25 @@ public class MyInfoActivity extends Activity {
             }
         });
         //生日
-//       final TextView mybirtnday=findViewById(R.id.birthday);
-//       mybirtnday.setText(String.valueOf(LoginInfo.user.getBirthday()));
-//       mybirtnday.setOnClickListener(new View.OnClickListener() {
- //           @Override
- //           public void onClick(View v) {
-//                DateChooseWheelViewDialog endDateChooseDialog = new DateChooseWheelViewDialog(MyInfoActivity.this,
- //                      new DateChooseWheelViewDialog.DateChooseInterface() {
-//                           @Override
-//                           public void getDateTime(String time, boolean longTimeChecked) {
-//                               mybirtnday.setText(time);
-  //                          }
-//    });
-//               endDateChooseDialog.setTimePickerGone(true);
- //              endDateChooseDialog.setDateDialogTitle("选择生日");
- //              endDateChooseDialog.showDateChooseDialog();
- //           }
-//        });
-
-//        String birth= String.valueOf(mybirtnday.getText());
-//        System.out.print(birth);
- //       long b=new java.util.Date(birth).getTime();
+       final TextView mybirtnday=findViewById(R.id.birthday);
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        String bir=sf.format(LoginInfo.user.getBirthday());
+        if (FLAG1==0){
+            mybirtnday.setText(bir);
+        }else{
+            Intent intent=getIntent();
+            Bundle b=intent.getExtras();
+            bir=b.getString("birthday");
+            mybirtnday.setText(bir);
+            FLAG1=0;
+        }
+        mybirtnday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent birth = new Intent(getApplicationContext(), Mybirthday.class);
+                startActivity(birth);
+            }
+        });
         //修改
         Button xiugai=findViewById(R.id.xiugai);
         xiugai.setOnClickListener(new View.OnClickListener() {

@@ -16,6 +16,7 @@ public class Myrili extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_my_date);
+
         //返回按钮
         ImageView info_back = findViewById(R.id.info_back);
         info_back.setOnClickListener(new View.OnClickListener() {

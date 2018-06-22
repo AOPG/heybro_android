@@ -1,17 +1,13 @@
 package com.aopg.heybro.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.aopg.heybro.R;
-import com.aopg.heybro.entity.Concern;
 import com.aopg.heybro.entity.User;
-import com.aopg.heybro.ui.activity.SearchFriendActivity;
-import com.aopg.heybro.ui.activity.SingleChartActivity;
 
 import java.util.List;
 
@@ -21,9 +17,11 @@ import java.util.List;
 
 public class SearchfriendAdapter extends BaseAdapter {
     private Context context;
+    private int item_layout_id;
     private List<User> users;
-    public SearchfriendAdapter(Context context,List<User> users){
+    public SearchfriendAdapter(Context context,int item_layout_id,List<User> users){
         this.context = context;
+        this.item_layout_id = item_layout_id;
         this.users = users;
     }
     @Override
@@ -44,7 +42,7 @@ public class SearchfriendAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView==null){
-            convertView = View.inflate(context, R.layout.search_friend_msg_item, null);
+            convertView = View.inflate(context, item_layout_id, null);
         }
         final TextView userName=convertView.findViewById(R.id.userName);
         final TextView userCode=convertView.findViewById(R.id.userId);

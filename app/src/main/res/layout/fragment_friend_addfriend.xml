@@ -40,16 +40,16 @@
             android:orientation="horizontal"
             android:background="#1fffffff">
 
-<EditText
-    android:id="@+id/search_friend"
-    android:layout_width="240dp"
-    android:layout_height="30dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginLeft="15dp"
-    android:hint="输入昵称/ID号搜索"
-    android:textColor="#ffffff"
-    android:background="@null"
-    />
+            <EditText
+                android:id="@+id/search_friend"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:hint="输入昵称/ID号搜索"
+                android:textColor="#ffffff"
+                android:background="@null"
+                />
             <!-- 搜索 有点击事件-->
     <ImageView
         android:id="@+id/search_ensure"

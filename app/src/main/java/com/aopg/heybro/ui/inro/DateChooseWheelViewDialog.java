@@ -258,15 +258,15 @@ public class DateChooseWheelViewDialog extends Dialog implements View.OnClickLis
     private void initView() {
         View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_my_ziliao_date, null);
         mDialog.setContentView(view);
-        mYearWheelView = (WheelView) view.findViewById(R.id.year_wv);
-        mDateWheelView = (WheelView) view.findViewById(R.id.date_wv);
-        mHourWheelView = (WheelView) view.findViewById(R.id.hour_wv);
-        mMinuteWheelView = (WheelView) view.findViewById(R.id.minute_wv);
-        mTitleTextView = (TextView) view.findViewById(R.id.title_tv);
-        mSureButton = (Button) view.findViewById(R.id.sure_btn);
-        mCloseDialog = (Button) view.findViewById(R.id.date_choose_close_btn);
-        mLongTermLayout = (LinearLayout) view.findViewById(R.id.long_term_layout);
-        mLongTermTextView = (TextView) view.findViewById(R.id.long_term_tv);
+        mYearWheelView =  view.findViewById(R.id.year_wv);
+        mDateWheelView =  view.findViewById(R.id.date_wv);
+        mHourWheelView =  view.findViewById(R.id.hour_wv);
+        mMinuteWheelView = view.findViewById(R.id.minute_wv);
+        mTitleTextView = view.findViewById(R.id.title_tv);
+        mSureButton =  view.findViewById(R.id.sure_btn);
+        mCloseDialog =  view.findViewById(R.id.date_choose_close_btn);
+        mLongTermLayout = view.findViewById(R.id.long_term_layout);
+        mLongTermTextView = view.findViewById(R.id.long_term_tv);
 
         mSureButton.setOnClickListener(this);
         mCloseDialog.setOnClickListener(this);

@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.aopg.heybro.R;
 
@@ -13,6 +15,11 @@ import com.aopg.heybro.ui.position.BaseActivity;
 import com.aopg.heybro.ui.position.OnWheelChangedListener;
 import com.aopg.heybro.ui.position.ArrayWheelAdapter;
 import com.aopg.heybro.ui.position.WheelView;
+import com.aopg.heybro.utils.LoginInfo;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
 
 /**
  * Created by 陈燕博 on 2018/6/19.
@@ -29,6 +36,25 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_my_ziliao_position);
+        //头像显示
+        ImageView image=findViewById(R.id.image);
+        RequestOptions options = new RequestOptions()
+                .fallback(R.drawable.image).centerCrop();
+
+        Glide.with(this)
+                .load(BASE_URL+ LoginInfo.user.getUserPortrait())
+                .apply(options)
+                .into(image);
+        //昵称
+        final EditText nicheng=findViewById(R.id.user_name);
+        nicheng.setHint(LoginInfo.user.getNickName());
+        final String[] name = {LoginInfo.user.getNickName()};
+        nicheng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                name[0] = String.valueOf(nicheng.getText());
+            }
+        });
         setUpViews();
         setUpListener();
         setUpData();
@@ -86,6 +112,7 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
         if (areas == null) {
             areas = new String[] { "" };
         }
+
         mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(this, areas));
         mViewDistrict.setCurrentItem(0);
     }
@@ -118,7 +145,7 @@ public class Myposition extends Activity implements View.OnClickListener, OnWhee
         FLAG0=1;
         Intent pos = new Intent(getApplicationContext(), MyInfoActivity.class);
         Bundle bundle = new Bundle();                           //创建Bundle对象
-        bundle.putString("provice", baseActivity.getmCurrentProviceName()); //装入数据
+        bundle.putString("province", baseActivity.getmCurrentProviceName()); //装入数据
         bundle.putString("city",baseActivity.getmCurrentCityName());
         bundle.putString("district",baseActivity.getmCurrentDistrictName());
         pos.putExtras(bundle);
