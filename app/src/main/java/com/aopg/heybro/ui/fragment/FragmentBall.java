@@ -158,8 +158,8 @@ public class FragmentBall extends Fragment{
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         if(getActivity().getResources().getStringArray(R.array.spinner_rate)[i].equals("无限制")){
-                            basketRoomInfo.setRateLow(0);
-                            basketRoomInfo.setRateHigh(0);
+                            basketRoomInfo.setRateLow(1);
+                            basketRoomInfo.setRateHigh(9);
                         }else if(getActivity().getResources().getStringArray(R.array.spinner_rate)[i].equals("Ⅰ-Ⅲ")){
                             basketRoomInfo.setRateLow(1);
                             basketRoomInfo.setRateHigh(3);
@@ -170,8 +170,8 @@ public class FragmentBall extends Fragment{
                             basketRoomInfo.setRateLow(7);
                             basketRoomInfo.setRateHigh(9);
                         }else{
-                            basketRoomInfo.setRateLow(0);
-                            basketRoomInfo.setRateHigh(0);
+                            basketRoomInfo.setRateLow(1);
+                            basketRoomInfo.setRateHigh(9);
                         }
                     }
 
@@ -209,7 +209,7 @@ public class FragmentBall extends Fragment{
                             }
                             basketRoomInfo.setType(0);
                             basketRoomInfo.setMaster(LoginInfo.user.getUserCode());
-                            basketRoomInfo.setRoomId(-1L);
+                            basketRoomInfo.setRoomId(0L);
                             //设置房间Id
                             createImRoom(basketRoomInfo.getRoomName(), "");
                         }

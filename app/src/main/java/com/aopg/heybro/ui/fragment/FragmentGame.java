@@ -2,6 +2,7 @@ package com.aopg.heybro.ui.fragment;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -42,6 +43,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.callback.CreateGroupCallback;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -81,7 +84,7 @@ public class FragmentGame extends Fragment {
     private String roomPass;
     private Handler handler;
 
-
+    private CreateGroupCallback callback;
     private BasketRoomInfo basketRoomInfo;
     private OkHttpClient client;
     private String password;//房间密码（可选）
@@ -155,8 +158,8 @@ public class FragmentGame extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         if(getActivity().getResources().getStringArray(R.array.spinner_rate)[i].equals("无限制")){
-                            basketRoomInfo.setRateLow(0);
-                            basketRoomInfo.setRateHigh(0);
+                            basketRoomInfo.setRateLow(1);
+                            basketRoomInfo.setRateHigh(9);
                         }else if(getActivity().getResources().getStringArray(R.array.spinner_rate)[i].equals("Ⅰ-Ⅲ")){
                             basketRoomInfo.setRateLow(1);
                             basketRoomInfo.setRateHigh(3);
@@ -167,8 +170,8 @@ public class FragmentGame extends Fragment {
                             basketRoomInfo.setRateLow(7);
                             basketRoomInfo.setRateHigh(9);
                         }else{
-                            basketRoomInfo.setRateLow(0);
-                            basketRoomInfo.setRateHigh(0);
+                            basketRoomInfo.setRateLow(1);
+                            basketRoomInfo.setRateHigh(9);
                         }
                     }
 
@@ -205,7 +208,9 @@ public class FragmentGame extends Fragment {
                         }
                         basketRoomInfo.setType(1);
                         basketRoomInfo.setMaster(LoginInfo.user.getUserCode());
-                        httpInsertRoom(basketRoomInfo,password);
+                        basketRoomInfo.setRoomId(0L);
+                        //设置房间Id
+                        createImRoom(basketRoomInfo.getRoomName(), "");
                     }
                 });
                 /**
@@ -266,7 +271,7 @@ public class FragmentGame extends Fragment {
         if(password != null&&!password.equals("")) {
             basketRoomInfo.setPassword(password);
             request = new Request.Builder().
-                    url(BUILD_URL("basketRoom/createRoom?roomName="
+                    url(BUILD_URL("basketRoom/createRoom?roomId="+basketRoomInfo.getRoomId()+"&roomName="
                             + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
                             + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
                             +"&rateHigh="+basketRoomInfo.getRateHigh()
@@ -274,7 +279,7 @@ public class FragmentGame extends Fragment {
                             + "&userCode=" + basketRoomInfo.getMaster())).build();
         }else{
             request = new Request.Builder().
-                    url(BUILD_URL("basketRoom/createRoom?roomName="
+                    url(BUILD_URL("basketRoom/createRoom?roomId="+basketRoomInfo.getRoomId()+"&roomName="
                             + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
                             + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
                             +"&rateHigh="+basketRoomInfo.getRateHigh()
@@ -290,13 +295,18 @@ public class FragmentGame extends Fragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String result = response.body().string();
-                Log.e("msg",result);
-                JSONObject roomInfo =
-                        (JSONObject)((JSONObject)((JSONObject.parseObject(result)).get("data"))).get("room");
+                String haveRoom = (JSONObject.parseObject(result)).getString("msg");
+                if(null != haveRoom&&haveRoom.equals("已经加入或创建一个房间，无需创建")){
+                    Looper.prepare();
+                    Toast.makeText(getApplicationContext(), "您已经创建或者加入一个房间，无需再创建", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }
+                Log.e("result",result);
                 String success = (JSONObject.parseObject(result)).getString("success");
                 if(null!=success&&success.equals("true")) {
-                    TextView tvRoom = createRoomView.findViewById(R.id.roomId);
-                    String roomId = tvRoom.getText().toString();
+                    JSONObject roomInfo =
+                            (JSONObject)((JSONObject)((JSONObject.parseObject(result)).get("data"))).get("room");
+                    Long roomId = Long.parseLong(roomInfo.getString("roomId"));
                     String roomName = roomInfo.getString("roomName");
                     Intent roomIntent = new Intent(getActivity(), ChartRoomActivity.class);
                     roomIntent.putExtra("roomId",roomId);
@@ -307,6 +317,20 @@ public class FragmentGame extends Fragment {
         });
     }
 
+
+    private void createImRoom(String roomName,String roomDesc){
+        callback = new CreateGroupCallback() {
+            @Override
+            public void gotResult(int responseCode, String responseMsg, long groupId) {
+                if (responseCode == 0) {
+                    //创建成功
+                    basketRoomInfo.setRoomId(groupId);
+                    httpInsertRoom(basketRoomInfo,password);
+                }
+            }
+        };
+        JMessageClient.createGroup(roomName, roomDesc, callback);
+    }
     /**
      *  Created by 王攀 on 2018/6/20
      *  主线程房间滑动信息
