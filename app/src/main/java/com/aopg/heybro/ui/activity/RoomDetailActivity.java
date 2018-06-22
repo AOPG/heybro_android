@@ -1,16 +1,22 @@
 package com.aopg.heybro.ui.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
@@ -54,6 +60,8 @@ public class RoomDetailActivity extends AppCompatActivity {
     private ImageView back;
     private GridView userGrid;
     private MainHandler mainHandler;
+    private Button finishGame;
+    private Dialog dialog;
 
 
     @Override
@@ -88,6 +96,22 @@ public class RoomDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        finishGame = findViewById(R.id.finish_game);
+        dialog = new Dialog(this,R.style.finishGameDialog);
+        dialog.setContentView(R.layout.game_over_dialog);
+        RadioButton radioWin = dialog.findViewById(R.id.radioWin);
+        RadioButton radioLose = dialog.findViewById(R.id.radioLose);
+        Drawable drawableWin = getResources().getDrawable(R.drawable.radio_button_style);
+        drawableWin.setBounds(0,0,60,60);
+        radioWin.setCompoundDrawables(drawableWin,null,null,null);
+        radioLose.setCompoundDrawables(drawableWin,null,null,null);
+        dialog.setTitle("请填写个人比赛数据....");
+        finishGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.show();
             }
         });
 
