@@ -151,6 +151,7 @@ public class MyInfoActivity extends Activity {
             Bundle b=intent.getExtras();
             bir=b.getString("birthday");
             mybirtnday.setText(bir);
+            FLAG1=0;
         }
         mybirtnday.setOnClickListener(new View.OnClickListener() {
             @Override
