@@ -18,7 +18,8 @@ import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
+import java.text.SimpleDateFormat;
+
 import static com.aopg.heybro.ui.activity.Myposition.FLAG0;
 import static com.aopg.heybro.ui.activity.Mysex.FLAG;
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
@@ -80,7 +81,7 @@ public class MyInfoActivity extends Activity {
         }else {
             Intent intent1 =  getIntent();;       //获取已有的intent对象
             Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
-            String provice= bundle1.getString("provice");
+            String provice= bundle1.getString("province");
             String city=bundle1.getString("city");
             userpo.setText(provice+"  "+city);
             FLAG0=0;
@@ -139,8 +140,10 @@ public class MyInfoActivity extends Activity {
             }
         });
         //生日
-//       final TextView mybirtnday=findViewById(R.id.birthday);
-//       mybirtnday.setText(String.valueOf(LoginInfo.user.getBirthday()));
+       final TextView mybirtnday=findViewById(R.id.birthday);
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        String bir=sf.format(LoginInfo.user.getBirthday());
+        mybirtnday.setText(bir);
 //       mybirtnday.setOnClickListener(new View.OnClickListener() {
  //           @Override
  //           public void onClick(View v) {
