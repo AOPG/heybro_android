@@ -1,17 +1,13 @@
 package com.aopg.heybro.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.aopg.heybro.R;
-import com.aopg.heybro.entity.Concern;
 import com.aopg.heybro.entity.User;
-import com.aopg.heybro.ui.activity.SearchFriendActivity;
-import com.aopg.heybro.ui.activity.SingleChartActivity;
 
 import java.util.List;
 
