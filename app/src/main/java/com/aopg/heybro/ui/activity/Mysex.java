@@ -39,8 +39,8 @@ public class Mysex extends Activity {
                 .apply(options)
                 .into(image);
 //昵称
-        final EditText nicheng=findViewById(R.id.user_name);
-        nicheng.setHint(LoginInfo.user.getNickName());
+        final TextView nicheng=findViewById(R.id.user_name);
+        nicheng.setText(LoginInfo.user.getNickName());
         final String[] name = {LoginInfo.user.getNickName()};
         nicheng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
