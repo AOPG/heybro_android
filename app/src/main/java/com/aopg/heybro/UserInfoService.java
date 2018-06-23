@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.entity.User;
 import com.aopg.heybro.im.InitIM;
 import com.aopg.heybro.ui.activity.LoginActivty;
+import com.aopg.heybro.ui.fragment.FragmentBall;
 import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
 
@@ -96,6 +97,11 @@ public class UserInfoService extends IntentService {
                         if (LoginInfo.ISLOGINIM==0){
                             InitIM.initJmessageUser(LoginInfo.user.getUsername(),
                                     LoginInfo.user.getUserCode(),UserInfoService.this);
+                        }
+                        if (LoginInfo.user.getRoomId()==0L){
+                            FragmentBall.setCreateRoomStates(true);
+                        }else {
+                            FragmentBall.setCreateRoomStates(false);
                         }
                     } else {
 

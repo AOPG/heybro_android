@@ -8,24 +8,23 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.BasketRoomInfo;
-import com.aopg.heybro.entity.Concern;
 import com.aopg.heybro.entity.User;
-import com.aopg.heybro.ui.adapter.MyConcernAdapter;
 import com.aopg.heybro.ui.adapter.RoomDetailUserAdapter;
 import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
@@ -36,6 +35,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.api.BasicCallback;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -62,6 +63,7 @@ public class RoomDetailActivity extends AppCompatActivity {
     private MainHandler mainHandler;
     private Button finishGame;
     private Dialog dialog;
+    private BasketRoomInfo basketRoomInfo;
 
 
     @Override
@@ -107,13 +109,16 @@ public class RoomDetailActivity extends AppCompatActivity {
         drawableWin.setBounds(0,0,60,60);
         radioWin.setCompoundDrawables(drawableWin,null,null,null);
         radioLose.setCompoundDrawables(drawableWin,null,null,null);
-        dialog.setTitle("请填写个人比赛数据....");
         finishGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.show();
             }
         });
+
+
+
+
 
         Request request = new Request.Builder().
                 url(BUILD_URL("BasketBallRoom/roomAndUserInfo?roomId="+roomId)).build();
@@ -132,7 +137,7 @@ public class RoomDetailActivity extends AppCompatActivity {
                 if (null!=success&&success.equals("true")) {
                     JSONObject roomInfo = (JSONObject)((JSONObject.parseObject(result)).get("data"));
                     JSONArray userInfo = roomInfo.getJSONArray("list");
-                    BasketRoomInfo basketRoomInfo = new BasketRoomInfo();
+                    basketRoomInfo = new BasketRoomInfo();
                     basketRoomInfo.setMaster(roomInfo.getString("roomMasterCode"));
                     basketRoomInfo.setRoomName(roomInfo.getString("roomName"));
                     basketRoomInfo.setRoomId(Long.parseLong(roomInfo.getString("roomId")));
@@ -180,9 +185,89 @@ public class RoomDetailActivity extends AppCompatActivity {
                         RoomDetailUserAdapter roomDetailUserAdapter = new
                                 RoomDetailUserAdapter(RoomDetailActivity.this,userList);
                         userGrid.setAdapter(roomDetailUserAdapter);
+
+                        dealDialogEvent();
+                    }
+                    break;
+                case 301:
+                    if ((msg.obj).equals("exitSuccess")){
+                        LoginInfo.user.setRoomId(0l);
+                        Intent intentToMainActivity = new Intent();
+                        intentToMainActivity.setClass(RoomDetailActivity.this, MainActivity.class);
+                        startActivity(intentToMainActivity);
+                        Toast.makeText(getApplicationContext(),"退出群聊成功!",Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(getApplicationContext(),"退出群聊失败!",Toast.LENGTH_SHORT).show();
                     }
                     break;
             }
         }
+    }
+
+    //dialog框内事件绑定
+    public void dealDialogEvent(){
+        Button directExit = dialog.findViewById(R.id.cancel_score);
+        directExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //直接退出事件
+                if (basketRoomInfo.getMaster().equals(LoginInfo.user.getUserCode())){
+                    //解散聊天室
+                    JMessageClient.adminDissolveGroup(basketRoomInfo.getRoomId(), new BasicCallback() {
+                        @Override
+                        public void gotResult(int responseCode, String responseMessage) {
+                            if (0 == responseCode) {
+                                Toast.makeText(getApplicationContext(), "解散群组成功", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "解散群组失败", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }else {
+                    JMessageClient.exitGroup(basketRoomInfo.getRoomId(), new BasicCallback() {
+                        @Override
+                        public void gotResult(int i, String s) {
+                            if (i == 0) {
+                                LoginInfo.user.setRoomId(0L);
+                                Toast.makeText(getApplicationContext(), "退出聊天成功", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "退出聊天失败", Toast.LENGTH_SHORT).show();
+                                Log.i("ExitGroupActivity", "JMessageClient.exitGroup " + ", responseCode = " + i + " ; Desc = " + s);
+                            }
+                        }
+                    });
+                }
+                //删除服务器
+                exitRoom();
+
+            }
+        });
+    }
+
+    public void exitRoom(){
+        client = HttpUtils.init(client);
+        Request request = new Request.Builder().
+                url(BUILD_URL("BasketBallRoom/exitRoom?roomId=" + basketRoomInfo.getRoomId()
+                +"&userCode="+LoginInfo.user.getUserCode())).build();
+        Call call = client.newCall(request);
+        call.enqueue(new okhttp3.Callback() {//4.回调方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                String success = (JSONObject.parseObject(result)).getString("success");
+                if (null!=success&&success.equals("true")) {
+                    Message message = mainHandler.obtainMessage(301,"exitSuccess");
+                    mainHandler.sendMessage(message);
+                }else {
+                    Message message = mainHandler.obtainMessage(301,"exitFailure");
+                    mainHandler.sendMessage(message);
+                }
+            }
+        });
     }
 }

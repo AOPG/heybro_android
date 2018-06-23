@@ -6,54 +6,34 @@
     android:orientation="vertical">
 
     <!--第一部分-->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="49dp"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_marginLeft="25dp"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"
+            android:layout_centerInParent="true"
             android:text="发现"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="#ffffff"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"/>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="30dp"
-                android:layout_height="28dp"
-                android:src="@drawable/discover_search"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="#1fffffff"
-        android:layout_weight="0.3"></LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/discover_search"/>
+    </RelativeLayout>
 
 
     <!--第二部分-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        >
+        android:layout_height="150dp">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
@@ -68,15 +48,14 @@
                 android:layout_alignBottom="@id/vp"
                 android:background="#33000000"
                 android:orientation="vertical"
+                android:gravity="center_vertical"
                 android:paddingBottom="10dp" >
-
                 <LinearLayout
                     android:id="@+id/ll_points"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal"
-                    android:paddingBottom="10dp"></LinearLayout>
+                    android:orientation="horizontal" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -84,36 +63,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:background="#1fffffff"
-        android:layout_weight="0.3"></LinearLayout>
+       android:layout_height="3dp"/>
 
 
     <!--第三部分-->
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_height="30dp"
         android:orientation="horizontal">
 
         <!--横向滚动-->
         <com.aopg.heybro.ui.discover.HorizontalListView
             android:id="@+id/horizon_listview"
             android:layout_width="match_parent"
-            android:layout_height="150dip"
-            android:layout_alignParentTop="true"
-            >
+            android:layout_height="120dip"
+            android:layout_alignParentTop="true">
         </com.aopg.heybro.ui.discover.HorizontalListView>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="#1fffffff"
-        android:layout_weight="0.3"></LinearLayout>
 
 
     <!--第四部分-->
@@ -124,14 +94,13 @@
 
         <LinearLayout
             android:background="#5B5B5B"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="10dp"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ListView
+                android:divider="#535050"
                 android:id="@+id/lv"
+                android:dividerHeight="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </ListView>
@@ -141,7 +110,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="55dp">
     </LinearLayout>
 
 </LinearLayout>

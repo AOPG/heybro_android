@@ -195,10 +195,12 @@ public class FragmentFriend extends Fragment {
                 case 401:
                     ArrayList<String> imageUrls = (ArrayList<String>) msg.obj;
                     int imageSize = DensityUtils.dp2px(getApplicationContext(), 120);
+                    roomImage.setVisibility(ImageView.VISIBLE);
                     roomImage.displayImage(imageUrls)
                         .synthesizedWidthHeight(imageSize, imageSize)
                         .defaultImage(R.mipmap.ic_launcher_round)
                         .load();
+                    Log.e("roomImage","房间图片已生成！");
                     break;
 
             }
@@ -235,4 +237,9 @@ public class FragmentFriend extends Fragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        loadRoomInfo();
+        super.onResume();
+    }
 }

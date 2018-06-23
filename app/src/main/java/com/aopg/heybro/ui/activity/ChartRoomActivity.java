@@ -166,7 +166,7 @@ public class ChartRoomActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "发送成功", Toast.LENGTH_SHORT).show();
                             } else {
                                 Log.i(TAG, "JMessageClient.createSingleTextMessage" + ", responseCode = " + i + " ; LoginDesc = " + s);
-                                Toast.makeText(getApplicationContext(), "发送失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "该群组已解散,请尽快填写比赛信息!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

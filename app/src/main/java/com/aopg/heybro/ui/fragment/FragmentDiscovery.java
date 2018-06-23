@@ -79,9 +79,9 @@ public class FragmentDiscovery extends Fragment {
         final int[] ids = {R.drawable.discover_search, R.drawable.discover_ball,
                 R.drawable.discover_equipment, R.drawable.discover_tj,R.drawable.discover_tj
         ,R.drawable.discover_topic};
-        final int[] idss = {R.drawable.discover_coins, R.drawable.discover_coinf,
-                R.drawable.discover_coint, R.drawable.discover_coinfo,R.drawable.discover_coinbl
-                ,R.drawable.discover_coinlibl};
+        final int[] idss = {R.drawable.discover_bankuan_bg, R.drawable.discover_bankuan_bg,
+                R.drawable.discover_bankuan_bg, R.drawable.discover_bankuan_bg,R.drawable.discover_bankuan_bg
+                ,R.drawable.discover_bankuan_bg};
 //        Resources resources = getContext().getResources();
 //        List<Drawable> list = new ArrayList<>();
 //        list.add(resources.getDrawable(R.drawable.discover_coins));

@@ -88,6 +88,7 @@ public class FragmentBall extends Fragment{
     private Integer flag = 1;
     private String roomPass;
     private Handler handler;
+    private static Button btn_create;
 
 
     @Nullable
@@ -121,8 +122,9 @@ public class FragmentBall extends Fragment{
      * 创建房间
      */
     public void createRoom(){
-        final Button btn_create = rootView.findViewById(R.id.btn_create);
+        btn_create = rootView.findViewById(R.id.btn_create);
         basketRoomInfo = new BasketRoomInfo();
+        btn_create.setClickable(false);
         btn_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -412,13 +414,15 @@ public class FragmentBall extends Fragment{
             @Override
             public void gotResult(int responseCode, String responseMsg, long groupId) {
                 if (responseCode == 0) {
+                    btn_create.setClickable(false);
                     //创建成功
                     basketRoomInfo.setRoomId(groupId);
+                    LoginInfo.user.setRoomId(groupId);
                     httpInsertRoom(basketRoomInfo,password);
                 }
             }
         };
-        JMessageClient.createGroup(roomName, roomDesc, callback);
+        JMessageClient.createPublicGroup(roomName, roomDesc, callback);
     }
 
     /**
@@ -592,8 +596,9 @@ public class FragmentBall extends Fragment{
                 };
             }
         });
-
     }
 
-
+    public static void setCreateRoomStates(boolean flag){
+        btn_create.setClickable(flag);
+    }
 }

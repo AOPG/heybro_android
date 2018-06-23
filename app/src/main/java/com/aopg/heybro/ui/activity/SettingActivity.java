@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.aopg.heybro.R;
 
@@ -33,7 +34,7 @@ public class SettingActivity extends Activity {
         /**
          * 账号与安全界面
          */
-        LinearLayout codeSafe = findViewById(R.id.zhanghaoanquan);
+        RelativeLayout codeSafe = findViewById(R.id.zhanghaoanquan);
         codeSafe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +47,7 @@ public class SettingActivity extends Activity {
         /**
          * 隐私设置界面
          */
-        LinearLayout privateSetting = findViewById(R.id.yinsi);
+        RelativeLayout privateSetting = findViewById(R.id.yinsi);
         privateSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +60,7 @@ public class SettingActivity extends Activity {
         /**
          * 通用设置界面
          */
-        LinearLayout commonSetting = findViewById(R.id.tongyong);
+        RelativeLayout commonSetting = findViewById(R.id.tongyong);
         commonSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +72,7 @@ public class SettingActivity extends Activity {
         });
         /**
          * 退出登录*/
-        LinearLayout quitSetting = findViewById(R.id.tongyong);
+        RelativeLayout quitSetting = findViewById(R.id.tongyong);
         quitSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
