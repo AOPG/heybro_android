@@ -310,11 +310,17 @@ public class MainActivity extends AppCompatActivity {
                                 ((UserInfoThread)threads[i]).stopMe();
                             }
                         }
-                        LoginInfo.user = new User();
-                        Intent intent = new Intent(MainActivity.this, LoginActivty.class);
+
                         LoginInfo.ISLOGINIM=0;
                         LoginInfo.user.setIsLogin(0);
                         LoginInfo.user.updateAll("userName = ?",LoginInfo.user.getUsername());
+
+                        LoginInfo.user = new User();
+                        //刷新用户信息为空,向MainActivity发送信息刷新请求
+                        Intent intentRefresh = new Intent("FragmentMy");
+                        sendBroadcast(intentRefresh);
+
+                        Intent intent = new Intent(MainActivity.this, LoginActivty.class);
                         startActivity(intent);
                         break;
                 }
