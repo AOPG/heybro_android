@@ -125,7 +125,7 @@ public class FragmentFriend extends Fragment {
         fangjian = rootView.findViewById(R.id.fangjian);
         fangjian.setClickable(false);
 
-        if (LoginInfo.user.getRoomId()!=0){
+        if (null!=LoginInfo.user.getRoomId()&&LoginInfo.user.getRoomId()!=0){
             loadRoomInfo();
             getRoomUserImage();
         }else {

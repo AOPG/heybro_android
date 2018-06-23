@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter();
         filter.addAction("FragmentMy");
         registerReceiver(mbcr, filter);// 注册
+
+
         Thread userInfoThread = new UserInfoThread();
         userInfoThread.start();
         //底部tabhost改变图标
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         baiduMapLocationUtil.onStop();
     }
 
-    class UserInfoThread extends Thread{
+    public class UserInfoThread extends Thread{
         // 用于停止线程
         private boolean stopMe = true;
 
@@ -270,10 +272,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             //对接收到的广播进行处理，intent里面包含数据
+            System.out.println("收到广播！----------------------------");
             Message msg = mHandler.obtainMessage();
             msg.what =0;
             mHandler.sendMessage(msg);
-            context.unregisterReceiver(this);
+
         }
     }
 
@@ -307,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
                                 ((UserInfoThread)threads[i]).stopMe();
                             }
                         }
-
+                        LoginInfo.user = new User();
                         Intent intent = new Intent(MainActivity.this, LoginActivty.class);
                         LoginInfo.ISLOGINIM=0;
                         LoginInfo.user.setIsLogin(0);
@@ -360,5 +363,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mbcr);
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        startService(new Intent(MainActivity.this, UserInfoService.class));
+        super.onResume();
     }
 }

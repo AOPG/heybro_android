@@ -299,7 +299,7 @@ public class FragmentMy extends Fragment {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    System.out.println("收到mainactivity的消息！--------------------------------");
+                    System.out.println("收到更新用户信息的消息！--------------------------------");
                     loadInfo();
                     break;
             }
@@ -310,5 +310,6 @@ public class FragmentMy extends Fragment {
         super.onAttach(activity);
         mActivity = (MainActivity) activity;
         mActivity.setHandler(handler);
+
     }
 }
