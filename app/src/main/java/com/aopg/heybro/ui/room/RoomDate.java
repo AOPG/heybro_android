@@ -40,7 +40,7 @@ public class RoomDate {
     private String  roomName;
     private String roomNum;
     private String  roomPro;
-    private  String roomPass;
+    private String roomPass;
 
     public String getRoomPass() {
         return roomPass;

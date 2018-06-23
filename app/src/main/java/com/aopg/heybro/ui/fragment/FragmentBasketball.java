@@ -13,11 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
-import android.widget.GridView;
 
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.activity.SearchRoomActivity;
-import com.aopg.heybro.ui.activity.SettingActivity;
 import com.aopg.heybro.ui.adapter.BasketBallFragmentPagerAdapter;
 import com.aopg.heybro.ui.room.CustomViewPager;
 

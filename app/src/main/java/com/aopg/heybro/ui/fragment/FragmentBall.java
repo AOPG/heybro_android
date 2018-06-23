@@ -262,21 +262,21 @@ public class FragmentBall extends Fragment{
 
                 if (null != success&&success.equals("true")) {
 
-                    JSONArray concernInfo =
+                    JSONArray roomListInfo =
                             ((JSONObject)((JSONObject.parseObject(result)).get("data"))).getJSONArray("list");
                     roomDateList = new ArrayList<>();
-                    for (int i = 0; i < concernInfo.size(); i++) {
+                    for (int i = 0; i < roomListInfo.size(); i++) {
                         RoomDate roomDate = new RoomDate();
                         String roomId =
-                                ((JSONObject)concernInfo.get(i)).getString("roomId");
+                                ((JSONObject)roomListInfo.get(i)).getString("roomId");
                         String roomNum =
-                                ((JSONObject)concernInfo.get(i)).getString("roomNum");
+                                ((JSONObject)roomListInfo.get(i)).getString("roomNum");
                         String roomPeo =
-                                ((JSONObject)concernInfo.get(i)).getString("roomPeo");
+                                ((JSONObject)roomListInfo.get(i)).getString("roomPeo");
                         String roomName =
-                                ((JSONObject)concernInfo.get(i)).getString("roomName");
+                                ((JSONObject)roomListInfo.get(i)).getString("roomName");
                         String roomPass =
-                                ((JSONObject)concernInfo.get(i)).getString("roomPass");
+                                ((JSONObject)roomListInfo.get(i)).getString("roomPass");
 
                         roomDate.setRoomId(roomId);
                         roomDate.setRoomName(roomName);
@@ -489,16 +489,16 @@ public class FragmentBall extends Fragment{
                         String success = (JSONObject.parseObject(result)).getString("success");
                         if (null!=success&&success.equals("true")) {
                             roomUserList = new ArrayList<>();
-                            JSONArray concernInfo =
+                            JSONArray userInfo =
                                     ((JSONObject)((JSONObject.parseObject(result)).get("data"))).getJSONArray("list");
-                            for (int i = 0; i < concernInfo.size(); i++) {
+                            for (int i = 0; i < userInfo.size(); i++) {
                                 RoomUser roomUser = new RoomUser();
                                 String userName =
-                                        ((JSONObject)concernInfo.get(i)).getString("userName");
+                                        ((JSONObject)userInfo.get(i)).getString("userName");
                                 String userIntro =
-                                        ((JSONObject)concernInfo.get(i)).getString("userIntro");
+                                        ((JSONObject)userInfo.get(i)).getString("userIntro");
                                 String userPortrait =
-                                        ((JSONObject)concernInfo.get(i)).getString("userPortrait");
+                                        ((JSONObject)userInfo.get(i)).getString("userPortrait");
 
 
                                 Map<String,Object> map = new HashMap<>();
