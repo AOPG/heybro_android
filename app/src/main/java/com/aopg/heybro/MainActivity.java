@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     MyBroadcastReceiver mbcr;
     private BaiduMapLocationUtil baiduMapLocationUtil;
     public static Integer CMD_STOP_USER_INFO_SERVICE = 0;
+    private Thread userInfoThread;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -84,10 +85,9 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter();
         filter.addAction("FragmentMy");
         registerReceiver(mbcr, filter);// 注册
-
-
-        Thread userInfoThread = new UserInfoThread();
+        userInfoThread = new UserInfoThread();
         userInfoThread.start();
+
         //底部tabhost改变图标
         myTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -173,6 +173,9 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        }
+        public void startUserInfoService(){
+
         }
     }
 
@@ -378,8 +381,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onRestart() {
         startService(new Intent(MainActivity.this, UserInfoService.class));
-        super.onResume();
+        super.onRestart();
     }
 }
