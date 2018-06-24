@@ -22,10 +22,13 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.text.SimpleDateFormat;
 
+import okhttp3.Request;
+
 import static com.aopg.heybro.ui.activity.Mybirthday.FLAG1;
 import static com.aopg.heybro.ui.activity.Myposition.FLAG0;
 import static com.aopg.heybro.ui.activity.Mysex.FLAG;
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
+import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
 /**
  * Created by 壑过忘川 on 2018/6/6.
@@ -169,7 +172,8 @@ public class MyInfoActivity extends Activity {
         xiugai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Request request = new Request.Builder().
+                        url(BUILD_URL("averageUser/updateUserInfo"+"?userCode="+ LoginInfo.user.getUserCode())).build();
             }
         });
 
