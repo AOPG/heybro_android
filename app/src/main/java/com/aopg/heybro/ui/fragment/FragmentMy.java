@@ -302,6 +302,8 @@ public class FragmentMy extends Fragment {
                     System.out.println("收到更新用户信息的消息！--------------------------------");
                     loadInfo();
                     break;
+                case 403:
+                    System.out.println("收到更新房间信息的消息！--------------------------------");
             }
         }
     };
@@ -310,6 +312,5 @@ public class FragmentMy extends Fragment {
         super.onAttach(activity);
         mActivity = (MainActivity) activity;
         mActivity.setHandler(handler);
-
     }
 }

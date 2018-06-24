@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#535050"
     tools:context="com.aopg.heybro.MainActivity">
     <android.support.v4.app.FragmentTabHost
         android:id="@android:id/tabhost"

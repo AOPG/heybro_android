@@ -9,7 +9,7 @@
     <item android:top="0.7dp">
         <shape>
             <!--    边框里面的颜色    -->
-            <solid android:color="#535050"/>
+            <solid android:color="#686565"/>
         </shape>
     </item>
 </layer-list>

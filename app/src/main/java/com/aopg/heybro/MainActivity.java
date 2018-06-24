@@ -53,6 +53,7 @@ import static com.aopg.heybro.utils.ThreadUtils.findAllThreads;
 
 public class MainActivity extends AppCompatActivity {
     private Handler mHandler;
+    private Handler mFridendHandler;
     private FragmentTabHost myTabHost;
     private Map<String,Map<String,Object>> map;
     private static String LAST_SELECT = "basketball";
@@ -174,9 +175,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        public void startUserInfoService(){
-
-        }
     }
 
     /**
@@ -287,6 +285,10 @@ public class MainActivity extends AppCompatActivity {
         mHandler = handler;
     }
 
+    public void setFragmentFriendHandler(Handler handler) {
+        mFridendHandler = handler;
+    }
+
 
     public void onEvent(LoginStateChangeEvent event) {
         System.out.println("------------------监听到事件-------------------");
@@ -384,5 +386,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestart() {
         startService(new Intent(MainActivity.this, UserInfoService.class));
         super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.e("mianActivity","onResume被调用！");
+        if (LoginInfo.FragmentFriendISCREATE==1){
+            Log.e("mianActivity","onResume被调用！");
+            Message msg = mFridendHandler.obtainMessage();
+            msg.what =403;
+            mFridendHandler.sendMessage(msg);
+        }
+        super.onResume();
     }
 }
