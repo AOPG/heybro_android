@@ -5,17 +5,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.BasketRoomInfo;
 import com.aopg.heybro.ui.adapter.SearchRoomAdapter;
-import com.aopg.heybro.ui.room.RoomDate;
 import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
 
@@ -23,7 +26,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.jpush.im.android.api.callback.CreateGroupCallback;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -31,7 +33,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
-//import com.aopg.heybro.ui.adapter.SearchRoomAdapter;
 
 /**
  * Created by 壑过忘川 on 2018/6/21.
@@ -41,6 +42,7 @@ import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 public class SearchRoomActivity extends Activity {
     private SearchRoomAdapter searchRoomAdapter;
     private ListView roomListView;
+    private SearchView searchView;
     private List<BasketRoomInfo> roomList;
 
     private OkHttpClient client;
@@ -50,6 +52,14 @@ public class SearchRoomActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basketball_searchroom);
+        /**
+         * 显示房间
+         */
+        allRoom();
+        /**
+         * 搜索房间
+         */
+        searchRoom();
         //取消
         TextView searchroom_cancel = findViewById(R.id.searchroom_cancel);
         searchroom_cancel.setOnClickListener(new View.OnClickListener() {
@@ -58,12 +68,6 @@ public class SearchRoomActivity extends Activity {
                 onBackPressed();
             }
         });
-        /**
-         * 显示房间
-         */
-        allRoom();
-
-
     }
     public void onBackPressed() {
         //返回
@@ -158,5 +162,73 @@ public class SearchRoomActivity extends Activity {
                 }
             }
         };
+    }
+    /**
+     * 搜索房间
+     */
+    public void searchRoom(){
+        final List<BasketRoomInfo> roomSearchList = new ArrayList<BasketRoomInfo>();
+        searchView = findViewById(R.id.searchroom);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            //输入完成后，提交时触发的方法，一般情况是点击输入法中的搜索按钮才会触发，表示现在正式提交了
+            public boolean onQueryTextSubmit(String query) {
+                if(TextUtils.isEmpty(query))
+                {
+                    Toast.makeText(SearchRoomActivity.this, "请输入查找内容！", Toast.LENGTH_SHORT).show();
+                    roomListView.setAdapter(searchRoomAdapter);
+                }
+                else
+                {
+                    roomSearchList.clear();
+                    for(int i = 0; i < roomList.size(); i++)
+                    {
+                        BasketRoomInfo basketRoom = new BasketRoomInfo();
+                        basketRoom = roomList.get(i);
+                        if(basketRoom.getRoomName().equals(query))
+                        {
+                            roomSearchList.add(basketRoom);
+                            break;
+                        }
+                    }
+                    if(roomSearchList.size() == 0)
+                    {
+                        Toast.makeText(SearchRoomActivity.this, "查找的商品不在列表中", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        searchRoomAdapter = new SearchRoomAdapter(SearchRoomActivity.this,R.layout.basketball_searchroom_item,roomSearchList);
+                        roomListView.setAdapter(searchRoomAdapter);
+                    }
+                }
+                return true;
+            }
+
+            @Override
+            //在输入时触发的方法，当字符真正显示到searchView中才触发，像是拼音，在输入法组词的时候不会触发
+            public boolean onQueryTextChange(String newText) {
+                if(TextUtils.isEmpty(newText))
+                {
+                    roomListView.setAdapter(searchRoomAdapter);
+                }
+                else
+                {
+                    roomSearchList.clear();
+                    for(int i = 0; i < roomList.size(); i++)
+                    {
+                        BasketRoomInfo basketRoom = new BasketRoomInfo();
+                        basketRoom = roomList.get(i);
+                        if(basketRoom.getRoomName().contains(newText))
+                        {
+                            roomSearchList.add(basketRoom);
+                        }
+                    }
+                    searchRoomAdapter = new SearchRoomAdapter(SearchRoomActivity.this,R.layout.basketball_searchroom_item,roomSearchList);
+                    searchRoomAdapter.notifyDataSetChanged();
+                    roomListView.setAdapter(searchRoomAdapter);
+                }
+                return true;
+            }
+        });
     }
 }
