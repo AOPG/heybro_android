@@ -67,6 +67,7 @@ public class MyInfoActivity extends Activity {
         final EditText nicheng=findViewById(R.id.user_name);
         nicheng.setHint(LoginInfo.user.getNickName());
         final String[] name = {LoginInfo.user.getNickName()};
+
         nicheng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
