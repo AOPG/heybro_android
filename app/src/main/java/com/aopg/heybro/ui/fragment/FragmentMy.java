@@ -28,6 +28,7 @@ import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.UserInfoService;
 import com.aopg.heybro.ui.activity.MyInfoActivity;
+import com.aopg.heybro.ui.activity.Mydata;
 import com.aopg.heybro.ui.activity.Myrili;
 import com.aopg.heybro.ui.activity.SaoyisaoActivity;
 import com.aopg.heybro.ui.activity.SettingActivity;
@@ -251,6 +252,17 @@ public class FragmentMy extends Fragment {
                 toastTip.setGravity(Gravity.CENTER, 0, 0);
                 toastTip.show();
 
+            }
+        });
+        /**
+         * 数据
+         * */
+        ImageView shuju=rootView.findViewById(R.id.data);
+        shuju.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shujuIntent = new Intent(getActivity(), Mydata.class);
+                startActivity(shujuIntent);
             }
         });
         /**
