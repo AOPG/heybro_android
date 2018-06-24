@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.widget.ImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -90,7 +91,7 @@ public class ImageUtils {
      */
     public static void pickImageFromCamera(final Activity activity){
 
-        imageUriFromCamera = getImageUri();
+        imageUriFromCamera = getImageUri(activity);
 
         Intent intent = new Intent();
         intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -102,10 +103,10 @@ public class ImageUtils {
     /**
      * 根据指定目录产生一条图片Uri
      */
-    private static Uri getImageUri(){
+    private static Uri getImageUri(Activity activity){
         String imageName = new SimpleDateFormat("yyMMddHHmmss").format(new Date()) + ".jpg";
         String path = MyConstant.PhotoDir + imageName;
-        return UriUtils.getUriFromFilePath(path);
+        return UriUtils.getUriFromFilePath(activity,path);
     }
 
     /**
@@ -116,7 +117,7 @@ public class ImageUtils {
         String imageName = new SimpleDateFormat("yyMMddHHmmss").format(new Date()) + ".jpg";
         String copyPath = MyConstant.PhotoDir + imageName;
         FileUtils.copyfile(UriUtils.getRealFilePath(activity,uri),copyPath,true);
-        imageUriFromALBUM = UriUtils.getUriFromFilePath(copyPath);
+        imageUriFromALBUM = UriUtils.getUriFromFilePath(activity,copyPath);
     }
 
     /**

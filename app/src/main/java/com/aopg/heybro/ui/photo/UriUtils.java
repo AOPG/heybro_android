@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -63,8 +64,10 @@ public class UriUtils {
     /**
      * 将路径地址转换为Uri
      */
-    public static Uri getUriFromFilePath(final String path){
+    public static Uri getUriFromFilePath(Context context,final String path){
 
-        return Uri.fromFile(new File(path));
+
+        //return Uri.fromFile(new File(path));
+        return FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", new File(path));
     }
 }
