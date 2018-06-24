@@ -315,11 +315,6 @@ public class FragmentBall extends Fragment{
         };
 
     }
-
-
-
-
-
     /**
      * 快速匹配
      */
