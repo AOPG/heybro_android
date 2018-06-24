@@ -61,7 +61,7 @@
         <!-- 上传头像所需更改-->
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="heybro_android.fileprovider"
+            android:authorities="com.aopg.heybro.fileprovider"
             android:grantUriPermissions="true"
             android:exported="false"
             >
