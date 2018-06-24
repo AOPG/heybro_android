@@ -26,6 +26,8 @@ public class CodeSafeActivity extends Activity {
                 onBackPressed();
             }
         });
+        //修改密码
+
     }
     public void onBackPressed() {
         //返回
