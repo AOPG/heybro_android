@@ -556,7 +556,7 @@ public class FragmentGame extends Fragment {
                                 /**
                                  *  点击进入房间按钮
                                  */
-                                textJoinRoomPass = viewRoomView.findViewById(R.id.spinner4);
+                                textJoinRoomPass = viewRoomView.findViewById(R.id.roomPassword);
                                 Button joinRoom = viewRoomView.findViewById(R.id.join_room);
                                 joinRoom.setOnClickListener(new View.OnClickListener() {
                                     @Override

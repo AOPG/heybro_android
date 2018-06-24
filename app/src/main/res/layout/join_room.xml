@@ -52,9 +52,8 @@
                 android:text="房间密码"
                 android:textColor="#ffffff"
                 android:textSize="15dp" />
-            <!-- 下拉菜单  待实现-->
             <EditText
-                android:id="@+id/spinner4"
+                android:id="@+id/roomPassword"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginLeft="65dp"
