@@ -25,21 +25,44 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.UserInfoService;
+import com.aopg.heybro.entity.BasketRoomInfo;
+import com.aopg.heybro.entity.Concern;
+import com.aopg.heybro.ui.activity.ChartRoomActivity;
 import com.aopg.heybro.ui.activity.MyInfoActivity;
 import com.aopg.heybro.ui.activity.Mydata;
 import com.aopg.heybro.ui.activity.Myrili;
 import com.aopg.heybro.ui.activity.SaoyisaoActivity;
 import com.aopg.heybro.ui.activity.SettingActivity;
 import com.aopg.heybro.utils.LoginInfo;
+import com.aopg.heybro.utils.teamhead.utils.DensityUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Authenticator;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Credentials;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.Route;
+
 import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
 import static com.aopg.heybro.utils.ActivityUtils.addStatusViewWithColor;
+import static com.aopg.heybro.utils.BaiduMapLocationUtil.mLocationClient;
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
+import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
 
 /**
@@ -53,6 +76,7 @@ public class FragmentMy extends Fragment {
     private boolean isVisible = true;
     private MainActivity mActivity;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -61,6 +85,7 @@ public class FragmentMy extends Fragment {
 
 
         LoginInfo.FragmentMYISCREATE=1;
+
         Log.e("", "onCreateView");
         if (rootView == null) {
             Log.e("", "FragmentMy");
@@ -328,4 +353,5 @@ public class FragmentMy extends Fragment {
         mActivity = (MainActivity) activity;
         mActivity.setHandler(handler);
     }
+
 }
