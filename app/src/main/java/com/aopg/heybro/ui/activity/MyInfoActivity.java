@@ -1,10 +1,17 @@
 package com.aopg.heybro.ui.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -15,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.fragment.FragmentMy;
@@ -24,13 +32,18 @@ import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static com.aopg.heybro.ui.activity.Mybirthday.FLAG1;
@@ -47,6 +60,13 @@ import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 public class MyInfoActivity extends Activity {
     private ImageView image;
     private OkHttpClient client;
+    private OkHttpClient okHttp;
+    private Handler handler;
+    private static final int REQUEST_CODE = 1;
+    private static final int REQUEST_PERMISSION =2 ;
+    private String PicUrl = null;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +82,15 @@ public class MyInfoActivity extends Activity {
             }
         });
         //头像显示
-        image=findViewById(R.id.image);
+
+        //创建OkHttpClient对象
+        okHttp=new OkHttpClient.Builder()
+                .connectTimeout(90, TimeUnit.SECONDS)
+                .readTimeout(90, TimeUnit.SECONDS)
+                .build();
+
+
+        image = findViewById(R.id.image);
         RequestOptions options = new RequestOptions()
                 .fallback(R.drawable.image).centerCrop();
 
@@ -72,12 +100,39 @@ public class MyInfoActivity extends Activity {
                 .into(image);
         //头像上传
         LinearLayout ima=findViewById(R.id.image1);
+        final ImageView img = findViewById(R.id.image);
         ima.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageUtils.showImagePickDialog(MyInfoActivity.this);
+//                ImageUtils.showImagePickDialog(MyInfoActivity.this);
+                ActivityCompat.requestPermissions(
+                        MyInfoActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_PERMISSION
+                );
+
             }
         });
+
+        handler = new Handler(){
+
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what) {
+                    case 0:
+                        String imgUrl = msg.obj.toString();
+                        Glide.with(MyInfoActivity.this)
+                                .load(imgUrl)
+                                .into(img);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        };
+
         //昵称
         final EditText nicheng=findViewById(R.id.user_name);
         nicheng.setHint(LoginInfo.user.getNickName());
@@ -214,49 +269,132 @@ public class MyInfoActivity extends Activity {
             }
         });
     }
+
+    /*
+文件上传
+*/
+    private void doUploadFile(File file) {
+//        String imageType = "multipart/form-data";
+//        RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpg"), file);
+//        RequestBody requestBody = new MultipartBody.Builder()
+//                .setType(MultipartBody.FORM)
+//                .addFormDataPart("imageData", "imageData", fileBody)
+//                .build();
+
+        client = HttpUtils.init(client);
+
+        RequestBody fileBody = RequestBody.create(MediaType.parse("image/*"), file);
+
+        //创建请求体
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("imageData", file.getName(), fileBody)
+                .build();
+
+
+        Request request = new Request.Builder()
+                .url(BASE_URL+"img/uploadImage")
+                .post(requestBody)
+                .build();
+
+        Call call=okHttp.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                JSONObject imgInfo = (JSONObject) JSONObject.parse(response.body().string());
+                String success = imgInfo.getString("success");
+                if (null!=success&&success.equals("true")){
+                    String imgUrl = ((JSONObject)imgInfo.get("data")).getString("imgUrl");
+                    Message message = handler.obtainMessage(0,BASE_URL+imgUrl);
+                    handler.sendMessage(message);
+                }
+            }
+        });
+    }
+    //相册界面返回之后的回调方法
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK&&requestCode==REQUEST_CODE){
+            //获取照片
+            Uri uri=data.getData();
+            Cursor cursor=getContentResolver().query(uri,null,null,
+                    null,null);
+            cursor.moveToFirst();
+            String column= MediaStore.Images.Media.DATA;
+            int columnIndex=cursor.getColumnIndex(column);
+            String path=cursor.getString(columnIndex);
+            File file=new File(path);
+            doUploadFile(file);
+        }
+    }
+
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[]
+            grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //打开手机相册
+        Intent intent=new Intent();
+        intent.setAction(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent,REQUEST_CODE);
+    }
+
+
+
     public void onBackPressed() {
         //返回
         super.onBackPressed();
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode){
-            case ImageUtils.REQUEST_CODE_FROM_ALBUM: {
 
-                if (resultCode == RESULT_CANCELED) {   //取消操作
-                    return;
-                }
-
-                Uri imageUri = data.getData();
-                ImageUtils.copyImageUri(this,imageUri);
-                ImageUtils.cropImageUri(this, ImageUtils.getCurrentUri(), 200, 200);
-                break;
-            }
-            case ImageUtils.REQUEST_CODE_FROM_CAMERA: {
-
-                if (resultCode == RESULT_CANCELED) {     //取消操作
-                    ImageUtils.deleteImageUri(this, ImageUtils.getCurrentUri());   //删除Uri
-                }
-
-                ImageUtils.cropImageUri(this, ImageUtils.getCurrentUri(), 200, 200);
-                break;
-            }
-            case ImageUtils.REQUEST_CODE_CROP: {
-
-                if (resultCode == RESULT_CANCELED) {     //取消操作
-                    return;
-                }
-
-                Uri imageUri = ImageUtils.getCurrentUri();
-                if (imageUri != null) {
-                    image.setImageURI(imageUri);
-                }
-                break;
-            }
-            default:
-                break;
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        switch (requestCode){
+//            case ImageUtils.REQUEST_CODE_FROM_ALBUM: {
+//
+//                if (resultCode == RESULT_CANCELED) {   //取消操作
+//                    return;
+//                }
+//
+//                Uri imageUri = data.getData();
+//                ImageUtils.copyImageUri(this,imageUri);
+//                ImageUtils.cropImageUri(this, ImageUtils.getCurrentUri(), 200, 200);
+//                break;
+//            }
+//            case ImageUtils.REQUEST_CODE_FROM_CAMERA: {
+//
+//                if (resultCode == RESULT_CANCELED) {     //取消操作
+//                    ImageUtils.deleteImageUri(this, ImageUtils.getCurrentUri());   //删除Uri
+//                }
+//
+//                ImageUtils.cropImageUri(this, ImageUtils.getCurrentUri(), 200, 200);
+//                break;
+//            }
+//            case ImageUtils.REQUEST_CODE_CROP: {
+//
+//                if (resultCode == RESULT_CANCELED) {     //取消操作
+//                    return;
+//                }
+//
+//                Uri imageUri = ImageUtils.getCurrentUri();
+//                if (imageUri != null) {
+//                    image.setImageURI(imageUri);
+//                }
+//                break;
+//            }
+//            default:
+//                break;
+//        }
+//    }
 }
