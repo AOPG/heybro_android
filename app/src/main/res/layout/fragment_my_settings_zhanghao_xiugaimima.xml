@@ -37,7 +37,6 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/xiaoxitongzhi"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
@@ -59,12 +58,12 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:layout_marginRight="10dp"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"
+                    android:background="@null"/>
 
             </LinearLayout>
             <!-- 修改密码 有点击事件-->
             <LinearLayout
-                android:id="@+id/yinsi"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
@@ -86,7 +85,8 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:layout_marginRight="10dp"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"
+                    android:background="@null"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"

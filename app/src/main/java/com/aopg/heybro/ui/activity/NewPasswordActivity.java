@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,14 @@ public class NewPasswordActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_my_settings_zhanghao_xiugaimima);
+        //返回按钮
+        ImageView info_back = findViewById(R.id.info_back);
+        info_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         final EditText newpassword1 = findViewById(R.id.newpassord1);
         final EditText newpassword2 = findViewById(R.id.newpassord2);
         Button xiugai = findViewById(R.id.passwordxiugai);
@@ -68,6 +77,12 @@ public class NewPasswordActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //修改数据库信息
+                Toast toastTip
+                        = Toast.makeText(getApplicationContext(),
+                        "验证正确！！",
+                        Toast.LENGTH_LONG);
+                toastTip.setGravity(Gravity.CENTER, 0, 0);
+                toastTip.show();
             }
         });
     }

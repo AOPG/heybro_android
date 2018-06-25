@@ -98,7 +98,6 @@ public class FragmentActivity extends Fragment {
             }
         });
 
-
         if (parent != null) {
             parent.removeView(rootView);
         }
