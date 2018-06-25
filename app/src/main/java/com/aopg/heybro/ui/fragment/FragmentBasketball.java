@@ -3,6 +3,8 @@ package com.aopg.heybro.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,15 +15,34 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.R;
+import com.aopg.heybro.ui.activity.MyConcernActivity;
 import com.aopg.heybro.ui.activity.SearchRoomActivity;
 import com.aopg.heybro.ui.adapter.BasketBallFragmentPagerAdapter;
+import com.aopg.heybro.ui.adapter.MyConcernAdapter;
 import com.aopg.heybro.ui.room.CustomViewPager;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.Authenticator;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.Route;
+
+import static com.aopg.heybro.utils.BaiduMapLocationUtil.mLocationClient;
 
 
 /**
@@ -40,6 +61,8 @@ public class FragmentBasketball extends Fragment{
     private View ball_selected;
     private View game_selected;
     private Button btn_searchRoom;
+    private MainHandler mainHandler;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -55,6 +78,9 @@ public class FragmentBasketball extends Fragment{
         if (parent != null) {
             parent.removeView(rootView);
         }
+
+        mainHandler = new MainHandler();
+
         initView();
         // 设置菜单栏的点击事件
         /**
@@ -105,6 +131,7 @@ public class FragmentBasketball extends Fragment{
      * 初始化控件
      * */
     private void initView(){
+        getWeather();
         ball_selected = rootView.findViewById(R.id.ball_selected);
         game_selected = rootView.findViewById(R.id.game_selected);
         btn_ball = rootView.findViewById(R.id.date_ball);
@@ -142,4 +169,115 @@ public class FragmentBasketball extends Fragment{
             }
         }
     }
+    private void getWeather(){
+        OkHttpClient clientWeather;
+        clientWeather = new OkHttpClient.Builder()
+                .connectTimeout(90, TimeUnit.SECONDS)
+                .readTimeout(90, TimeUnit.SECONDS)
+                .authenticator(new Authenticator()
+                {
+                    @Override
+                    public Request authenticate(Route route, Response response) throws IOException
+                    {//401，认证
+                        return response.request().newBuilder().header("Authorization", "APPCODE 961c9d9cae0443ffa56f81a6f9d96bdf").build();
+                    }
+                })
+                .build();
+        //维度
+        double lat;
+        //经度
+        double lon;
+        if(mLocationClient.getLastKnownLocation() == null){
+            lat =  Double.parseDouble("38.003585");
+            lon = Double.parseDouble("114.529362");
+        }else {
+            lat = mLocationClient.getLastKnownLocation().getLatitude();
+            lon = mLocationClient.getLastKnownLocation().getLongitude();
+        }
+
+        Request request = new Request.Builder().
+                url("http://jisutqybmf.market.alicloudapi.com/weather/query?location="+lat+","+lon).build();
+        Call call = clientWeather.newCall(request);
+
+        call.enqueue(new Callback() {//4.回调方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                Log.e("getWeather",result);
+                String success = (JSONObject.parseObject(result)).getString("msg");
+                if (null!=success&&success.equals("ok")) {
+                    JSONObject weatherInfo =
+                            ((JSONObject)((JSONObject.parseObject(result)).get("result")));
+                    JSONObject api =
+                            ((JSONObject)(((JSONObject)((JSONObject.parseObject(result)).get("result"))).get("aqi")));
+                    String city = weatherInfo.getString("city");
+                    String weather = weatherInfo.getString("weather");
+                    String temp = weatherInfo.getString("temp");
+                    String pm2_5 = api.getString("pm2_5");
+                    Map weatherMap = new HashMap();
+                    weatherMap.put("city",city);
+                    weatherMap.put("weather",weather);
+                    weatherMap.put("temp",temp+"°");
+                    weatherMap.put("pm2_5",pm2_5);
+                    Message message = mainHandler.obtainMessage(900,weatherMap);
+                    mainHandler.sendMessage(message);
+                }
+            }
+        });
+
+    }
+
+    private class MainHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 900:
+                    Map weatherMap = (Map) msg.obj;
+                    TextView weatherInfo =rootView.findViewById(R.id.weather_info);
+                    weatherInfo.setText((String)weatherMap.get("weather"));
+                    TextView weatherPm25 =rootView.findViewById(R.id.weather_pm2_5);
+                    weatherPm25.setText((String)weatherMap.get("pm2_5"));
+                    TextView weatherTemp =rootView.findViewById(R.id.weather_temp);
+                    weatherTemp.setText((String)weatherMap.get("temp"));
+                    String weather = (String) weatherMap.get("weather");
+                    ImageView weatherImage = rootView.findViewById(R.id.weather_img);
+                    ArrayList<String> shower = new ArrayList<String>(){{add("阵雨"); add("小雨");add("中雨");add("大雨");add("暴雨");
+                        add("大暴雨");add("特大暴雨");add("小雨-中雨");add("中雨-大雨");add("大雨-暴雨");add("暴雨-大暴雨");add("大暴雨-特大暴雨");
+                        add("大雨-暴雨");add("雨");add("冻雨");}};
+                    ArrayList<String> snow = new ArrayList<String>(){{add("阵雪");add("中雪");add("小雪");add("大雪");add("暴雪");add("小雪-中雪");
+                        add("中雪-大雪");add("大雪-暴雪");add("雪");}};
+
+                    ArrayList<String> thunder = new ArrayList<String>(){{add("雷阵雨");add("雷阵雨伴有冰雹");}};
+
+                    ArrayList<String> haze = new ArrayList<String>(){{add("雾");add("沙尘暴");add("特强浓雾");add("大雾");add("严重霾");add("重度霾");
+                        add("中毒霾");add("霾");add("强浓雾");add("浓雾");add("强沙尘暴");add("扬沙");add("浮尘");}};
+
+                    if (weather.equals("晴")){
+                        weatherImage.setImageResource(R.drawable.weather_sunny);
+                    }else if (weather.equals("多云")){
+                        weatherImage.setImageResource(R.drawable.weather_cloudy);
+                    }else if (weather.equals("阴")){
+                        weatherImage.setImageResource(R.drawable.weather_overcast);
+                    }else if (shower.contains(weather)){
+                        weatherImage.setImageResource(R.drawable.weather_shower);
+                    }else if (snow.contains(weather)){
+                        weatherImage.setImageResource(R.drawable.weather_snow);
+                    }else if (thunder.contains(weather)){
+                        weatherImage.setImageResource(R.drawable.weather_thunder);
+                    }else if (haze.contains(weather)){
+                        weatherImage.setImageResource(R.drawable.weather_haze);
+                    }else if (weather.equals("雨夹雪")){
+                        weatherImage.setImageResource(R.drawable.weather_sleet);
+                    }
+            }
+        }
+    }
+
+
 }

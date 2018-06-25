@@ -38,6 +38,4 @@ public class LoginInfo {
     //0为未登录IM，1为已登录IM
     public static Integer ISLOGINIM = 0;
 
-
-
 }
