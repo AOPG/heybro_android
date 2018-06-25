@@ -17,12 +17,14 @@ import android.widget.Toast;
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.fragment.FragmentMy;
 import com.aopg.heybro.ui.photo.ImageUtils;
+import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.text.SimpleDateFormat;
 
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 import static com.aopg.heybro.ui.activity.Mybirthday.FLAG1;
@@ -38,6 +40,7 @@ import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
 public class MyInfoActivity extends Activity {
     private ImageView image;
+    private OkHttpClient client;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,14 +89,16 @@ public class MyInfoActivity extends Activity {
         String id= String.valueOf(ID.getText());
         //地区
         TextView userpo=findViewById(R.id.user_location);
+        final String[] pro={LoginInfo.user.getUserProvince()};
+        final String[] city={LoginInfo.user.getUserCity()};
         if(FLAG0==0){
-            userpo.setText(LoginInfo.user.getUserProvince()+"  "+LoginInfo.user.getUserCity());
+            userpo.setText(pro+"  "+city);
         }else {
             Intent intent1 =  getIntent();;       //获取已有的intent对象
             Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
-            String provice= bundle1.getString("province");
-            String city=bundle1.getString("city");
-            userpo.setText(provice+"  "+city);
+            pro[0]= bundle1.getString("province");
+            city[0]=bundle1.getString("city");
+            userpo.setText(pro+"  "+city);
             FLAG0=0;
         }
         userpo.setOnClickListener(new View.OnClickListener() {
@@ -117,10 +122,9 @@ public class MyInfoActivity extends Activity {
 
         //性别
         TextView sex=findViewById(R.id.user_sex);
-        System.out.print(LoginInfo.user.getUserSex());//测试打印性别
-        String s=null;
+        String s=LoginInfo.user.getUserSex();
         if (FLAG==0){
-            sex.setText(LoginInfo.user.getUserSex());
+            sex.setText(s);
         }else{
             Intent intent = getIntent();//获取已有的intent对象
             Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
@@ -152,14 +156,14 @@ public class MyInfoActivity extends Activity {
         //生日
        final TextView mybirtnday=findViewById(R.id.birthday);
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-        String bir=sf.format(LoginInfo.user.getBirthday());
+        final String[] bir={sf.format(LoginInfo.user.getBirthday())};
         if (FLAG1==0){
-            mybirtnday.setText(bir);
+            mybirtnday.setText(bir[0]);
         }else{
             Intent intent=getIntent();
             Bundle b=intent.getExtras();
-            bir=b.getString("birthday");
-            mybirtnday.setText(bir);
+            bir[0]=b.getString("birthday");
+            mybirtnday.setText(bir[0]);
             FLAG1=0;
         }
         mybirtnday.setOnClickListener(new View.OnClickListener() {
@@ -174,8 +178,10 @@ public class MyInfoActivity extends Activity {
         xiugai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                client = HttpUtils.init(client);
                 Request request = new Request.Builder().
-                        url(BUILD_URL("averageUser/updateUserInfo"+"?userCode="+ LoginInfo.user.getUserCode())).build();
+                       url(BUILD_URL("averageUser/updateUserInfo"+"?userCode="+ LoginInfo.user.getUserCode()+"&userNickName="+name[0]+
+                               "&userIntro="+intro[0]+"&userProvince="+ pro[0] +"&userCity="+city[0])).build();
             }
         });
 
