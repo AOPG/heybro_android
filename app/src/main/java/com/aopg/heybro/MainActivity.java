@@ -397,6 +397,10 @@ public class MainActivity extends AppCompatActivity {
             msg.what =403;
             mFridendHandler.sendMessage(msg);
         }
+        int id = getIntent().getIntExtra("userloginflag", 0);
+        if (id == 1 ) {
+            myTabHost.setCurrentTab(4);
+        }
         super.onResume();
     }
 }

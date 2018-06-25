@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.fragment.FragmentMy;
 import com.aopg.heybro.ui.photo.ImageUtils;
@@ -50,7 +51,8 @@ public class MyInfoActivity extends Activity {
         info_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent backIntent= new Intent(getApplicationContext(), FragmentMy.class);
+                Intent backIntent= new Intent(getApplicationContext(), MainActivity.class);
+                backIntent.putExtra("userloginflag", 1);
                 startActivity(backIntent);
             }
         });

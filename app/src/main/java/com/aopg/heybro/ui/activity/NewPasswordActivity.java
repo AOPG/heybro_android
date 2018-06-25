@@ -23,26 +23,10 @@ public class NewPasswordActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_my_settings_zhanghao_xiugaimima);
-        final EditText oldpassword=findViewById(R.id.oldpassword);
         final EditText newpassword1=findViewById(R.id.newpassord1);
         final EditText newpassword2=findViewById(R.id.newpassord2);
         Button xiugai=findViewById(R.id.passwordxiugai);
         xiugai.setEnabled(false);
-        oldpassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if ("".equals(oldpassword.getText())){
-                    Toast toastTip
-                            = Toast.makeText(getApplicationContext(),
-                            "密码不能为空",
-                            Toast.LENGTH_LONG);
-                    toastTip.setGravity(Gravity.CENTER, 0, 0);
-                    toastTip.show();
-                }
-                //判断密码是否和用户密码相同 不相同toast提示
-
-            }
-        });
         newpassword1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
