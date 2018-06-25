@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -23,10 +24,14 @@ import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.aopg.heybro.ui.activity.Mybirthday.FLAG1;
 import static com.aopg.heybro.ui.activity.Myposition.FLAG0;
@@ -135,7 +140,6 @@ public class MyInfoActivity extends Activity {
             sex.setText(s);
             FLAG=0;
         }
-
         sex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,12 +187,25 @@ public class MyInfoActivity extends Activity {
             public void onClick(View v) {
                 client = HttpUtils.init(client);
                 Request request = new Request.Builder().
-                       url(BUILD_URL("averageUser/updateUserInfo"+"?userCode="+ LoginInfo.user.getUserCode()+"&userNickName="+name[0]+
-                               "&userIntro="+intro[0]+"&userProvince="+ pro[0] +"&userCity="+city[0]+"&birthday="+bir[0])).build();
+                        url(BUILD_URL("averageUser/updateUserInfo" + "?userCode=" + LoginInfo.user.getUserCode() + "&userNickName=" + name[0] +
+                                "&userIntro=" + intro[0] + "&userProvince=" + pro[0] + "&userCity=" + city[0] + "&birthday=" + bir[0])).build();
+              //测试-------------------
+                Call call = client.newCall(request);
+                call.enqueue(new Callback() {//4.回调方法
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        e.printStackTrace();
+                    }
 
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+
+                        String result = response.body().string();
+                        Log.e("msg", result);
+                    }
+                });
             }
         });
-
     }
     public void onBackPressed() {
         //返回

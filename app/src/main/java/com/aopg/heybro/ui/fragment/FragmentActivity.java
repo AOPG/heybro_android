@@ -42,7 +42,6 @@ public class FragmentActivity extends Fragment {
     HorizontalListView hListView;
     HorizontalListViewAdapter hListViewAdapter;
     ImageView previewImg;
-
     private View rootView;
 
     @Nullable

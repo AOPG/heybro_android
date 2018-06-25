@@ -74,6 +74,7 @@
                 android:gravity="center">
                 <!-- 有点击事件 跳转到fragment_activity_exci页面-->
                 <ImageView
+                    android:id="@+id/exci"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/xunlian"/>
@@ -91,6 +92,7 @@
                 android:orientation="vertical"
                 android:gravity="center">
                 <ImageView
+                    android:id="@+id/zhibo"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/zhibo1"/>
@@ -110,6 +112,7 @@
                 android:gravity="center">
                 <!-- 点击该图片 跳转到fragment_activity_saishi页面-->
                 <ImageView
+                    android:id="@+id/fujin"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@drawable/fujin"/>
