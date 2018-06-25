@@ -878,7 +878,18 @@ public class FragmentGame extends Fragment {
 
                 String success = (JSONObject.parseObject(result)).getString("success");
                 if (null!=success&&success.equals("true")) {
-                    System.out.println(44444444);
+                    //申请加入讨论组
+                    JMessageClient.applyJoinGroup(roomId,"", new BasicCallback() {
+                        @Override
+                        public void gotResult(int responseCode, String responseMessage) {
+                            if (responseCode == 0) {
+                                Toast.makeText(rootView.getContext(), "申请成功", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.d(TAG, "apply failed. code :" + responseCode + " msg : " + responseMessage);
+                                Toast.makeText(rootView.getContext(), "申请失败", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                     Intent intent = new Intent();
                     intent.setComponent(new ComponentName(rootView.getContext(), ChartRoomActivity.class));
                     intent.putExtra("roomId",Long.parseLong(roomId.toString()));
