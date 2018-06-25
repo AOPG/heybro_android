@@ -1,6 +1,7 @@
 package com.aopg.heybro.ui.activity;
 
 import android.app.Activity;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +19,9 @@ import com.aopg.heybro.R;
 import com.aopg.heybro.entity.User;
 import com.aopg.heybro.ui.adapter.SearchfriendAdapter;
 import com.aopg.heybro.utils.HttpUtils;
+import com.aopg.heybro.utils.LoginInfo;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +34,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
 import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
 /**
@@ -115,6 +120,8 @@ public class AddFriendActivity extends Activity{
                         if(((JSONObject)UserInfo.get(i)).getString("userCode").equals(user_code_txt)) {
                             String userName =
                                     ((JSONObject) UserInfo.get(i)).getString("userName");
+                            String userPortrait=((JSONObject) UserInfo.get(i)).getString("userPortrait");
+                            user.setUserPortrait(userPortrait);
                             user.setUsername(userName);
                             user.setUserCode(user_code_txt);
                             users.add(user);

@@ -2,8 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_gravity="center_vertical">
+        <!--待实现图片圆角功能-->
+        <ImageView
+            android:id="@+id/user_img"
+            android:layout_margin="5dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/basket_room_usersimg" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:orientation="vertical">
         <!--昵称-->
         <TextView
             android:id="@+id/userName"
@@ -22,4 +34,5 @@
             android:gravity="center_vertical"
             android:text="id"
             android:textColor="#bbbbbb"/>
+        </LinearLayout>
 </LinearLayout>

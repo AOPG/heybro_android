@@ -5,12 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.User;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
+
+import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
 
 /**
  * Created by L on 2018/6/19.
@@ -45,8 +50,15 @@ public class SearchfriendAdapter extends BaseAdapter {
         if (convertView==null){
             convertView = LayoutInflater.from(context).inflate(item_layout_id, null);
         }
+        final ImageView userPortrait=convertView.findViewById(R.id.user_img);
         final TextView userName=convertView.findViewById(R.id.userName);
         final TextView userCode=convertView.findViewById(R.id.userId);
+        RequestOptions options = new RequestOptions()
+                .fallback(R.drawable.image).centerCrop();
+        Glide.with(convertView)
+                .load(BASE_URL+ users.get(position).getUserPortrait())
+                .apply(options)
+                .into(userPortrait);
         userName.setText(users.get(position).getUsername());
         userCode.setText(users.get(position).getUserCode());
 //        convertView.setOnClickListener(new View.OnClickListener() {
