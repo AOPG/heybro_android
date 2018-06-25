@@ -1,6 +1,7 @@
 package com.aopg.heybro.ui.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,16 +16,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ScrollView;
 
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.Common.MyViewPageLB;
+import com.aopg.heybro.ui.Lunbo.ShareCardView;
 import com.aopg.heybro.ui.discover.CustomerAdapter;
 import com.aopg.heybro.ui.discover.HorizontalListView;
 import com.aopg.heybro.ui.discover.HorizontalListViewAdapter;
 import com.aopg.heybro.ui.discover.Virtualdiscoverdata;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 import java.util.Map;
+
+import static com.aopg.heybro.utils.ActivityUtils.addStatusViewWithColor;
 
 /**
  * Created by 王伟健 on 2018-03-16.
@@ -33,6 +39,7 @@ import java.util.Map;
  */
 
 public class FragmentDiscovery extends Fragment {
+
 
     private  List<Map<String,Object>> list;
     HorizontalListView hListView;
@@ -50,15 +57,21 @@ public class FragmentDiscovery extends Fragment {
             Log.e("", "FragmentDiscovery");
             rootView = inflater.inflate(R.layout.fragment_discovery,container,false);
         }
+
+        ShareCardView shareCardview = rootView.findViewById(R.id.share_cardview);
+        shareCardview.setCardData();
+
         // 缓存的rootView需要判断是否已经被加过parent，如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
         ViewGroup parent = (ViewGroup) rootView.getParent();
+        ScrollView sc = rootView.findViewById(R.id.discovery_main);
+        sc.smoothScrollTo(0, 0);
 
-        if (Virtualdiscoverdata.flag2 != 1) {
-            Virtualdiscoverdata.flag2 = 1;
-            LinearLayout llPoints = (LinearLayout) rootView.findViewById(R.id.ll_points);
-            ViewPager mVp = (ViewPager) rootView.findViewById(R.id.vp);
-            MyViewPageLB myViewPageLB = new MyViewPageLB(rootView.getContext(), mVp, llPoints);
-        }
+//        if (Virtualdiscoverdata.flag2 != 1) {
+//            Virtualdiscoverdata.flag2 = 1;
+//            LinearLayout llPoints = (LinearLayout) rootView.findViewById(R.id.ll_points);
+//            ViewPager mVp = (ViewPager) rootView.findViewById(R.id.vp);
+//            MyViewPageLB myViewPageLB = new MyViewPageLB(rootView.getContext(), mVp, llPoints);
+//        }
 
         initUI();
 
@@ -69,10 +82,12 @@ public class FragmentDiscovery extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }
+        addStatusViewWithColor(rootView,Color.parseColor("#1A1B1F"));
         return rootView;
     }
 
     public void initUI(){
+
         hListView = (HorizontalListView)rootView.findViewById(R.id.horizon_listview);
         previewImg = (ImageView)rootView.findViewById(R.id.dis_pic);
         String[] titles = {"推荐", "篮球动态", "篮球装备", "达人动态","附近动态","热门话题"};

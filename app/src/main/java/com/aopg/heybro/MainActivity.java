@@ -1,5 +1,6 @@
 package com.aopg.heybro;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -7,6 +8,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -17,6 +20,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -31,6 +36,7 @@ import com.aopg.heybro.ui.fragment.FragmentBasketball;
 import com.aopg.heybro.ui.fragment.FragmentDiscovery;
 import com.aopg.heybro.ui.fragment.FragmentFriend;
 import com.aopg.heybro.ui.fragment.FragmentMy;
+import com.aopg.heybro.utils.ActivityUtils;
 import com.aopg.heybro.utils.BaiduMapLocationUtil;
 import com.aopg.heybro.utils.LoginInfo;
 import com.baidu.mapapi.SDKInitializer;
@@ -49,6 +55,7 @@ import cn.jpush.im.android.api.event.LoginStateChangeEvent;
 import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.api.BasicCallback;
 
+import static com.aopg.heybro.utils.ActivityUtils.getStatusBarHeight;
 import static com.aopg.heybro.utils.ThreadUtils.findAllThreads;
 
 public class MainActivity extends AppCompatActivity {
@@ -66,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate( Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        fullScreen(this);
         LoginInfo.user =  DataSupport.where("isLogin = ?", "1").findFirst(User.class);
         startTimerTaskService();
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
@@ -99,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 ImageView iv = view.findViewById(R.id.imageId);
                 TextView tv = view.findViewById(R.id.textId);
                 iv.setImageResource((int)attr.get("img"));
-                tv.setTextColor(0xFF2C2C2C);
+                tv.setTextColor(0xFFFFFFFF);
                 LAST_SELECT = tabId;
                 //改此次点击的图标
                 if(tabId.equals("discovery")){
@@ -390,6 +397,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        if (ActivityUtils.STATUSHEIGHT==0){
+            ActivityUtils.STATUSHEIGHT = getStatusBarHeight(this);
+        }
+
         Log.e("mianActivity","onResume被调用！");
         if (LoginInfo.FragmentFriendISCREATE==1){
             Log.e("mianActivity","onResume被调用！");
@@ -403,4 +414,31 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onResume();
     }
+
+    private void fullScreen(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                //5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色
+                Window window = activity.getWindow();
+                View decorView = window.getDecorView();
+                //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
+                int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+                decorView.setSystemUiVisibility(option);
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.TRANSPARENT);
+                //导航栏颜色也可以正常设置
+//                window.setNavigationBarColor(Color.TRANSPARENT);
+            } else {
+                Window window = activity.getWindow();
+                WindowManager.LayoutParams attributes = window.getAttributes();
+                int flagTranslucentStatus = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+                int flagTranslucentNavigation = WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
+                attributes.flags |= flagTranslucentStatus;
+//                attributes.flags |= flagTranslucentNavigation;
+                window.setAttributes(attributes);
+            }
+        }
+    }
+
 }

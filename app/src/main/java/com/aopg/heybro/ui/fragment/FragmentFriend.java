@@ -3,6 +3,7 @@ package com.aopg.heybro.ui.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -47,6 +48,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
+import static com.aopg.heybro.utils.ActivityUtils.addStatusViewWithColor;
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
 import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
@@ -138,6 +140,7 @@ public class FragmentFriend extends Fragment {
             roomPeopleNumTv.setText("");
             roomImage.setVisibility(ImageView.GONE);
         }
+        addStatusViewWithColor(rootView, Color.parseColor("#1A1B1F"));
         return rootView;
     }
     private void loadRoomInfo(){

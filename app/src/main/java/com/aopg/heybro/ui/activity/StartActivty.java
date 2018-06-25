@@ -10,9 +10,12 @@ import com.aopg.heybro.R;
 import com.aopg.heybro.entity.User;
 import com.aopg.heybro.im.InitIM;
 import com.aopg.heybro.ui.Common.ActivitiesManager;
+import com.aopg.heybro.utils.ActivityUtils;
 import com.aopg.heybro.utils.LoginInfo;
 
 import org.litepal.crud.DataSupport;
+
+import static com.aopg.heybro.utils.ActivityUtils.getStatusBarHeight;
 
 
 /**
@@ -25,9 +28,11 @@ public class StartActivty extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityUtils.STATUSHEIGHT = getStatusBarHeight(this);
         setContentView(R.layout.start_activity);
         ActivitiesManager.getInstance().addActivity(this);
         MyAsyncTask asyncTask = new MyAsyncTask();
+
         asyncTask.execute();
     }
 
@@ -71,4 +76,5 @@ public class StartActivty extends AppCompatActivity {
             overridePendingTransition(R.anim.in_anim,R.anim.init_anim);
         }
     }
+
 }
