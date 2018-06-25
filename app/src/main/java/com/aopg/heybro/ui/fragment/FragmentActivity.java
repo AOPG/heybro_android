@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.Common.MyViewPageLB;
 import com.aopg.heybro.ui.activity.ActivityexciActivity;
+import com.aopg.heybro.ui.activity.ActivityzhiboActivity;
 import com.aopg.heybro.ui.discover.HorizontalListView;
 import com.aopg.heybro.ui.discover.HorizontalListViewAdapter;
 import com.aopg.heybro.ui.discover.Virtualdiscoverdata;
@@ -67,9 +68,29 @@ public class FragmentActivity extends Fragment {
         }
 
 
-        //图片点击
+        //图片点击事件
         ImageView exci = rootView.findViewById(R.id.exci);
         exci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(rootView.getContext(), ActivityexciActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //图片点击事件
+        ImageView zhibo = rootView.findViewById(R.id.zhibo);
+        zhibo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(rootView.getContext(), ActivityzhiboActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //图片点击事件
+        ImageView fujin = rootView.findViewById(R.id.fujin);
+        fujin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(rootView.getContext(), ActivityexciActivity.class);
