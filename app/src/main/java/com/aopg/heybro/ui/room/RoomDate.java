@@ -41,6 +41,15 @@ public class RoomDate {
     private String roomNum;
     private String  roomPro;
     private String roomPass;
+    private String roomPassSet;
+
+    public String getRoomPassSet() {
+        return roomPassSet;
+    }
+
+    public void setRoomPassSet(String roomPassSet) {
+        this.roomPassSet = roomPassSet;
+    }
 
     public String getRoomPass() {
         return roomPass;

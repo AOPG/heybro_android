@@ -47,6 +47,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textViewRoomPass"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:text="房间密码"

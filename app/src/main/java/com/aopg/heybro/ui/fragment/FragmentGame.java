@@ -430,7 +430,7 @@ public class FragmentGame extends Fragment {
         SimpleDateFormat forma=new SimpleDateFormat(ma);
         String nwdate=forma.format(date);
 
-        if (roomDateList.size()>0){
+        if (roomDateList.size()>0 && roomDateList != null){
             for (int i = 0;i<roomDateList.size();i++){
                 System.out.println(roomDateList.size());
                 System.out.println(roomDateList.get(i).getRoomId());
