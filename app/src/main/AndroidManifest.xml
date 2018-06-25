@@ -42,6 +42,11 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- 上传头像相关的权限-->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--在sdcard中创建/删除文件的权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
 
     <application
         android:hardwareAccelerated="false"
@@ -53,6 +58,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <!-- 上传头像所需更改-->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.aopg.heybro.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false"
+            >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="cGgtuW2eaoQMPEuFIoTKRGwwWzl7HrER" >
@@ -115,6 +131,7 @@
             </intent-filter>
         </activity>
         <activity android:name="ui.activity.SingleChartActivity"/>
+        <activity android:name=".ui.activity.Mydata"/>
 
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

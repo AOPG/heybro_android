@@ -2,6 +2,7 @@ package com.aopg.heybro.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
@@ -14,16 +15,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aopg.heybro.R;
+import com.aopg.heybro.ui.photo.ImageUtils;
 import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.text.SimpleDateFormat;
 
+import okhttp3.Request;
+
 import static com.aopg.heybro.ui.activity.Mybirthday.FLAG1;
 import static com.aopg.heybro.ui.activity.Myposition.FLAG0;
 import static com.aopg.heybro.ui.activity.Mysex.FLAG;
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
+import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
 /**
  * Created by 壑过忘川 on 2018/6/6.
@@ -31,6 +36,7 @@ import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
  */
 
 public class MyInfoActivity extends Activity {
+    private ImageView image;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +50,7 @@ public class MyInfoActivity extends Activity {
             }
         });
         //头像显示
-        ImageView image=findViewById(R.id.image);
+        image=findViewById(R.id.image);
         RequestOptions options = new RequestOptions()
                 .fallback(R.drawable.image).centerCrop();
 
@@ -57,13 +63,14 @@ public class MyInfoActivity extends Activity {
         ima.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ImageUtils.showImagePickDialog(MyInfoActivity.this);
             }
         });
         //昵称
         final EditText nicheng=findViewById(R.id.user_name);
         nicheng.setHint(LoginInfo.user.getNickName());
         final String[] name = {LoginInfo.user.getNickName()};
+
         nicheng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -165,7 +172,8 @@ public class MyInfoActivity extends Activity {
         xiugai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Request request = new Request.Builder().
+                        url(BUILD_URL("averageUser/updateUserInfo"+"?userCode="+ LoginInfo.user.getUserCode())).build();
             }
         });
 
@@ -173,5 +181,46 @@ public class MyInfoActivity extends Activity {
     public void onBackPressed() {
         //返回
         super.onBackPressed();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case ImageUtils.REQUEST_CODE_FROM_ALBUM: {
+
+                if (resultCode == RESULT_CANCELED) {   //取消操作
+                    return;
+                }
+
+                Uri imageUri = data.getData();
+                ImageUtils.copyImageUri(this,imageUri);
+                ImageUtils.cropImageUri(this, ImageUtils.getCurrentUri(), 200, 200);
+                break;
+            }
+            case ImageUtils.REQUEST_CODE_FROM_CAMERA: {
+
+                if (resultCode == RESULT_CANCELED) {     //取消操作
+                    ImageUtils.deleteImageUri(this, ImageUtils.getCurrentUri());   //删除Uri
+                }
+
+                ImageUtils.cropImageUri(this, ImageUtils.getCurrentUri(), 200, 200);
+                break;
+            }
+            case ImageUtils.REQUEST_CODE_CROP: {
+
+                if (resultCode == RESULT_CANCELED) {     //取消操作
+                    return;
+                }
+
+                Uri imageUri = ImageUtils.getCurrentUri();
+                if (imageUri != null) {
+                    image.setImageURI(imageUri);
+                }
+                break;
+            }
+            default:
+                break;
+        }
     }
 }

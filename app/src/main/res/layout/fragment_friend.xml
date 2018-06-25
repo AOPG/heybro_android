@@ -79,8 +79,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_marginLeft="195dp"
-                android:layout_marginTop="15dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/right"/>
         </RelativeLayout>
         <LinearLayout
@@ -123,8 +122,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_marginLeft="195dp"
-                android:layout_marginTop="15dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/right"/>
         </RelativeLayout>
         <LinearLayout
@@ -166,8 +164,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_marginLeft="195dp"
-                android:layout_marginTop="15dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/right"/>
         </RelativeLayout>
             <LinearLayout
@@ -216,8 +213,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:layout_marginLeft="195dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/xiangshang"/>
             </RelativeLayout>
         <LinearLayout

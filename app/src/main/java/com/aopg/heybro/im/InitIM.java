@@ -8,7 +8,10 @@ import android.widget.Toast;
 import com.aopg.heybro.utils.LoginInfo;
 
 import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.api.BasicCallback;
+
+import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
 
 /**
  * Created by 王伟健 on 2018-06-11.
@@ -35,5 +38,15 @@ public class InitIM {
             }
         });
         Looper.loop();
+    }
+
+    public static void logout(Context context){
+        UserInfo myInfo = JMessageClient.getMyInfo();
+        if (myInfo != null) {
+            JMessageClient.logout();
+            Toast.makeText(context, "登出成功", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "登出失败", Toast.LENGTH_SHORT).show();
+        }
     }
 }

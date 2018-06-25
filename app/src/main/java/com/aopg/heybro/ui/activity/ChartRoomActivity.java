@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -17,15 +18,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 
 import com.aopg.heybro.entity.ChatRoomRecord;
+import com.aopg.heybro.entity.User;
 import com.aopg.heybro.ui.adapter.ChartRoomMessageAdapter;
 
+import com.aopg.heybro.ui.adapter.SingleMessageAdapter;
+import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
 
 
+import java.io.IOException;
 import java.util.Date;
 
 
@@ -36,11 +42,17 @@ import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.android.api.options.MessageSendingOptions;
 import cn.jpush.im.api.BasicCallback;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_FROM_USERNAME;
 import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_GROUPID;
 import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_MSGID;
 import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_MSG_TYPE;
+import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
 /**
  * Created by 王伟健 on 2018-06-15.
@@ -60,6 +72,7 @@ public class ChartRoomActivity extends AppCompatActivity {
     private ImageView back;
     private Long roomId;
     private Button roomDetail;
+
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -83,7 +96,7 @@ public class ChartRoomActivity extends AppCompatActivity {
         setContentView(R.layout.chart_room);
         back = findViewById(R.id.room_back);
         messageLv = findViewById(R.id.msg_list_view);
-        chartRoomMessageAdapter = new ChartRoomMessageAdapter(this,roomId,messageLv);
+        chartRoomMessageAdapter = new ChartRoomMessageAdapter(ChartRoomActivity.this,roomId,messageLv);
         messageLv.setAdapter(chartRoomMessageAdapter);
         userMessage = findViewById(R.id.input_msg);
         sendMessage = findViewById(R.id.send_msg);
@@ -108,7 +121,7 @@ public class ChartRoomActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        sendMessage.setClickable(false);
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,7 +166,7 @@ public class ChartRoomActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "发送成功", Toast.LENGTH_SHORT).show();
                             } else {
                                 Log.i(TAG, "JMessageClient.createSingleTextMessage" + ", responseCode = " + i + " ; LoginDesc = " + s);
-                                Toast.makeText(getApplicationContext(), "发送失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "该群组已解散,请尽快填写比赛信息!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -223,6 +236,11 @@ public class ChartRoomActivity extends AppCompatActivity {
             }
         }
     };
+
+
+
+
+
 
     @Override
     protected void onDestroy(){

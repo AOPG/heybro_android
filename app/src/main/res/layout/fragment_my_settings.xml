@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#656862"
@@ -11,20 +11,19 @@
         <!-- 返回 有点击事件-->
         <ImageView
             android:id="@+id/set_back"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
             android:src="@drawable/back"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:text="设置"
-            android:layout_marginLeft="120dp"
-            android:layout_marginTop="15dp"
-            android:textSize="20dp"/>
-    </LinearLayout>
+            android:layout_centerInParent="true"
+            android:textSize="18dp"/>
+    </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,7 +34,9 @@
 
         android:orientation="vertical">
         <!-- 账号与安全有点击事件 跳转到fragment_my_settings_zhanghao界面-->
-        <LinearLayout
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:id="@+id/zhanghaoanquan"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -47,18 +48,19 @@
                 android:layout_height="wrap_content"
                 android:text="账号与安全"
                 android:textColor="#ffffff"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:textSize="16dp"/>
+                android:layout_centerVertical="true"
+                android:textSize="15dp"/>
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="225dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
-        </LinearLayout>
+        </RelativeLayout>
         <!-- 消息通知有点击事件 跳转到fragment_my_settings_tongzhi界面-->
-        <LinearLayout
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:id="@+id/xiaoxitongzhi"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -70,18 +72,19 @@
                 android:layout_height="wrap_content"
                 android:text="消息通知"
                 android:textColor="#ffffff"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:textSize="16dp"/>
+                android:layout_centerVertical="true"
+                android:textSize="15dp"/>
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="240dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
-        </LinearLayout>
+        </RelativeLayout>
         <!-- 隐私设置有点击事件 跳转到fragment_my_settings_yinsi界面-->
-        <LinearLayout
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:id="@+id/yinsi"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -93,18 +96,19 @@
                 android:layout_height="wrap_content"
                 android:text="隐私设置"
                 android:textColor="#ffffff"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:textSize="16dp"/>
+                android:layout_centerVertical="true"
+                android:textSize="15dp"/>
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="240dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
-        </LinearLayout>
+        </RelativeLayout>
         <!-- 通用有点击事件 跳转到fragment_my_settings_tongyong界面-->
-        <LinearLayout
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:id="@+id/tongyong"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -116,18 +120,19 @@
                 android:layout_height="wrap_content"
                 android:text="通用"
                 android:textColor="#ffffff"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:textSize="16dp"/>
+                android:layout_centerVertical="true"
+                android:textSize="15dp"/>
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="270dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
-        </LinearLayout>
+        </RelativeLayout>
         <!-- 帮助与反馈暂不开放-->
-        <LinearLayout
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:id="@+id/help"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -139,18 +144,19 @@
                 android:layout_height="wrap_content"
                 android:text="帮助与反馈"
                 android:textColor="#ffffff"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:textSize="16dp"/>
+                android:layout_centerVertical="true"
+                android:textSize="15dp"/>
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="225dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
-        </LinearLayout>
+        </RelativeLayout>
         <!-- 关于微信暂不开放-->
-        <LinearLayout
+        <RelativeLayout
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
             android:id="@+id/guanyu"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -162,16 +168,15 @@
                 android:layout_height="wrap_content"
                 android:text="关于app"
                 android:textColor="#ffffff"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:textSize="16dp"/>
+                android:layout_centerVertical="true"
+                android:textSize="15dp"/>
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="240dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/right"/>
-        </LinearLayout>
+        </RelativeLayout>
         <!-- 退出登录-->
         <LinearLayout
             android:id="@+id/tuichu"
@@ -179,14 +184,14 @@
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
             android:orientation="horizontal"
-            android:background="#1fffffff"
+            android:background="#ff4422"
             android:gravity="center">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="退出登录"
-    android:textColor="#ff0000"
-    android:textSize="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="退出登录"
+                android:textColor="#ffffff"
+                android:textSize="15dp"/>
         </LinearLayout>
 
 

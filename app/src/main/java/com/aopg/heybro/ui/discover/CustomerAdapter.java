@@ -62,7 +62,6 @@ public class CustomerAdapter extends BaseAdapter{
         TextView text2 = convertView.findViewById(R.id.distrend_textsec);
         TextView text3 = convertView.findViewById(R.id.distrend_textthir);
         TextView text4 = convertView.findViewById(R.id.distrend_textfor);
-        TextView text5 = convertView.findViewById(R.id.distrend_textfif);
 
 
         Map<String,Object> map = data.get(position);
@@ -73,7 +72,6 @@ public class CustomerAdapter extends BaseAdapter{
         text2.setText(map.get("textsec").toString());
         text3.setText(map.get("textthir").toString());
         text4.setText(map.get("textfor").toString());
-        text5.setText(map.get("textfif").toString());
 
         return convertView;
     }

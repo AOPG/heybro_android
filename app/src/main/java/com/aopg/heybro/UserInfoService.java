@@ -1,14 +1,19 @@
 package com.aopg.heybro;
 
 import android.app.IntentService;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.entity.User;
 import com.aopg.heybro.im.InitIM;
 import com.aopg.heybro.ui.activity.LoginActivty;
+import com.aopg.heybro.ui.fragment.FragmentBall;
 import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
 
@@ -28,6 +33,7 @@ import static com.aopg.heybro.utils.HttpUtils.*;
 
 public class UserInfoService extends IntentService {
     private OkHttpClient client;
+    CommandReceiver cmdReceiver;
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
@@ -92,6 +98,11 @@ public class UserInfoService extends IntentService {
                             InitIM.initJmessageUser(LoginInfo.user.getUsername(),
                                     LoginInfo.user.getUserCode(),UserInfoService.this);
                         }
+                        if (LoginInfo.user.getRoomId()==0L){
+                            FragmentBall.setCreateRoomStates(true);
+                        }else {
+                            FragmentBall.setCreateRoomStates(false);
+                        }
                     } else {
 
                     }
@@ -99,13 +110,37 @@ public class UserInfoService extends IntentService {
             });
     }
 
+    private class CommandReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int cmd=intent.getIntExtra("cmd", -1);
+            if(cmd==MainActivity.CMD_STOP_USER_INFO_SERVICE){//如果等于0
+                stopSelf();//停止服务
+            }
+        }
+
+    }
+
+
     @Override
     public void onCreate() {
+        cmdReceiver=new CommandReceiver();
         super.onCreate();
     }
 
     @Override
     public void onDestroy() {
+        Log.e("userInfoService","service已销毁！");
+        this.unregisterReceiver(cmdReceiver);
         super.onDestroy();
+    }
+
+    @Override
+    public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("stopUserInfoService");
+        registerReceiver(cmdReceiver, intentFilter);
+        return super.onStartCommand(intent, flags, startId);
     }
 }

@@ -7,6 +7,7 @@
     <!-- 对于以下图片 如果失败 则是star1
     如果胜利则是star2-->
 <ImageView
+    android:id="@+id/star"
     android:layout_width="40dp"
     android:layout_height="40dp"
     android:layout_marginTop="10dp"
@@ -21,6 +22,7 @@
        >
         <!-- 对于以下文本 胜利就是  胜    输了就是   负-->
         <TextView
+            android:id="@+id/result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -38,11 +40,13 @@
         android:layout_marginLeft="5dp">
 
         <TextView
+            android:id="@+id/defen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="得分:0"
             android:textColor="#ffffff" />
         <TextView
+            android:id="@+id/gaimao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="盖帽:0"
@@ -55,11 +59,13 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp">
         <TextView
+            android:id="@+id/lanban"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="篮板:0"
             android:textColor="#ffffff"/>
         <TextView
+            android:id="@+id/qiangduan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="抢断:0"
@@ -72,11 +78,13 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp">
         <TextView
+            android:id="@+id/zhugong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="助攻:0"
             android:textColor="#ffffff"/>
         <TextView
+            android:id="@+id/shiwu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="失误:0"

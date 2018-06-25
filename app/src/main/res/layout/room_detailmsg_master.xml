@@ -126,7 +126,7 @@
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="模  式"
+                    android:text="模         式"
                     android:textColor="#bbbbbb" />
                 <!--设置模式-->
                 <LinearLayout

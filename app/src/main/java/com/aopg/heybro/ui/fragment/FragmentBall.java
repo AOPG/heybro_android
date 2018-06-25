@@ -1,12 +1,16 @@
 package com.aopg.heybro.ui.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,9 +28,11 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.BasketRoomInfo;
 import com.aopg.heybro.ui.activity.ChartRoomActivity;
+import com.aopg.heybro.ui.activity.LoginActivty;
 import com.aopg.heybro.ui.room.HorizontaRoomlListViewAdapter;
 import com.aopg.heybro.ui.room.HorizontalRoomListView;
 import com.aopg.heybro.ui.room.RoomDate;
@@ -75,20 +81,28 @@ public class FragmentBall extends Fragment{
     List<RoomDate> roomDateList;
     List<Map<String,Object>> roomUserList;
     private  List<Map<String,Object>> list;
+    List<RoomDate> userRoomInfoT;
     private Integer roomId = 0;
-    private Integer ballRoomPeo = 0;
-    private Integer ballRoomNum = 0;
-    private String ballRoomName = "";
+    private View joinRoomView;
     private View viewRoomView;
-    private HorizontalRoomListView hListView;
-    private HorizontaRoomlListViewAdapter hListViewAdapter;
+    HorizontalRoomListView hListView;
+    HorizontaRoomlListViewAdapter hListViewAdapter;
     private Handler ReduceHandler;
     private Integer joinFlag = 1;
     private String joinRoomPass;
     private EditText textJoinRoomPass;
+    private TextView textViewJoinRoomPass;
     private Integer flag = 1;
     private String roomPass;
     private Handler handler;
+    private Handler judgeUserHandler;
+    private Handler joinRoomHandker;
+    private static Button btn_create;
+    private String joinRoomPassSet;
+    private String roomName;
+
+    //判断用户是否已经拥有房间
+    private Integer whetherHaveRoom = 0;
 
 
     @Nullable
@@ -122,8 +136,9 @@ public class FragmentBall extends Fragment{
      * 创建房间
      */
     public void createRoom(){
-        final Button btn_create = rootView.findViewById(R.id.btn_create);
+        btn_create = rootView.findViewById(R.id.btn_create);
         basketRoomInfo = new BasketRoomInfo();
+        btn_create.setClickable(false);
         btn_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,8 +174,8 @@ public class FragmentBall extends Fragment{
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         if(getActivity().getResources().getStringArray(R.array.spinner_rate)[i].equals("无限制")){
-                            basketRoomInfo.setRateLow(0);
-                            basketRoomInfo.setRateHigh(0);
+                            basketRoomInfo.setRateLow(1);
+                            basketRoomInfo.setRateHigh(9);
                         }else if(getActivity().getResources().getStringArray(R.array.spinner_rate)[i].equals("Ⅰ-Ⅲ")){
                             basketRoomInfo.setRateLow(1);
                             basketRoomInfo.setRateHigh(3);
@@ -171,8 +186,8 @@ public class FragmentBall extends Fragment{
                             basketRoomInfo.setRateLow(7);
                             basketRoomInfo.setRateHigh(9);
                         }else{
-                            basketRoomInfo.setRateLow(0);
-                            basketRoomInfo.setRateHigh(0);
+                            basketRoomInfo.setRateLow(1);
+                            basketRoomInfo.setRateHigh(9);
                         }
                     }
 
@@ -201,24 +216,20 @@ public class FragmentBall extends Fragment{
                  * 完成创建
                  */
                 Button btn_create_finish = createRoomView.findViewById(R.id.btn_create_finish);
-                    btn_create_finish.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if(LoginInfo.user.getRoomId() == 0||LoginInfo.user.getRoomId() == null) {
-                                basketRoomInfo.setRoomName(roomName.getText().toString());
-                                if (passwordSet.getText().toString() != null) {
-                                    password = passwordSet.getText().toString();
-                                }
-                                basketRoomInfo.setType(0);
-                                basketRoomInfo.setMaster(LoginInfo.user.getUserCode());
-                                basketRoomInfo.setRoomId(-1L);
-                                //设置房间Id
-                                createImRoom(basketRoomInfo.getRoomName(), "");
-                            }else{
-                                Toast.makeText(getApplicationContext(), "您已经创建或者加入一个房间，无需再创建", Toast.LENGTH_SHORT).show();
-                            }
+                btn_create_finish.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        basketRoomInfo.setRoomName(roomName.getText().toString());
+                        if (passwordSet.getText().toString() != null) {
+                            password = passwordSet.getText().toString();
                         }
-                    });
+                        basketRoomInfo.setType(0);
+                        basketRoomInfo.setMaster(LoginInfo.user.getUserCode());
+                        basketRoomInfo.setRoomId(0L);
+                        //设置房间Id
+                        createImRoom(basketRoomInfo.getRoomName(), "");
+                    }
+                });
                 /**
                  * 关闭创建房间
                  */
@@ -262,35 +273,39 @@ public class FragmentBall extends Fragment{
                 String result = response.body().string();
 
                 String success = (JSONObject.parseObject(result)).getString("success");
-                if (null!=success&&success.equals("true")) {
 
-                    JSONArray concernInfo =
+                if (null != success&&success.equals("true")) {
+
+                    JSONArray roomListInfo =
                             ((JSONObject)((JSONObject.parseObject(result)).get("data"))).getJSONArray("list");
                     roomDateList = new ArrayList<>();
-                    for (int i = 0; i < concernInfo.size(); i++) {
+                    for (int i = 0; i < roomListInfo.size(); i++) {
                         RoomDate roomDate = new RoomDate();
                         String roomId =
-                                ((JSONObject)concernInfo.get(i)).getString("roomId");
+                                ((JSONObject)roomListInfo.get(i)).getString("roomId");
                         String roomNum =
-                                ((JSONObject)concernInfo.get(i)).getString("roomNum");
+                                ((JSONObject)roomListInfo.get(i)).getString("roomNum");
                         String roomPeo =
-                                ((JSONObject)concernInfo.get(i)).getString("roomPeo");
+                                ((JSONObject)roomListInfo.get(i)).getString("roomPeo");
                         String roomName =
-                                ((JSONObject)concernInfo.get(i)).getString("roomName");
+                                ((JSONObject)roomListInfo.get(i)).getString("roomName");
                         String roomPass =
-                                ((JSONObject)concernInfo.get(i)).getString("roomPass");
+                                ((JSONObject)roomListInfo.get(i)).getString("roomPass");
+                        String roomPassSet =
+                                ((JSONObject)roomListInfo.get(i)).getString("roomPassSet");
 
                         roomDate.setRoomId(roomId);
                         roomDate.setRoomName(roomName);
                         roomDate.setRoomNum(roomNum);
                         roomDate.setRoomPro(roomPeo);
                         roomDate.setRoomPass(roomPass);
+                        roomDate.setRoomPassSet(roomPassSet);
 
                         roomDateList.add(roomDate);
 
                     }
 
-                    Message message = handler.obtainMessage(0,"formCallBackk");
+                    Message message = handler.obtainMessage(0,"formCallBack");
                     handler.sendMessage(message);
 
                 }
@@ -317,6 +332,7 @@ public class FragmentBall extends Fragment{
         };
 
     }
+
 
     /**
      * 快速匹配
@@ -351,6 +367,7 @@ public class FragmentBall extends Fragment{
         });
     }
 
+
     /**
      * 向远程数据库添加房间信息
      */
@@ -384,11 +401,17 @@ public class FragmentBall extends Fragment{
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String result = response.body().string();
-                Log.e("msg",result);
-                JSONObject roomInfo =
-                        (JSONObject)((JSONObject)((JSONObject.parseObject(result)).get("data"))).get("room");
+                String haveRoom = (JSONObject.parseObject(result)).getString("msg");
+                if(null != haveRoom&&haveRoom.equals("已经加入或创建一个房间，无需创建")){
+                    Looper.prepare();
+                    Toast.makeText(getApplicationContext(), "您已经创建或者加入一个房间，无需再创建", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }
+                Log.e("result",result);
                 String success = (JSONObject.parseObject(result)).getString("success");
                 if(null!=success&&success.equals("true")) {
+                    JSONObject roomInfo =
+                            (JSONObject)((JSONObject)((JSONObject.parseObject(result)).get("data"))).get("room");
                     Long roomId = Long.parseLong(roomInfo.getString("roomId"));
                     String roomName = roomInfo.getString("roomName");
                     Intent roomIntent = new Intent(getActivity(), ChartRoomActivity.class);
@@ -406,13 +429,15 @@ public class FragmentBall extends Fragment{
             @Override
             public void gotResult(int responseCode, String responseMsg, long groupId) {
                 if (responseCode == 0) {
+                    btn_create.setClickable(false);
                     //创建成功
                     basketRoomInfo.setRoomId(groupId);
+                    LoginInfo.user.setRoomId(groupId);
                     httpInsertRoom(basketRoomInfo,password);
                 }
             }
         };
-        JMessageClient.createGroup(roomName, roomDesc, callback);
+        JMessageClient.createPublicGroup(roomName, roomDesc, callback);
     }
 
     /**
@@ -431,11 +456,9 @@ public class FragmentBall extends Fragment{
         SimpleDateFormat forma=new SimpleDateFormat(ma);
         String nwdate=forma.format(date);
 
-        if (roomDateList.size()>0){
+        if (roomDateList.size()>0 && roomDateList != null){
             for (int i = 0;i<roomDateList.size();i++){
-                System.out.println(roomDateList.size());
-                System.out.println(roomDateList.get(i).getRoomId());
-                roomCode[i] = roomDateList.get(i).getRoomId();
+                roomCode[i] = ""+nwdate+roomDateList.get(i).getRoomId();
                 roomTitle[i] = roomDateList.get(i).getRoomName();
                 roomNum[i] = ""+roomDateList.get(i).getRoomPro()+"/"+roomDateList.get(i).getRoomNum();
             }
@@ -451,23 +474,17 @@ public class FragmentBall extends Fragment{
 
         hListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @SuppressLint("HandlerLeak")
             @Override
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
 
                 hListViewAdapter.setSelectIndex(position);
                 hListViewAdapter.notifyDataSetChanged();
-                System.out.println(roomDateList.get(position).getRoomId()+222);
-
-
                 roomId = Integer.parseInt(roomDateList.get(position).getRoomId());
-                System.out.println(roomDateList.get(position).getRoomPro().length());
-                if (roomDateList.get(position).getRoomPro().length()>0 ) {
-                    ballRoomPeo = Integer.parseInt(roomDateList.get(position).getRoomPro());
-                }
-                ballRoomNum = Integer.parseInt(roomDateList.get(position).getRoomNum());
                 roomPass = roomDateList.get(position).getRoomPass();
-                ballRoomName = roomDateList.get(position).getRoomName();
+                joinRoomPassSet = roomDateList.get(position).getRoomPassSet();
+                roomName = roomDateList.get(position).getRoomName();
 
                 /**
                  * 查询房间详情信息
@@ -490,16 +507,16 @@ public class FragmentBall extends Fragment{
                         String success = (JSONObject.parseObject(result)).getString("success");
                         if (null!=success&&success.equals("true")) {
                             roomUserList = new ArrayList<>();
-                            JSONArray concernInfo =
+                            JSONArray userInfo =
                                     ((JSONObject)((JSONObject.parseObject(result)).get("data"))).getJSONArray("list");
-                            for (int i = 0; i < concernInfo.size(); i++) {
+                            for (int i = 0; i < userInfo.size(); i++) {
                                 RoomUser roomUser = new RoomUser();
                                 String userName =
-                                        ((JSONObject)concernInfo.get(i)).getString("userName");
+                                        ((JSONObject)userInfo.get(i)).getString("userName");
                                 String userIntro =
-                                        ((JSONObject)concernInfo.get(i)).getString("userIntro");
+                                        ((JSONObject)userInfo.get(i)).getString("userIntro");
                                 String userPortrait =
-                                        ((JSONObject)concernInfo.get(i)).getString("userPortrait");
+                                        ((JSONObject)userInfo.get(i)).getString("userPortrait");
 
 
                                 Map<String,Object> map = new HashMap<>();
@@ -536,6 +553,11 @@ public class FragmentBall extends Fragment{
                         switch (msg.what) {
                             case 1:
                                 viewRoomView = LayoutInflater.from(getContext()).inflate(R.layout.join_room, null, false);
+
+                                //获取密码框
+                                textJoinRoomPass = viewRoomView.findViewById(R.id.roomPassword);
+                                textViewJoinRoomPass = viewRoomView.findViewById(R.id.textViewRoomPass);
+
                                 if (null == window || !window.isShowing()) {
                                     //加入listView
                                     if (joinFlag == 1) {
@@ -543,12 +565,100 @@ public class FragmentBall extends Fragment{
                                         lv.setAdapter(new RoomJoinAdapter(viewRoomView.getContext(), roomUserList, R.layout.basketball_joinroom_item));
                                     }
 
-                                    window = new PopupWindow(viewRoomView, 850, 1000, true);
-                                    // 设置PopupWindow是否能响应外部点击事件
-                                    window.setOutsideTouchable(false);
-                                    // 设置PopupWindow是否能响应点击事件
-                                    window.setTouchable(true);
-                                    window.showAtLocation(view, Gravity.LEFT, 20, -200);
+
+                                    //该房间设立密码为1 没有设立密码为0
+                                    //该功能暂时没因为进入讨论组而能修改密码改善
+                                    if ("1".equals(joinRoomPassSet)){
+
+
+                                    } else if("0".equals(joinRoomPassSet)){
+                                        textJoinRoomPass.setVisibility(View.GONE);
+                                        textViewJoinRoomPass.setVisibility(View.GONE);
+                                    }
+
+
+                                    /**
+                                     *  查询该用户拥有的房间信息
+                                     *  该用户只能进入自己的房间
+                                     */
+
+                                    Request request = new Request.Builder().
+                                            url(BUILD_URL("BasketBallRoom/WethereHaveRoom?userCode="+LoginInfo.user.getUserCode())).build();
+                                    Call call = client.newCall(request);
+                                    call.enqueue(new okhttp3.Callback() {//4.回调方法
+                                        @Override
+                                        public void onFailure(Call call, IOException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        @Override
+                                        public void onResponse(Call call, Response response) throws IOException {
+
+
+                                            String result = response.body().string();
+
+                                            String success = (JSONObject.parseObject(result)).getString("success");
+                                            if (null!=success&&success.equals("true")) {
+                                                userRoomInfoT = new ArrayList<>();
+                                                JSONArray userRoomInfo =
+                                                        ((JSONObject)((JSONObject.parseObject(result)).get("data"))).getJSONArray("list");
+                                                for (int i = 0; i < userRoomInfo.size(); i++) {
+                                                    RoomDate roomDate = new RoomDate();
+                                                    String roomId =
+                                                            ((JSONObject)userRoomInfo.get(i)).getString("roomId");
+
+                                                    roomDate.setRoomId(roomId);
+
+                                                    userRoomInfoT.add(roomDate);
+
+                                                }
+                                                Message message = judgeUserHandler.obtainMessage(1,userRoomInfoT.get(0).getRoomId());
+                                                judgeUserHandler.sendMessage(message);
+                                            }
+                                        }
+                                    });
+
+                                    /**
+                                     * 判断用户向主线程发送消息
+                                     */
+                                    judgeUserHandler = new Handler(){
+                                        @Override
+                                        public void handleMessage(Message msg) {
+                                            super.handleMessage(msg);
+                                            switch (msg.what) {
+                                                case 1:
+
+                                                    if (roomId.toString().equals(msg.obj.toString())){
+                                                        Toast.makeText(getApplicationContext(), "调用加入房间逻辑（已加入房间）", Toast.LENGTH_SHORT).show();
+
+
+//                                                        Intent intent = new Intent();
+//                                                        intent.setComponent(new ComponentName(rootView.getContext(), ChartRoomActivity.class));
+//                                                        intent.putExtra("roomId",Long.parseLong(roomId.toString()));
+//                                                        intent.putExtra("roomName",roomName);
+//                                                        startActivity(intent);
+
+                                                    }else if ("0".equals(msg.obj.toString())){
+
+                                                        window = new PopupWindow(viewRoomView, 850, 1000, true);
+                                                        // 设置PopupWindow是否能响应外部点击事件
+                                                        window.setOutsideTouchable(false);
+                                                        // 设置PopupWindow是否能响应点击事件
+                                                        window.setTouchable(true);
+                                                        window.showAtLocation(view, Gravity.LEFT, 20, -200);
+                                                    }else{
+                                                        Toast.makeText(getApplicationContext(), "您已经加入其它房间！", Toast.LENGTH_SHORT).show();
+                                                    }
+
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        }
+                                    };
+
+
+
                                 }
                                 /**
                                  * 关闭房间信息
@@ -563,37 +673,99 @@ public class FragmentBall extends Fragment{
                                     }
                                 });
 
+
+
+
+
+
                                 /**
                                  *  点击进入房间按钮
                                  */
-                                textJoinRoomPass = viewRoomView.findViewById(R.id.spinner4);
+
                                 Button joinRoom = viewRoomView.findViewById(R.id.join_room);
                                 joinRoom.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         flag = 1;
                                         joinRoomPass = textJoinRoomPass.getText().toString();
+
                                         //密码验证
-                                        if (joinRoomPass.length()!=4 && flag == 1){
-                                            Toast.makeText(getApplicationContext(), "请输入4位密码", Toast.LENGTH_SHORT).show();
-                                            flag = 0;
-                                        }
-                                        if (!roomPass.equals(joinRoomPass) && flag == 1){
-                                            Toast.makeText(getApplicationContext(), "输入房间密码不正确！", Toast.LENGTH_SHORT).show();
-                                            flag = 0;
+                                        if ("1".equals(joinRoomPassSet)){
+                                            if (joinRoomPass.length()!=4 && flag == 1){
+                                                Toast.makeText(getApplicationContext(), "请输入4位密码", Toast.LENGTH_SHORT).show();
+                                                flag = 0;
+                                            }
+                                            if (!roomPass.equals(joinRoomPass) && flag == 1){
+                                                Toast.makeText(getApplicationContext(), "输入房间密码不正确！", Toast.LENGTH_SHORT).show();
+                                                flag = 0;
+                                            }
                                         }
 
-                                        if (ballRoomPeo >= ballRoomNum && flag == 1){
-                                            Toast.makeText(getApplicationContext(), "房间已满！", Toast.LENGTH_SHORT).show();
-                                            flag = 0;
-                                        }
 
                                         if (flag == 1){
+
+                                            System.out.println(3333);
+                                            System.out.println(roomId);
                                             System.out.println(LoginInfo.user.getUserCode());
-                                            Toast.makeText(getApplicationContext(), "登陆成功！", Toast.LENGTH_SHORT).show();
+
+                                            /**
+                                             *  该用户进入房间，填充三表
+                                             */
+
+                                            Request request = new Request.Builder().
+                                                    url(BUILD_URL("BasketBallRoom/JoinBallRoom?roomId="+ roomId+"&userCode="+LoginInfo.user.getUserCode())).build();
+                                            Call call = client.newCall(request);
+                                            call.enqueue(new okhttp3.Callback() {//4.回调方法
+                                                @Override
+                                                public void onFailure(Call call, IOException e) {
+                                                    e.printStackTrace();
+                                                }
+
+                                                @Override
+                                                public void onResponse(Call call, Response response) throws IOException {
+
+
+                                                    String result = response.body().string();
+
+                                                    String success = (JSONObject.parseObject(result)).getString("success");
+                                                    if (null!=success&&success.equals("true")) {
+                                                        System.out.println(44444444);
+                                                        Message message = joinRoomHandker.obtainMessage(1,"success");
+                                                        joinRoomHandker.sendMessage(message);
+                                                    }
+                                                }
+                                            });
+
                                         }
                                     }
                                 });
+
+
+                                /**
+                                 * 进入房间逻辑
+                                 */
+                                joinRoomHandker = new Handler(){
+                                    @Override
+                                    public void handleMessage(Message msg) {
+                                        super.handleMessage(msg);
+                                        switch (msg.what) {
+                                            case 1:
+
+                                                Toast.makeText(getApplicationContext(), "加入房间成功（暂时不拥有房间）！", Toast.LENGTH_SHORT).show();
+
+//                                                Intent intent = new Intent();
+//                                                intent.setComponent(new ComponentName(rootView.getContext(), ChartRoomActivity.class));
+//                                                intent.putExtra("roomId",Long.parseLong(roomId.toString()));
+//                                                intent.putExtra("roomName",roomName);
+//                                                startActivity(intent);
+
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                };
+
 
                                 break;
                             default:
@@ -601,10 +773,15 @@ public class FragmentBall extends Fragment{
                         }
                     }
                 };
+
+
+
+
             }
         });
-
     }
 
-
+    public static void setCreateRoomStates(boolean flag){
+        btn_create.setClickable(flag);
+    }
 }

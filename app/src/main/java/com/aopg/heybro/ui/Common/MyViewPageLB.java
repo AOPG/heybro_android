@@ -67,7 +67,6 @@ public class MyViewPageLB  extends AppCompatActivity {
             //下面封装viewpager的适配器
             MyViewPageLBF adapter = new MyViewPageLBF(list);
             mVp.setAdapter(adapter);
-
             //设置ViewPager对象页面变化时的监听
             mVp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -151,7 +150,7 @@ public class MyViewPageLB  extends AppCompatActivity {
 
     private int[] getImages(){
 
-        return new int[]{R.drawable.demoa,R.drawable.demob,R.drawable.democ};
+        return new int[]{R.drawable.a,R.drawable.b,R.drawable.c};
 
 
     }

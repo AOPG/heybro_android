@@ -329,25 +329,25 @@
                 android:layout_marginTop="20dip"
                 android:orientation="horizontal" >
 
-                <WheelView
+                <com.aopg.heybro.ui.position.WheelView
                     android:id="@+id/id_province"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" >
-                </WheelView>
+                    android:layout_weight="1"></com.aopg.heybro.ui.position.WheelView>
 
-                <WheelView
+                <com.aopg.heybro.ui.position.WheelView
                     android:id="@+id/id_city"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" >
-                </WheelView>
-                <WheelView
+                </com.aopg.heybro.ui.position.WheelView>
+               <!-- <com.aopg.heybro.ui.position.WheelView
                     android:id="@+id/id_district"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" >
-                </WheelView>
+                </com.aopg.heybro.ui.position.WheelView>
+                -->
             </LinearLayout>
 
             <Button

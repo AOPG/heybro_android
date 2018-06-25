@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.UserInfoService;
 import com.aopg.heybro.ui.activity.MyInfoActivity;
+import com.aopg.heybro.ui.activity.Mydata;
 import com.aopg.heybro.ui.activity.Myrili;
 import com.aopg.heybro.ui.activity.SaoyisaoActivity;
 import com.aopg.heybro.ui.activity.SettingActivity;
@@ -253,6 +255,17 @@ public class FragmentMy extends Fragment {
             }
         });
         /**
+         * 数据
+         * */
+        ImageView shuju=rootView.findViewById(R.id.data);
+        shuju.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shujuIntent = new Intent(getActivity(), Mydata.class);
+                startActivity(shujuIntent);
+            }
+        });
+        /**
          * 客服
          * */
         ImageView kefu=rootView.findViewById(R.id.kefu);
@@ -298,9 +311,11 @@ public class FragmentMy extends Fragment {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    System.out.println("收到mainactivity的消息！--------------------------------");
+                    System.out.println("收到更新用户信息的消息！--------------------------------");
                     loadInfo();
                     break;
+                case 403:
+                    System.out.println("收到更新房间信息的消息！--------------------------------");
             }
         }
     };

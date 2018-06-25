@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aopg.heybro.entity.User;
 import com.aopg.heybro.service.TimerTaskService;
@@ -37,18 +38,29 @@ import com.baidu.mapapi.SDKInitializer;
 import org.litepal.crud.DataSupport;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.callback.GetUserInfoCallback;
+import cn.jpush.im.android.api.callback.GetUserInfoListCallback;
+import cn.jpush.im.android.api.event.GroupApprovalEvent;
 import cn.jpush.im.android.api.event.LoginStateChangeEvent;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
+
+import static com.aopg.heybro.utils.ThreadUtils.findAllThreads;
 
 public class MainActivity extends AppCompatActivity {
     private Handler mHandler;
+    private Handler mFridendHandler;
     private FragmentTabHost myTabHost;
     private Map<String,Map<String,Object>> map;
     private static String LAST_SELECT = "basketball";
     MyBroadcastReceiver mbcr;
     private BaiduMapLocationUtil baiduMapLocationUtil;
+    public static Integer CMD_STOP_USER_INFO_SERVICE = 0;
+    private Thread userInfoThread;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -74,23 +86,8 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter();
         filter.addAction("FragmentMy");
         registerReceiver(mbcr, filter);// 注册
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                while (true){
-                    Log.e("mainactivity",
-                            "------------------------启动service--------------------------");
-                    startService(new Intent(MainActivity.this, UserInfoService.class));
-                    try {
-                        sleep(300000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        }.start();
+        userInfoThread = new UserInfoThread();
+        userInfoThread.start();
 
         //底部tabhost改变图标
         myTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -153,6 +150,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         baiduMapLocationUtil.onStop();
+    }
+
+    public class UserInfoThread extends Thread{
+        // 用于停止线程
+        private boolean stopMe = true;
+
+        public void stopMe() {
+            Log.e("userInfoThread","我被终止了！");
+            stopMe = false;
+        }
+
+        @Override
+        public void run() {
+            while (stopMe) {
+                this.setName("userInfoThread");
+                Log.e("mainactivity",
+                        "------------------------启动service--------------------------");
+                MainActivity.this.startService(new Intent(MainActivity.this, UserInfoService.class));
+                try {
+                    sleep(300000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /**
@@ -251,15 +273,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             //对接收到的广播进行处理，intent里面包含数据
+            System.out.println("收到广播！----------------------------");
             Message msg = mHandler.obtainMessage();
             msg.what =0;
             mHandler.sendMessage(msg);
-            context.unregisterReceiver(this);
+
         }
     }
 
     public void setHandler(Handler handler) {
         mHandler = handler;
+    }
+
+    public void setFragmentFriendHandler(Handler handler) {
+        mFridendHandler = handler;
     }
 
 
@@ -282,10 +309,23 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case AlertDialog.BUTTON_POSITIVE:// "确认"按钮退出程序
-                        Intent intent = new Intent(MainActivity.this, LoginActivty.class);
+                        Thread[] threads = findAllThreads();
+                        for (int i = 0; i < threads.length; i++) {
+                            if (threads[i].getName().equals("userInfoThread")){
+                                ((UserInfoThread)threads[i]).stopMe();
+                            }
+                        }
+
                         LoginInfo.ISLOGINIM=0;
                         LoginInfo.user.setIsLogin(0);
                         LoginInfo.user.updateAll("userName = ?",LoginInfo.user.getUsername());
+
+                        LoginInfo.user = new User();
+                        //刷新用户信息为空,向MainActivity发送信息刷新请求
+                        Intent intentRefresh = new Intent("FragmentMy");
+                        sendBroadcast(intentRefresh);
+
+                        Intent intent = new Intent(MainActivity.this, LoginActivty.class);
                         startActivity(intent);
                         break;
                 }
@@ -298,5 +338,65 @@ public class MainActivity extends AppCompatActivity {
     public void startTimerTaskService(){
         Intent it=new Intent(this, TimerTaskService.class);
         startService(it);
+    }
+
+    public void onEvent(final GroupApprovalEvent event) {
+        event.getFromUserInfo(new GetUserInfoCallback() {
+            @Override
+            public void gotResult(int responseCode, String responseMessage, UserInfo info) {
+                if (0 == responseCode) {
+                    final String fromUsername = info.getUserName();
+                    final String fromUserAppKey = info.getAppKey();
+                    if (event.getType() == GroupApprovalEvent.Type.apply_join_group) {
+                        event.acceptGroupApproval(fromUsername, fromUserAppKey, new BasicCallback() {
+                            @Override
+                            public void gotResult(int responseCode, String responseMessage) {
+                                if (0 == responseCode) {
+                                    Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Log.i("GroupApprovalEvent", "acceptApplyJoinGroup failed," + " code = " + responseCode + ";msg = " + responseMessage);
+                                    Toast.makeText(getApplicationContext(), "添加失败", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    } else if (event.getType() == GroupApprovalEvent.Type.invited_into_group) {
+                            event.getApprovalUserInfoList(new GetUserInfoListCallback() {
+                            @Override
+                            public void gotResult(int responseCode, String responseMessage, List<UserInfo> userInfoList) {
+                                if (0 == responseCode) {
+                                    Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "被邀请人userInfo未找到", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mbcr);
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onRestart() {
+        startService(new Intent(MainActivity.this, UserInfoService.class));
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.e("mianActivity","onResume被调用！");
+        if (LoginInfo.FragmentFriendISCREATE==1){
+            Log.e("mianActivity","onResume被调用！");
+            Message msg = mFridendHandler.obtainMessage();
+            msg.what =403;
+            mFridendHandler.sendMessage(msg);
+        }
+        super.onResume();
     }
 }

@@ -1,6 +1,7 @@
 package com.aopg.heybro.ui.fragment;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.BasketRoomInfo;
 import com.aopg.heybro.entity.Concern;
@@ -62,6 +64,7 @@ public class FragmentFriend extends Fragment {
     private TextView roomNameTv;
     private TextView roomPeopleNumTv;
     private RelativeLayout fangjian;
+    private MainActivity mActivity;
     private SynthesizedImageView roomImage;
 
     @Nullable
@@ -79,6 +82,8 @@ public class FragmentFriend extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }
+
+        LoginInfo.FragmentFriendISCREATE=1;
 
         mainHandler = new MainHandler();
         roomNameTv = rootView.findViewById(R.id.roomName);
@@ -125,7 +130,7 @@ public class FragmentFriend extends Fragment {
         fangjian = rootView.findViewById(R.id.fangjian);
         fangjian.setClickable(false);
 
-        if (LoginInfo.user.getRoomId()!=0){
+        if (null!=LoginInfo.user.getRoomId()&&LoginInfo.user.getRoomId()!=0){
             loadRoomInfo();
             getRoomUserImage();
         }else {
@@ -159,6 +164,9 @@ public class FragmentFriend extends Fragment {
                     basketRoomInfo.setRoomRealNum(Integer.parseInt(roomInfo.getString("roomPeo")));
                     basketRoomInfo.setRoomName(roomInfo.getString("roomName"));
                     Message message = mainHandler.obtainMessage(400,basketRoomInfo);
+                    mainHandler.sendMessage(message);
+                }else{
+                    Message message = mainHandler.obtainMessage(402,"");
                     mainHandler.sendMessage(message);
                 }
             }
@@ -195,12 +203,18 @@ public class FragmentFriend extends Fragment {
                 case 401:
                     ArrayList<String> imageUrls = (ArrayList<String>) msg.obj;
                     int imageSize = DensityUtils.dp2px(getApplicationContext(), 120);
+                    roomImage.setVisibility(ImageView.VISIBLE);
                     roomImage.displayImage(imageUrls)
                         .synthesizedWidthHeight(imageSize, imageSize)
                         .defaultImage(R.mipmap.ic_launcher_round)
                         .load();
+                    Log.e("roomImage","房间图片已生成！");
                     break;
 
+                case 402:
+                    roomNameTv.setText("您还没有加入任何房间!");
+                    roomPeopleNumTv.setText("");
+                    roomImage.setVisibility(ImageView.GONE);
             }
         }
     }
@@ -234,5 +248,30 @@ public class FragmentFriend extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        loadRoomInfo();
+        super.onResume();
+    }
+
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = (MainActivity) activity;
+        mActivity.setFragmentFriendHandler(handler);
+
+    }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 403:
+                    System.out.println("收到更新房间信息的消息！--------------------------------");
+                    loadRoomInfo();
+                    break;
+            }
+        }
+    };
 
 }
