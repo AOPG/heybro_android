@@ -18,7 +18,7 @@
             android:layout_marginLeft="15dp"
             android:gravity="center"
             android:layout_marginTop="15dp"
-            android:background="@color/topbar_3">
+            android:background="@drawable/topbar_3">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:id="@+id/sure_btn"
-            android:background="@color/topbar_3"
+            android:background="@drawable/topbar_3"
             android:gravity="center"
             android:textSize="17sp"
             android:layout_marginTop="10dp"

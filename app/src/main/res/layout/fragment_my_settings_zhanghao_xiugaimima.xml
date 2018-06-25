@@ -125,7 +125,7 @@
                     android:id="@+id/passwordxiugai"
                     android:layout_width="350dp"
                     android:layout_height="40dp"
-                    android:background="#ff1111"
+                    android:background="@drawable/unlogin"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:text="修改"

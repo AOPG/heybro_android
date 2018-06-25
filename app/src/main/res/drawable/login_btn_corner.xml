@@ -6,4 +6,8 @@
         android:topRightRadius="10dp"
         android:bottomRightRadius="10dp"
         android:bottomLeftRadius="10dp"/>
+    <gradient
+        android:angle="0"
+        android:endColor="#324BD7"
+        android:startColor="#9F79EE" />
 </shape>

@@ -184,7 +184,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
             android:orientation="horizontal"
-            android:background="#ff4422"
+            android:background="@drawable/unlogin"
             android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
@@ -193,8 +193,6 @@
                 android:textColor="#ffffff"
                 android:textSize="15dp"/>
         </LinearLayout>
-
-
     </LinearLayout>
     </ScrollView>
 </LinearLayout>

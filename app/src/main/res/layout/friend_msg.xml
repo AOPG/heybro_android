@@ -260,7 +260,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
-        android:background="#9FF43C"
+        android:background="@drawable/tianqibgm"
         android:text="关注"
         android:textColor="#ffffff"
         android:textSize="20dp"/>
