@@ -622,11 +622,11 @@ public class FragmentGame extends Fragment {
                                                         Toast.makeText(getApplicationContext(), "调用加入房间逻辑（已加入房间）", Toast.LENGTH_SHORT).show();
 
 
-//                                                        Intent intent = new Intent();
-//                                                        intent.setComponent(new ComponentName(rootView.getContext(), ChartRoomActivity.class));
-//                                                        intent.putExtra("roomId",Long.parseLong(roomId.toString()));
-//                                                        intent.putExtra("roomName",roomName);
-//                                                        startActivity(intent);
+                                                        Intent intent = new Intent();
+                                                        intent.setComponent(new ComponentName(rootView.getContext(), ChartRoomActivity.class));
+                                                        intent.putExtra("roomId",Long.parseLong(roomId.toString()));
+                                                        intent.putExtra("roomName",roomName);
+                                                        startActivity(intent);
 
 
 
@@ -664,9 +664,6 @@ public class FragmentGame extends Fragment {
                                         }
                                     }
                                 });
-
-
-
 
 
 
@@ -755,23 +752,23 @@ public class FragmentGame extends Fragment {
                                                 }
 
                                                 //申请加入讨论组
-//                                                JMessageClient.applyJoinGroup(roomId,"", new BasicCallback() {
-//                                                    @Override
-//                                                    public void gotResult(int responseCode, String responseMessage) {
-//                                                        if (responseCode == 0) {
-//                                                            Toast.makeText(rootView.getContext(), "申请成功", Toast.LENGTH_SHORT).show();
-//                                                        } else {
-//                                                            Log.d(TAG, "apply failed. code :" + responseCode + " msg : " + responseMessage);
-//                                                            Toast.makeText(rootView.getContext(), "申请失败", Toast.LENGTH_SHORT).show();
-//                                                        }
-//                                                    }
-//                                                });
-//
-//                                                Intent intent = new Intent();
-//                                                intent.setComponent(new ComponentName(rootView.getContext(), ChartRoomActivity.class));
-//                                                intent.putExtra("roomId",Long.parseLong(roomId.toString()));
-//                                                intent.putExtra("roomName",roomName);
-//                                                startActivity(intent);
+                                                JMessageClient.applyJoinGroup(roomId,"", new BasicCallback() {
+                                                    @Override
+                                                    public void gotResult(int responseCode, String responseMessage) {
+                                                        if (responseCode == 0) {
+                                                            Toast.makeText(rootView.getContext(), "申请成功", Toast.LENGTH_SHORT).show();
+                                                        } else {
+                                                            Log.d(TAG, "apply failed. code :" + responseCode + " msg : " + responseMessage);
+                                                            Toast.makeText(rootView.getContext(), "申请失败", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
+
+                                                Intent intent = new Intent();
+                                                intent.setComponent(new ComponentName(rootView.getContext(), ChartRoomActivity.class));
+                                                intent.putExtra("roomId",Long.parseLong(roomId.toString()));
+                                                intent.putExtra("roomName",roomName);
+                                                startActivity(intent);
 
                                                 break;
                                             default:
