@@ -28,6 +28,7 @@
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/white"/>
         </LinearLayout>
+        <!--
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_alignParentRight="true"
@@ -37,7 +38,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/circle_close"/>
-        </FrameLayout>
+        </FrameLayout>-->
     </RelativeLayout>
 
     <LinearLayout

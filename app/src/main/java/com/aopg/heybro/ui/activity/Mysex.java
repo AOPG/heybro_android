@@ -17,6 +17,8 @@ import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.text.SimpleDateFormat;
+
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
 
 /**
@@ -57,15 +59,18 @@ public class Mysex extends Activity {
         sexx.setText(LoginInfo.user.getUserSex());
         //生日
         TextView mybirtnday=findViewById(R.id.birthday);
-        mybirtnday.setText(String.valueOf(LoginInfo.user.getBirthday()));
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        String bir=sf.format(LoginInfo.user.getBirthday());
+        mybirtnday.setText(bir);
         //关闭该页面
-        Button circle_close=findViewById(R.id.circle_close);
-        circle_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+       // Button circle_close=findViewById(R.id.circle_close);
+       // circle_close.setOnClickListener(new View.OnClickListener() {
+     //       @Override
+     //       public void onClick(View v) {
+    //            Intent circleIntent=new Intent(getApplicationContext(),MyInfoActivity.class);
+    //            startActivity(circleIntent);
+    //        }
+   //     });
         //选择男女
         final RadioGroup sexs=findViewById(R.id.sexs);
         RadioButton sex0=findViewById(R.id.male);

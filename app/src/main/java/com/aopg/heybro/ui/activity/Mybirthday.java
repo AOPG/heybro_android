@@ -15,6 +15,8 @@ import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.text.SimpleDateFormat;
+
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
 
 /**
@@ -50,7 +52,9 @@ public class Mybirthday extends Activity {
         sexx.setText(LoginInfo.user.getUserSex());
         //生日
         TextView mybirtnday=findViewById(R.id.birthday);
-        mybirtnday.setText(String.valueOf(LoginInfo.user.getBirthday()));
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        String bir=sf.format(LoginInfo.user.getBirthday());
+        mybirtnday.setText(bir);
         //
         DateChooseWheelViewDialog endDateChooseDialog = new DateChooseWheelViewDialog(Mybirthday.this,
                 new DateChooseWheelViewDialog.DateChooseInterface() {

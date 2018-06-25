@@ -307,20 +307,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:gravity="center"
-                android:background="@drawable/topbar_3"
+                android:background="@color/topbar_3"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dip"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="100dip"
                     android:text="请选择省市区"
 
                     android:textColor="#ffffff"
                     android:textSize="20sp" />
+
+
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -356,7 +358,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:background="@drawable/topbar_3"
+                android:background="@color/topbar_3"
                 android:text="确定"
                 android:textColor="#ffffff" />
 </LinearLayout>

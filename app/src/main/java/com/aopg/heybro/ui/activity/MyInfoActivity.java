@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aopg.heybro.R;
+import com.aopg.heybro.ui.fragment.FragmentMy;
 import com.aopg.heybro.ui.photo.ImageUtils;
 import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
@@ -46,7 +47,8 @@ public class MyInfoActivity extends Activity {
         info_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent backIntent= new Intent(getApplicationContext(), FragmentMy.class);
+                startActivity(backIntent);
             }
         });
         //头像显示
