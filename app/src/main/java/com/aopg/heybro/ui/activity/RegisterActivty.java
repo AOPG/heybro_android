@@ -6,26 +6,45 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
+import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
+import com.aopg.heybro.entity.Concern;
+import com.aopg.heybro.entity.User;
 import com.aopg.heybro.ui.Common.ActivitiesManager;
 import com.aopg.heybro.ui.register.isMobile;
+import com.aopg.heybro.utils.HttpUtils;
+import com.aopg.heybro.utils.LoginInfo;
 
+import org.litepal.crud.DataSupport;
+
+import java.io.IOException;
 import java.util.regex.Pattern;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.api.BasicCallback;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by 王攀 on 2018/5/31.
@@ -36,7 +55,7 @@ public class RegisterActivty extends AppCompatActivity{
 
 
     private ProgressDialog mProgressDialog = null;
-
+    private OkHttpClient client;
     private String rigsterPhoneNum;
     private String Validation;
     private String registerPass;
@@ -134,7 +153,7 @@ public class RegisterActivty extends AppCompatActivity{
                 System.out.println(Validation);
                 System.out.println(registerPass);
 
-
+                doRegist(rigsterPhoneNum,rigsterPhoneNum);
 
 
 
@@ -190,6 +209,51 @@ public class RegisterActivty extends AppCompatActivity{
 
     }
 
+    private boolean doRegist(final String username,final String password){
+        client = HttpUtils.init(client);
+        RequestBody requestBody=new FormBody.Builder()
+                .add("userName",username)
+                .add("userPass",password)
+                .build();
+        Request request=new Request.Builder()
+                .url(HttpUtils.BASE_URL+"averageUser/ASRegister")
+                .post(requestBody)
+                .build();
+        Call call=client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("++++++++++++++",e.getMessage());
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws
+                    IOException {
+
+                String success = (JSONObject.parseObject(response.body().string())).getString("success");
+                if (null!=success&&success.equals("true")) {
+                    JMessageClient.register(username, password, null, new BasicCallback() {
+                        @Override
+                        public void gotResult(int responseCode, String registerDesc) {
+                            if (responseCode == 0) {
+                                Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "注册失败", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+
+
+
+
+            }
+        });
+        return false;
+    }
+
 
     // 提交验证码，其中的code表示验证码，如“1357”
     public void submitCode(String country, String phone, String code) {
@@ -212,5 +276,5 @@ public class RegisterActivty extends AppCompatActivity{
         super.onDestroy();
         //用完回调要注销掉，否则可能会出现内存泄露
         SMSSDK.unregisterAllEventHandler();
-    };
+    }
 }
