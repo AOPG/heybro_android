@@ -24,13 +24,15 @@ public class BasketRoomInfo {
     private int roomRealNum;
     //房间密码
     private String password;
+    //是否设置密码
+    private int roomPassSet;
     //房主编码
     private String master;
 
     public BasketRoomInfo() {
 
     }
-    public BasketRoomInfo(Long roomId, String roomName, int type, String mode, int rateLow, int rateHigh, int num, int roomRealNum, String password, String master) {
+    public BasketRoomInfo(Long roomId, String roomName, int type, String mode, int rateLow, int rateHigh, int num, int roomRealNum, String password, int roomPassSet, String master) {
         this.roomId = roomId;
         this.roomName = roomName;
         this.type = type;
@@ -40,6 +42,7 @@ public class BasketRoomInfo {
         this.num = num;
         this.roomRealNum = roomRealNum;
         this.password = password;
+        this.roomPassSet = roomPassSet;
         this.master = master;
     }
 
@@ -113,6 +116,14 @@ public class BasketRoomInfo {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getRoomPassSet() {
+        return roomPassSet;
+    }
+
+    public void setRoomPassSet(int roomPassSet) {
+        this.roomPassSet = roomPassSet;
     }
 
     public String getMaster() {
