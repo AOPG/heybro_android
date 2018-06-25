@@ -268,7 +268,7 @@ public class DateChooseWheelViewDialog extends Dialog implements View.OnClickLis
         mLongTermTextView = view.findViewById(R.id.long_term_tv);
 
         mSureButton.setOnClickListener(this);
-        mCloseDialog.setOnClickListener(this);
+//        mCloseDialog.setOnClickListener(this);
         mLongTermTextView.setOnClickListener(this);
     }
 
