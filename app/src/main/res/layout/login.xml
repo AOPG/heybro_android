@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context="com.aopg.heybro.ui.activity.LoginActivty">
+    <include layout="@layout/vedio_background" />
+    <RelativeLayout
         android:layout_width="360dp"
         android:layout_height="match_parent"
-        android:background="@drawable/beijing"
         android:alpha="0.79"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="260dp"
             android:layout_height="600dp"
             android:layout_gravity="center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="50dp">
             <!--程序名称-->
             <TextView
                 android:layout_marginLeft="20dp"
@@ -144,5 +147,5 @@
                     android:textSize="20dp"/>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

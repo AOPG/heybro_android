@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.Nullable;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.MainActivity;
@@ -49,15 +52,35 @@ public class LoginActivty extends AppCompatActivity implements View.OnClickListe
     private EditText passwordEt;
     private String userNameFlag = null;
     private OkHttpClient client;
+    private VideoView videoview;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        videoview=(VideoView)findViewById(R.id.videoView);
+        final String videoPath = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.beijing).toString();
+        videoview.setVideoPath(videoPath);
+        videoview.start();
+        videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.start();
+                mp.setLooping(true);
+            }
+        });
+        videoview.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                videoview.setVideoPath(videoPath);
+                videoview.start();
+            }
+        });
         ActivitiesManager.getInstance().addActivity(this);
 
         usernameEt = findViewById(R.id.login_user);
         passwordEt = findViewById(R.id.login_password);
+
 
         Button subBtn1 = findViewById(R.id.login);
         subBtn1.setOnClickListener(this);
