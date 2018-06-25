@@ -1,6 +1,8 @@
 package com.aopg.heybro.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.User;
+import com.aopg.heybro.ui.activity.AddFriendActivity;
+import com.aopg.heybro.ui.activity.FriendInfoActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -46,7 +50,7 @@ public class SearchfriendAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView==null){
             convertView = LayoutInflater.from(context).inflate(item_layout_id, null);
         }
@@ -61,12 +65,28 @@ public class SearchfriendAdapter extends BaseAdapter {
                 .into(userPortrait);
         userName.setText(users.get(position).getUsername());
         userCode.setText(users.get(position).getUserCode());
-//        convertView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        final String username=users.get(position).getUsername();
+        final String usercode=users.get(position).getUserCode();
+        final String userprovince=users.get(position).getUserProvince();
+        final String usercity=users.get(position).getUserCity();
+        final int usergrade=users.get(position).getUserGrade();
+        final String userportrait=users.get(position).getUserPortrait();
+        final String userintro=users.get(position).getUserIntro();
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context,FriendInfoActivity.class);
+                intent.putExtra("username",username);
+                intent.putExtra("usercode",usercode);
+                intent.putExtra("userprovince",userprovince);
+                intent.putExtra("usercity",usercity);
+                intent.putExtra("usergrade",usergrade);
+                intent.putExtra("userportrait",userportrait);
+                intent.putExtra("userintro",userintro);
+                context.startActivity(intent);
+            }
+        });
         return convertView;
     }
 }

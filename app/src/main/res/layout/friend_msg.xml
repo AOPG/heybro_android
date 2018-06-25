@@ -74,7 +74,18 @@
                </LinearLayout>
                <!--地址-->
                <TextView
-                   android:id="@+id/user_address"
+                   android:id="@+id/user_province"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="地址"
+                   android:textColor="#FFFFFF"/>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="·"
+                   android:textColor="#FFFFFF"/>
+               <TextView
+                   android:id="@+id/user_city"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="地址"
