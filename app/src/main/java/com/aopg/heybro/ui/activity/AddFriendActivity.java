@@ -121,9 +121,18 @@ public class AddFriendActivity extends Activity{
                             String userName =
                                     ((JSONObject) UserInfo.get(i)).getString("userName");
                             String userPortrait=((JSONObject) UserInfo.get(i)).getString("userPortrait");
+                            String userIntro=((JSONObject) UserInfo.get(i)).getString("userIntro");
+                            int userGrade= Integer.parseInt(((JSONObject) UserInfo.get(i)).getString("userGrade"));
+                            String userCity=((JSONObject) UserInfo.get(i)).getString("userCity");
+                            String userProvince=((JSONObject) UserInfo.get(i)).getString("userProvince");
+                            user.setUserProvince(userProvince);
+                            user.setUserCity(userCity);
+                            user.setUserGrade(userGrade);
+                            user.setUserIntro(userIntro);
                             user.setUserPortrait(userPortrait);
                             user.setUsername(userName);
                             user.setUserCode(user_code_txt);
+
                             users.add(user);
                         }
                     }

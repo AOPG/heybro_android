@@ -102,7 +102,7 @@ public class MyInfoActivity extends Activity {
         if(FLAG0==0){
             userpo.setText(pro[0]+"  "+city[0]);
         }else {
-            Intent intent1 =  getIntent();;       //获取已有的intent对象
+            Intent intent1 =  getIntent();       //获取已有的intent对象
             Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
             pro[0]= bundle1.getString("province");
             city[0]=bundle1.getString("city");
@@ -130,14 +130,14 @@ public class MyInfoActivity extends Activity {
 
         //性别
         TextView sex=findViewById(R.id.user_sex);
-        String s=LoginInfo.user.getUserSex();
+        final String[] s={LoginInfo.user.getUserSex()};
         if (FLAG==0){
-            sex.setText(s);
+            sex.setText(s[0]);
         }else{
             Intent intent = getIntent();//获取已有的intent对象
             Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
-            s= bundle.getString("sex");    //获取Bundle里面的字符串
-            sex.setText(s);
+            s[0]= bundle.getString("sex");    //获取Bundle里面的字符串
+            sex.setText(s[0]);
             FLAG=0;
         }
         sex.setOnClickListener(new View.OnClickListener() {
@@ -187,8 +187,8 @@ public class MyInfoActivity extends Activity {
             public void onClick(View v) {
                 client = HttpUtils.init(client);
                 Request request = new Request.Builder().
-                        url(BUILD_URL("averageUser/updateUserInfo" + "?userCode=" + LoginInfo.user.getUserCode() + "&userNickName=" + name[0] +
-                                "&userIntro=" + intro[0] + "&userProvince=" + pro[0] + "&userCity=" + city[0] + "&birthday=" + bir[0])).build();
+                        url(BUILD_URL("averageUser/updateUserInfo?userCode=" + LoginInfo.user.getUserCode() + "&userNickName=" + name[0] +
+                                "&userIntro=" + intro[0] + "&userProvince=" + pro[0] + "&userCity=" + city[0] + "&birthday=" + bir[0]+"&userSex="+ s[0])).build();
               //测试-------------------
                 Call call = client.newCall(request);
                 call.enqueue(new Callback() {//4.回调方法
@@ -204,6 +204,13 @@ public class MyInfoActivity extends Activity {
                         Log.e("msg", result);
                     }
                 });
+                //提示修改成功
+                Toast toastTip
+                        = Toast.makeText(getApplicationContext(),
+                        "修改成功!",
+                        Toast.LENGTH_LONG);
+                toastTip.setGravity(Gravity.CENTER, 0, 0);
+                toastTip.show();
             }
         });
     }
