@@ -4,28 +4,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/statusbar"
+        android:layout_width="match_parent"
+        android:background="#1A1B1F"
+        android:layout_height=".1dp"></LinearLayout>
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#656862"
+        android:background="#1A1B1F"
         android:orientation="horizontal">
         <TextView
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:text="活动"
-            android:layout_marginLeft="160dp"
-            android:layout_marginTop="13dp"
-            android:textSize="20dp"/>
-    </LinearLayout>
+            android:textSize="18dp"/>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#535050"
+        android:background="#323238"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            >
+            android:layout_height="150dp">
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"

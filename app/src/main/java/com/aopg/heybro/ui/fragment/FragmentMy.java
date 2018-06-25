@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -37,6 +38,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
+import static com.aopg.heybro.utils.ActivityUtils.addStatusViewWithColor;
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
 
 
@@ -282,6 +284,7 @@ public class FragmentMy extends Fragment {
 
             }
         });
+
         return rootView;
     }
 

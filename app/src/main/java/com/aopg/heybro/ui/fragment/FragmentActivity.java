@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +27,8 @@ import com.aopg.heybro.ui.discover.Virtualdiscoverdata;
 
 import java.util.List;
 import java.util.Map;
+
+import static com.aopg.heybro.utils.ActivityUtils.addStatusViewWithColor;
 
 
 /**
@@ -67,6 +70,7 @@ public class FragmentActivity extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }
+        addStatusViewWithColor(rootView, Color.parseColor("#1A1B1F"));
         return rootView;
     }
 

@@ -133,7 +133,9 @@
         <activity android:name="ui.activity.SingleChartActivity"/>
         <activity android:name=".ui.activity.Mydata"/>
         <activity android:name=".ui.activity.NewPasswordActivity"/>
-
+        <activity android:name=".ui.activity.ActivityexciActivity"/>
+        <activity android:name=".ui.activity.Activityexci_firstActivity"/>
+        <activity android:name=".ui.activity.Activity_saishiActivity"/>
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service

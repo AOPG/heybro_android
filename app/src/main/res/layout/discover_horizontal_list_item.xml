@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingLeft="2dip"
-    android:paddingRight="2dip"
-    android:paddingTop="2dip"
-    android:paddingBottom="2dip"
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip"
+    android:paddingTop="5dip"
+    android:paddingBottom="5dip"
     android:orientation="vertical"
-    android:background="#555555"
+    android:background="#323238"
     android:layout_gravity="center"
     android:clickable="true">
 
@@ -16,8 +16,8 @@
         android:paddingRight="10dp"
         android:id="@+id/dis_layout"
         android:gravity="center_vertical"
-        android:layout_marginLeft="6dp"
-        android:layout_height="25dp"
+        android:layout_marginRight="3dp"
+        android:layout_height="30dp"
         android:layout_width="wrap_content"
         android:orientation="horizontal"
         >
