@@ -51,6 +51,7 @@ import java.util.Map;
 
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.callback.CreateGroupCallback;
+import cn.jpush.im.api.BasicCallback;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -58,6 +59,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
+import static cn.jpush.im.android.tasks.RegisterTask.TAG;
 import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
 
@@ -80,7 +82,6 @@ public class FragmentBall extends Fragment{
     //房间滑动字段
     List<RoomDate> roomDateList;
     List<Map<String,Object>> roomUserList;
-    private  List<Map<String,Object>> list;
     List<RoomDate> userRoomInfoT;
     private Integer roomId = 0;
     private View joinRoomView;
@@ -93,6 +94,8 @@ public class FragmentBall extends Fragment{
     private EditText textJoinRoomPass;
     private TextView textViewJoinRoomPass;
     private Integer flag = 1;
+    private String roomProT;
+    private String roomNumT;
     private String roomPass;
     private Handler handler;
     private Handler judgeUserHandler;
@@ -100,9 +103,6 @@ public class FragmentBall extends Fragment{
     private static Button btn_create;
     private String joinRoomPassSet;
     private String roomName;
-
-    //判断用户是否已经拥有房间
-    private Integer whetherHaveRoom = 0;
 
 
     @Nullable
@@ -230,6 +230,7 @@ public class FragmentBall extends Fragment{
                         createImRoom(basketRoomInfo.getRoomName(), "");
                     }
                 });
+
                 /**
                  * 关闭创建房间
                  */
@@ -448,7 +449,7 @@ public class FragmentBall extends Fragment{
         hListView = (HorizontalRoomListView)rootView.findViewById(R.id.ball_horizon_listview);
         String[] roomCode = new String[roomDateList.size()];
         final String[] roomTitle = new String[roomDateList.size()];
-        String[] roomNum = new String[roomDateList.size()];
+        final String[] roomNum = new String[roomDateList.size()];
         //获取日期
         long time=System.currentTimeMillis();
         Date date=new Date(time);
@@ -485,6 +486,8 @@ public class FragmentBall extends Fragment{
                 roomPass = roomDateList.get(position).getRoomPass();
                 joinRoomPassSet = roomDateList.get(position).getRoomPassSet();
                 roomName = roomDateList.get(position).getRoomName();
+                roomProT = roomDateList.get(position).getRoomPro();
+                roomNumT = roomDateList.get(position).getRoomNum();
 
                 /**
                  * 查询房间详情信息
@@ -524,8 +527,6 @@ public class FragmentBall extends Fragment{
                                 map.put("user_name",userName);
                                 map.put("user_Intro",userIntro);
 
-                                System.out.println(userIntro);
-                                System.out.println(userPortrait);
 
                                 roomUserList.add(map);
 
@@ -638,6 +639,8 @@ public class FragmentBall extends Fragment{
 //                                                        intent.putExtra("roomName",roomName);
 //                                                        startActivity(intent);
 
+
+
                                                     }else if ("0".equals(msg.obj.toString())){
 
                                                         window = new PopupWindow(viewRoomView, 850, 1000, true);
@@ -689,6 +692,11 @@ public class FragmentBall extends Fragment{
                                         flag = 1;
                                         joinRoomPass = textJoinRoomPass.getText().toString();
 
+                                        if (Integer.parseInt(roomProT) >= Integer.parseInt(roomNumT)){
+                                            Toast.makeText(getApplicationContext(), "房间已满", Toast.LENGTH_SHORT).show();
+                                            flag = 0;
+                                        }
+
                                         //密码验证
                                         if ("1".equals(joinRoomPassSet)){
                                             if (joinRoomPass.length()!=4 && flag == 1){
@@ -704,7 +712,6 @@ public class FragmentBall extends Fragment{
 
                                         if (flag == 1){
 
-                                            System.out.println(3333);
                                             System.out.println(roomId);
                                             System.out.println(LoginInfo.user.getUserCode());
 
@@ -753,6 +760,25 @@ public class FragmentBall extends Fragment{
 
                                                 Toast.makeText(getApplicationContext(), "加入房间成功（暂时不拥有房间）！", Toast.LENGTH_SHORT).show();
 
+
+                                                if (null != window && window.isShowing()) {
+                                                    System.out.println(2222);
+                                                    window.dismiss();
+                                                }
+
+                                                //申请加入讨论组
+//                                                JMessageClient.applyJoinGroup(roomId,"", new BasicCallback() {
+//                                                    @Override
+//                                                    public void gotResult(int responseCode, String responseMessage) {
+//                                                        if (responseCode == 0) {
+//                                                            Toast.makeText(rootView.getContext(), "申请成功", Toast.LENGTH_SHORT).show();
+//                                                        } else {
+//                                                            Log.d(TAG, "apply failed. code :" + responseCode + " msg : " + responseMessage);
+//                                                            Toast.makeText(rootView.getContext(), "申请失败", Toast.LENGTH_SHORT).show();
+//                                                        }
+//                                                    }
+//                                                });
+//
 //                                                Intent intent = new Intent();
 //                                                intent.setComponent(new ComponentName(rootView.getContext(), ChartRoomActivity.class));
 //                                                intent.putExtra("roomId",Long.parseLong(roomId.toString()));
