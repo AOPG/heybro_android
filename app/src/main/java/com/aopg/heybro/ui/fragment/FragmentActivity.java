@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.Common.MyViewPageLB;
+import com.aopg.heybro.ui.activity.ActivityexciActivity;
 import com.aopg.heybro.ui.discover.HorizontalListView;
 import com.aopg.heybro.ui.discover.HorizontalListViewAdapter;
 import com.aopg.heybro.ui.discover.Virtualdiscoverdata;
@@ -64,6 +65,17 @@ public class FragmentActivity extends Fragment {
             ViewPager mVp = (ViewPager) rootView.findViewById(R.id.vp);
             MyViewPageLB myViewPageLB = new MyViewPageLB(rootView.getContext(), mVp, llPoints);
         }
+
+
+        //图片点击
+        ImageView exci = rootView.findViewById(R.id.exci);
+        exci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(rootView.getContext(), ActivityexciActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         if (parent != null) {
