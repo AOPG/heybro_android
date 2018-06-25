@@ -76,15 +76,15 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         fullScreen(this);
-        ImageView exci=findViewById(R.id.exci);
-        exci.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ActivityexciActivity.class);
-                startActivity(intent);
-
-            }
-        });
+//        ImageView exci=findViewById(R.id.exci);
+//        exci.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), ActivityexciActivity.class);
+//                startActivity(intent);
+//
+//            }
+//        });
         LoginInfo.user =  DataSupport.where("isLogin = ?", "1").findFirst(User.class);
         startTimerTaskService();
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext

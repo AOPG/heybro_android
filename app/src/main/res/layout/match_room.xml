@@ -19,7 +19,7 @@
             android:layout_width="160dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="100dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="60dp"
@@ -45,21 +45,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="150dp"
             android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:text="等级要求"
-                android:textColor="#ffffff"
-                android:textSize="15dp" />
-            <Spinner
-                android:id="@+id/spinner_rate"
-                android:entries="@array/spinner_rate"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="65dp"
-                android:spinnerMode="dialog"
-                android:background="@drawable/basket_spinner_corner" />
         </RelativeLayout>
         <!-- 匹配完成后 跳到房间界面-->
         <Button

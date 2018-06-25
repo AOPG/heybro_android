@@ -70,6 +70,7 @@ public class FragmentGame extends Fragment {
     private View matchRoomView;
     private PopupWindow window;
 
+    private String modeSelect;//匹配选择模式
 
     //房间滑动字段
     List<RoomDate> roomDateList;
@@ -257,6 +258,30 @@ public class FragmentGame extends Fragment {
                     window.showAtLocation(view, Gravity.LEFT, 20,-200);
                 }
                 /**
+                 * 获取选择的数据
+                 */
+                final Spinner modeChose = matchRoomView.findViewById(R.id.spinner_mode);
+                modeChose.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        modeSelect = getActivity().getResources().getStringArray(R.array.spinner_mode)[i];
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+                /**
+                 * 开始匹配
+                 */
+                Button btn_match_finish = matchRoomView.findViewById(R.id.btn_match_finish);
+                btn_match_finish.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        httpMatchRoom(modeSelect,LoginInfo.user.getUserGrade(),LoginInfo.user.getUserCode(),1);
+                    }
+                });
+                /**
                  * 关闭快速匹配
                  */
                 Button match_close = matchRoomView.findViewById(R.id.match_close);
@@ -322,6 +347,49 @@ public class FragmentGame extends Fragment {
                     roomIntent.putExtra("roomId",roomId);
                     roomIntent.putExtra("roomName",roomName);
                     startActivity(roomIntent);
+                }
+            }
+        });
+    }
+    /**
+     * 向远程数据库匹配房间信息
+     */
+    public void httpMatchRoom(String mode, int userRate, final String userCode, int type){
+        client = HttpUtils.init(client);
+        Request request = new Request.Builder().
+                url(BUILD_URL("basketRoom/matchRoom?mode="+ mode +"&userRate="
+                        + userRate + "&type=" + type
+                        + "&userCode=" + userCode)).build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {//4.回调方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                String info = (JSONObject.parseObject(result)).getString("msg");
+                if(null != info&&info.equals("已经加入或创建一个房间，无需匹配")){
+                    Looper.prepare();
+                    Toast.makeText(getApplicationContext(), "您已经创建或者加入一个房间，请先退出房间", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }
+                if(null != info&&info.equals("没有符合条件的房间！")){
+                    Looper.prepare();
+                    Toast.makeText(getApplicationContext(), "没有符合条件的房间，请稍后再试", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }
+                Log.e("result",result);
+                String success = (JSONObject.parseObject(result)).getString("success");
+                if(null!=success&&success.equals("true")) {
+                    JSONObject matchRoomInfo =
+                            (JSONObject)((JSONObject)((JSONObject.parseObject(result)).get("data"))).get("matchRoom");
+                    Long roomId = Long.parseLong(matchRoomInfo.getString("roomId"));
+                    String roomName = matchRoomInfo.getString("roomName");
+                    Log.e("room",roomName);
+                    joinRoom(Integer.parseInt(matchRoomInfo.getString("roomId")),roomName,userCode);
                 }
             }
         });
@@ -787,5 +855,50 @@ public class FragmentGame extends Fragment {
 
             }
         });
+    }
+    public void joinRoom(final Integer roomId, final String roomName, String userCode){
+        /**
+         *  该用户进入房间，填充三表
+         */
+
+        Request request = new Request.Builder().
+                url(BUILD_URL("BasketBallRoom/JoinBallRoom?roomId="+ roomId+"&userCode="+userCode)).build();
+        Call call = client.newCall(request);
+        call.enqueue(new okhttp3.Callback() {//4.回调方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+
+                String result = response.body().string();
+
+                String success = (JSONObject.parseObject(result)).getString("success");
+                if (null!=success&&success.equals("true")) {
+                    //申请加入讨论组
+                    JMessageClient.applyJoinGroup(roomId,"", new BasicCallback() {
+                        @Override
+                        public void gotResult(int responseCode, String responseMessage) {
+                            if (responseCode == 0) {
+                                Toast.makeText(rootView.getContext(), "申请成功", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.d(TAG, "apply failed. code :" + responseCode + " msg : " + responseMessage);
+                                Toast.makeText(rootView.getContext(), "申请失败", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    Intent intent = new Intent();
+                    intent.setComponent(new ComponentName(rootView.getContext(), ChartRoomActivity.class));
+                    intent.putExtra("roomId",Long.parseLong(roomId.toString()));
+                    intent.putExtra("roomName",roomName);
+                    startActivity(intent);
+
+                }
+            }
+        });
+
     }
 }
