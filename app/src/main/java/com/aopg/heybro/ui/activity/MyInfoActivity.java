@@ -185,6 +185,7 @@ public class MyInfoActivity extends Activity {
                 Request request = new Request.Builder().
                        url(BUILD_URL("averageUser/updateUserInfo"+"?userCode="+ LoginInfo.user.getUserCode()+"&userNickName="+name[0]+
                                "&userIntro="+intro[0]+"&userProvince="+ pro[0] +"&userCity="+city[0]+"&birthday="+bir[0])).build();
+
             }
         });
 
