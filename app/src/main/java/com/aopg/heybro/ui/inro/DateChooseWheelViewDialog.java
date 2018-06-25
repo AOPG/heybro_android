@@ -264,7 +264,6 @@ public class DateChooseWheelViewDialog extends Dialog implements View.OnClickLis
         mMinuteWheelView = view.findViewById(R.id.minute_wv);
         mTitleTextView = view.findViewById(R.id.title_tv);
         mSureButton =  view.findViewById(R.id.sure_btn);
-        mCloseDialog =  view.findViewById(R.id.date_choose_close_btn);
         mLongTermLayout = view.findViewById(R.id.long_term_layout);
         mLongTermTextView = view.findViewById(R.id.long_term_tv);
 
@@ -430,9 +429,6 @@ public class DateChooseWheelViewDialog extends Dialog implements View.OnClickLis
                 } else {
                     dateChooseInterface.getDateTime(strTimeToDateFormat(mYearStr, mDateStr , mHourStr , mMinuteStr), mBlnBeLongTerm);
                 }
-                dismissDialog();
-                break;
-            case R.id.date_choose_close_btn://关闭日期选择对话框
                 dismissDialog();
                 break;
             case R.id.long_term_tv://选择长期时间监听

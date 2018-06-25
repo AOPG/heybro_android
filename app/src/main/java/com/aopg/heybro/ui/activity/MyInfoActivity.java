@@ -90,15 +90,16 @@ public class MyInfoActivity extends Activity {
         //地区
         TextView userpo=findViewById(R.id.user_location);
         final String[] pro={LoginInfo.user.getUserProvince()};
+        System.out.println(pro[0]);
         final String[] city={LoginInfo.user.getUserCity()};
         if(FLAG0==0){
-            userpo.setText(pro+"  "+city);
+            userpo.setText(pro[0]+"  "+city[0]);
         }else {
             Intent intent1 =  getIntent();;       //获取已有的intent对象
             Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
             pro[0]= bundle1.getString("province");
             city[0]=bundle1.getString("city");
-            userpo.setText(pro+"  "+city);
+            userpo.setText(pro[0]+"  "+city[0]);
             FLAG0=0;
         }
         userpo.setOnClickListener(new View.OnClickListener() {
