@@ -246,6 +246,7 @@ public class MyInfoActivity extends Activity {
             public void onClick(View v) {
                 client = HttpUtils.init(client);
                 System.out.println(2222222);
+
                 System.out.println(PicUrl);
                 System.out.println(name[0]);
                 System.out.println(intro[0]);
