@@ -50,12 +50,11 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
 
     <application
-        Android:icon="@drawable/tubiao"
         android:hardwareAccelerated="false"
         android:largeHeap="true"
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/tubiao"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -65,8 +64,7 @@
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.aopg.heybro.fileprovider"
             android:grantUriPermissions="true"
-            android:exported="false"
-            >
+            android:exported="false">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />

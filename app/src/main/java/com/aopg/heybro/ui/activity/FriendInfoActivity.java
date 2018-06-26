@@ -66,5 +66,6 @@ public class FriendInfoActivity extends Activity {
         usergrade.setText(userGrade);
         String userintro=intent.getStringExtra("userintro");
         qianming.setText(userintro);
+
     }
 }
