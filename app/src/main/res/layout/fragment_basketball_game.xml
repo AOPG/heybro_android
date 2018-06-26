@@ -4,21 +4,19 @@
     android:layout_height="match_parent"
     android:background="#323238"
     android:orientation="vertical">
+
     <!--主要功能-->
     <LinearLayout
+        android:layout_marginBottom="55dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#323238"
         android:orientation="vertical">
 
-
         <!-- 房间显示-->
-
-
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="170dp"
-            android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp">
 
             <com.aopg.heybro.ui.room.HorizontalRoomListView
@@ -31,93 +29,51 @@
 
 
         </LinearLayout>
+        <RelativeLayout
 
-        <!-- 房间显示-->
-        <!--a.包裹HorizontalScrollView控件是GirdView横向滚动的基本条件
-            b.GirdView外包裹LinearLayout是java代码中参数设置的必要条件-->
-        <!--<HorizontalScrollView-->
-            <!--android:layout_width="300dp"-->
-            <!--android:layout_height="170dp"-->
-            <!--android:layout_marginLeft="30dp"-->
-            <!--android:layout_marginTop="20dp">-->
-            <!--<LinearLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_margin="10dp"-->
-                <!--android:orientation="horizontal">-->
-                <!--&lt;!&ndash;需要通过具体代码实现左右滑动 具体代码示例见下面备注&ndash;&gt;-->
-                <!--<GridView-->
-                    <!--android:id="@+id/grid"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:numColumns="auto_fit">-->
-                <!--</GridView>-->
-
-            <!--</LinearLayout>-->
-        <!--</HorizontalScrollView>-->
-        <!--/**
-         * 将GridView改成单行横向布局
-        */
-        private void changeGridView() {
-        // item宽度
-        int itemWidth = DensityUtil.dip2px(this, 100);
-        // item之间的间隔
-        int itemPaddingH = DensityUtil.dip2px(this, 1);
-        int size = datas.size();
-        // 计算GridView宽度
-        int gridviewWidth = size * (itemWidth + itemPaddingH);
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                gridviewWidth, LinearLayout.LayoutParams.MATCH_PARENT);
-        mContentGv.setLayoutParams(params);
-        mContentGv.setColumnWidth(itemWidth);
-        mContentGv.setHorizontalSpacing(itemPaddingH);
-        mContentGv.setStretchMode(GridView.NO_STRETCH);
-        mContentGv.setNumColumns(size);
-    }-->
-        <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="150dp"
+            android:layout_height="28dp"
             android:layout_gravity="center"
-            android:background="@drawable/basket_class_corner"
-            android:orientation="vertical">
+            android:background="@drawable/basket_class_corner">
 
             <TextView
+                android:layout_centerInParent="true"
                 android:id="@+id/my_rate_game"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="50dp"
-                android:paddingTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="当前等级："
-                android:textColor="#9B9999" />
-        </LinearLayout>
-        <LinearLayout
+                android:textColor="#ccffffff" />
+        </RelativeLayout>
+        <RelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-            <Button
-                android:id="@+id/btn_create"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@drawable/basket_btn_corner"
-                android:text="创建房间"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                android:textStyle="bold"/>
-            <Button
-                android:id="@+id/btn_match"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="110dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@drawable/basket_btn_corner"
-                android:text="快速匹配"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                android:textStyle="bold"/>
-        </LinearLayout>
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btn_create"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/basket_btn_corner"
+                    android:text="创建房间"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18dp" />
+                <Button
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/btn_match"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/basket_btn_corner"
+                    android:text="快速匹配"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

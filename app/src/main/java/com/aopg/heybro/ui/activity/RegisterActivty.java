@@ -118,7 +118,7 @@ public class RegisterActivty extends AppCompatActivity{
                 //手机号
                 rigsterPhoneNum = textPhoneNum.getText().toString();
                 //验证码
-                Validation = textValidation.getText().toString();
+               // Validation = textValidation.getText().toString();
                 //密码
                 registerPass = textPass.getText().toString();
                 flag = 1;
@@ -130,18 +130,18 @@ public class RegisterActivty extends AppCompatActivity{
                 }
 
                 //验证码验证
-                if(Validation.length() == 0 && flag == 1){
-                    Toast.makeText(getApplicationContext(), "验证码不能为空", Toast.LENGTH_SHORT).show();
-                    flag = 0;
-                }
-                if(!isInteger(Validation) && flag == 1){
-                    Toast.makeText(getApplicationContext(), "验证码必须是4位数字", Toast.LENGTH_SHORT).show();
-                    flag = 0;
-                }
-                if (Validation.length()!=4 && flag == 1){
-                    Toast.makeText(getApplicationContext(), "验证码必须是4位数字", Toast.LENGTH_SHORT).show();
-                    flag = 0;
-                }
+//                if(Validation.length() == 0 && flag == 1){
+//                    Toast.makeText(getApplicationContext(), "验证码不能为空", Toast.LENGTH_SHORT).show();
+//                    flag = 0;
+//                }
+//                if(!isInteger(Validation) && flag == 1){
+//                    Toast.makeText(getApplicationContext(), "验证码必须是4位数字", Toast.LENGTH_SHORT).show();
+//                    flag = 0;
+//                }
+//                if (Validation.length()!=4 && flag == 1){
+//                    Toast.makeText(getApplicationContext(), "验证码必须是4位数字", Toast.LENGTH_SHORT).show();
+//                    flag = 0;
+//                }
 
                 //密码验证
                 if (registerPass.length()!=8 && flag == 1){
@@ -152,10 +152,9 @@ public class RegisterActivty extends AppCompatActivity{
                 System.out.println(rigsterPhoneNum);
                 System.out.println(Validation);
                 System.out.println(registerPass);
-
-                doRegist(rigsterPhoneNum,rigsterPhoneNum);
-
-
+                if (flag==1){
+                    doRegist(rigsterPhoneNum,registerPass);
+                }
 
             }
         });
@@ -163,51 +162,51 @@ public class RegisterActivty extends AppCompatActivity{
 
 
         //发送验证码
-        Button registerValidation = findViewById(R.id.register_validation_btn);
-        registerValidation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText phoneET = findViewById(R.id.register_phone);
-                sendCode("86",phoneET.getText().toString());
-            }
-        });
+//        Button registerValidation = findViewById(R.id.register_validation_btn);
+//        registerValidation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                EditText phoneET = findViewById(R.id.register_phone);
+//                sendCode("86",phoneET.getText().toString());
+//            }
+//        });
 
 
     }
 
 
     // 请求验证码，其中country表示国家代码，如“86”；phone表示手机号码，如“13800138000”
-    public void sendCode(String country, String phone) {
+  //  public void sendCode(String country, String phone) {
         // 注册一个事件回调，用于处理发送验证码操作的结果
-        SMSSDK.registerEventHandler(new EventHandler() {
-            public void afterEvent(int event, int result, Object data) {
-                if (result == SMSSDK.RESULT_COMPLETE) {
-                    // TODO 处理成功得到验证码的结果
-                    // 请注意，此时只是完成了发送验证码的请求，验证码短信还需要几秒钟之后才送达
-                    Looper.prepare();
-                    Toast.makeText(getApplicationContext(), "发送成功", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
-                } else{
-                    // TODO 处理错误的结果
-                    Looper.prepare();
-                    Toast.makeText(getApplicationContext(), "发送失败", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
-                }
-
-            }
-        });
-
-        textPhoneNum = findViewById(R.id.register_phone);
-        rigsterPhoneNum = textPhoneNum.getText().toString();
-        System.out.println(rigsterPhoneNum);
-        if (isMobile.isChinaPhoneLegal(rigsterPhoneNum)){
-            // 触发操作
-             SMSSDK.getVerificationCode(country, phone);
-        }else {
-            Toast.makeText(getApplicationContext(), "手机号码格式不正确", Toast.LENGTH_SHORT).show();
-        }
-
-    }
+//        SMSSDK.registerEventHandler(new EventHandler() {
+//            public void afterEvent(int event, int result, Object data) {
+//                if (result == SMSSDK.RESULT_COMPLETE) {
+//                    // TODO 处理成功得到验证码的结果
+//                    // 请注意，此时只是完成了发送验证码的请求，验证码短信还需要几秒钟之后才送达
+//                    Looper.prepare();
+//                    Toast.makeText(getApplicationContext(), "发送成功", Toast.LENGTH_SHORT).show();
+//                    Looper.loop();
+//                } else{
+//                    // TODO 处理错误的结果
+//                    Looper.prepare();
+//                    Toast.makeText(getApplicationContext(), "发送失败", Toast.LENGTH_SHORT).show();
+//                    Looper.loop();
+//                }
+//
+//            }
+//        });
+//
+//        textPhoneNum = findViewById(R.id.register_phone);
+//        rigsterPhoneNum = textPhoneNum.getText().toString();
+//        System.out.println(rigsterPhoneNum);
+//        if (isMobile.isChinaPhoneLegal(rigsterPhoneNum)){
+//            // 触发操作
+//             SMSSDK.getVerificationCode(country, phone);
+//        }else {
+//            Toast.makeText(getApplicationContext(), "手机号码格式不正确", Toast.LENGTH_SHORT).show();
+//        }
+//
+//    }
 
     private boolean doRegist(final String username,final String password){
         client = HttpUtils.init(client);
@@ -233,7 +232,7 @@ public class RegisterActivty extends AppCompatActivity{
 
                 String success = (JSONObject.parseObject(response.body().string())).getString("success");
                 if (null!=success&&success.equals("true")) {
-                    JMessageClient.register(username, password, null, new BasicCallback() {
+                    JMessageClient.register(username, username, null, new BasicCallback() {
                         @Override
                         public void gotResult(int responseCode, String registerDesc) {
                             if (responseCode == 0) {

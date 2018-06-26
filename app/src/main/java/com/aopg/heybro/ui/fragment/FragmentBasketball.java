@@ -209,24 +209,27 @@ public class FragmentBasketball extends Fragment{
             public void onResponse(Call call, Response response) throws IOException {
                 String result = response.body().string();
                 Log.e("getWeather",result);
-                String success = (JSONObject.parseObject(result)).getString("msg");
-                if (null!=success&&success.equals("ok")) {
-                    JSONObject weatherInfo =
-                            ((JSONObject)((JSONObject.parseObject(result)).get("result")));
-                    JSONObject api =
-                            ((JSONObject)(((JSONObject)((JSONObject.parseObject(result)).get("result"))).get("aqi")));
-                    String city = weatherInfo.getString("city");
-                    String weather = weatherInfo.getString("weather");
-                    String temp = weatherInfo.getString("temp");
-                    String pm2_5 = api.getString("pm2_5");
-                    Map weatherMap = new HashMap();
-                    weatherMap.put("city",city);
-                    weatherMap.put("weather",weather);
-                    weatherMap.put("temp",temp+"°");
-                    weatherMap.put("pm2_5",pm2_5);
-                    Message message = mainHandler.obtainMessage(900,weatherMap);
-                    mainHandler.sendMessage(message);
+                if(!result.equals("")){
+                    String success = (JSONObject.parseObject(result)).getString("msg");
+                    if (null!=success&&success.equals("ok")) {
+                        JSONObject weatherInfo =
+                                ((JSONObject)((JSONObject.parseObject(result)).get("result")));
+                        JSONObject api =
+                                ((JSONObject)(((JSONObject)((JSONObject.parseObject(result)).get("result"))).get("aqi")));
+                        String city = weatherInfo.getString("city");
+                        String weather = weatherInfo.getString("weather");
+                        String temp = weatherInfo.getString("temp");
+                        String pm2_5 = api.getString("pm2_5");
+                        Map weatherMap = new HashMap();
+                        weatherMap.put("city",city);
+                        weatherMap.put("weather",weather);
+                        weatherMap.put("temp",temp+"°");
+                        weatherMap.put("pm2_5",pm2_5);
+                        Message message = mainHandler.obtainMessage(900,weatherMap);
+                        mainHandler.sendMessage(message);
+                    }
                 }
+
             }
         });
 

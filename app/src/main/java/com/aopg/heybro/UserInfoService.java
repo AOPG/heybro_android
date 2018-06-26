@@ -82,8 +82,18 @@ public class UserInfoService extends IntentService {
                         LoginInfo.user.setUserCode(userInfo.getString("userCode"));
                         LoginInfo.user.setUserPortrait(userInfo.getString("userPortrait"));
                         LoginInfo.user.setHomepageBack(userInfo.getString("homepageBack"));
-                        LoginInfo.user.setRoomId(Long.parseLong(userDetailInfo.getString("roomId")));
-                        LoginInfo.user.setBirthday(Long.parseLong(userInfo.getString("birthday")));
+                        if (userDetailInfo.getString("roomId")!=null){
+                            LoginInfo.user.setRoomId(Long.parseLong(userDetailInfo.getString("roomId")));
+                        }else {
+                            LoginInfo.user.setRoomId(0L);
+                        }
+
+                        if(userInfo.getString("birthday")!=null){
+                            LoginInfo.user.setBirthday(Long.parseLong(userInfo.getString("birthday")));
+                        }else{
+                            LoginInfo.user.setBirthday(Long.parseLong("1529973085000"));
+                        }
+
                         LoginInfo.user.setUserProvince(userInfo.getString("userProvince"));
                         LoginInfo.user.setUserCity(userInfo.getString("userCity"));
                         LoginInfo.user.setUserSex(userInfo.getString("userSex"));

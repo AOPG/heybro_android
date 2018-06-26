@@ -3,6 +3,8 @@ package com.aopg.heybro;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import com.baidu.mapapi.SDKInitializer;
+import com.mob.MobSDK;
+
 import org.litepal.LitePalApplication;
 import org.litepal.tablemanager.Connector;
 
@@ -21,7 +23,7 @@ public class MyApplication extends LitePalApplication {
 
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
-
+        MobSDK.init(this);
         Log.i("IMDebugApplication", "init");
         JMessageClient.setDebugMode(true);
         JMessageClient.init(getApplicationContext(), true);
