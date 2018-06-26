@@ -131,13 +131,13 @@ public class FragmentBasketball extends Fragment{
      * 初始化控件
      * */
     private void initView(){
-        getWeather();
         ball_selected = rootView.findViewById(R.id.ball_selected);
         game_selected = rootView.findViewById(R.id.game_selected);
         btn_ball = rootView.findViewById(R.id.date_ball);
         btn_game = rootView.findViewById(R.id.date_game);
         myViewPager = rootView.findViewById(R.id.basketball_viewPager);
         btn_searchRoom = rootView.findViewById(R.id.basket_search);
+        getWeather();
     }
     /**
      * 设置一个ViewPager的侦听事件，当左右滑动ViewPager时菜单栏被选中状态跟着改变
@@ -172,16 +172,8 @@ public class FragmentBasketball extends Fragment{
     private void getWeather(){
         OkHttpClient clientWeather;
         clientWeather = new OkHttpClient.Builder()
-                .connectTimeout(90, TimeUnit.SECONDS)
-                .readTimeout(90, TimeUnit.SECONDS)
-                .authenticator(new Authenticator()
-                {
-                    @Override
-                    public Request authenticate(Route route, Response response) throws IOException
-                    {//401，认证
-                        return response.request().newBuilder().header("Authorization", "APPCODE 961c9d9cae0443ffa56f81a6f9d96bdf").build();
-                    }
-                })
+                .connectTimeout(900, TimeUnit.SECONDS)
+                .readTimeout(900, TimeUnit.SECONDS)
                 .build();
         //维度
         double lat;
@@ -196,7 +188,8 @@ public class FragmentBasketball extends Fragment{
         }
 
         Request request = new Request.Builder().
-                url("http://jisutqybmf.market.alicloudapi.com/weather/query?location="+lat+","+lon).build();
+                url("http://jisutqybmf.market.alicloudapi.com/weather/query?location="+lat+","+lon).
+                addHeader("Authorization","APPCODE 961c9d9cae0443ffa56f81a6f9d96bdf").build();
         Call call = clientWeather.newCall(request);
 
         call.enqueue(new Callback() {//4.回调方法
