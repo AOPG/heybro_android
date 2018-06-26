@@ -35,6 +35,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -65,6 +66,7 @@ public class MyInfoActivity extends Activity {
     private static final int REQUEST_CODE = 1;
     private static final int REQUEST_PERMISSION =2 ;
     private String PicUrl = null;
+
 
 
     @Override
@@ -123,8 +125,10 @@ public class MyInfoActivity extends Activity {
                     case 0:
                         String imgUrl = msg.obj.toString();
                         Glide.with(MyInfoActivity.this)
-                                .load(imgUrl)
+                                .load(BASE_URL+imgUrl)
                                 .into(img);
+
+                        PicUrl = imgUrl;
                         break;
 
                     default:
@@ -241,9 +245,26 @@ public class MyInfoActivity extends Activity {
             @Override
             public void onClick(View v) {
                 client = HttpUtils.init(client);
+                System.out.println(2222222);
+                System.out.println(PicUrl);
+                System.out.println(name[0]);
+                System.out.println(intro[0]);
+                System.out.println(pro[0]);
+                System.out.println(city[0]);
+
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                String startDay = "";
+                try {
+                    Date dateStart = format.parse(bir[0]);
+                    startDay = String.valueOf(dateStart.getTime());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                System.err.println(startDay);
+
                 Request request = new Request.Builder().
-                        url(BUILD_URL("averageUser/updateUserInfo?userCode=" + LoginInfo.user.getUserCode() + "&userNickName=" + name[0] +
-                                "&userIntro=" + intro[0] + "&userProvince=" + pro[0] + "&userCity=" + city[0] + "&birthday=" + bir[0]+"&userSex="+ s[0])).build();
+                        url("http://192.168.23.1:8082/android/averageUser/updateUserInfo?userCode=" + LoginInfo.user.getUserCode() + "&userNickName=" + name[0] +"&userPortrait=" + PicUrl+
+                                "&userIntro=" + intro[0] + "&userProvince=" + pro[0] + "&userCity=" + city[0] + "&birthday=" + startDay).build();
               //测试-------------------
                 Call call = client.newCall(request);
                 call.enqueue(new Callback() {//4.回调方法
@@ -310,7 +331,7 @@ public class MyInfoActivity extends Activity {
                 String success = imgInfo.getString("success");
                 if (null!=success&&success.equals("true")){
                     String imgUrl = ((JSONObject)imgInfo.get("data")).getString("imgUrl");
-                    Message message = handler.obtainMessage(0,BASE_URL+imgUrl);
+                    Message message = handler.obtainMessage(0,imgUrl);
                     handler.sendMessage(message);
                 }
             }
