@@ -263,7 +263,7 @@ public class MyInfoActivity extends Activity {
                 System.err.println(startDay);
 
                 Request request = new Request.Builder().
-                        url("http://192.168.23.1:8082/android/averageUser/updateUserInfo?userCode=" + LoginInfo.user.getUserCode() + "&userNickName=" + name[0] +"&userPortrait=" + PicUrl+
+                        url("http://101.200.59.121:8082/android/averageUser/updateUserInfo?userCode=" + LoginInfo.user.getUserCode() + "&userNickName=" + name[0] +"&userPortrait=" + PicUrl+
                                 "&userIntro=" + intro[0] + "&userProvince=" + pro[0] + "&userCity=" + city[0] + "&birthday=" + startDay).build();
               //测试-------------------
                 Call call = client.newCall(request);
