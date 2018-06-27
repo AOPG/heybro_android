@@ -97,7 +97,6 @@ public class TimerTaskService extends Service {
         System.out.println("onDestroy invoke");
         super.onDestroy();
     }
-
     //超时重连
     public void relink(OkHttpClient client){
             RequestBody requestBody=new FormBody.Builder()
