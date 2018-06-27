@@ -7,145 +7,188 @@
     tools:context="com.aopg.heybro.ui.activity.LoginActivty">
     <include layout="@layout/vedio_background" />
     <RelativeLayout
-        android:layout_width="360dp"
+
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.79"
+        android:background="#33000000"
         android:orientation="vertical">
         <LinearLayout
-            android:layout_width="260dp"
-            android:layout_height="600dp"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical"
-            android:layout_marginLeft="50dp">
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <!--程序名称-->
             <TextView
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="50dp"
-                android:layout_width="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
                 android:layout_height="75dp"
                 android:text="Hey!bro"
                 android:textStyle="bold"
                 android:textColor="#ffffff"
-                android:textSize="50sp"
-                android:gravity="center"/>
+                android:textSize="50sp" />
             <LinearLayout
-                android:paddingTop="30dp"
-                android:layout_width="match_parent"
+                android:layout_marginBottom="60dp"
+                android:paddingTop="20dp"
+                android:layout_width="250dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <!--用户-->
                 <LinearLayout
+                    android:layout_marginBottom="5dp"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_marginTop="10dp"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
                         android:src="@drawable/login_user"/>
                     <EditText
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center|left"
+                        android:background="@null"
                         android:id="@+id/login_user"
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
                         android:hint="手机号/邮箱/账号"
                         android:textColorHint="#ffffff"
-                        android:layout_margin="15dp"
                         android:textColor="#ffffff"
-                        android:textSize="15dp"/>
+                        android:textSize="13dp"/>
                 </LinearLayout>
                 <View  android:layout_height="1dp"
                     android:layout_width="300dp"
-                    android:background="#A49D9D"
+                    android:background="#ffffff"
                     android:layout_gravity="center_horizontal"/>
                 <!--密码-->
                 <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp">
+                    android:layout_height="30dp"
+                    android:orientation="horizontal">
                     <ImageView
-                        android:layout_marginTop="10dp"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
                         android:src="@drawable/login_password"/>
                     <EditText
+                        android:layout_marginLeft="8dp"
+                        android:background="@null"
                         android:id="@+id/login_password"
-                        android:layout_width="160dp"
-                        android:layout_height="40dp"
+                        android:layout_width="190dp"
+                        android:layout_height="30dp"
                         android:singleLine="true"
-                        android:password="true"
                         android:hint="登陆密码"
+                        android:inputType="textPassword"
                         android:textColorHint="#ffffff"
                         android:textColor="#ffffff"
-                        android:layout_margin="15dp"
-                        android:textSize="15dp"/>
+                        android:textSize="13dp"/>
                     <!--找回密码，暂时不实现-->
                     <ImageView
-                        android:layout_marginTop="10dp"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
                         android:src="@drawable/login_ask"/>
                 </LinearLayout>
                 <View  android:layout_height="1dp"
                     android:layout_width="300dp"
-                    android:background="#A49D9D"
+                    android:background="#ffffff"
                     android:layout_gravity="center_horizontal"/>
                 <!-- 登陆按钮-->
                 <Button
                     android:id="@+id/login"
                     android:layout_marginTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/login_btn_corner"
                     android:text="登陆"
-                    android:textSize="20dp"
-                    android:textColor="#BEC2C9"/>
-                <!-- 手机验证码登录，可暂时不实现-->
-                <TextView
-                    android:id="@+id/yanzheng"
-                    android:layout_marginTop="100dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_width="200dp"
-                    android:layout_height="20dp"
-                    android:text="手机验证码登录"
-                    android:textColor="#0e6dfd"
-                    android:textSize="15dp"/>
-                <View
-                    android:layout_marginTop="10dp"
-                    android:layout_height="1dp"
-                    android:layout_width="120dp"
-                    android:background="#A49D9D"
-                    android:layout_gravity="center_horizontal"/>
-                <!--微信微博登录 可暂时不实现-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal">
-                    <Button
-                        android:layout_marginLeft="70dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/login_wechat"/>
-                    <Button
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/login_weibo"/>
-                </LinearLayout>
-                <!-- 注册账号-->
-                <TextView
+                    android:textSize="15dp"
+                    android:textColor="#ffffff"/>
+                <Button
                     android:id="@+id/login_register"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_width="200dp"
-                    android:layout_height="25dp"
-                    android:text="注册账号"
-                    android:textColor="#ffffff"
-                    android:textSize="20dp"/>
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/regist_btn_corner"
+                    android:text="注册"
+                    android:textSize="15dp"
+                    android:textColor="#ffffff"/>
+                <!-- 手机验证码登录，可暂时不实现-->
+                <!--<TextView-->
+                    <!--android:id="@+id/yanzheng"-->
+                    <!--android:layout_marginTop="100dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_width="200dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:text="手机验证码登录"-->
+                    <!--android:textColor="#0e6dfd"-->
+                    <!--android:textSize="15dp"/>-->
+                <!--<View-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_width="120dp"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:layout_gravity="center_horizontal"/>-->
+                <!--微信微博登录 可暂时不实现-->
+
+                <!-- 注册账号-->
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
+    <LinearLayout
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:background="#ffffff"
+                android:layout_centerVertical="true"
+                android:layout_width="50dp"
+                android:layout_height="0.5dp"/>
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="12dp"
+                android:text="第三方登录"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_alignParentRight="true"
+                android:background="#ffffff"
+                android:layout_centerVertical="true"
+                android:layout_width="50dp"
+                android:layout_height="0.5dp"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_marginTop="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/login_phone"/>
+            <Button
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/login_wechat"/>
+            <Button
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/login_weibo"/>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
