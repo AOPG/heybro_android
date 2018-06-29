@@ -290,7 +290,7 @@ public class MyInfoActivity extends Activity {
                         Toast.LENGTH_LONG);
                 toastTip.setGravity(Gravity.CENTER, 0, 0);
                 toastTip.show();
-                //startService(new Intent(MyInfoActivity.this, UserInfoService.class));
+                startService(new Intent(MyInfoActivity.this, UserInfoService.class));
 
             }
         });
