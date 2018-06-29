@@ -142,11 +142,11 @@ public class MyInfoActivity extends Activity {
         final EditText nicheng=findViewById(R.id.user_name);
         nicheng.setHint(LoginInfo.user.getNickName());
         final String[] name = {LoginInfo.user.getNickName()};
-
         nicheng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 name[0] = String.valueOf(nicheng.getText());
+                nicheng.setHint(nicheng.getText());
             }
         });
 
@@ -167,7 +167,6 @@ public class MyInfoActivity extends Activity {
             pro[0]= bundle1.getString("province");
             city[0]=bundle1.getString("city");
             userpo.setText(pro[0]+"  "+city[0]);
-            FLAG0=0;
         }
         userpo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,6 +184,7 @@ public class MyInfoActivity extends Activity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 intro[0] = String.valueOf(userintro.getText());
+                userintro.setHint(userintro.getText());
             }
         });
 
@@ -198,7 +198,6 @@ public class MyInfoActivity extends Activity {
             Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
             s[0]= bundle.getString("sex");    //获取Bundle里面的字符串
             sex.setText(s[0]);
-            FLAG=0;
         }
         sex.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,7 +230,6 @@ public class MyInfoActivity extends Activity {
             Bundle b=intent.getExtras();
             bir[0]=b.getString("birthday");
             mybirtnday.setText(bir[0]);
-            FLAG1=0;
         }
         mybirtnday.setOnClickListener(new View.OnClickListener() {
             @Override
