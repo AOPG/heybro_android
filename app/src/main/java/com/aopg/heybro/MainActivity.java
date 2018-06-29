@@ -420,7 +420,11 @@ public class MainActivity extends AppCompatActivity {
             mFridendHandler.sendMessage(msg);
         }
         int id = getIntent().getIntExtra("userloginflag", 0);
+        int id0 = getIntent().getIntExtra("flagggg", 0);
         if (id == 1 ) {
+            myTabHost.setCurrentTab(4);
+        }
+        if (id == 2 ) {
             myTabHost.setCurrentTab(4);
         }
         super.onResume();

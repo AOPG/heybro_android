@@ -291,7 +291,9 @@ public class MyInfoActivity extends Activity {
                 toastTip.setGravity(Gravity.CENTER, 0, 0);
                 toastTip.show();
                 startService(new Intent(MyInfoActivity.this, UserInfoService.class));
-
+                Intent intent = new Intent(MyInfoActivity.this,MainActivity.class);
+                intent.putExtra("flagggg", 2);
+                startActivity(intent);
             }
         });
     }
