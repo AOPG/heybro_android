@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
+import com.aopg.heybro.UserInfoService;
 import com.aopg.heybro.ui.fragment.FragmentMy;
 import com.aopg.heybro.ui.photo.ImageUtils;
 import com.aopg.heybro.utils.HttpUtils;
@@ -260,12 +261,13 @@ public class MyInfoActivity extends Activity {
                     startDay = String.valueOf(dateStart.getTime());
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
-                System.err.println(startDay);
-
+                };
+                System.out.println(startDay);
                 Request request = new Request.Builder().
-                        url("http://101.200.59.121:8082/android/averageUser/updateUserInfo?userCode=" + LoginInfo.user.getUserCode() + "&userNickName=" + name[0] +"&userPortrait=" + PicUrl+
-                                "&userIntro=" + intro[0] + "&userProvince=" + pro[0] + "&userCity=" + city[0] + "&birthday=" + startDay).build();
+                        url(BUILD_URL("averageUser/updateUserInfo?userCode=" + LoginInfo.user.getUserCode() + "&userNickName=" + name[0] +"&userPortrait=" + PicUrl+
+                                "&userIntro=" + intro[0] + "&userProvince=" + pro[0] + "&userCity=" + city[0] + "&birthday=" + startDay)).build();
+                //url("http://101.200.59.121:8082/android/averageUser/updateUserInfo?userCode=" + LoginInfo.user.getUserCode() + "&userNickName=" + name[0] +"&userPortrait=" + PicUrl+
+                  //      "&userIntro=" + intro[0] + "&userProvince=" + pro[0] + "&userCity=" + city[0] + "&birthday=" + startDay).build();
               //测试-------------------
                 Call call = client.newCall(request);
                 call.enqueue(new Callback() {//4.回调方法
@@ -288,6 +290,8 @@ public class MyInfoActivity extends Activity {
                         Toast.LENGTH_LONG);
                 toastTip.setGravity(Gravity.CENTER, 0, 0);
                 toastTip.show();
+                //startService(new Intent(MyInfoActivity.this, UserInfoService.class));
+
             }
         });
     }
