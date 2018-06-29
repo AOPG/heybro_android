@@ -575,10 +575,7 @@ public class FragmentBall extends Fragment{
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-
-
                         String result = response.body().string();
-
                         String success = (JSONObject.parseObject(result)).getString("success");
                         if (null!=success&&success.equals("true")) {
                             roomUserList = new ArrayList<>();

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -144,7 +145,7 @@ public class AddFriendActivity extends Activity{
     }
     public void showUserInfo(){
         if (null == window || !window.isShowing()) {
-            window = new PopupWindow(friendView, 850, 1000, true);
+            window = new PopupWindow(friendView, WindowManager.LayoutParams.FILL_PARENT, 800, true);
             // 设置PopupWindow是否能响应外部点击事件
             window.setOutsideTouchable(false);
             // 设置PopupWindow是否能响应点击事件
