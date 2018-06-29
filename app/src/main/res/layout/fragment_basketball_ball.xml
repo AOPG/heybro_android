@@ -19,6 +19,7 @@
 
             <com.aopg.heybro.ui.room.HorizontalRoomListView
                 android:id="@+id/ball_horizon_listview"
+                android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
                 android:layout_alignParentTop="true"

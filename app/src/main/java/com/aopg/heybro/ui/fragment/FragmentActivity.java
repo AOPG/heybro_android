@@ -18,15 +18,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.aopg.heybro.R;
 import com.aopg.heybro.ui.Common.MyViewPageLB;
 import com.aopg.heybro.ui.activity.ActivityexciActivity;
 import com.aopg.heybro.ui.activity.ActivityzhiboActivity;
+import com.aopg.heybro.ui.adapter.CustomerAdapter;
 import com.aopg.heybro.ui.discover.HorizontalListView;
 import com.aopg.heybro.ui.discover.HorizontalListViewAdapter;
 import com.aopg.heybro.ui.discover.Virtualdiscoverdata;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +43,9 @@ import static com.aopg.heybro.utils.ActivityUtils.addStatusViewWithColor;
 
 public class FragmentActivity extends Fragment {
 
-    private List<Map<String,Object>> list;
+
+    //下拉列表
+    private List<Map<String,Object>> list3;
     HorizontalListView hListView;
     HorizontalListViewAdapter hListViewAdapter;
     ImageView previewImg;
@@ -60,12 +65,21 @@ public class FragmentActivity extends Fragment {
         // 缓存的rootView需要判断是否已经被加过parent，如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
         ViewGroup parent = (ViewGroup) rootView.getParent();
 
-        if (Virtualdiscoverdata.flag1 != 1) {
-            Virtualdiscoverdata.flag1 = 1;
-            LinearLayout llPoints = (LinearLayout) rootView.findViewById(R.id.ll_points);
-            ViewPager mVp = (ViewPager) rootView.findViewById(R.id.vp);
-            MyViewPageLB myViewPageLB = new MyViewPageLB(rootView.getContext(), mVp, llPoints);
-        }
+//        if (Virtualdiscoverdata.flag1 != 1) {
+//            Virtualdiscoverdata.flag1 = 1;
+//            LinearLayout llPoints = (LinearLayout) rootView.findViewById(R.id.ll_points);
+//            ViewPager mVp = (ViewPager) rootView.findViewById(R.id.vp);
+//            MyViewPageLB myViewPageLB = new MyViewPageLB(rootView.getContext(), mVp, llPoints);
+//        }
+
+        //下拉列表
+        list3 = new Virtualdiscoverdata().dataResource2();
+        final CustomerAdapter adapter = new CustomerAdapter(rootView.getContext(), list3,
+                R.layout.fragment_activity_item);
+        ListView lv = rootView.findViewById(R.id.lvActivity);
+        lv.setAdapter(adapter);
+
+
 
 
         //图片点击事件

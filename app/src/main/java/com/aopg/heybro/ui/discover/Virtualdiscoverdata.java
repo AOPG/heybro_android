@@ -1,5 +1,9 @@
 package com.aopg.heybro.ui.discover;
 import com.aopg.heybro.R;
+import com.aopg.heybro.ui.Lunbo.GlideRoundTransform;
+import com.aopg.heybro.ui.Lunbo.ShareCardView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,12 +18,49 @@ import java.util.Map;
 
 public class Virtualdiscoverdata {
 
-    //发现模块
+    //活动模块
+    private List<Map<String,Object>> list2;
+
+    //发现
     private List<Map<String,Object>> list;
 
     //轮播图控制
     public static int flag1 = 0;
     public static int flag2 = 0;
+
+    //活动模块
+    public List<Map<String,Object>> dataResource2(){
+        list2 = new ArrayList<>();
+
+
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("src",R.drawable.basketc);
+
+        Map<String,Object> map1 = new HashMap<>();
+        map1.put("src",R.drawable.baskete);
+
+        Map<String,Object> map2 = new HashMap<>();
+        map2.put("src",R.drawable.basketf);
+
+//        Map<String,Object> map3 = new HashMap<>();
+//        map3.put("src",R.drawable.basketd);
+//
+//        Map<String,Object> map4 = new HashMap<>();
+//        map4.put("src",R.drawable.basketf);
+//
+//        Map<String,Object> map5 = new HashMap<>();
+//        map5.put("src",R.drawable.basketh);
+
+        list2.add(map);
+//        list2.add(map4);
+//        list2.add(map5);
+        list2.add(map1);
+        list2.add(map2);
+
+
+        return list2;
+    }
 
 
     //发现模块

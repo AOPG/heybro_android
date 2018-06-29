@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+
+
+
     <LinearLayout
         android:orientation="horizontal"
         android:id="@+id/statusbar"
@@ -27,42 +32,43 @@
         android:layout_height="match_parent"
         android:background="#323238"
         android:orientation="vertical">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="150dp">-->
+
+            <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+                <!--xmlns:tools="http://schemas.android.com/tools"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent" >-->
+
+                <!--<android.support.v4.view.ViewPager-->
+                    <!--android:id="@+id/vp"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent" />-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignBottom="@id/vp"-->
+                    <!--android:background="#33000000"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:paddingBottom="10dp" >-->
+
+                    <!--<LinearLayout-->
+                        <!--android:id="@+id/ll_points"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:gravity="center_horizontal"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:paddingBottom="10dp"></LinearLayout>-->
+                <!--</LinearLayout>-->
+
+            <!--</RelativeLayout>-->
+
+
+        <!--</LinearLayout>-->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp">
-
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/vp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/vp"
-                    android:background="#33000000"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp" >
-
-                    <LinearLayout
-                        android:id="@+id/ll_points"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal"
-                        android:paddingBottom="10dp"></LinearLayout>
-                </LinearLayout>
-
-            </RelativeLayout>
-
-
-        </LinearLayout>
-        <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:orientation="horizontal">
@@ -129,12 +135,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ListView
-                android:id="@+id/activity1"
-                android:layout_width="330dp"
-                android:layout_marginLeft="15dp"
-                android:layout_height="wrap_content">
+                android:id="@+id/lvActivity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="47dp">
             </ListView>
+
         </LinearLayout>
     </LinearLayout>
+
+
 </LinearLayout>
+
