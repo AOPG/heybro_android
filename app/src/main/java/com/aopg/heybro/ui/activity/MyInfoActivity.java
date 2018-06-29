@@ -138,65 +138,55 @@ public class MyInfoActivity extends Activity {
             }
         };
 
-        //昵称
+        //获得所有文本框
         final EditText nicheng=findViewById(R.id.user_name);
+        final EditText userintro=findViewById(R.id.user_intro);
+        TextView sex=findViewById(R.id.user_sex);
+        final TextView mybirtnday=findViewById(R.id.birthday);
+        TextView userpo=findViewById(R.id.user_location);
+
+        //昵称
+
         nicheng.setHint(LoginInfo.user.getNickName());
         final String[] name = {LoginInfo.user.getNickName()};
         nicheng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 name[0] = String.valueOf(nicheng.getText());
-                nicheng.setHint(nicheng.getText());
+                System.out.println(2222);
+                System.out.println(nicheng.getText());
+                LoginInfo.user.setNickName(nicheng.getText().toString());
+                nicheng.setHint(name[0]);
             }
         });
 
-        //ID(不可修改)
-        TextView ID=findViewById(R.id.user_code);
-        ID.setText(LoginInfo.user.getUserCode());
-        String id= String.valueOf(ID.getText());
-        //地区
-        TextView userpo=findViewById(R.id.user_location);
-        final String[] pro={LoginInfo.user.getUserProvince()};
-        System.out.println(pro[0]);
-        final String[] city={LoginInfo.user.getUserCity()};
-        if(FLAG0==0){
-            userpo.setText(pro[0]+"  "+city[0]);
-        }else {
-            Intent intent1 =  getIntent();       //获取已有的intent对象
-            Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
-            pro[0]= bundle1.getString("province");
-            city[0]=bundle1.getString("city");
-            userpo.setText(pro[0]+"  "+city[0]);
-        }
-        userpo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent poIntent = new Intent(getApplicationContext(), Myposition.class);
-                startActivity(poIntent);
-                  }
-               });
 
         //简介
-        final EditText userintro=findViewById(R.id.user_intro);
+
        userintro.setHint(LoginInfo.user.getUserIntro());
         final String[] intro = {LoginInfo.user.getUserIntro()};
         userintro.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 intro[0] = String.valueOf(userintro.getText());
+                LoginInfo.user.setUserIntro(userintro.getText().toString());
                 userintro.setHint(userintro.getText());
             }
         });
 
         //性别
-        TextView sex=findViewById(R.id.user_sex);
+
         final String[] s={LoginInfo.user.getUserSex()};
         if (FLAG==0){
             sex.setText(s[0]);
         }else{
+
+            LoginInfo.user.setNickName(nicheng.getText().toString());
+            LoginInfo.user.setUserIntro(userintro.getText().toString());
             Intent intent = getIntent();//获取已有的intent对象
             Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
             s[0]= bundle.getString("sex");    //获取Bundle里面的字符串
+            LoginInfo.user.setUserSex(s[0]);
             sex.setText(s[0]);
         }
         sex.setOnClickListener(new View.OnClickListener() {
@@ -219,8 +209,43 @@ public class MyInfoActivity extends Activity {
                 toastTip.show();
             }
         });
+
+        //ID(不可修改)
+        TextView ID=findViewById(R.id.user_code);
+        ID.setText(LoginInfo.user.getUserCode());
+        String id= String.valueOf(ID.getText());
+        //地区
+
+        final String[] pro={LoginInfo.user.getUserProvince()};
+        System.out.println(pro[0]);
+        final String[] city={LoginInfo.user.getUserCity()};
+        if(FLAG0==0){
+            userpo.setText(LoginInfo.user.getUserCity()+"  "+city[0]);
+        }else {
+            Intent intent1 =  getIntent();       //获取已有的intent对象
+            Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
+            pro[0]= bundle1.getString("province");
+            city[0]=bundle1.getString("city");
+            System.out.println(pro[0]);
+            System.out.println(city[0]);
+            LoginInfo.user.setUserCity(city[0]);
+            LoginInfo.user.setUserProvince(pro[0]);
+            userpo.setText(LoginInfo.user.getUserCity()+"  "+city[0]);
+
+        }
+        userpo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                LoginInfo.user.setNickName(nicheng.getText().toString());
+                LoginInfo.user.setUserIntro(userintro.getText().toString());
+                Intent poIntent = new Intent(getApplicationContext(), Myposition.class);
+                startActivity(poIntent);
+            }
+        });
+
         //生日
-       final TextView mybirtnday=findViewById(R.id.birthday);
+
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         final String[] bir={sf.format(LoginInfo.user.getBirthday())};
         if (FLAG1==0){
@@ -229,11 +254,16 @@ public class MyInfoActivity extends Activity {
             Intent intent=getIntent();
             Bundle b=intent.getExtras();
             bir[0]=b.getString("birthday");
+
             mybirtnday.setText(bir[0]);
         }
         mybirtnday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                LoginInfo.user.setNickName(nicheng.getText().toString());
+                LoginInfo.user.setUserIntro(userintro.getText().toString());
                 Intent birth = new Intent(getApplicationContext(), Mybirthday.class);
                 startActivity(birth);
             }
