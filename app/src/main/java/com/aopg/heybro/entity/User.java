@@ -1,14 +1,19 @@
 package com.aopg.heybro.entity;
 
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.litepal.crud.DataSupport;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * Created by 王伟健 on 2018-06-08.
  */
 
-public class User extends DataSupport {
+public class User  extends DataSupport implements Serializable{
     private String username;
     private String userCode;
     private String nickName;
@@ -217,4 +222,5 @@ public class User extends DataSupport {
     public void setRoomId(Long roomId) {
         this.roomId = roomId;
     }
+
 }

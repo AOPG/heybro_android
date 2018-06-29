@@ -75,7 +75,17 @@ public class SearchfriendAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                User user=users.get(position);
+                user.setUsername(username);
+                user.setUserCode(usercode);
+                user.setUserProvince(userprovince);
+                user.setUserCity(usercity);
+                user.setUserGrade(usergrade);
+                user.setUserPortrait(userportrait);
+                user.setUserIntro(userintro);
                 Intent intent = new Intent();
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable("user",user);
                 intent.setClass(context,FriendInfoActivity.class);
                 intent.putExtra("username",username);
                 intent.putExtra("usercode",usercode);
@@ -84,6 +94,7 @@ public class SearchfriendAdapter extends BaseAdapter {
                 intent.putExtra("usergrade",usergrade);
                 intent.putExtra("userportrait",userportrait);
                 intent.putExtra("userintro",userintro);
+                intent.putExtras(mBundle);
                 context.startActivity(intent);
             }
         });
