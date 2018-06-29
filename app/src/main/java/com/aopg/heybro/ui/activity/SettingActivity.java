@@ -16,6 +16,7 @@ import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.User;
 import com.aopg.heybro.im.InitIM;
+import com.aopg.heybro.ui.Common.ActivitiesManager;
 import com.aopg.heybro.utils.LoginInfo;
 
 import static com.aopg.heybro.utils.ThreadUtils.findAllThreads;
@@ -32,6 +33,7 @@ public class SettingActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.fragment_my_settings);
+        ActivitiesManager.getInstance().addActivity(this);
 
         ImageView set_back = findViewById(R.id.set_back);
         //返回按钮
