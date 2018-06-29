@@ -65,36 +65,29 @@ public class SearchfriendAdapter extends BaseAdapter {
                 .into(userPortrait);
         userName.setText(users.get(position).getUsername());
         userCode.setText(users.get(position).getUserCode());
-        final String username=users.get(position).getUsername();
-        final String usercode=users.get(position).getUserCode();
-        final String userprovince=users.get(position).getUserProvince();
-        final String usercity=users.get(position).getUserCity();
-        final int usergrade=users.get(position).getUserGrade();
-        final String userportrait=users.get(position).getUserPortrait();
-        final String userintro=users.get(position).getUserIntro();
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user=users.get(position);
-                user.setUsername(username);
-                user.setUserCode(usercode);
-                user.setUserProvince(userprovince);
-                user.setUserCity(usercity);
-                user.setUserGrade(usergrade);
-                user.setUserPortrait(userportrait);
-                user.setUserIntro(userintro);
+               User user=users.get(position);
+//                user.setUsername(username);
+//                user.setUserCode(usercode);
+//                user.setUserProvince(userprovince);
+//                user.setUserCity(usercity);
+//                user.setUserGrade(usergrade);
+//                user.setUserPortrait(userportrait);
+//                user.setUserIntro(userintro);
                 Intent intent = new Intent();
-                Bundle mBundle = new Bundle();
-                mBundle.putSerializable("user",user);
+ //               Bundle mBundle = new Bundle();
+//                mBundle.putSerializable("user",user);
                 intent.setClass(context,FriendInfoActivity.class);
-                intent.putExtra("username",username);
-                intent.putExtra("usercode",usercode);
-                intent.putExtra("userprovince",userprovince);
-                intent.putExtra("usercity",usercity);
-                intent.putExtra("usergrade",usergrade);
-                intent.putExtra("userportrait",userportrait);
-                intent.putExtra("userintro",userintro);
-                intent.putExtras(mBundle);
+//                intent.putExtra("username",username);
+                intent.putExtra("userCode",user.getUserCode());
+//                intent.putExtra("userprovince",userprovince);
+//                intent.putExtra("usercity",usercity);
+//                intent.putExtra("usergrade",usergrade);
+//                intent.putExtra("userportrait",userportrait);
+//                intent.putExtra("userintro",userintro);
+  //              intent.putExtras(mBundle);
                 context.startActivity(intent);
             }
         });

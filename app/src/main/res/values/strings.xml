@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Hey!bro</string>
+    <string name="scan_text">请将二维码对准扫描框内,程序即可自动识别</string>
+    <string name="scan_title">二维码扫描</string>
 </resources>

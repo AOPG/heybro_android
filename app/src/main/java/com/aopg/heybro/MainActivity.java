@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -48,6 +49,8 @@ import org.litepal.crud.DataSupport;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.callback.GetUserInfoCallback;
@@ -61,6 +64,7 @@ import static com.aopg.heybro.utils.ActivityUtils.getStatusBarHeight;
 import static com.aopg.heybro.utils.ThreadUtils.findAllThreads;
 
 public class MainActivity extends AppCompatActivity {
+
     private Handler mHandler;
     private Handler mFridendHandler;
     private FragmentTabHost myTabHost;
@@ -240,11 +244,6 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = view.findViewById(R.id.textId);
         textView.setText(title);
         return view;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
 
@@ -454,6 +453,12 @@ public class MainActivity extends AppCompatActivity {
                 window.setAttributes(attributes);
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 
 }

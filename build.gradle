@@ -18,6 +18,8 @@ buildscript {
     }
     dependencies {
 
+       // classpath 'com.neenbedankt.gradle.plugins:android-apt:1.7'
+
         // 注册MobSDK
         classpath "com.mob.sdk:MobSDK:+"
 

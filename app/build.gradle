@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 // 添加插件
 apply plugin: "com.mob.sdk"
+//apply plugin: 'android-apt'
 
 // 在MobSDK的扩展中注册SMSSDK的相关信息
 MobSDK {
@@ -15,7 +16,7 @@ android {
         config {
             keyAlias 'heybro'
             keyPassword 'heybro'
-            storeFile file('C:/Users/L/Desktop/aopg.jks')
+            storeFile file('D:/studiospace/heybro_android/aopg.jks')
             storePassword '123456'
         }
     }
@@ -45,6 +46,10 @@ android {
 }
 
 dependencies {
+    //url
+    compile 'com.github.mzule.activityrouter:activityrouter:1.1.1'
+    annotationProcessor 'com.github.mzule.activityrouter:compiler:1.1.1'
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //baidu定位sdk
     implementation files('libs/BaiduLBS_Android.jar')

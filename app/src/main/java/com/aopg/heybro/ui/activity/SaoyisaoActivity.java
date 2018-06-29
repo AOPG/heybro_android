@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.aopg.heybro.R;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.common.HybridBinarizer;
 
 /**
  * Created by 壑过忘川 on 2018/6/6.
@@ -31,4 +33,5 @@ public class SaoyisaoActivity extends Activity {
         //返回
         super.onBackPressed();
     }
+
 }

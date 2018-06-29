@@ -49,9 +49,8 @@
                 android:textSize="15dp"
                 android:textColor="#ffffff"
                 android:checked="true"
-                android:clickable="true"
-                android:button="@null"
-                android:drawableLeft="@drawable/radio_button_style"/>
+                android:background="@null"
+                android:button="@drawable/radio_button_style" />
             <!--比赛失败选项-->
             <RadioButton
                 android:layout_marginLeft="20dp"
@@ -61,11 +60,10 @@
                 android:layout_height="wrap_content"
                 android:text="  负"
                 android:textSize="15dp"
+                android:background="@null"
                 android:textColor="#ffffff"
                 android:checked="false"
-                android:clickable="true"
-                android:button="@null"
-                android:drawableLeft="@drawable/radio_button_style"/>
+                android:button="@drawable/radio_button_style" />
         </RadioGroup>
 
     </RelativeLayout>

@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
-    <color name="transparent">#00000000</color>
+    <!--<color name="transparent">#00000000</color>-->
     <color name="topbar_3">#339EFE</color>
     <color name="line">#dddddd</color>
     <color name="text_10">#333333</color>
@@ -14,4 +14,32 @@
     <color name="theme_text">#898989</color>
     <color name="theme_color">#F57708</color>
     <color name="theme_border">#EEEEEE</color>
+
+
+    <color name="transparent">#FFD306</color>
+    <color name="silver">#00ffffff</color>
+    <color name="darkgray">#808080FF</color>
+    <color name="black">#FF000000</color>
+    <color name="red">#FE2E2E</color>
+    <color name="ltgray">#4B8A08</color>
+    <color name="pressed">#fff22fff</color>
+    <color name="selected">#dddddd</color>
+    <color name="focused">#e0e0e0</color>
+    <color name="background">#f8f9fa</color>
+    <color name="border">#dedfe0</color>
+    <!-- 灰色 -->
+    <color name="bg_Gray">#CCCCCC</color>
+    <color name="green">#ff00ff00</color>
+    <color name="blue">#ff1e90ff</color>
+
+    <color name="holo_blue_bright">#0099FF</color>
+    <color name="holo_green_light">#CCFF66</color>
+    <color name="holo_orange_light">#FFCC99</color>
+    <color name="holo_red_light">#FF6600</color>
+    <!-- 浅灰色 -->
+    <color name="bg_Gray_light">#EEEEEE</color>
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="tool_bg">#921536</color>
 </resources>

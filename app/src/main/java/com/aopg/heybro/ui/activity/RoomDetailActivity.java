@@ -16,6 +16,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,12 +104,6 @@ public class RoomDetailActivity extends AppCompatActivity {
         finishGame = findViewById(R.id.finish_game);
         dialog = new Dialog(this,R.style.finishGameDialog);
         dialog.setContentView(R.layout.game_over_dialog);
-        RadioButton radioWin = dialog.findViewById(R.id.radioWin);
-        RadioButton radioLose = dialog.findViewById(R.id.radioLose);
-        Drawable drawableWin = getResources().getDrawable(R.drawable.radio_button_style);
-        drawableWin.setBounds(0,0,60,60);
-        radioWin.setCompoundDrawables(drawableWin,null,null,null);
-        radioLose.setCompoundDrawables(drawableWin,null,null,null);
         finishGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +111,18 @@ public class RoomDetailActivity extends AppCompatActivity {
             }
         });
 
+        RadioGroup zhanji = dialog.findViewById(R.id.zhanjiID);
+        zhanji.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int id = group.getCheckedRadioButtonId();
+                RadioButton choise = dialog.findViewById(id);
 
+//                String output = choise.getText().toString();
+               // Toast.makeText(RoomDetailActivity.this, "你的选择为：" + output, Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
 
@@ -207,6 +213,7 @@ public class RoomDetailActivity extends AppCompatActivity {
     //dialog框内事件绑定
     public void dealDialogEvent(){
         Button directExit = dialog.findViewById(R.id.cancel_score);
+        Button ensureScore = dialog.findViewById(R.id.ensure_score);
         directExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -240,6 +247,41 @@ public class RoomDetailActivity extends AppCompatActivity {
                 //删除服务器
                 exitRoom();
 
+            }
+        });
+
+        ensureScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //直接退出事件
+                if (basketRoomInfo.getMaster().equals(LoginInfo.user.getUserCode())){
+                    //解散聊天室
+                    JMessageClient.adminDissolveGroup(basketRoomInfo.getRoomId(), new BasicCallback() {
+                        @Override
+                        public void gotResult(int responseCode, String responseMessage) {
+                            if (0 == responseCode) {
+                                Toast.makeText(getApplicationContext(), "解散群组成功", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "解散群组失败", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }else {
+                    JMessageClient.exitGroup(basketRoomInfo.getRoomId(), new BasicCallback() {
+                        @Override
+                        public void gotResult(int i, String s) {
+                            if (i == 0) {
+                                LoginInfo.user.setRoomId(0L);
+                                Toast.makeText(getApplicationContext(), "退出聊天成功", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "退出聊天失败", Toast.LENGTH_SHORT).show();
+                                Log.i("ExitGroupActivity", "JMessageClient.exitGroup " + ", responseCode = " + i + " ; Desc = " + s);
+                            }
+                        }
+                    });
+                }
+                //删除服务器
+                exitRoom();
             }
         });
     }

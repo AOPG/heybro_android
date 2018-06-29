@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,44 +26,26 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.MainActivity;
 import com.aopg.heybro.R;
 import com.aopg.heybro.UserInfoService;
-import com.aopg.heybro.entity.BasketRoomInfo;
-import com.aopg.heybro.entity.Concern;
-import com.aopg.heybro.ui.activity.ChartRoomActivity;
+import com.aopg.heybro.codescan.ScanCodeActivity;
 import com.aopg.heybro.ui.activity.MyInfoActivity;
 import com.aopg.heybro.ui.activity.Mydata;
 import com.aopg.heybro.ui.activity.Myrili;
 import com.aopg.heybro.ui.activity.SaoyisaoActivity;
 import com.aopg.heybro.ui.activity.SettingActivity;
 import com.aopg.heybro.utils.LoginInfo;
-import com.aopg.heybro.utils.teamhead.utils.DensityUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.Authenticator;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Credentials;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.Route;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
-import static com.aopg.heybro.utils.ActivityUtils.addStatusViewWithColor;
-import static com.aopg.heybro.utils.BaiduMapLocationUtil.mLocationClient;
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
-import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
+
 
 
 /**
@@ -71,6 +54,7 @@ import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
  */
 
 public class FragmentMy extends Fragment {
+    public final static int SCANNIN_GREQUEST_CODE = 1;
 
     private static View rootView;
     private boolean isVisible = true;
@@ -181,8 +165,12 @@ public class FragmentMy extends Fragment {
         saoyisao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent saoyisaoIntent = new Intent(getActivity(), SaoyisaoActivity.class);
-                startActivity(saoyisaoIntent);
+//                Intent saoyisaoIntent = new Intent(getActivity(), SaoyisaoActivity.class);
+//                startActivity(saoyisaoIntent);
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), ScanCodeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
             }
         });
         /**
@@ -354,4 +342,38 @@ public class FragmentMy extends Fragment {
         mActivity.setHandler(handler);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case SCANNIN_GREQUEST_CODE:
+                if (resultCode == -1) {
+                    Bundle bundle = data.getExtras();
+                    //取出扫描到的内容
+                    String str = bundle.getString("result");
+                    Log.e("onActivityResult",str);
+                    Toast.makeText(getActivity(),str,Toast.LENGTH_SHORT);
+                    Uri uri=Uri.parse(str);
+                    Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+                    startActivity(intent);
+                    //调用外部浏览器
+//                    String regEx = "^http\\://.*$";
+//                    Pattern pattern = Pattern.compile(regEx);
+//                    Matcher matcher = pattern.matcher(str);
+//                    boolean b = matcher.matches();
+//                    if (b) {
+//                        try {
+//                            Intent intent = new Intent(Intent.ACTION_VIEW);
+//                            intent.setData(Uri.parse(str));
+//                            startActivity(intent);
+//                        } catch (Exception e) {
+//                            Log.v("liulan", e.getMessage());
+//                        }
+//                    }
+                    //显示图片数据到img标签中
+                    //mImageView.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
+                }
+                break;
+        }
+    }
 }

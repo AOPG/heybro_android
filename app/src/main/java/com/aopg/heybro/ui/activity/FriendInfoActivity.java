@@ -23,6 +23,7 @@ import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.github.mzule.activityrouter.annotation.Router;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,7 +41,12 @@ import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
  * Created by L on 2018/6/25.
  */
 
+
+@Router("userInfo/:userCode")
 public class FriendInfoActivity extends Activity {
+
+    private String userCode;
+    private User user;
     private ImageView userimg;
     private TextView username;
     private TextView usercode;
@@ -73,8 +79,29 @@ public class FriendInfoActivity extends Activity {
             }
         });
         Intent intent=getIntent();
-        User user=(User)intent.getSerializableExtra("user");
+        userCode = intent.getStringExtra("userCode");
+        loadUserInfo(userCode);
+    }
+    public void onBackPressed() {
+        //返回
+        super.onBackPressed();
+    }
+    private class MainHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 2:
+                    guanzhu.setBackgroundDrawable(getResources().getDrawable(R.drawable.unlogin));
+                    guanzhu.setText("取消关注");
+                case 1000:
+                    showUserInfo();
 
+            }
+        }
+    }
+
+    public void showUserInfo(){
         String userPortrait=user.getUserPortrait();//intent.getStringExtra("userportrait");
         RequestOptions options = new RequestOptions()
                 .fallback(R.drawable.image).centerCrop();
@@ -125,19 +152,42 @@ public class FriendInfoActivity extends Activity {
             }
         });
     }
-    public void onBackPressed() {
-        //返回
-        super.onBackPressed();
-    }
-    private class MainHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 2:
-                    guanzhu.setBackgroundDrawable(getResources().getDrawable(R.drawable.unlogin));
-                    guanzhu.setText("取消关注");
+
+    public void loadUserInfo(String userCode){
+        client = HttpUtils.init(client);
+        Request request = new Request.Builder().
+                url(BUILD_URL("averageUser/userInfoByCode?userCode="+userCode)).build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {//4.回调方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
             }
-        }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                System.out.println("测试"+result+"123");
+                String success = (JSONObject.parseObject(result)).getString("success");
+                if (null!=success&&success.equals("true")) {
+                    JSONObject userInfo = (JSONObject) (JSONObject.parseObject(result)).get("data");
+                    String userName = userInfo.getString("userName");
+                    String userPortrait=userInfo.getString("userPortrait");
+                    String userIntro= userInfo.getString("userIntro");
+                    int userGrade= Integer.parseInt(userInfo.getString("userGrade"));
+                    String userCity= userInfo.getString("userCity");
+                    String userProvince= userInfo.getString("userProvince");
+                    user = new User();
+                    user.setUserProvince(userProvince);
+                    user.setUserCity(userCity);
+                    user.setUserGrade(userGrade);
+                    user.setUserIntro(userIntro);
+                    user.setUserPortrait(userPortrait);
+                    user.setUsername(userName);
+                    Message message = mainHandler.obtainMessage(1000,user);
+                    mainHandler.sendMessage(message);
+                }
+            }
+        });
     }
 }
