@@ -62,10 +62,10 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		tishitext = (TextView) findViewById(R.id.tishitext);
 		//下面一行是为啦修证在小米手机上关掉扫描器后再打开不会再次定位的问题,因为viewfinderview中的ondraw只会绘制一次,而这个activity有的手机优化时会把他关掉
-		if(ViewfinderView.tvMarginBottom>0){
-			FrameLayout.LayoutParams par=(FrameLayout.LayoutParams) tishitext.getLayoutParams();
-			par.setMargins(0,0,0,viewfinderView.tvMarginBottom);
-		}
+//		if(ViewfinderView.tvMarginBottom>0){
+//			FrameLayout.LayoutParams par=(FrameLayout.LayoutParams) tishitext.getLayoutParams();
+//			par.setMargins(0,0,0,viewfinderView.tvMarginBottom);
+//		}
 //
 //		Rect frame = CameraManager.get().getFramingRect();
 //		WindowManager manager = this.getWindowManager();

@@ -210,11 +210,11 @@ public final class ViewfinderView extends View {
 //			float textWidth = paint.measureText(text);
 //			canvas.drawText(text, (width - textWidth)/2, (float) (frame.bottom + (float)TEXT_PADDING_TOP *density), paint);
 //
-			tvMarginBottom=height - frame.bottom-MipcaActivityCapture.tishitext.getMeasuredHeight()*2;
-			if(MipcaActivityCapture.tishitext!=null) {
-				FrameLayout.LayoutParams par = (FrameLayout.LayoutParams) MipcaActivityCapture.tishitext.getLayoutParams();
-				par.setMargins(0, 0, 0, tvMarginBottom);
-			}
+//			tvMarginBottom=height - frame.bottom-MipcaActivityCapture.tishitext.getMeasuredHeight()*2;
+//			if(MipcaActivityCapture.tishitext!=null) {
+//				FrameLayout.LayoutParams par = (FrameLayout.LayoutParams) MipcaActivityCapture.tishitext.getLayoutParams();
+//				par.setMargins(0, 0, 0, tvMarginBottom);
+//			}
 
 			Collection<ResultPoint> currentPossible = possibleResultPoints;
 			Collection<ResultPoint> currentLast = lastPossibleResultPoints;

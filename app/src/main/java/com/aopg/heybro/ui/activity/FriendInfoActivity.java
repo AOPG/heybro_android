@@ -58,6 +58,9 @@ public class FriendInfoActivity extends Activity {
     private Button guanzhu;
     private OkHttpClient client;
     private MainHandler mainHandler = new MainHandler();
+    private boolean isConcern = false;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,8 +97,14 @@ public class FriendInfoActivity extends Activity {
                 case 2:
                     guanzhu.setBackgroundDrawable(getResources().getDrawable(R.drawable.unlogin));
                     guanzhu.setText("取消关注");
+                    guanzhu.setOnClickListener(null);
                 case 1000:
                     showUserInfo();
+                    if (isConcern==true){
+                        guanzhu.setBackgroundDrawable(getResources().getDrawable(R.drawable.unlogin));
+                        guanzhu.setText("取消关注");
+                        guanzhu.setOnClickListener(null);
+                    }
 
             }
         }
@@ -156,7 +165,7 @@ public class FriendInfoActivity extends Activity {
     public void loadUserInfo(String userCode){
         client = HttpUtils.init(client);
         Request request = new Request.Builder().
-                url(BUILD_URL("averageUser/userInfoByCode?userCode="+userCode)).build();
+                url(BUILD_URL("averageUser/userInfoConcernByCode?userCode="+LoginInfo.user.getUserCode()+"&concernCode="+userCode)).build();
         Call call = client.newCall(request);
         call.enqueue(new Callback() {//4.回调方法
             @Override
@@ -177,6 +186,10 @@ public class FriendInfoActivity extends Activity {
                     int userGrade= Integer.parseInt(userInfo.getString("userGrade"));
                     String userCity= userInfo.getString("userCity");
                     String userProvince= userInfo.getString("userProvince");
+                    String isConcernStr = userInfo.getString("isConcern");
+                    if (isConcernStr.equals("true")){
+                        isConcern = true;
+                    }
                     user = new User();
                     user.setUserProvince(userProvince);
                     user.setUserCity(userCity);
