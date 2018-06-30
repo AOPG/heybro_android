@@ -120,7 +120,6 @@ public class FriendInfoActivity extends Activity {
                 .into(userimg);
         String userName=user.getUsername();//intent.getStringExtra("username");
         username.setText(userName);
-        final String userCode=user.getUserCode();//intent.getStringExtra("usercode");
         usercode.setText(userCode);
         String userProvince=user.getUserProvince();//intent.getStringExtra("userprovince");
         userprovince.setText(userProvince);

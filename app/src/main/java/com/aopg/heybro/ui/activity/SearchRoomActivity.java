@@ -25,7 +25,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.BasketRoomInfo;
-import com.aopg.heybro.ui.adapter.SearchRoomAdapter;;
+import com.aopg.heybro.ui.adapter.SearchRoomAdapter;
 import com.aopg.heybro.ui.room.RoomDate;
 import com.aopg.heybro.ui.room.RoomJoinAdapter;
 import com.aopg.heybro.ui.room.RoomUser;
@@ -97,7 +97,7 @@ public class SearchRoomActivity extends Activity {
         /**
          * 搜索房间
          */
-        searchRoom();
+      //  searchRoom();
         //取消
         TextView searchroom_cancel = findViewById(R.id.searchroom_cancel);
         searchroom_cancel.setOnClickListener(new View.OnClickListener() {
