@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
 // 添加插件
 apply plugin: "com.mob.sdk"
-//apply plugin: 'android-apt'
 
 // 在MobSDK的扩展中注册SMSSDK的相关信息
 MobSDK {
-    appKey "d580ad56b4b5"
-    appSecret "7fcae59a62342e7e2759e9e397c82bdd"
+    appKey "268c445b5886e"
+    appSecret "32e725cbbdd5244837794594bfc7e65a"
 
     SMSSDK {}
 }
@@ -16,7 +15,7 @@ android {
         config {
             keyAlias 'heybro'
             keyPassword 'heybro'
-            storeFile file('D:/studiospace/heybro_android/aopg.jks')
+            storeFile file('D:/projectinschool/jks/aopg.jks')
             storePassword '123456'
         }
     }
@@ -46,6 +45,7 @@ android {
 }
 
 dependencies {
+
     //url
     compile 'com.github.mzule.activityrouter:activityrouter:1.1.1'
     annotationProcessor 'com.github.mzule.activityrouter:compiler:1.1.1'
