@@ -203,37 +203,10 @@ public class ChartRoomActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String msgTypeString = intent.getStringExtra(EXTRA_MSG_TYPE);
-            contentType = ContentType.valueOf(msgTypeString);
-            String user = intent.getStringExtra(EXTRA_FROM_USERNAME);
-            int msgid = intent.getIntExtra(EXTRA_MSGID, 0);
-            long gid = intent.getLongExtra(EXTRA_GROUPID, 0);
-            Conversation conversation;
-
-            conversation = JMessageClient.getGroupConversation(gid);
-            Log.e(TAG,"收到来自群聊：" + gid + ",用户" + user + "的消息\n");
-            if (conversation == null) {
-                Toast.makeText(getApplicationContext(), "会话对象为null", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            message = conversation.getMessage(msgid);
-
-            switch (contentType) {
-                case text:
-                    TextContent textContent = (TextContent) message.getContent();
-
-                    ChatRoomRecord chatRoomRecord = new ChatRoomRecord();
-                    chatRoomRecord.setUserCode(user);
-                    chatRoomRecord.setMessage(textContent.getText());
-                    chatRoomRecord.setRoomId(gid+"");
-                    chatRoomRecord.setRoomName(roomName);
-                    chatRoomRecord.setDate(new Date().getTime());
-                    chatRoomRecord.save();
-                    chartRoomMessageAdapter.addMessage(chatRoomRecord);
-                    chartRoomMessageAdapter.notifyDataSetChanged();
-                    Log.e(TAG, "文本消息" + "\n消息内容 = " + textContent.getText());
-                    break;
-            }
+            ChatRoomRecord chatRoomRecord = (ChatRoomRecord) intent.getSerializableExtra("chatRoomRecord");
+            chartRoomMessageAdapter.addMessage(chatRoomRecord);
+            chartRoomMessageAdapter.notifyDataSetChanged();
+            Log.e(TAG, "文本消息" + "\n消息内容 = " + chatRoomRecord.getMessage());
         }
     };
 

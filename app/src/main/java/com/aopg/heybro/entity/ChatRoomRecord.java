@@ -2,11 +2,13 @@ package com.aopg.heybro.entity;
 
 import org.litepal.crud.DataSupport;
 
+import java.io.Serializable;
+
 /**
  * Created by 王伟健 on 2018-06-13.
  */
 
-public class ChatRoomRecord extends DataSupport {
+public class ChatRoomRecord extends DataSupport implements Serializable {
     //房间ID
     private String roomId;
     //房间名称

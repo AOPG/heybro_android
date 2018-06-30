@@ -195,35 +195,11 @@ public class SingleChartActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String msgTypeString = intent.getStringExtra(EXTRA_MSG_TYPE);
-            contentType = ContentType.valueOf(msgTypeString);
-            String user = intent.getStringExtra(EXTRA_FROM_USERNAME);
-            int msgid = intent.getIntExtra(EXTRA_MSGID, 0);
-            Conversation conversation;
+            ChatRecord chatRecord = (ChatRecord) intent.getSerializableExtra("chatRecord");
+            singleMessageAdapter.addMessage(chatRecord);
+            singleMessageAdapter.notifyDataSetChanged();
+            Log.e(TAG, "文本消息" + "\n消息内容 = " + chatRecord.getMessage());
 
-            conversation = JMessageClient.getSingleConversation(user);
-            Log.e(TAG, "initData: 收到来自用户：" + user + "的消息\n" );
-            if (conversation == null) {
-                Toast.makeText(getApplicationContext(), "会话对象为null", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            message = conversation.getMessage(msgid);
-
-            switch (contentType) {
-                case text:
-                    TextContent textContent = (TextContent) message.getContent();
-                    ChatRecord chatRecord = new ChatRecord();
-                    chatRecord.setUserCode(LoginInfo.user.getUserCode());
-                    chatRecord.setTheOrtherCode(user);
-                    chatRecord.setMessage(textContent.getText());
-                    chatRecord.setDate(new Date().getTime());
-                    chatRecord.setToMe(true);
-                    chatRecord.save();
-                    singleMessageAdapter.addMessage(chatRecord);
-                    singleMessageAdapter.notifyDataSetChanged();
-                    Log.e(TAG, "文本消息" + "\n消息内容 = " + textContent.getText());
-                    break;
-            }
         }
     };
 

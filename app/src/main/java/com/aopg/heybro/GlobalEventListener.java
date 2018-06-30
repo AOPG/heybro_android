@@ -1,19 +1,30 @@
 package com.aopg.heybro;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
+import com.aopg.heybro.entity.ChatRecord;
+import com.aopg.heybro.entity.ChatRoomRecord;
+import com.aopg.heybro.entity.UserConversation;
+import com.aopg.heybro.utils.LoginInfo;
 
-import com.aopg.heybro.im.createmessage.ShowMessageActivity;
-import com.aopg.heybro.ui.activity.SingleChartActivity;
+import org.litepal.crud.DataSupport;
+
+import java.util.Date;
+import java.util.List;
 
 import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.content.TextContent;
 import cn.jpush.im.android.api.enums.ConversationType;
 import cn.jpush.im.android.api.event.MessageEvent;
 import cn.jpush.im.android.api.event.NotificationClickEvent;
+import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.GroupInfo;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.android.api.model.UserInfo;
+
+import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
 
 
 /**
@@ -28,32 +39,81 @@ public class GlobalEventListener {
     }
 
     public void onEvent(NotificationClickEvent event) {
-        jumpToActivity(event.getMessage());
+
     }
 
     public void onEvent(MessageEvent event) {
-        jumpToActivity(event.getMessage());
+        saveConversationDate(event.getMessage());
     }
 
-    private void jumpToActivity(Message msg) {
+    private void saveConversationDate(Message msg) {
         UserInfo fromUser = msg.getFromUser();
         Intent notificationIntent;
-
+        Conversation conversation;
         if (msg.getTargetType() == ConversationType.group) {
             notificationIntent = new Intent("group_message");
             GroupInfo groupInfo = (GroupInfo) msg.getTargetInfo();
-            notificationIntent.putExtra(ShowMessageActivity.EXTRA_IS_GROUP, true);
-            notificationIntent.putExtra(ShowMessageActivity.EXTRA_GROUPID, groupInfo.getGroupID());
+
+            conversation = JMessageClient.getGroupConversation(groupInfo.getGroupID());
+            Log.e("","收到来自群聊：" + groupInfo.getGroupID() + ",用户" + fromUser.getUserName() + "的消息\n");
+            if (conversation == null) {
+                Toast.makeText(getApplicationContext(), "会话对象为null", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Message message = conversation.getMessage(msg.getId());
+
+            TextContent textContent = (TextContent) message.getContent();
+
+            //存储Group信息
+            ChatRoomRecord chatRoomRecord = new ChatRoomRecord();
+            chatRoomRecord.setUserCode(fromUser.getUserName());
+            chatRoomRecord.setMessage(textContent.getText());
+            chatRoomRecord.setRoomId(groupInfo.getGroupID()+"");
+            chatRoomRecord.setRoomName(groupInfo.getGroupName());
+            chatRoomRecord.setDate(new Date().getTime());
+            chatRoomRecord.save();
+
+            notificationIntent.putExtra("chatRoomRecord",chatRoomRecord);
+
+
         } else {
             notificationIntent = new Intent("single_message");
-            notificationIntent.putExtra(ShowMessageActivity.EXTRA_IS_GROUP, false);
+
+            conversation = JMessageClient.getSingleConversation(fromUser.getUserName());
+
+            Log.e("", "initData: 收到来自用户：" + fromUser.getUserName() + "的消息\n" );
+            if (conversation == null) {
+                Toast.makeText(getApplicationContext(), "会话对象为null", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Message message = conversation.getMessage(msg.getId());
+            TextContent textContent = (TextContent) message.getContent();
+            ChatRecord chatRecord = new ChatRecord();
+            chatRecord.setUserCode(LoginInfo.user.getUserCode());
+            chatRecord.setTheOrtherCode(fromUser.getUserName());
+            chatRecord.setMessage(textContent.getText());
+            chatRecord.setDate(new Date().getTime());
+            chatRecord.setToMe(true);
+            chatRecord.save();
+
+            UserConversation userConversation = new UserConversation();
+            List<UserConversation> userConversationList =  DataSupport
+                    .where("userCode = ? and userConversationCode = ?", LoginInfo.user.getUserCode(),fromUser.getUserName())
+                    .find(UserConversation.class);
+            if (null!=userConversationList&&userConversationList.size()>0){
+                userConversation.setUnReadNum(userConversationList.get(0).getUnReadNum()+1);
+                userConversation.updateAll("userCode = ? and userConversationCode = ?", LoginInfo.user.getUserCode(),fromUser.getUserName());
+            }else {
+                userConversation.setUnReadNum(0);
+                userConversation.setUserCode(LoginInfo.user.getUserCode());
+                userConversation.setUserConversationCode(fromUser.getUserName());
+                userConversation.save();
+            }
+
+
+            notificationIntent.putExtra("chatRecord",chatRecord);
         }
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        notificationIntent.putExtra(ShowMessageActivity.EXTRA_FROM_USERNAME, fromUser.getUserName());
-        notificationIntent.putExtra(ShowMessageActivity.EXTRA_FROM_APPKEY, fromUser.getAppKey());
-        notificationIntent.putExtra(ShowMessageActivity.EXTRA_MSG_TYPE, msg.getContentType().toString());
-        notificationIntent.putExtra(ShowMessageActivity.EXTRA_MSGID, msg.getId());
         appContext.sendBroadcast(notificationIntent);
     }
 }

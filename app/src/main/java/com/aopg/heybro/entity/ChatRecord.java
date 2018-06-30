@@ -2,11 +2,13 @@ package com.aopg.heybro.entity;
 
 import org.litepal.crud.DataSupport;
 
+import java.io.Serializable;
+
 /**
  * Created by 王伟健 on 2018-06-08.
  */
 
-public class ChatRecord extends DataSupport {
+public class ChatRecord extends DataSupport implements Serializable{
 
     private String userCode;
     //对方code

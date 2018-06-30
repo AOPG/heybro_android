@@ -48,6 +48,7 @@ import org.litepal.crud.DataSupport;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -55,8 +56,16 @@ import java.util.regex.Pattern;
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.callback.GetUserInfoCallback;
 import cn.jpush.im.android.api.callback.GetUserInfoListCallback;
+import cn.jpush.im.android.api.content.TextContent;
+import cn.jpush.im.android.api.enums.ContentType;
+import cn.jpush.im.android.api.enums.ConversationType;
+import cn.jpush.im.android.api.event.ConversationRefreshEvent;
 import cn.jpush.im.android.api.event.GroupApprovalEvent;
 import cn.jpush.im.android.api.event.LoginStateChangeEvent;
+import cn.jpush.im.android.api.event.MessageEvent;
+import cn.jpush.im.android.api.event.NotificationClickEvent;
+import cn.jpush.im.android.api.model.Conversation;
+import cn.jpush.im.android.api.model.GroupInfo;
 import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.api.BasicCallback;
 
@@ -65,6 +74,8 @@ import static com.aopg.heybro.utils.ThreadUtils.findAllThreads;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ContentType contentType;
+    private cn.jpush.im.android.api.model.Message message;
     private Handler mHandler;
     private Handler mFridendHandler;
     private FragmentTabHost myTabHost;
@@ -386,6 +397,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * 刷新会话信息
+     * */
 
     @Override
     protected void onDestroy() {
