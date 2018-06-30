@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         JMessageClient.registerEventReceiver(this);
 
         setContentView(R.layout.activity_main);
-        baiduMapLocationUtil.init(this);
         map = new HashMap<>();
         initTabHost();
         ActivitiesManager.getInstance().addActivity(this);
@@ -168,11 +167,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        baiduMapLocationUtil.onStop();
-    }
 
     public class UserInfoThread extends Thread{
         // 用于停止线程

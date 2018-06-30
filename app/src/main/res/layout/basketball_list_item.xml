@@ -47,6 +47,15 @@
             <!-- 房间实际人数和房间容纳人数   待完成-->
             <TextView
                 android:fontFamily="sans-serif-light"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/ball_room_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3/5"
+                android:textColor="#E8DCDC"
+                android:textSize="13sp" />
+            <TextView
+                android:fontFamily="sans-serif-light"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:id="@+id/ball_room_num"

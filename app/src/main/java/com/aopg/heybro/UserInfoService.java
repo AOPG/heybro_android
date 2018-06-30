@@ -10,12 +10,14 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSONObject;
-import com.aopg.heybro.entity.User;
 import com.aopg.heybro.im.InitIM;
-import com.aopg.heybro.ui.activity.LoginActivty;
 import com.aopg.heybro.ui.fragment.FragmentBall;
+import com.aopg.heybro.utils.BaiduMapLocationUtil;
 import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.LocationClient;
 
 import java.io.IOException;
 
@@ -34,6 +36,7 @@ import static com.aopg.heybro.utils.HttpUtils.*;
 public class UserInfoService extends IntentService {
     private OkHttpClient client;
     CommandReceiver cmdReceiver;
+    LocationClient mLocationClient;
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
@@ -51,7 +54,8 @@ public class UserInfoService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        System.out.println("service被调用！--------------------------------------");
+        upLoadUserLoactionInfo();
+            System.out.println("service被调用！--------------------------------------");
             client = HttpUtils.init(client);
             Request request = new Request.Builder().
                     url(BUILD_URL("averageUser/userInfo?username=" + LoginInfo.user.getUsername())).build();
@@ -152,5 +156,42 @@ public class UserInfoService extends IntentService {
         intentFilter.addAction("stopUserInfoService");
         registerReceiver(cmdReceiver, intentFilter);
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void upLoadUserLoactionInfo(){
+        client = HttpUtils.init(client);
+        mLocationClient = BaiduMapLocationUtil.init(getApplicationContext(),mLocationClient);
+        mLocationClient.registerLocationListener(
+                new BDAbstractLocationListener(){
+                    @Override
+                    public void onReceiveLocation(final BDLocation bdLocation) {
+                        Request request = new Request.Builder().
+                                url(BUILD_URL("averageUser/upLoadUserLoactionInfo?username=" + LoginInfo.user.getUsername()+
+                                        "&lat="+bdLocation.getLatitude()+"&lng="+bdLocation.getLongitude())).build();
+                        Call call = client.newCall(request);
+                        call.enqueue(new Callback() {//4.回调方法
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                System.out.println("接受消息--------------------------------------");
+                                String result = response.body().string();
+
+                                String success = (JSONObject.parseObject(result)).getString("success");
+                                if (null!=success&&success.equals("true")) {
+                                    Log.e("LoactionInfo()","上传用户位置信息成功！");
+                                    LoginInfo.user.setUserLat(bdLocation.getLatitude()+"");
+                                    LoginInfo.user.setUserLng(bdLocation.getLongitude()+"");
+                                }
+                            }
+                        });
+                        mLocationClient.stop();
+                    }
+                }
+        );
+
     }
 }

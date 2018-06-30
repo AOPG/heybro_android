@@ -34,10 +34,17 @@ import com.aopg.heybro.ui.room.HorizontalRoomListView;
 import com.aopg.heybro.ui.room.RoomDate;
 import com.aopg.heybro.ui.room.RoomJoinAdapter;
 import com.aopg.heybro.ui.room.RoomUser;
+import com.aopg.heybro.utils.BaiduMapLocationUtil;
 import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.LocationClient;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,6 +79,7 @@ public class FragmentGame extends Fragment {
 
     private String modeSelect;//匹配选择模式
 
+    LocationClient mLocationClient;
     //房间滑动字段
     List<RoomDate> roomDateList;
     List<Map<String,Object>> roomUserList;
@@ -311,14 +319,18 @@ public class FragmentGame extends Fragment {
                             + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
                             +"&rateHigh="+basketRoomInfo.getRateHigh()
                             + "&num=" + basketRoomInfo.getNum() + "&password=" + basketRoomInfo.getPassword()
-                            + "&userCode=" + basketRoomInfo.getMaster())).build();
+                            + "&userCode=" + basketRoomInfo.getMaster()
+                            + "&lat=" + LoginInfo.user.getUserLat()
+                            + "&lng=" +LoginInfo.user.getUserLng())).build();
         }else{
             request = new Request.Builder().
                     url(BUILD_URL("basketRoom/createRoom?roomId="+basketRoomInfo.getRoomId()+"&roomName="
                             + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
                             + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
                             +"&rateHigh="+basketRoomInfo.getRateHigh()
-                            + "&num=" + basketRoomInfo.getNum() + "&userCode=" + basketRoomInfo.getMaster())).build();
+                            + "&num=" + basketRoomInfo.getNum() + "&userCode=" + basketRoomInfo.getMaster()
+                            + "&lat=" + LoginInfo.user.getUserLat()
+                            + "&lng=" +LoginInfo.user.getUserLng())).build();
         }
         Call call = client.newCall(request);
         call.enqueue(new Callback() {//4.回调方法
@@ -458,6 +470,11 @@ public class FragmentGame extends Fragment {
                                 ((JSONObject)roomListInfo.get(i)).getString("roomPass");
                         String roomPassSet =
                                 ((JSONObject)roomListInfo.get(i)).getString("roomPassSet");
+                        String roomLat =
+                                ((JSONObject)roomListInfo.get(i)).getString("roomLat");
+                        String roomLng =
+                                ((JSONObject)roomListInfo.get(i)).getString("roomLng");
+
 
                         roomDate.setRoomId(roomId);
                         roomDate.setRoomName(roomName);
@@ -465,7 +482,8 @@ public class FragmentGame extends Fragment {
                         roomDate.setRoomPro(roomPeo);
                         roomDate.setRoomPass(roomPass);
                         roomDate.setRoomPassSet(roomPassSet);
-
+                        roomDate.setRoomLat(roomLat);
+                        roomDate.setRoomLng(roomLng);
                         roomDateList.add(roomDate);
 
                     }
@@ -487,8 +505,21 @@ public class FragmentGame extends Fragment {
                 super.handleMessage(msg);
                 switch (msg.what) {
                     case 0:
-                        //房间部分
-                        initUI();
+                        //先定位
+                        mLocationClient = BaiduMapLocationUtil.init(getApplicationContext(),mLocationClient);
+                        mLocationClient.registerLocationListener(
+                                new BDAbstractLocationListener(){
+                                    @Override
+                                    public void onReceiveLocation(BDLocation bdLocation) {
+                                        LoginInfo.user.setUserLng(bdLocation.getLongitude()+"");
+                                        LoginInfo.user.setUserLat(bdLocation.getLatitude()+"");
+                                        //再加载房间部分
+                                        initUI();
+                                        mLocationClient.stop();
+                                    }
+                                });
+
+
                         break;
                     default:
                         break;
@@ -507,6 +538,7 @@ public class FragmentGame extends Fragment {
         String[] roomCode = new String[roomDateList.size()];
         final String[] roomTitle = new String[roomDateList.size()];
         String[] roomNum = new String[roomDateList.size()];
+        String[] roomDistance = new String[roomDateList.size()];
         //获取日期
         long time=System.currentTimeMillis();
         Date date=new Date(time);
@@ -519,11 +551,20 @@ public class FragmentGame extends Fragment {
                 roomCode[i] = roomDateList.get(i).getRoomId();
                 roomTitle[i] = roomDateList.get(i).getRoomName();
                 roomNum[i] = ""+roomDateList.get(i).getRoomPro()+"/"+roomDateList.get(i).getRoomNum();
+                if (!roomDateList.get(i).getRoomLat().equals("")&&!LoginInfo.user.getUserLng().equals("")){
+                    LatLng room = new LatLng(Double.parseDouble(roomDateList.get(i).getRoomLat()),
+                            Double.parseDouble(roomDateList.get(i).getRoomLng()));
+                    LatLng user = new LatLng(Double.parseDouble(LoginInfo.user.getUserLat()),
+                            Double.parseDouble(LoginInfo.user.getUserLng()));
+                    Double distanceSingle = DistanceUtil.getDistance(room,user);
+                    DecimalFormat df = new DecimalFormat("#.00");
+                    roomDistance[i] = df.format(distanceSingle/1000)+"km";
+                }
             }
         }
 
         hListViewAdapter = new HorizontaRoomlListViewAdapter(rootView.getContext(),
-                roomCode,roomTitle,roomNum);
+                roomCode,roomTitle,roomNum,roomDistance);
         hListView.setAdapter(hListViewAdapter);
 
         /**

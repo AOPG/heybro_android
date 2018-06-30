@@ -1,32 +1,5 @@
 package com.aopg.heybro.ui.room;
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.os.Looper;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.alibaba.fastjson.JSONObject;
-import com.aopg.heybro.MainActivity;
-import com.aopg.heybro.UserInfoService;
-import com.aopg.heybro.entity.User;
-import com.aopg.heybro.ui.activity.LoginActivty;
-import com.aopg.heybro.utils.HttpUtils;
-import com.aopg.heybro.utils.LoginInfo;
-
-import org.litepal.crud.DataSupport;
-
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
-import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
 
 /**
  *  Created by 王攀 on 2018/6/15.
@@ -42,6 +15,24 @@ public class RoomDate {
     private String  roomPro;
     private String roomPass;
     private String roomPassSet;
+    private String roomLat;
+    private String roomLng;
+
+    public String getRoomLat() {
+        return roomLat;
+    }
+
+    public void setRoomLat(String roomLat) {
+        this.roomLat = roomLat;
+    }
+
+    public String getRoomLng() {
+        return roomLng;
+    }
+
+    public void setRoomLng(String roomLng) {
+        this.roomLng = roomLng;
+    }
 
     public String getRoomPassSet() {
         return roomPassSet;

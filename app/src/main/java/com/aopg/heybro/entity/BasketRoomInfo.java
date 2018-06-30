@@ -28,11 +28,17 @@ public class BasketRoomInfo {
     private int roomPassSet;
     //房主编码
     private String master;
+    //房间纬度信息
+    private String lat;
+    //房间经度信息
+    private String lng;
 
     public BasketRoomInfo() {
 
     }
-    public BasketRoomInfo(Long roomId, String roomName, int type, String mode, int rateLow, int rateHigh, int num, int roomRealNum, String password, int roomPassSet, String master) {
+
+
+    public BasketRoomInfo(Long roomId, String roomName, int type, String mode, int rateLow, int rateHigh, int num, int roomRealNum, String password, int roomPassSet, String master, String lat, String lng) {
         this.roomId = roomId;
         this.roomName = roomName;
         this.type = type;
@@ -44,6 +50,25 @@ public class BasketRoomInfo {
         this.password = password;
         this.roomPassSet = roomPassSet;
         this.master = master;
+        this.lat = lat;
+        this.lng = lng;
+    }
+
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
     }
 
     public Long getRoomId() {

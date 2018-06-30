@@ -26,6 +26,10 @@ import com.aopg.heybro.ui.activity.SearchRoomActivity;
 import com.aopg.heybro.ui.adapter.BasketBallFragmentPagerAdapter;
 import com.aopg.heybro.ui.adapter.MyConcernAdapter;
 import com.aopg.heybro.ui.room.CustomViewPager;
+import com.aopg.heybro.utils.BaiduMapLocationUtil;
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.LocationClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,7 +46,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
 
-import static com.aopg.heybro.utils.BaiduMapLocationUtil.mLocationClient;
+import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
 
 
 /**
@@ -62,6 +66,7 @@ public class FragmentBasketball extends Fragment{
     private View game_selected;
     private Button btn_searchRoom;
     private MainHandler mainHandler;
+    private LocationClient mLocationClient;
 
     @Nullable
     @Override
@@ -170,61 +175,72 @@ public class FragmentBasketball extends Fragment{
         }
     }
     private void getWeather(){
-        OkHttpClient clientWeather;
-        clientWeather = new OkHttpClient.Builder()
-                .connectTimeout(900, TimeUnit.SECONDS)
-                .readTimeout(900, TimeUnit.SECONDS)
-                .build();
-        //维度
-        double lat;
-        //经度
-        double lon;
-        if(mLocationClient.getLastKnownLocation() == null){
-            lat =  Double.parseDouble("38.003585");
-            lon = Double.parseDouble("114.529362");
-        }else {
-            lat = mLocationClient.getLastKnownLocation().getLatitude();
-            lon = mLocationClient.getLastKnownLocation().getLongitude();
-        }
+        mLocationClient = BaiduMapLocationUtil.init(getApplicationContext(),mLocationClient);
+        mLocationClient.registerLocationListener(
+                new BDAbstractLocationListener(){
+                    @Override
+                    public void onReceiveLocation(BDLocation bdLocation) {
+                        OkHttpClient clientWeather;
+                        clientWeather = new OkHttpClient.Builder()
+                                .connectTimeout(900, TimeUnit.SECONDS)
+                                .readTimeout(900, TimeUnit.SECONDS)
+                                .build();
+                        //维度
+                        double lat;
+                        //经度
+                        double lon;
+                        if(mLocationClient.getLastKnownLocation() == null){
+                            lat =  Double.parseDouble("38.003585");
+                            lon = Double.parseDouble("114.529362");
+                        }else {
+                            lat = mLocationClient.getLastKnownLocation().getLatitude();
+                            lon = mLocationClient.getLastKnownLocation().getLongitude();
+                        }
 
-        Request request = new Request.Builder().
-                url("http://jisutqybmf.market.alicloudapi.com/weather/query?location="+lat+","+lon).
-                addHeader("Authorization","APPCODE 961c9d9cae0443ffa56f81a6f9d96bdf").build();
-        Call call = clientWeather.newCall(request);
+                        Request request = new Request.Builder().
+                                url("http://jisutqybmf.market.alicloudapi.com/weather/query?location="+lat+","+lon).
+                                addHeader("Authorization","APPCODE 961c9d9cae0443ffa56f81a6f9d96bdf").build();
+                        Call call = clientWeather.newCall(request);
 
-        call.enqueue(new Callback() {//4.回调方法
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
+                        call.enqueue(new Callback() {//4.回调方法
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                e.printStackTrace();
+                            }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String result = response.body().string();
-                Log.e("getWeather",result);
-                if(!result.equals("")){
-                    String success = (JSONObject.parseObject(result)).getString("msg");
-                    if (null!=success&&success.equals("ok")) {
-                        JSONObject weatherInfo =
-                                ((JSONObject)((JSONObject.parseObject(result)).get("result")));
-                        JSONObject api =
-                                ((JSONObject)(((JSONObject)((JSONObject.parseObject(result)).get("result"))).get("aqi")));
-                        String city = weatherInfo.getString("city");
-                        String weather = weatherInfo.getString("weather");
-                        String temp = weatherInfo.getString("temp");
-                        String pm2_5 = api.getString("pm2_5");
-                        Map weatherMap = new HashMap();
-                        weatherMap.put("city",city);
-                        weatherMap.put("weather",weather);
-                        weatherMap.put("temp",temp+"°");
-                        weatherMap.put("pm2_5",pm2_5);
-                        Message message = mainHandler.obtainMessage(900,weatherMap);
-                        mainHandler.sendMessage(message);
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                String result = response.body().string();
+                                Log.e("getWeather",result);
+                                if(!result.equals("")){
+                                    String success = (JSONObject.parseObject(result)).getString("msg");
+                                    if (null!=success&&success.equals("ok")) {
+                                        JSONObject weatherInfo =
+                                                ((JSONObject)((JSONObject.parseObject(result)).get("result")));
+                                        JSONObject api =
+                                                ((JSONObject)(((JSONObject)((JSONObject.parseObject(result)).get("result"))).get("aqi")));
+                                        String city = weatherInfo.getString("city");
+                                        String weather = weatherInfo.getString("weather");
+                                        String temp = weatherInfo.getString("temp");
+                                        String pm2_5 = api.getString("pm2_5");
+                                        Map weatherMap = new HashMap();
+                                        weatherMap.put("city",city);
+                                        weatherMap.put("weather",weather);
+                                        weatherMap.put("temp",temp+"°");
+                                        weatherMap.put("pm2_5",pm2_5);
+                                        mLocationClient.stop();
+                                        Message message = mainHandler.obtainMessage(900,weatherMap);
+                                        mainHandler.sendMessage(message);
+                                    }
+                                }
+
+                            }
+                        });
+
                     }
                 }
 
-            }
-        });
+        );
 
     }
 

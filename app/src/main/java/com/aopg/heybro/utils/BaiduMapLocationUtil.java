@@ -13,13 +13,13 @@ import com.baidu.location.LocationClientOption;
  */
 
 public class BaiduMapLocationUtil {
-    public static LocationClient mLocationClient;
-    public static MyLocationListener myListener = new MyLocationListener();
-    public static void init(Context context) {
+    //public static LocationClient mLocationClient;
+    //public static MyLocationListener myListener = new MyLocationListener();
+    public static LocationClient init(Context context,LocationClient mLocationClient) {
         //声明LocationClient类
         mLocationClient = new LocationClient(context.getApplicationContext());
         //注册监听函数
-        mLocationClient.registerLocationListener(myListener);
+     //   mLocationClient.registerLocationListener(myListener);
 
         LocationClientOption locationClientOption = initOption();
         mLocationClient.setLocOption(locationClientOption);
@@ -28,6 +28,7 @@ public class BaiduMapLocationUtil {
         //更多LocationClientOption的配置，请参照类参考中LocationClientOption类的详细说明
 
         mLocationClient.start();
+        return mLocationClient;
         //启动定位
     }
     public static LocationClientOption initOption() {
@@ -50,7 +51,7 @@ public class BaiduMapLocationUtil {
         //bd09：百度墨卡托坐标；
         //海外地区定位，无需设置坐标类型，统一返回wgs84类型坐标
 
-        option.setScanSpan(5000);
+        option.setScanSpan(0);
         //可选，设置发起定位请求的间隔，int类型，单位ms
         //如果设置为0，则代表单次定位，即仅定位一次，默认为0
         //如果设置非0，需设置1000ms以上才有效
@@ -61,44 +62,48 @@ public class BaiduMapLocationUtil {
         return option;
     }
 
-    /**
-     * 定位成功之后的回调函数
-     *
-     */
-    public static class MyLocationListener extends BDAbstractLocationListener {
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            if (location == null)
-                return;
-            StringBuffer sb = new StringBuffer(256);
-            sb.append("时间 : ");
-            sb.append(location.getTime());
-            sb.append("\n返回码 : ");
-            sb.append(location.getLocType());
-            sb.append("\n纬度 : ");
-            sb.append(location.getLatitude());
-            sb.append("\n经度 : ");
-            sb.append(location.getLongitude());
-            sb.append("\n半径 : ");
-            sb.append(location.getRadius());
-            sb.append("\n省 : ");
-            sb.append(location.getProvince());
-            sb.append("\n市 : ");
-            sb.append(location.getCity());
-            if (location.getLocType() == BDLocation.TypeGpsLocation) {
-                sb.append("\n速度 : ");
-                sb.append(location.getSpeed());
-                sb.append("\n卫星数 : ");
-                sb.append(location.getSatelliteNumber());
-            }
-            //tv.setText(tv.getText() + "\n" + sb.toString());
-            System.out.println(sb.toString());
-        }
-    }
-    /**
-     * 关闭定位功能
-     */
-    public static void onStop() {
-        mLocationClient.stop();
-    }
+//    /**
+//     * 定位成功之后的回调函数
+//     *
+//     */
+//    public static class MyLocationListener extends BDAbstractLocationListener {
+//        @Override
+//        public void onReceiveLocation(BDLocation location) {
+//            if (location == null)
+//                return;
+//            StringBuffer sb = new StringBuffer(256);
+//            sb.append("时间 : ");
+//            sb.append(location.getTime());
+//            sb.append("\n返回码 : ");
+//            sb.append(location.getLocType());
+//            sb.append("\n纬度 : ");
+//            sb.append(location.getLatitude());
+//            sb.append("\n经度 : ");
+//            sb.append(location.getLongitude());
+//            sb.append("\n半径 : ");
+//            sb.append(location.getRadius());
+//            sb.append("\n省 : ");
+//            sb.append(location.getProvince());
+//            sb.append("\n市 : ");
+//            sb.append(location.getCity());
+//            if (location.getLocType() == BDLocation.TypeGpsLocation) {
+//                sb.append("\n速度 : ");
+//                sb.append(location.getSpeed());
+//                sb.append("\n卫星数 : ");
+//                sb.append(location.getSatelliteNumber());
+//            }
+//            //tv.setText(tv.getText() + "\n" + sb.toString());
+//            System.out.println(sb.toString());
+//            LoginInfo.user.setUserLat(location.getLatitude()+"");
+//            LoginInfo.user.setUserLng(location.getLongitude()+"");
+//
+//            onStop();
+//        }
+//    }
+//    /**
+//     * 关闭定位功能
+//     */
+//    public static void onStop() {
+//        mLocationClient.stop();
+//    }
 }

@@ -26,15 +26,17 @@ public class HorizontaRoomlListViewAdapter extends BaseAdapter {
     private String[] roomCode;
     private String[] roomTitle;
     private String[] roomNum;
+    private String[] roomDistance;
     private Context mContext;
     private LayoutInflater mInflater;
     private int selectIndex = -1;
 
-    public HorizontaRoomlListViewAdapter(Context context,String[] roomCode, String[] roomTitle, String[] roomNum) {
+    public HorizontaRoomlListViewAdapter(Context context,String[] roomCode, String[] roomTitle, String[] roomNum,String[] roomDistance) {
         this.mContext = context;
         this.roomTitle = roomTitle;
         this.roomCode = roomCode;
         this.roomNum = roomNum;
+        this.roomDistance = roomDistance;
 //        this.mIconIDs = idss;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);//LayoutInflater.from(mContext);
     }
@@ -65,6 +67,7 @@ public class HorizontaRoomlListViewAdapter extends BaseAdapter {
             holder.room_code = (TextView) convertView.findViewById(R.id.ball_room_code);
             holder.room_name = (TextView) convertView.findViewById(R.id.ball_room_name);
             holder.room_num = (TextView) convertView.findViewById(R.id.ball_room_num);
+            holder.room_distance = convertView.findViewById(R.id.ball_room_distance);
 //            holder.disLayout = (LinearLayout)convertView.findViewById(R.id.room_Layout);
             convertView.setTag(holder);
         } else {
@@ -79,6 +82,7 @@ public class HorizontaRoomlListViewAdapter extends BaseAdapter {
         holder.room_code.setText(roomCode[position]);
         holder.room_name.setText(roomTitle[position]);
         holder.room_num.setText(roomNum[position]);
+        holder.room_distance.setText(roomDistance[position]);
 //        holder.disLayout.setBackgroundResource(mIconIDs[position]);
 
 
@@ -89,6 +93,7 @@ public class HorizontaRoomlListViewAdapter extends BaseAdapter {
         private TextView room_code;
         private TextView room_name;
         private TextView room_num;
+        private TextView room_distance;
 //        private LinearLayout disLayout;
     }
 
