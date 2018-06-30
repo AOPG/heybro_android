@@ -68,7 +68,8 @@
 
         <!--</LinearLayout>-->
         <LinearLayout
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:orientation="horizontal">
@@ -81,8 +82,8 @@
                 <!-- 有点击事件 跳转到fragment_activity_exci页面-->
                 <ImageView
                     android:id="@+id/exci"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/xunlian"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -99,8 +100,8 @@
                 android:gravity="center">
                 <ImageView
                     android:id="@+id/zhibo"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/zhibo1"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -119,8 +120,8 @@
                 <!-- 点击该图片 跳转到fragment_activity_saishi页面-->
                 <ImageView
                     android:id="@+id/fujin"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/fujin"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -137,10 +138,11 @@
             android:orientation="vertical">
 
             <ListView
+                android:divider="#00000000"
                 android:id="@+id/lvActivity"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="47dp">
+                android:layout_marginBottom="55dp">
             </ListView>
 
         </LinearLayout>

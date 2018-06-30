@@ -74,7 +74,7 @@ public class CustomerAdapter extends BaseAdapter{
 
 
         RequestOptions myOptions = new RequestOptions()
-                .transform(new GlideRoundTransform(context,20));
+                .transform(new GlideRoundTransform(context,12));
         Glide.with(context)
                 .load((int)data.get(position).get("src"))
                 .apply(myOptions)

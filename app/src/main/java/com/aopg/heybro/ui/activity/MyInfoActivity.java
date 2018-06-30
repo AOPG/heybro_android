@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,7 +104,7 @@ public class MyInfoActivity extends Activity {
                 .apply(options)
                 .into(image);
         //头像上传
-        LinearLayout ima=findViewById(R.id.image1);
+        RelativeLayout ima=findViewById(R.id.image1);
         final ImageView img = findViewById(R.id.image);
         ima.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,7 +209,7 @@ public class MyInfoActivity extends Activity {
             }
         });
         //二维码
-        LinearLayout erweima=findViewById(R.id.erweima);
+        RelativeLayout erweima=findViewById(R.id.erweima);
         erweima.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

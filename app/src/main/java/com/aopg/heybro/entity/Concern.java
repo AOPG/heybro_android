@@ -14,6 +14,15 @@ public class Concern extends DataSupport {
     //备注
     private String userNote;
 
+    private String userPortrait;
+
+    public String getUserPortrait() {
+        return userPortrait;
+    }
+
+    public void setUserPortrait(String userPortrait) {
+        this.userPortrait = userPortrait;
+    }
 
     public String getUserCode() {
         return userCode;

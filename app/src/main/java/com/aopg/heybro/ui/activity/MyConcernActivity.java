@@ -78,9 +78,12 @@ public class MyConcernActivity extends Activity {
                                 ((JSONObject)concernInfo.get(i)).getString("userConcernCode");
                         String userNote =
                                 ((JSONObject)concernInfo.get(i)).getString("userNote");
+                        String userPortrait =
+                                ((JSONObject)concernInfo.get(i)).getString("userPortrait");
                         concern.setUserConcernCode(userConcernCode);
                         concern.setUserNote(userNote);
                         concern.setUserCode(LoginInfo.user.getUserCode());
+                        concern.setUserPortrait(userPortrait);
                         concern.save();
                         concerns.add(concern);
                     }
