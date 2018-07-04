@@ -2,7 +2,7 @@
 <litepal>
     <dbname value="heybro"></dbname>
 
-    <version value="15" ></version>
+    <version value="17" ></version>
 
     <list>
         <mapping class="com.aopg.heybro.entity.User"></mapping>
@@ -12,5 +12,6 @@
         <mapping class="com.aopg.heybro.entity.RoomInfo"></mapping>
         <mapping class="com.aopg.heybro.entity.ChatRoomRecord"></mapping>
         <mapping class="com.aopg.heybro.entity.RoomUserInfo"></mapping>
+        <mapping class="com.aopg.heybro.entity.UserConversation"></mapping>
     </list>
 </litepal>

@@ -42,17 +42,7 @@ import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.android.api.options.MessageSendingOptions;
 import cn.jpush.im.api.BasicCallback;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
-import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_FROM_USERNAME;
-import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_GROUPID;
-import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_MSGID;
-import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_MSG_TYPE;
-import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
 /**
  * Created by 王伟健 on 2018-06-15.

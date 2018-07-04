@@ -1,10 +1,12 @@
 package com.aopg.heybro.ui.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.aopg.heybro.R;
 
@@ -24,6 +26,16 @@ public class MyMessageActivity extends Activity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        LinearLayout sixin = findViewById(R.id.sixin);
+        sixin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MyMessageActivity.this,PrivateLetterActivity.class);
+                startActivity(intent);
             }
         });
     }

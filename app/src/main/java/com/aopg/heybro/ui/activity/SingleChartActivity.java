@@ -52,13 +52,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static cn.jpush.im.android.api.jmrtc.JMRTCInternalUse.getApplicationContext;
-import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_FROM_APPKEY;
-import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_FROM_USERNAME;
-import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_GROUPID;
-import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_IS_GROUP;
-import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_MSGID;
-import static com.aopg.heybro.im.createmessage.ShowMessageActivity.EXTRA_MSG_TYPE;
 import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
 /**
