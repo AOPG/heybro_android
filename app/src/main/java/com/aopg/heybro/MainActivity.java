@@ -21,9 +21,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
     private BaiduMapLocationUtil baiduMapLocationUtil;
     public static Integer CMD_STOP_USER_INFO_SERVICE = 0;
     private Thread userInfoThread;
+    private ImageView iv;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 //将上一次点击的图标改回
                 Map attr = map.get(LAST_SELECT);
                 View view = (View) attr.get("view");
-                ImageView iv = view.findViewById(R.id.imageId);
+                iv = view.findViewById(R.id.imageId);
                 TextView tv = view.findViewById(R.id.textId);
                 iv.setImageResource((int)attr.get("img"));
                 tv.setTextColor(0xFFFFFFFF);
@@ -155,6 +158,19 @@ public class MainActivity extends AppCompatActivity {
                     iv = view.findViewById(R.id.imageId);
                     view = (((View)(map.get(tabId).get("view"))).findViewById(R.id.textId));
                     tv = view.findViewById(R.id.textId);
+//                    ViewGroup.LayoutParams params = iv.getLayoutParams();
+//                    params.height=150;
+//                    params.width =150;
+//                    iv.setLayoutParams(params);
+
+                    LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+//            ViewGroup.LayoutParams params = iv.getLayoutParams();
+                    param.height=140;
+                    param.width =140;
+                    iv.setLayoutParams(param);
+                    iv.setPadding(0,0,0,30);
+
                     iv.setImageResource(R.drawable.basketball_selected);
                     tv.setTextColor(0xFFFFB90F);
                 }
@@ -213,13 +229,14 @@ public class MainActivity extends AppCompatActivity {
                 android.R.id.tabcontent);
         addTabSpec("discovery","发现",R.drawable.discovery, FragmentDiscovery.class);
         addTabSpec("activity","活动",R.drawable.activity, FragmentActivity.class);
-        addTabSpec("basketball","篮球",R.drawable.basketball, FragmentBasketball.class);
+        addTabSpec("basketball",null,R.drawable.basketball, FragmentBasketball.class);
         addTabSpec("friend","好友",R.drawable.friend, FragmentFriend.class);
         addTabSpec("my","我的",R.drawable.my, FragmentMy.class);
         ImageView iv =  (myTabHost.getTabWidget().getChildTabViewAt(2).findViewById(R.id.imageId));
         TextView tv = (myTabHost.getTabWidget().getChildTabViewAt(2).findViewById(R.id.textId));
         iv.setImageResource(R.drawable.basketball_selected);
         tv.setTextColor(0xFFFFB90F);
+
         myTabHost.setCurrentTab(2);
     }
 
@@ -246,6 +263,15 @@ public class MainActivity extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.fragment_tab, null);
         ImageView imageView = view.findViewById(R.id.imageId);
         imageView.setImageResource(drawable);
+        if(title == null){
+            iv = view.findViewById(R.id.imageId);
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+            param.height=140;
+            param.width =140;
+            iv.setPadding(0,0,0,30);
+            iv.setLayoutParams(param);
+        }
         TextView textView = view.findViewById(R.id.textId);
         textView.setText(title);
         return view;

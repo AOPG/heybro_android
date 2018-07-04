@@ -112,11 +112,11 @@ public class UserInfoService extends IntentService {
                             InitIM.initJmessageUser(LoginInfo.user.getUsername(),
                                     LoginInfo.user.getUserCode(),UserInfoService.this);
                         }
-                        if (LoginInfo.user.getRoomId()==0L){
-                            FragmentBall.setCreateRoomStates(true);
-                        }else {
-                            FragmentBall.setCreateRoomStates(false);
-                        }
+//                        if (LoginInfo.user.getRoomId()==0L){
+//                            FragmentBall.setCreateRoomStates(true);
+//                        }else {
+//                            FragmentBall.setCreateRoomStates(false);
+//                        }
                     } else {
 
                     }
