@@ -152,46 +152,55 @@ public class FragmentMy extends Fragment {
                     if (grade==1){
                         RadioButton rd=myRateView.findViewById(R.id.rd11);
                         TextView tv=myRateView.findViewById(R.id.rd12);
+                        rd.setEnabled(true);
                         rd.setChecked(true);
                         tv.setTextColor(Color.WHITE);
                     }else if (grade==2){
                         RadioButton rd=myRateView.findViewById(R.id.rd21);
                         TextView tv=myRateView.findViewById(R.id.rd22);
+                        rd.setEnabled(true);
                         rd.setChecked(true);
                         tv.setTextColor(Color.WHITE);
                     }else if (grade==3){
                         RadioButton rd=myRateView.findViewById(R.id.rd31);
                         TextView tv=myRateView.findViewById(R.id.rd32);
+                        rd.setEnabled(true);
                         rd.setChecked(true);
                         tv.setTextColor(Color.WHITE);
                     }else if (grade==4){
                         RadioButton rd=myRateView.findViewById(R.id.rd41);
                         TextView tv=myRateView.findViewById(R.id.rd42);
+                        rd.setEnabled(true);
                         rd.setChecked(true);
                         tv.setTextColor(Color.WHITE);
                     }else if (grade==5){
                         RadioButton rd=myRateView.findViewById(R.id.rd51);
                         TextView tv=myRateView.findViewById(R.id.rd52);
+                        rd.setEnabled(true);
                         rd.setChecked(true);
                         tv.setTextColor(Color.WHITE);
                     }else if (grade==6){
                         RadioButton rd=myRateView.findViewById(R.id.rd61);
                         TextView tv=myRateView.findViewById(R.id.rd62);
+                        rd.setEnabled(true);
                         rd.setChecked(true);
                         tv.setTextColor(Color.WHITE);
                     }else if (grade==7){
                         RadioButton rd=myRateView.findViewById(R.id.rd71);
                         TextView tv=myRateView.findViewById(R.id.rd72);
+                        rd.setEnabled(true);
                         rd.setChecked(true);
                         tv.setTextColor(Color.WHITE);
                     }else if (grade==8){
                         RadioButton rd=myRateView.findViewById(R.id.rd81);
                         TextView tv=myRateView.findViewById(R.id.rd82);
+                        rd.setEnabled(true);
                         rd.setChecked(true);
                         tv.setTextColor(Color.WHITE);
                     }else if (grade==9){
                         RadioButton rd=myRateView.findViewById(R.id.rd91);
                         TextView tv=myRateView.findViewById(R.id.rd92);
+                        rd.setEnabled(true);
                         rd.setChecked(true);
                         tv.setTextColor(Color.WHITE);
                     }
