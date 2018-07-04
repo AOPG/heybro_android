@@ -77,7 +77,7 @@ public class MyInfoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_my_ziliao);
         //返回按钮
-        ImageView info_back = findViewById(R.id.info_back);
+        final ImageView info_back = findViewById(R.id.info_back);
         info_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,56 +142,75 @@ public class MyInfoActivity extends Activity {
 
         //昵称
         final EditText nicheng=findViewById(R.id.user_name);
-        nicheng.setHint(LoginInfo.user.getNickName());
+        System.out.println(222222);
+        System.out.println(LoginInfo.user.getNickName());
+        nicheng.setText(LoginInfo.user.getNickName());
         final String[] name = {LoginInfo.user.getNickName()};
-        nicheng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                name[0] = String.valueOf(nicheng.getText());
-                nicheng.setHint(nicheng.getText());
-            }
-        });
+//        nicheng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                name[0] = String.valueOf(nicheng.getText());
+//                nicheng.setText(LoginInfo.user.getNickName());
+//            }
+//        });
+
+        //简介
+        final EditText userintro=findViewById(R.id.user_intro);
+        userintro.setText(LoginInfo.user.getUserIntro());
+        final String[] intro = {LoginInfo.user.getUserIntro()};
+//        userintro.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                intro[0] = String.valueOf(userintro.getText());
+//                userintro.setText(userintro.getText());
+//            }
+//        });
+
 
         //ID(不可修改)
         TextView ID=findViewById(R.id.user_code);
         ID.setText(LoginInfo.user.getUserCode());
         final String id= String.valueOf(ID.getText());
         //地区
-        TextView userpo=findViewById(R.id.user_location);
+        final TextView userpo=findViewById(R.id.user_location);
         final String[] pro={LoginInfo.user.getUserProvince()};
-        System.out.println(pro[0]);
         final String[] city={LoginInfo.user.getUserCity()};
         if(FLAG0==0){
             userpo.setText(pro[0]+"  "+city[0]);
         }else {
+
             Intent intent1 =  getIntent();       //获取已有的intent对象
             Bundle bundle1 = intent1.getExtras();//获取intent里面的bundle对象
-            pro[0]= bundle1.getString("province");
-            city[0]=bundle1.getString("city");
-            userpo.setText(pro[0]+"  "+city[0]);
+            if(bundle1.getString("province")!=null&&bundle1.getString("city")!=null) {
+                pro[0] = bundle1.getString("province");
+                city[0] = bundle1.getString("city");
+            }
+            FLAG0 = 0;
+
+            if(pro[0]!=null && city[0]!=null) {
+                LoginInfo.user.setUserProvince(pro[0]);
+                LoginInfo.user.setUserCity(city[0]);
+            }
+
+            userpo.setText(LoginInfo.user.getUserProvince()+"  "+LoginInfo.user.getUserCity());
+
+
+
         }
         userpo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                LoginInfo.user.setNickName(nicheng.getText().toString());
+                LoginInfo.user.setUserIntro(userintro.getText().toString());
                 Intent poIntent = new Intent(getApplicationContext(), Myposition.class);
                 startActivity(poIntent);
-                  }
-               });
-
-        //简介
-        final EditText userintro=findViewById(R.id.user_intro);
-       userintro.setHint(LoginInfo.user.getUserIntro());
-        final String[] intro = {LoginInfo.user.getUserIntro()};
-        userintro.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                intro[0] = String.valueOf(userintro.getText());
-                userintro.setHint(userintro.getText());
             }
         });
 
+
+
         //性别
-        TextView sex=findViewById(R.id.user_sex);
+        final TextView sex=findViewById(R.id.user_sex);
         final String[] s={LoginInfo.user.getUserSex()};
         if (FLAG==0){
             sex.setText(s[0]);
@@ -199,12 +218,19 @@ public class MyInfoActivity extends Activity {
             Intent intent = getIntent();//获取已有的intent对象
             Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
             s[0]= bundle.getString("sex");    //获取Bundle里面的字符串
-            sex.setText(s[0]);
+            if(s[0] != null) {
+                LoginInfo.user.setUserSex(s[0]);
+            }
+            sex.setText(LoginInfo.user.getUserSex());
+            FLAG = 0;
         }
         sex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent sexIntent = new Intent(getApplicationContext(), Mysex.class);
+                LoginInfo.user.setNickName(nicheng.getText().toString());
+                LoginInfo.user.setUserIntro(userintro.getText().toString());
+                LoginInfo.user.setUserSex(s[0]);
+                Intent sexIntent = new Intent(getApplicationContext(), Mysex.class);
                 startActivity(sexIntent);
             }
         });
@@ -219,7 +245,7 @@ public class MyInfoActivity extends Activity {
             }
         });
         //生日
-       final TextView mybirtnday=findViewById(R.id.birthday);
+        final TextView mybirtnday=findViewById(R.id.birthday);
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         final String[] bir={sf.format(LoginInfo.user.getBirthday())};
         if (FLAG1==0){
@@ -229,10 +255,24 @@ public class MyInfoActivity extends Activity {
             Bundle b=intent.getExtras();
             bir[0]=b.getString("birthday");
             mybirtnday.setText(bir[0]);
+            FLAG1 = 0;
         }
         mybirtnday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                String startDay = "";
+                try {
+                    Date dateStart = format.parse(mybirtnday.getText().toString());
+                    startDay = String.valueOf(dateStart.getTime());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                };
+
+                LoginInfo.user.setNickName(nicheng.getText().toString());
+                LoginInfo.user.setUserIntro(userintro.getText().toString());
+                LoginInfo.user.setBirthday(Long.parseLong(startDay));
                 Intent birth = new Intent(getApplicationContext(), Mybirthday.class);
                 startActivity(birth);
             }
@@ -245,11 +285,20 @@ public class MyInfoActivity extends Activity {
                 client = HttpUtils.init(client);
                 System.out.println(2222222);
 
-                System.out.println(PicUrl);
-                System.out.println(name[0]);
-                System.out.println(intro[0]);
-                System.out.println(pro[0]);
-                System.out.println(city[0]);
+//                System.out.println(PicUrl);
+//                System.out.println(name[0]);
+//                System.out.println(intro[0]);
+//                System.out.println(pro[0]);
+//                System.out.println(city[0]);
+//                String location = userpo.getText().toString();
+//                String[] splited = location.split("\\s+");
+//                System.out.println(splited[0]);
+//                System.out.println(splited[1]);
+
+
+                LoginInfo.user.setNickName(nicheng.getText().toString());
+                LoginInfo.user.setUserIntro(userintro.getText().toString());
+
 
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 String startDay = "";
@@ -264,8 +313,8 @@ public class MyInfoActivity extends Activity {
                         url(BUILD_URL("averageUser/updateUserInfo?userCode=" + LoginInfo.user.getUserCode() + "&userNickName=" + name[0] +"&userPortrait=" + PicUrl+
                                 "&userIntro=" + intro[0] + "&userProvince=" + pro[0] + "&userCity=" + city[0] + "&birthday=" + startDay)).build();
                 //url("http://101.200.59.121:8082/android/averageUser/updateUserInfo?userCode=" + LoginInfo.user.getUserCode() + "&userNickName=" + name[0] +"&userPortrait=" + PicUrl+
-                  //      "&userIntro=" + intro[0] + "&userProvince=" + pro[0] + "&userCity=" + city[0] + "&birthday=" + startDay).build();
-              //测试-------------------
+                //      "&userIntro=" + intro[0] + "&userProvince=" + pro[0] + "&userCity=" + city[0] + "&birthday=" + startDay).build();
+                //测试-------------------
                 Call call = client.newCall(request);
                 call.enqueue(new Callback() {//4.回调方法
                     @Override

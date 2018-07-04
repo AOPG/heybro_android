@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -243,9 +244,6 @@ public class SearchRoomActivity extends Activity {
                                                 map.put("user_name", userName);
                                                 map.put("user_Intro", userIntro);
 
-                                                System.out.println(userIntro);
-                                                System.out.println(userPortrait);
-
                                                 roomUserList.add(map);
 
                                             }
@@ -364,6 +362,15 @@ public class SearchRoomActivity extends Activity {
                                                                         // 设置PopupWindow是否能响应点击事件
                                                                         window.setTouchable(true);
                                                                         window.showAtLocation(view, Gravity.LEFT, 20, -200);
+                                                                        setBackgroundAlpha(SearchRoomActivity.this,0.5f);
+                                                                        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                                                                            @Override
+                                                                            public void onDismiss() {
+                                                                                if (SearchRoomActivity.this != null) {
+                                                                                    setBackgroundAlpha(SearchRoomActivity.this, 1f);
+                                                                                }
+                                                                            }
+                                                                        });
                                                                     } else {
                                                                         Toast.makeText(getApplicationContext(), "您已经加入其它房间！", Toast.LENGTH_SHORT).show();
                                                                     }
@@ -380,8 +387,8 @@ public class SearchRoomActivity extends Activity {
                                                 /**
                                                  * 关闭房间信息
                                                  */
-                                                Button create_close = viewRoomView.findViewById(R.id.join_close);
-                                                create_close.setOnClickListener(new View.OnClickListener() {
+                                                Button join_close = viewRoomView.findViewById(R.id.join_close);
+                                                join_close.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View view) {
                                                         if (null != window && window.isShowing()) {
@@ -420,10 +427,6 @@ public class SearchRoomActivity extends Activity {
 
 
                                                         if (flag == 1) {
-
-                                                            System.out.println(3333);
-                                                            System.out.println(roomId);
-                                                            System.out.println(LoginInfo.user.getUserCode());
                                                             /**
                                                              *  该用户进入房间，填充三表
                                                              */
@@ -584,7 +587,7 @@ public class SearchRoomActivity extends Activity {
                     }
                     if(roomSearchList.size() == 0)
                     {
-                        Toast.makeText(SearchRoomActivity.this, "查找的商品不在列表中", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SearchRoomActivity.this, "查找的房间不在列表中", Toast.LENGTH_SHORT).show();
                     }
                     else
                     {
@@ -621,5 +624,15 @@ public class SearchRoomActivity extends Activity {
                 return true;
             }
         });
+    }
+    public static void setBackgroundAlpha(Activity activity, float bgAlpha) {
+        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+        lp.alpha = bgAlpha;
+        if (bgAlpha == 1) {
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
+        } else {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
+        }
+        activity.getWindow().setAttributes(lp);
     }
 }
