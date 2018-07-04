@@ -28,15 +28,16 @@
             android:orientation="horizontal">
             <RadioButton
                 android:id="@+id/rd11"
+                android:enabled="false"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:checked="true" />
+                android:checked="false" />
             <TextView
                 android:id="@+id/rd12"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:text="Ⅰ级 看台围观"
-                android:textColor="#ffffff"
+                android:textColor="#bbbbbb"
                 android:layout_marginLeft="20dp"/>
         </LinearLayout>
         <LinearLayout
@@ -48,6 +49,7 @@
                 android:id="@+id/rd21"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:enabled="false"
                 android:checked="false" />
             <TextView
                 android:id="@+id/rd22"
@@ -66,6 +68,7 @@
                 android:id="@+id/rd31"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:enabled="false"
                 android:checked="false" />
             <TextView
                 android:id="@+id/rd32"
@@ -84,6 +87,7 @@
                 android:id="@+id/rd41"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:enabled="false"
                 android:checked="false" />
             <TextView
                 android:id="@+id/rd421"
@@ -102,6 +106,7 @@
                 android:id="@+id/rd51"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:enabled="false"
                 android:checked="false" />
             <TextView
                 android:id="@+id/rd52"
@@ -120,6 +125,7 @@
                 android:id="@+id/rd61"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:enabled="false"
                 android:checked="false" />
             <TextView
                 android:id="@+id/rd62"
@@ -138,6 +144,7 @@
                 android:id="@+id/rd71"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:enabled="false"
                 android:checked="false"
                 />
 
@@ -158,6 +165,7 @@
                 android:id="@+id/rd81"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:enabled="false"
                 android:checked="false"
                 />
 
@@ -178,6 +186,7 @@
                 android:id="@+id/rd91"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:enabled="false"
                 android:checked="false" />
 
             <TextView
