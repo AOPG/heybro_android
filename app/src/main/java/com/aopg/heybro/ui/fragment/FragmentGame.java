@@ -311,57 +311,61 @@ public class FragmentGame extends Fragment {
     public void httpInsertRoom(final BasketRoomInfo basketRoomInfo, String password){
         client = HttpUtils.init(client);
         Request request;
-        if(password != null&&!password.equals("")) {
-            basketRoomInfo.setPassword(password);
-            request = new Request.Builder().
-                    url(BUILD_URL("basketRoom/createRoom?roomId="+basketRoomInfo.getRoomId()+"&roomName="
-                            + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
-                            + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
-                            +"&rateHigh="+basketRoomInfo.getRateHigh()
-                            + "&num=" + basketRoomInfo.getNum() + "&password=" + basketRoomInfo.getPassword()
-                            + "&userCode=" + basketRoomInfo.getMaster()
-                            + "&lat=" + LoginInfo.user.getUserLat()
-                            + "&lng=" +LoginInfo.user.getUserLng())).build();
-        }else{
-            request = new Request.Builder().
-                    url(BUILD_URL("basketRoom/createRoom?roomId="+basketRoomInfo.getRoomId()+"&roomName="
-                            + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
-                            + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
-                            +"&rateHigh="+basketRoomInfo.getRateHigh()
-                            + "&num=" + basketRoomInfo.getNum() + "&userCode=" + basketRoomInfo.getMaster()
-                            + "&lat=" + LoginInfo.user.getUserLat()
-                            + "&lng=" +LoginInfo.user.getUserLng())).build();
-        }
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {//4.回调方法
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+        if(null != basketRoomInfo.getRoomName()&&!basketRoomInfo.getRoomName().equals("")) {
+            if (password != null && !password.equals("")) {
+                basketRoomInfo.setPassword(password);
+                request = new Request.Builder().
+                        url(BUILD_URL("basketRoom/createRoom?roomId=" + basketRoomInfo.getRoomId() + "&roomName="
+                                + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
+                                + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
+                                + "&rateHigh=" + basketRoomInfo.getRateHigh()
+                                + "&num=" + basketRoomInfo.getNum() + "&password=" + basketRoomInfo.getPassword()
+                                + "&userCode=" + basketRoomInfo.getMaster()
+                                + "&lat=" + LoginInfo.user.getUserLat()
+                                + "&lng=" + LoginInfo.user.getUserLng())).build();
+            } else {
+                request = new Request.Builder().
+                        url(BUILD_URL("basketRoom/createRoom?roomId=" + basketRoomInfo.getRoomId() + "&roomName="
+                                + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
+                                + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
+                                + "&rateHigh=" + basketRoomInfo.getRateHigh()
+                                + "&num=" + basketRoomInfo.getNum() + "&userCode=" + basketRoomInfo.getMaster()
+                                + "&lat=" + LoginInfo.user.getUserLat()
+                                + "&lng=" + LoginInfo.user.getUserLng())).build();
             }
+            Call call = client.newCall(request);
+            call.enqueue(new Callback() {//4.回调方法
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    e.printStackTrace();
+                }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String result = response.body().string();
-                String haveRoom = (JSONObject.parseObject(result)).getString("msg");
-                if(null != haveRoom&&haveRoom.equals("已经加入或创建一个房间，无需创建")){
-                    Looper.prepare();
-                    Toast.makeText(getApplicationContext(), "您已经创建或者加入一个房间，无需再创建", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String result = response.body().string();
+                    String haveRoom = (JSONObject.parseObject(result)).getString("msg");
+                    if (null != haveRoom && haveRoom.equals("已经加入或创建一个房间，无需创建")) {
+                        Looper.prepare();
+                        Toast.makeText(getApplicationContext(), "您已经创建或者加入一个房间，无需再创建", Toast.LENGTH_SHORT).show();
+                        Looper.loop();
+                    }
+                    Log.e("result", result);
+                    String success = (JSONObject.parseObject(result)).getString("success");
+                    if (null != success && success.equals("true")) {
+                        JSONObject roomInfo =
+                                (JSONObject) ((JSONObject) ((JSONObject.parseObject(result)).get("data"))).get("room");
+                        Long roomId = Long.parseLong(roomInfo.getString("roomId"));
+                        String roomName = roomInfo.getString("roomName");
+                        Intent roomIntent = new Intent(getActivity(), ChartRoomActivity.class);
+                        roomIntent.putExtra("roomId", roomId);
+                        roomIntent.putExtra("roomName", roomName);
+                        startActivity(roomIntent);
+                    }
                 }
-                Log.e("result",result);
-                String success = (JSONObject.parseObject(result)).getString("success");
-                if(null!=success&&success.equals("true")) {
-                    JSONObject roomInfo =
-                            (JSONObject)((JSONObject)((JSONObject.parseObject(result)).get("data"))).get("room");
-                    Long roomId = Long.parseLong(roomInfo.getString("roomId"));
-                    String roomName = roomInfo.getString("roomName");
-                    Intent roomIntent = new Intent(getActivity(), ChartRoomActivity.class);
-                    roomIntent.putExtra("roomId",roomId);
-                    roomIntent.putExtra("roomName",roomName);
-                    startActivity(roomIntent);
-                }
-            }
-        });
+            });
+        }else{
+            Toast.makeText(getApplicationContext(), "请输入房间名", Toast.LENGTH_SHORT).show();
+        }
     }
     /**
      * 向远程数据库匹配房间信息

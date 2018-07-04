@@ -134,7 +134,7 @@
                 android:password="true"
                 android:numeric="integer"
                 android:background="@drawable/basket_spinner_corner"
-                android:hint="请输入"
+                android:hint="可选（4位）"
                 android:textColor="#f5f5f5"
                 android:textSize="15dp">
             </EditText>

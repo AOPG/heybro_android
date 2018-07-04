@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +59,11 @@ public class FragmentMy extends Fragment {
 
     private static View rootView;
     private boolean isVisible = true;
+
+    private View myRateView;
+    private View myPositionView;
+    private PopupWindow window;
+
     private MainActivity mActivity;
 
 
@@ -84,9 +90,7 @@ public class FragmentMy extends Fragment {
             parent.removeView(rootView);
         }
         final RelativeLayout myPosition = rootView.findViewById(R.id.position_show);
-        myPosition.setVisibility(View.GONE);
         final RelativeLayout myRating = rootView.findViewById(R.id.rating_show);
-        myRating.setVisibility(View.GONE);
 
         /**
          * 我的资料界面
@@ -106,10 +110,25 @@ public class FragmentMy extends Fragment {
         my_position.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isVisible) {
-                    isVisible = false;//设置其他模块不能打开
-                    myPosition.setVisibility(View.VISIBLE);//这一句显示布局
+                myPositionView = LayoutInflater.from(getContext()).inflate(R.layout.my_position,null,false);
+                if(null == window || !window.isShowing()) {
+                    window = new PopupWindow(myPositionView, 850, 1000, true);
+                    // 设置PopupWindow是否能响应外部点击事件
+                    window.setOutsideTouchable(false);
+                    // 设置PopupWindow是否能响应点击事件
+                    window.setTouchable(true);
+                    window.showAtLocation(view, Gravity.LEFT, 120,0);
                 }
+                /**
+                 * 关闭我的位置
+                 */
+                ImageView position_close = myPositionView.findViewById(R.id.position_close);
+                position_close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        window.dismiss();
+                    }
+                });
             }
         });
         /**
@@ -119,32 +138,25 @@ public class FragmentMy extends Fragment {
         my_rating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isVisible) {
-                    isVisible = false;//设置其他模块不能打开
-                    myRating.setVisibility(View.VISIBLE);//这一句显示布局
+                myRateView = LayoutInflater.from(getContext()).inflate(R.layout.my_rate,null,false);
+                if(null == window || !window.isShowing()) {
+                    window = new PopupWindow(myRateView, 850, 1000, true);
+                    // 设置PopupWindow是否能响应外部点击事件
+                    window.setOutsideTouchable(false);
+                    // 设置PopupWindow是否能响应点击事件
+                    window.setTouchable(true);
+                    window.showAtLocation(view, Gravity.LEFT, 120,0);
                 }
-            }
-        });
-        /**
-         * 关闭我的位置
-         */
-        ImageView position_close = rootView.findViewById(R.id.position_close);
-        position_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myPosition.setVisibility(View.GONE);
-                isVisible = true;//设置其他模块可以打开
-            }
-        });
-        /**
-         * 关闭我的等级
-         */
-        ImageView rating_close = rootView.findViewById(R.id.rating_close);
-        rating_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myRating.setVisibility(View.GONE);
-                isVisible = true;//设置其他模块可以打开
+                /**
+                 * 关闭我的等级
+                 */
+                ImageView rating_close = myRateView.findViewById(R.id.rating_close);
+                rating_close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        window.dismiss();
+                    }
+                });
             }
         });
         /**
