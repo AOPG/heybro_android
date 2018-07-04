@@ -156,44 +156,7 @@
                     android:textColor="#ffffff" />
             </RelativeLayout>
 
-            <!-- 地区有点击事件 跳转到fragment_my_ziliao页面-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="1dp"
-                android:background="#1fffffff"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_centerVertical="true"
-                    android:text="地区"
-                    android:textColor="#ffffff"
-                    android:textSize="15dp" />
-
-                <ImageView
-                    android:id="@+id/diquright"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/right" />
-
-                <TextView
-                    android:textSize="14dp"
-                    android:layout_centerVertical="true"
-                    android:id="@+id/user_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_toLeftOf="@id/diquright"
-                    android:gravity="right"
-                    android:textColor="#ffffff" />
-
-            </RelativeLayout>
             <!--简介 跟姓名一样在本页修改 -->
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -234,6 +197,46 @@
 
 
             </RelativeLayout>
+
+            <!-- 地区有点击事件 跳转到fragment_my_ziliao页面-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="#1fffffff"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_centerVertical="true"
+                    android:text="地区"
+                    android:textColor="#ffffff"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:id="@+id/diquright"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/right" />
+
+                <TextView
+                    android:textSize="14dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/user_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@id/diquright"
+                    android:gravity="right"
+                    android:textColor="#ffffff" />
+
+            </RelativeLayout>
+
 
             <RelativeLayout
                 android:id="@+id/erweima"
