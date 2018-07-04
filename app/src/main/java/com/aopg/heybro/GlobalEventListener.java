@@ -7,6 +7,8 @@ import android.widget.Toast;
 import com.aopg.heybro.entity.ChatRecord;
 import com.aopg.heybro.entity.ChatRoomRecord;
 import com.aopg.heybro.entity.UserConversation;
+import com.aopg.heybro.ui.activity.ChartRoomActivity;
+import com.aopg.heybro.ui.activity.SingleChartActivity;
 import com.aopg.heybro.utils.LoginInfo;
 
 import org.litepal.crud.DataSupport;
@@ -39,7 +41,19 @@ public class GlobalEventListener {
     }
 
     public void onEvent(NotificationClickEvent event) {
-
+        Message msg = event.getMessage();
+        UserInfo fromUser = msg.getFromUser();
+        if (msg.getTargetType() == ConversationType.group){
+            Intent intent = new Intent(appContext, ChartRoomActivity.class);
+            GroupInfo groupInfo = (GroupInfo) msg.getTargetInfo();
+            intent.putExtra("roomName",groupInfo.getGroupName());
+            intent.putExtra("roomId",groupInfo.getGroupID());
+            appContext.startActivity(intent);
+        }else {
+            Intent intent = new Intent(appContext, SingleChartActivity.class);
+            intent.putExtra("userConcernCode",fromUser.getUserName());
+            appContext.startActivity(intent);
+        }
     }
 
     public void onEvent(MessageEvent event) {
@@ -102,14 +116,17 @@ public class GlobalEventListener {
                     .find(UserConversation.class);
             if (null!=userConversationList&&userConversationList.size()>0){
                 userConversation.setUnReadNum(userConversationList.get(0).getUnReadNum()+1);
+                userConversation.setDate(new Date().getTime());
                 userConversation.updateAll("userCode = ? and userConversationCode = ?", LoginInfo.user.getUserCode(),fromUser.getUserName());
             }else {
                 userConversation.setUnReadNum(0);
                 userConversation.setUserCode(LoginInfo.user.getUserCode());
                 userConversation.setUserConversationCode(fromUser.getUserName());
+                userConversation.setDate(new Date().getTime());
                 userConversation.save();
             }
-
+            Intent updatePrivateActivity = new Intent("updatePrivateActivity");
+            appContext.sendBroadcast(updatePrivateActivity);
 
             notificationIntent.putExtra("chatRecord",chatRecord);
         }

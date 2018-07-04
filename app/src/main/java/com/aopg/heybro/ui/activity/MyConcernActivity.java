@@ -68,10 +68,12 @@ public class MyConcernActivity extends Activity {
             public void onResponse(Call call, Response response) throws IOException {
                 concerns = new ArrayList<>();
                 String result = response.body().string();
-                JSONArray concernInfo =
-                        ((JSONObject)((JSONObject.parseObject(result)).get("data"))).getJSONArray("list");
+
                 String success = (JSONObject.parseObject(result)).getString("success");
+
                 if (null!=success&&success.equals("true")) {
+                    JSONArray concernInfo =
+                            ((JSONObject)((JSONObject.parseObject(result)).get("data"))).getJSONArray("list");
                     for (int i = 0; i < concernInfo.size(); i++) {
                         Concern concern = new Concern();
                         String userConcernCode =
@@ -92,10 +94,6 @@ public class MyConcernActivity extends Activity {
                 }
             }
         });
-
-
-
-
     }
     public void onBackPressed() {
         //返回

@@ -11,6 +11,7 @@ public class UserConversation extends DataSupport {
     private String userCode;
     private String userConversationCode;
     private Integer unReadNum;
+    private long date;
 
     public String getUserCode() {
         return userCode;
@@ -34,5 +35,13 @@ public class UserConversation extends DataSupport {
 
     public void setUnReadNum(Integer unReadNum) {
         this.unReadNum = unReadNum;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 }

@@ -8,19 +8,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.aopg.heybro.R;
+import com.aopg.heybro.entity.ChatRecord;
 import com.aopg.heybro.entity.User;
 import com.aopg.heybro.entity.UserConversation;
 import com.aopg.heybro.ui.activity.SingleChartActivity;
+import com.aopg.heybro.utils.DateUtils;
 import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.jauker.widget.BadgeView;
+
+import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -28,6 +37,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.aopg.heybro.utils.DateUtils.parseDateToStr;
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
 import static com.aopg.heybro.utils.HttpUtils.BUILD_URL;
 
@@ -42,7 +52,6 @@ public class PrivateLetterAdapter extends BaseAdapter{
     private Integer layoutItem;
     private List<UserConversation> userConversations;
     private MainHandler mainHandler;
-    private ImageView userImg;
 
     public PrivateLetterAdapter(Context context,Integer layoutItem,List<UserConversation> userConversations){
         this.context = context;
@@ -70,8 +79,15 @@ public class PrivateLetterAdapter extends BaseAdapter{
         if (convertView==null){
             convertView = View.inflate(context, layoutItem, null);
         }
+        final View singView = convertView;
+
         mainHandler = new MainHandler();
-        userImg = convertView.findViewById(R.id.user_img);
+        TextView weiduNum = convertView.findViewById(R.id.weiduNum);
+        if (userConversations.get(position).getUnReadNum()>0){
+            BadgeView badgeView = new com.jauker.widget.BadgeView(convertView.getContext());
+            badgeView.setTargetView(weiduNum);
+            badgeView.setBadgeCount(userConversations.get(position).getUnReadNum());
+        }
         client = HttpUtils.init(client);
         Request request = new Request.Builder().
                 url(BUILD_URL("averageUser/userInfoByCode?userCode="+userConversations
@@ -91,11 +107,16 @@ public class PrivateLetterAdapter extends BaseAdapter{
                 if (null!=success&&success.equals("true")) {
                     JSONObject userInfo = (JSONObject) (JSONObject.parseObject(result)).get("data");
                     String userCode = userInfo.getString("userCode");
+                    String userNickName = userInfo.getString("userNickname");
                     String userPortrait=userInfo.getString("userPortrait");
                     User user = new User();
+                    user.setNickName(userNickName);
                     user.setUserPortrait(userPortrait);
                     user.setUserCode(userCode);
-                    Message message = mainHandler.obtainMessage(1100,user);
+                    Map<String,Object> map= new HashMap<>();
+                    map.put("user",user);
+                    map.put("view",singView);
+                    Message message = mainHandler.obtainMessage(1100,map);
                     mainHandler.sendMessage(message);
                 }
             }
@@ -109,9 +130,27 @@ public class PrivateLetterAdapter extends BaseAdapter{
             super.handleMessage(msg);
             switch (msg.what){
                 case 1100:
-                    User user = (User) msg.obj;
-                    String userCode = user.getUserCode();
+                    Map<String,Object> map = (Map<String, Object>) msg.obj;
+                    User user = (User) map.get("user");
+                    View view = (View) map.get("view");
+                    TextView nickNameTv = view.findViewById(R.id.user_nickname);
+                    TextView messageTv = view.findViewById(R.id.user_message);
+                    ImageView userImg = view.findViewById(R.id.user_img);
+                    TextView dateTv = view.findViewById(R.id.date);
+                    final String userCode = user.getUserCode();
+                    final String userNickName = user.getNickName();
                     String userPortrait = user.getUserPortrait();
+                    nickNameTv.setText(userNickName);
+                    ChatRecord chatRecord = DataSupport
+                            .where("userCode = ? and theOrtherCode = ?", LoginInfo.user.getUserCode(),userCode)
+                            .findLast(ChatRecord.class);
+                    dateTv.setText(parseDateToStr(new Date(chatRecord.getDate()), DateUtils.DATE_FORMAT_MMDDHHMI));
+                    if (chatRecord.isToMe()){
+                        messageTv.setText(userNickName+":"+chatRecord.getMessage());
+                    }else {
+                        messageTv.setText("我:"+chatRecord.getMessage());
+                    }
+
                     RequestOptions options = new RequestOptions()
                             .fallback(R.drawable.image).centerCrop();
 
@@ -120,18 +159,28 @@ public class PrivateLetterAdapter extends BaseAdapter{
                             .apply(options)
                             .into(userImg);
 
-//                    convertView.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Intent intent = new Intent();
-//                            intent.setClass(context,SingleChartActivity.class);
-//                            intent.putExtra("note",note);
-//                            intent.putExtra("userConcernCode",userConcernCode);
-//                            context.startActivity(intent);
-//                        }
-//                    });
-
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent();
+                            intent.setClass(context,SingleChartActivity.class);
+                            intent.putExtra("note",userNickName);
+                            intent.putExtra("userConcernCode",userCode);
+                            context.startActivity(intent);
+                        }
+                    });
             }
         }
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        userConversations.clear();
+        List<UserConversation> userConversationList =  DataSupport
+                .where("userCode = ?", LoginInfo.user.getUserCode())
+                .order("date desc")
+                .find(UserConversation.class);
+        this.userConversations = userConversationList;
+        super.notifyDataSetChanged();
     }
 }

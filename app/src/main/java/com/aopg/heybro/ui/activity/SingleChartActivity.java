@@ -26,16 +26,20 @@ import com.aopg.heybro.R;
 import com.aopg.heybro.entity.BasketRoomInfo;
 import com.aopg.heybro.entity.ChatRecord;
 import com.aopg.heybro.entity.User;
+import com.aopg.heybro.entity.UserConversation;
 import com.aopg.heybro.ui.adapter.SingleMessageAdapter;
 import com.aopg.heybro.ui.fragment.FragmentFriend;
 import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
 import com.aopg.heybro.utils.teamhead.utils.DensityUtils;
 
+import org.litepal.crud.DataSupport;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cn.jpush.im.android.api.JMessageClient;
@@ -84,17 +88,15 @@ public class SingleChartActivity extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        initData();
         setIntent(intent);
-        note = getIntent().getStringExtra("note");
-        noteTv.setText(note);
+
     }
 
     private void initView() {
         mainHandler = new MainHandler();
-        concernUser = new User();
-        userConcernCode = getIntent().getStringExtra("userConcernCode");
-        concernUser.setUserCode(userConcernCode);
-        loadUserInfoByUserCode(userConcernCode);
+
+
         setContentView(R.layout.single_chart_activity);
         back = findViewById(R.id.back);
         messageLv = findViewById(R.id.msg_list_view);
@@ -103,8 +105,8 @@ public class SingleChartActivity extends AppCompatActivity {
         sendMessage = findViewById(R.id.send_msg);
         noteTv = findViewById(R.id.user_name);
 
-        note = getIntent().getStringExtra("note");
-        noteTv.setText(note);
+
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,6 +182,15 @@ public class SingleChartActivity extends AppCompatActivity {
         });
     }
     private void initData() {
+        userConcernCode = getIntent().getStringExtra("userConcernCode");
+        UserConversation userConversation = new UserConversation();
+        userConversation.setUnReadNum(0);
+        userConversation.updateAll("userCode = ? and userConversationCode = ?", LoginInfo.user.getUserCode(),userConcernCode);
+        note = getIntent().getStringExtra("note");
+        noteTv.setText(note);
+        concernUser = new User();
+        concernUser.setUserCode(userConcernCode);
+        loadUserInfoByUserCode(userConcernCode);
         IntentFilter filter = new IntentFilter("single_message");
         registerReceiver(broadcastReceiver, filter);
     }
@@ -247,6 +258,7 @@ public class SingleChartActivity extends AppCompatActivity {
             super.handleMessage(msg);
             switch (msg.what){
                 case 500:
+                    noteTv.setText(concernUser.getNickName());
                     singleMessageAdapter = new SingleMessageAdapter(SingleChartActivity.this,userConcernCode,messageLv,concernUser);
                     messageLv.setAdapter(singleMessageAdapter);
                     sendMessage.setClickable(true);
