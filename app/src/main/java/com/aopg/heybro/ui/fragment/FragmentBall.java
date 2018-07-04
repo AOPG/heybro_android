@@ -1,6 +1,7 @@
 package com.aopg.heybro.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Handler;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -166,6 +168,15 @@ public class FragmentBall extends Fragment{
                     // 设置PopupWindow是否能响应点击事件
                     window.setTouchable(true);
                     window.showAtLocation(view, Gravity.LEFT, 20,-200);
+                    setBackgroundAlpha(getActivity(),0.5f);
+                    window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            if (getActivity() != null) {
+                                setBackgroundAlpha(getActivity(), 1f);
+                            }
+                        }
+                    });
                 }
                 /**
                  * 获取选择的数据
@@ -255,6 +266,7 @@ public class FragmentBall extends Fragment{
                     public void onClick(View view) {
                         if(null != window && window.isShowing()){
                             window.dismiss();
+                            setBackgroundAlpha(getActivity(),1);
                         }
                     }
                 });
@@ -387,6 +399,15 @@ public class FragmentBall extends Fragment{
                     // 设置PopupWindow是否能响应点击事件
                     window.setTouchable(true);
                     window.showAtLocation(view, Gravity.LEFT, 20, -200);
+                    setBackgroundAlpha(getActivity(),0.5f);
+                    window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            if (getActivity() != null) {
+                                setBackgroundAlpha(getActivity(), 1f);
+                            }
+                        }
+                    });
                 }
                 /**
                  * 获取选择的数据
@@ -765,6 +786,15 @@ public class FragmentBall extends Fragment{
                                                         // 设置PopupWindow是否能响应点击事件
                                                         window.setTouchable(true);
                                                         window.showAtLocation(view, Gravity.LEFT, 20, -200);
+                                                        setBackgroundAlpha(getActivity(),0.5f);
+                                                        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                                                            @Override
+                                                            public void onDismiss() {
+                                                                if (getActivity() != null) {
+                                                                    setBackgroundAlpha(getActivity(), 1f);
+                                                                }
+                                                            }
+                                                        });
                                                     }else{
                                                         Toast.makeText(getApplicationContext(), "您已经加入其它房间！", Toast.LENGTH_SHORT).show();
                                                     }
@@ -782,8 +812,8 @@ public class FragmentBall extends Fragment{
                                 /**
                                  * 关闭房间信息
                                  */
-                                Button create_close = viewRoomView.findViewById(R.id.join_close);
-                                create_close.setOnClickListener(new View.OnClickListener() {
+                                Button join_close = viewRoomView.findViewById(R.id.join_close);
+                                join_close.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         if (null != window && window.isShowing()) {
@@ -826,10 +856,6 @@ public class FragmentBall extends Fragment{
 
 
                                         if (flag == 1){
-
-                                            System.out.println(3333);
-                                            System.out.println(roomId);
-                                            System.out.println(LoginInfo.user.getUserCode());
                                             /**
                                              *  该用户进入房间，填充三表
                                              */
@@ -962,7 +988,15 @@ public class FragmentBall extends Fragment{
         });
 
     }
-    public static void setCreateRoomStates(boolean flag){
-        btn_create.setClickable(flag);
+    public static void setBackgroundAlpha(Activity activity, float bgAlpha) {
+        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+        lp.alpha = bgAlpha;
+        if (bgAlpha == 1) {
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
+        } else {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
+        }
+            activity.getWindow().setAttributes(lp);
     }
+
 }
