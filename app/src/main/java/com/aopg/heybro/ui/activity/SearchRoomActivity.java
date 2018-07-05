@@ -134,7 +134,7 @@ public class SearchRoomActivity extends Activity {
             public void onResponse(Call call, Response response) throws IOException {
 
                 String result = response.body().string();
-                Log.e("msg",result);
+                Log.e("room",result);
                 String success = (JSONObject.parseObject(result)).getString("success");
 
                 if (null != success && success.equals("true")) {

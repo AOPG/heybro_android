@@ -121,6 +121,7 @@
         <activity android:name=".ui.activity.Mybirthday"></activity>
         <activity android:name=".ui.activity.MyQRCodeActivity"></activity>
         <activity android:name=".ui.activity.PrivateLetterActivity"></activity>
+        <activity android:name=".ui.activity.ActivityzhiboActivity"></activity>
         <activity
             android:name=".codescan.MipcaActivityCapture"
             android:configChanges="orientation|keyboardHidden"
