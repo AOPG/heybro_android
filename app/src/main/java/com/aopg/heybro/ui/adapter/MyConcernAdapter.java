@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.aopg.heybro.R;
 import com.aopg.heybro.entity.Concern;
+import com.aopg.heybro.ui.activity.FriendInfoActivity;
 import com.aopg.heybro.ui.activity.MyConcernActivity;
 import com.aopg.heybro.ui.activity.SingleChartActivity;
 import com.aopg.heybro.utils.LoginInfo;
@@ -75,9 +76,8 @@ public class MyConcernAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context,SingleChartActivity.class);
-                intent.putExtra("note",note);
-                intent.putExtra("userConcernCode",userConcernCode);
+                intent.setClass(context,FriendInfoActivity.class);
+                intent.putExtra("userCode",userConcernCode);
                 context.startActivity(intent);
             }
         });
