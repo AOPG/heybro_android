@@ -168,7 +168,7 @@ public class FragmentBall extends Fragment{
                     window.setOutsideTouchable(false);
                     // 设置PopupWindow是否能响应点击事件
                     window.setTouchable(true);
-                    window.showAtLocation(view, Gravity.LEFT, 20,-200);
+                    window.showAtLocation(view, Gravity.LEFT, 10,-200);
                     setBackgroundAlpha(getActivity(),0.5f);
                     window.setOnDismissListener(new PopupWindow.OnDismissListener() {
                         @Override
@@ -399,7 +399,7 @@ public class FragmentBall extends Fragment{
                     window.setOutsideTouchable(false);
                     // 设置PopupWindow是否能响应点击事件
                     window.setTouchable(true);
-                    window.showAtLocation(view, Gravity.LEFT, 20, -200);
+                    window.showAtLocation(view, Gravity.LEFT, 10, 0);
                     setBackgroundAlpha(getActivity(),0.5f);
                     window.setOnDismissListener(new PopupWindow.OnDismissListener() {
                         @Override
@@ -785,12 +785,12 @@ public class FragmentBall extends Fragment{
 
                                                     }else if ("0".equals(msg.obj.toString())){
 
-                                                        window = new PopupWindow(viewRoomView, 1000,2000, true);
+                                                        window = new PopupWindow(viewRoomView, 900,1250, true);
                                                         // 设置PopupWindow是否能响应外部点击事件
                                                         window.setOutsideTouchable(false);
                                                         // 设置PopupWindow是否能响应点击事件
                                                         window.setTouchable(true);
-                                                        window.showAtLocation(rootView, Gravity.LEFT, -1000, -400);
+                                                        window.showAtLocation(rootView, Gravity.LEFT, -150, -150);
                                                         setBackgroundAlpha(getActivity(),0.5f);
                                                         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
                                                             @Override
