@@ -2,6 +2,7 @@ package com.aopg.heybro.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -97,12 +98,12 @@ public class FriendInfoActivity extends Activity {
             super.handleMessage(msg);
             switch (msg.what){
                 case 2:
+                    isConcern = true;
                     xiaoxi.setVisibility(View.VISIBLE);
-                    xiaoxi.setBackgroundDrawable(getResources().getDrawable(R.drawable.unlogin));
-                    xiaoxi.setOnClickListener(new chatListener());
-                    guanzhu.setBackgroundDrawable(getResources().getDrawable(R.drawable.unlogin));
+                    guanzhu.setBackgroundColor(Color.parseColor("#FF6A6A"));
+                  //  guanzhu.setBackgroundDrawable(getResources().getDrawable(R.drawable.unlogin));
                     guanzhu.setText("取消关注");
-
+                    guanzhu.setOnClickListener(new CancelConcern());
                     //concern/cancelConcern?userCode=123456789&concernCode=111111
 //                    guanzhu.setOnClickListener(new View.OnClickListener() {
 //                        @Override
@@ -128,19 +129,32 @@ public class FriendInfoActivity extends Activity {
 
                     //guanzhu.setOnClickListener(
                      //       null);
+                    break;
                 case 3:
-
                     guanzhu.setBackgroundDrawable(getResources().getDrawable(R.drawable.tianqibgm));
                     guanzhu.setText("关注");
-                    xiaoxi.setVisibility(View.INVISIBLE);
-                    guanzhu.setOnClickListener(new CancelConcern());
+                    xiaoxi.setVisibility(View.GONE);
+                    isConcern = false;
+                    guanzhu.setOnClickListener(new concernListener());
+
+                    break;
                 case 1000:
                     showUserInfo();
+                    //xiaoxi.setBackgroundDrawable(getResources().getDrawable(R.drawable.unlogin));
+                    xiaoxi.setOnClickListener(new chatListener());
                     if (isConcern==true){
-                        guanzhu.setBackgroundDrawable(getResources().getDrawable(R.drawable.unlogin));
+                        xiaoxi.setVisibility(View.VISIBLE);
+                        //guanzhu.setBackgroundDrawable(getResources().getDrawable(R.drawable.unlogin));
+                        guanzhu.setBackgroundColor(Color.parseColor("#FF6A6A"));
                         guanzhu.setText("取消关注");
-                        guanzhu.setOnClickListener(null);
+                        guanzhu.setOnClickListener(new CancelConcern());
+                    }else{
+                        xiaoxi.setVisibility(View.GONE);
+                        guanzhu.setText("关注");
+                        guanzhu.setBackgroundDrawable(getResources().getDrawable(R.drawable.tianqibgm));
+                        guanzhu.setOnClickListener(new concernListener());
                     }
+                    break;
 
             }
         }
@@ -169,7 +183,7 @@ public class FriendInfoActivity extends Activity {
             guanzhu.setVisibility(View.INVISIBLE);
             xiaoxi.setVisibility(View.INVISIBLE);
         }
-        guanzhu.setOnClickListener(new concernListener());
+       // guanzhu.setOnClickListener(new concernListener());
 //                new View.OnClickListener(){
 //            @Override
 //            public void onClick(View v) {
@@ -228,6 +242,8 @@ public class FriendInfoActivity extends Activity {
 
                     if (isConcernStr.equals("true")){
                         isConcern = true;
+                    }else {
+                        isConcern=false;
                     }
                     user = new User();
                     user.setUserProvince(userProvince);
@@ -276,8 +292,9 @@ public class FriendInfoActivity extends Activity {
         public void onClick(View v) {
             Intent intent = new Intent();
             intent.putExtra("note",user.getNickName());
-            intent.putExtra("userConcernCode",user.getUserCode());
+            intent.putExtra("userConcernCode",userCode);
             intent.setClass(FriendInfoActivity.this,SingleChartActivity.class);
+            startActivity(intent);
         }
     }
 

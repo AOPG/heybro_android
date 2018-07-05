@@ -60,7 +60,7 @@
         android:src="@drawable/search"/>
 
         </LinearLayout>
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:orientation="horizontal"
@@ -73,26 +73,26 @@
                 android:layout_marginTop="3dp"
                 android:text="附近好友"
                 android:textColor="#ffffff"
-                android:textSize="15dp" />
+                android:textSize="15dp" />-->
             <!-- 有点击事件，跳转页面-->
-           <TextView
+           <!--<TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:textColor="#ffffff"
                android:textSize="15dp"
                android:text="更多"
                android:layout_marginLeft="245dp"/>
-        </LinearLayout>
+        </LinearLayout>-->
 <!--      有点击事件 一共只用获得附近的三条数据即可-->
-        <LinearLayout
+        <!--<LinearLayout
             android:id="@+id/fujinhaoyou1"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
             android:layout_marginTop="2dp"
-            android:background="#1fffffff">
+            android:background="#1fffffff">-->
             <!--使图片变成圆形 -->
-            <ImageView
+            <!--<ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_marginTop="10dp"
@@ -104,17 +104,17 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="2dp"
-                android:orientation="vertical">
+                android:orientation="vertical">-->
                 <!-- 昵称需要数据库获取-->
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="昵称"
                     android:textColor="#ffffff"
                     android:textStyle="bold"
-                    android:textSize="12dp"/>
+                    android:textSize="12dp"/>-->
                 <!-- 上次登录后面的时间需要动态获取-->
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="上次登录：昨天"
@@ -146,9 +146,9 @@
             android:layout_height="55dp"
             android:orientation="horizontal"
             android:layout_marginTop="2dp"
-            android:background="#1fffffff">
+            android:background="#1fffffff">-->
             <!--使图片变成圆形 -->
-            <ImageView
+            <!--<ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_marginTop="10dp"
@@ -160,17 +160,17 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="2dp"
-                android:orientation="vertical">
+                android:orientation="vertical">-->
                 <!-- 昵称需要数据库获取-->
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="昵称"
                     android:textColor="#ffffff"
                     android:textStyle="bold"
-                    android:textSize="12dp"/>
+                    android:textSize="12dp"/>-->
                 <!-- 上次登录后面的时间需要动态获取-->
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="上次登录：昨天"
@@ -202,9 +202,9 @@
             android:layout_height="55dp"
             android:orientation="horizontal"
             android:layout_marginTop="2dp"
-            android:background="#1fffffff">
+            android:background="#1fffffff">-->
             <!--使图片变成圆形 -->
-            <ImageView
+            <!--<ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_marginTop="10dp"
@@ -216,17 +216,17 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="2dp"
-                android:orientation="vertical">
+                android:orientation="vertical">-->
                 <!-- 昵称需要数据库获取-->
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="昵称"
                     android:textColor="#ffffff"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"/>-->
                 <!-- 上次登录后面的时间需要动态获取-->
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="上次登录：昨天"
@@ -265,26 +265,26 @@
                 android:layout_marginTop="3dp"
                 android:text="推荐好友"
                 android:textColor="#ffffff"
-                android:textSize="15dp" />
+                android:textSize="15dp" />-->
             <!-- 有点击事件，跳转页面-->
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:textSize="15dp"
                 android:text="更多"
                 android:layout_marginLeft="245dp"/>
-        </LinearLayout>
+        </LinearLayout>-->
         <!--      有点击事件 一共只用获得附近的三条数据即可-->
-        <LinearLayout
+        <!--<LinearLayout
             android:id="@+id/tuijianhaoyou1"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
             android:layout_marginTop="2dp"
-            android:background="#1fffffff">
+            android:background="#1fffffff">-->
             <!--使图片变成圆形 -->
-            <ImageView
+            <!--<ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_marginTop="10dp"
@@ -296,17 +296,17 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="2dp"
-                android:orientation="vertical">
+                android:orientation="vertical">-->
                 <!-- 昵称需要数据库获取-->
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="昵称"
                     android:textColor="#ffffff"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"/>-->
                 <!-- 来自：后面的地址需要动态获取-->
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="来自：河北 张家口"
@@ -338,9 +338,9 @@
             android:layout_height="55dp"
             android:orientation="horizontal"
             android:layout_marginTop="2dp"
-            android:background="#1fffffff">
+            android:background="#1fffffff">-->
             <!--使图片变成圆形 -->
-            <ImageView
+            <!--<ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_marginTop="10dp"
@@ -352,17 +352,17 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="2dp"
-                android:orientation="vertical">
+                android:orientation="vertical">-->
                 <!-- 昵称需要数据库获取-->
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="昵称"
                     android:textColor="#ffffff"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"/>-->
                 <!-- 来自：后面的地址需要动态获取-->
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="来自：河北 张家口"
@@ -394,9 +394,9 @@
             android:layout_height="55dp"
             android:orientation="horizontal"
             android:layout_marginTop="2dp"
-            android:background="#1fffffff">
+            android:background="#1fffffff">-->
             <!--使图片变成圆形 -->
-            <ImageView
+            <!--<ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_marginTop="10dp"
@@ -408,17 +408,17 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="2dp"
-                android:orientation="vertical">
+                android:orientation="vertical">-->
                 <!-- 昵称需要数据库获取-->
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="昵称"
                     android:textColor="#ffffff"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"/>-->
                 <!-- 来自：后面的地址需要动态获取-->
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="来自：河北 张家口"
@@ -439,11 +439,16 @@
                 android:layout_marginTop="20dp"
                 android:src="@drawable/right"/>
 
-        </LinearLayout>
+        </LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#ffffff" />
+        <ListView
+            android:id="@+id/friend_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
     </LinearLayout>
 
 </LinearLayout>
