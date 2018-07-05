@@ -330,19 +330,23 @@ public class FragmentGame extends Fragment {
      */
     public void httpInsertRoom(final BasketRoomInfo basketRoomInfo, String password){
         client = HttpUtils.init(client);
-        Request request;
+        Request request = null;
         if(null != basketRoomInfo.getRoomName()&&!basketRoomInfo.getRoomName().equals("")) {
             if (password != null && !password.equals("")) {
-                basketRoomInfo.setPassword(password);
-                request = new Request.Builder().
-                        url(BUILD_URL("basketRoom/createRoom?roomId=" + basketRoomInfo.getRoomId() + "&roomName="
-                                + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
-                                + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
-                                + "&rateHigh=" + basketRoomInfo.getRateHigh()
-                                + "&num=" + basketRoomInfo.getNum() + "&password=" + basketRoomInfo.getPassword()
-                                + "&userCode=" + basketRoomInfo.getMaster()
-                                + "&lat=" + LoginInfo.user.getUserLat()
-                                + "&lng=" + LoginInfo.user.getUserLng())).build();
+                if(password.length() >4){
+                    Toast.makeText(getApplicationContext(), "密码超出长度限制", Toast.LENGTH_SHORT).show();
+                }else {
+                    basketRoomInfo.setPassword(password);
+                    request = new Request.Builder().
+                            url(BUILD_URL("basketRoom/createRoom?roomId=" + basketRoomInfo.getRoomId() + "&roomName="
+                                    + basketRoomInfo.getRoomName() + "&type=" + basketRoomInfo.getType()
+                                    + "&mode=" + basketRoomInfo.getMode() + "&rateLow=" + basketRoomInfo.getRateLow()
+                                    + "&rateHigh=" + basketRoomInfo.getRateHigh()
+                                    + "&num=" + basketRoomInfo.getNum() + "&password=" + basketRoomInfo.getPassword()
+                                    + "&userCode=" + basketRoomInfo.getMaster()
+                                    + "&lat=" + LoginInfo.user.getUserLat()
+                                    + "&lng=" + LoginInfo.user.getUserLng())).build();
+                }
             } else {
                 request = new Request.Builder().
                         url(BUILD_URL("basketRoom/createRoom?roomId=" + basketRoomInfo.getRoomId() + "&roomName="
