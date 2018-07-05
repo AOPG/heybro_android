@@ -14,10 +14,13 @@ import com.aopg.heybro.R;
 import com.aopg.heybro.entity.User;
 import com.aopg.heybro.ui.activity.AddFriendActivity;
 import com.aopg.heybro.ui.activity.FriendInfoActivity;
+import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
+
+import cn.jpush.im.android.api.model.UserInfo;
 
 import static com.aopg.heybro.utils.HttpUtils.BASE_URL;
 
@@ -79,9 +82,10 @@ public class SearchfriendAdapter extends BaseAdapter {
                 Intent intent = new Intent();
  //               Bundle mBundle = new Bundle();
 //                mBundle.putSerializable("user",user);
-                intent.setClass(context,FriendInfoActivity.class);
+                    intent.setClass(context, FriendInfoActivity.class);
 //                intent.putExtra("username",username);
-                intent.putExtra("userCode",user.getUserCode());
+                    intent.putExtra("userCode", user.getUserCode());
+
 //                intent.putExtra("userprovince",userprovince);
 //                intent.putExtra("usercity",usercity);
 //                intent.putExtra("usergrade",usergrade);

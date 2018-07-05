@@ -56,6 +56,7 @@ public class FriendInfoActivity extends Activity {
     private TextView qianming;
     private ImageView back;
     private Button guanzhu;
+    private Button xiaoxi;
     private OkHttpClient client;
     private MainHandler mainHandler = new MainHandler();
     private boolean isConcern = false;
@@ -75,6 +76,7 @@ public class FriendInfoActivity extends Activity {
         qianming=findViewById(R.id.qianming);
         back=findViewById(R.id.back);
         guanzhu=findViewById(R.id.guanzhu);
+        xiaoxi=findViewById(R.id.liaotian);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,9 +97,43 @@ public class FriendInfoActivity extends Activity {
             super.handleMessage(msg);
             switch (msg.what){
                 case 2:
+                    xiaoxi.setVisibility(View.VISIBLE);
+                    xiaoxi.setBackgroundDrawable(getResources().getDrawable(R.drawable.unlogin));
+                    xiaoxi.setOnClickListener(new chatListener());
                     guanzhu.setBackgroundDrawable(getResources().getDrawable(R.drawable.unlogin));
                     guanzhu.setText("取消关注");
-                    guanzhu.setOnClickListener(null);
+
+                    //concern/cancelConcern?userCode=123456789&concernCode=111111
+//                    guanzhu.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            client = HttpUtils.init(client);
+//                            //concern/cancelConcern?userCode=123456789&concernCode=111111
+//                            Request request = new Request.Builder().
+//                                    url(BUILD_URL("concern/cancelConcern?userCode="+ LoginInfo.user.getUserCode()+"&concernCode="+userCode)).build();
+//               0             Call call = client.newCall(request);
+//                            call.enqueue(new okhttp3.Callback() {
+//                                @Override
+//                                public void onFailure(Call call, IOException e) {
+//
+//                                }
+//
+//                                @Override
+//                                public void onResponse(Call call, Response response) throws IOException {
+//
+//                                }
+//                            });
+//                        }
+//                    });
+
+                    //guanzhu.setOnClickListener(
+                     //       null);
+                case 3:
+
+                    guanzhu.setBackgroundDrawable(getResources().getDrawable(R.drawable.tianqibgm));
+                    guanzhu.setText("关注");
+                    xiaoxi.setVisibility(View.INVISIBLE);
+                    guanzhu.setOnClickListener(new CancelConcern());
                 case 1000:
                     showUserInfo();
                     if (isConcern==true){
@@ -131,34 +167,36 @@ public class FriendInfoActivity extends Activity {
         qianming.setText(userintro);
         if( LoginInfo.user.getUserCode()==userCode){
             guanzhu.setVisibility(View.INVISIBLE);
+            xiaoxi.setVisibility(View.INVISIBLE);
         }
-        guanzhu.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-
-                client = HttpUtils.init(client);
-                Request request = new Request.Builder().
-                        url(BUILD_URL("concern/concernByUserCode?userCode="+ LoginInfo.user.getUserCode()+"&concernCode="+userCode)).build();
-                Call call = client.newCall(request);
-                call.enqueue(new Callback() {//4.回调方法
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        String result = response.body().string();
-                        String success = (JSONObject.parseObject(result)).getString("success");
-                        if (null!=success&&success.equals("true")) {
-                            Message message = mainHandler.obtainMessage(2,"formCallBack");
-                            mainHandler.sendMessage(message);
-                        }
-                        Log.e("msg", result);
-                    }
-                });
-            }
-        });
+        guanzhu.setOnClickListener(new concernListener());
+//                new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//
+//                client = HttpUtils.init(client);
+//                Request request = new Request.Builder().
+//                        url(BUILD_URL("concern/concernByUserCode?userCode="+ LoginInfo.user.getUserCode()+"&concernCode="+userCode)).build();
+//                Call call = client.newCall(request);
+//                call.enqueue(new Callback() {//4.回调方法
+//                    @Override
+//                    public void onFailure(Call call, IOException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                    @Override
+//                    public void onResponse(Call call, Response response) throws IOException {
+//                        String result = response.body().string();
+//                        String success = (JSONObject.parseObject(result)).getString("success");
+//                        if (null!=success&&success.equals("true")) {
+//                            Message message = mainHandler.obtainMessage(2,"formCallBack");
+//                            mainHandler.sendMessage(message);
+//                        }
+//                        Log.e("msg", result);
+//                    }
+//                });
+//            }
+//        });
     }
 
     public void loadUserInfo(String userCode){
@@ -186,6 +224,8 @@ public class FriendInfoActivity extends Activity {
                     String userCity= userInfo.getString("userCity");
                     String userProvince= userInfo.getString("userProvince");
                     String isConcernStr = userInfo.getString("isConcern");
+                    String userNickName = userInfo.getString("userNickname");
+
                     if (isConcernStr.equals("true")){
                         isConcern = true;
                     }
@@ -196,10 +236,76 @@ public class FriendInfoActivity extends Activity {
                     user.setUserIntro(userIntro);
                     user.setUserPortrait(userPortrait);
                     user.setUsername(userName);
+                    user.setNickName(userNickName);
                     Message message = mainHandler.obtainMessage(1000,user);
                     mainHandler.sendMessage(message);
                 }
             }
         });
+    }
+
+    private class  CancelConcern implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            client = HttpUtils.init(client);
+            //concern/cancelConcern?userCode=123456789&concernCode=111111
+            Request request = new Request.Builder().
+                    url(BUILD_URL("concern/cancelConcern?userCode="+ LoginInfo.user.getUserCode()+"&concernCode="+userCode)).build();
+            Call call = client.newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                }
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String result1 = response.body().string();
+                    String success = (JSONObject.parseObject(result1)).getString("success");
+                    if (null!=success&&success.equals("true")) {
+                        Message message = mainHandler.obtainMessage(3,"formCallBack");
+                        mainHandler.sendMessage(message);
+                    }
+                    Log.e("msg", result1);
+                }
+            });
+        }
+    }
+    private class chatListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.putExtra("note",user.getNickName());
+            intent.putExtra("userConcernCode",user.getUserCode());
+            intent.setClass(FriendInfoActivity.this,SingleChartActivity.class);
+        }
+    }
+
+    private class  concernListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            client = HttpUtils.init(client);
+            Request request = new Request.Builder().
+                    url(BUILD_URL("concern/concernByUserCode?userCode="+ LoginInfo.user.getUserCode()+"&concernCode="+userCode)).build();
+            Call call = client.newCall(request);
+            call.enqueue(new Callback() {//4.回调方法
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String result = response.body().string();
+                    String success = (JSONObject.parseObject(result)).getString("success");
+                    if (null!=success&&success.equals("true")&&LoginInfo.user.getUserCode()!=userCode) {
+                        Message message = mainHandler.obtainMessage(2,"formCallBack");
+                        mainHandler.sendMessage(message);
+                    }
+                    Log.e("msg", result);
+                }
+            });
+        }
     }
 }
