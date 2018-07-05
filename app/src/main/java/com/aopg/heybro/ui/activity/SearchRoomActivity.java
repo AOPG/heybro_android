@@ -98,7 +98,7 @@ public class SearchRoomActivity extends Activity {
         /**
          * 搜索房间
          */
-      //  searchRoom();
+        searchRoom();
         //取消
         TextView searchroom_cancel = findViewById(R.id.searchroom_cancel);
         searchroom_cancel.setOnClickListener(new View.OnClickListener() {
