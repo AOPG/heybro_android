@@ -25,8 +25,13 @@
                 android:id="@+id/msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxWidth="200dp"
+                android:lineSpacingExtra="5dp"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:textColor="#fff"/>
         </LinearLayout>
     </LinearLayout>

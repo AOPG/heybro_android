@@ -17,13 +17,16 @@ import com.aopg.heybro.ui.activity.ChartRoomActivity;
 import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -44,9 +47,8 @@ public class ChartRoomMessageAdapter extends BaseAdapter {
     private ChatRoomRecord chatRoomRecord;
     private ListView messageLv;
     private OkHttpClient client;
-    private User ortherUser;
     private MainHandler mainHandler;
-    ImageView headLeft;
+
 
     public ChartRoomMessageAdapter(Context context, Long roomId, ListView messageLv) {
         this.context = context;
@@ -91,18 +93,20 @@ public class ChartRoomMessageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ortherUser = new User();
+     //   ortherUser = new User();
         chatRoomRecord = messages.get(position);
         String userCode =  chatRoomRecord.getUserCode();
-        ortherUser.setUserCode(userCode);
+    //    ortherUser.setUserCode(userCode);
         if (userCode.equals(LoginInfo.user.getUserCode())){
-            convertView = View.inflate(context, R.layout.room_chatitem_me, null);
+            convertView = View.inflate(context, R.layout.group_room_chatitem_me, null);
             ImageView headRight = convertView.findViewById(R.id.head_right);
+            TextView nickname = convertView.findViewById(R.id.nickname);
+            nickname.setText(LoginInfo.user.getNickName());
             loadPortImage(headRight,BASE_URL+LoginInfo.user.getUserPortrait());
         }else {
-            convertView = View.inflate(context, R.layout.room_chatitem_others, null);
-            headLeft = convertView.findViewById(R.id.head_left);
-            loadUserInfoByUserCode(ortherUser.getUserCode());
+            convertView = View.inflate(context, R.layout.group_room_chatitem_others, null);
+
+            loadUserInfoByUserCode(userCode,convertView);
 
         }
         String text = chatRoomRecord.getMessage();
@@ -113,14 +117,16 @@ public class ChartRoomMessageAdapter extends BaseAdapter {
 
     private void loadPortImage(ImageView imageView, String url){
         RequestOptions options = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .fallback(R.drawable.image).centerCrop();
         Glide.with(context)
                 .load(url)
                 .apply(options)
                 .into(imageView);
+
     }
 
-    private void loadUserInfoByUserCode(String userCode){
+    private void loadUserInfoByUserCode(String userCode, final View view){
         client = HttpUtils.init(client);
         Request request = new Request.Builder().
                 url(BUILD_URL("averageUser/userInfoByCode?userCode=" + userCode)).build();
@@ -141,6 +147,7 @@ public class ChartRoomMessageAdapter extends BaseAdapter {
                     JSONObject userInfo = JSONObject.
                             parseObject((JSONObject.parseObject(result)).getString("data"));
                     JSONObject userDetailInfo = userInfo.getJSONObject("userInfo");
+                    User ortherUser = new User();
                     ortherUser.setNickName(userInfo.getString("userNickname"));
                     ortherUser.setUserSignature(userInfo.getString("userSignature"));
                     ortherUser.setUserGrade(userInfo.getInteger("userGrade"));
@@ -156,7 +163,10 @@ public class ChartRoomMessageAdapter extends BaseAdapter {
                     ortherUser.setUserProvince(userInfo.getString("userProvince"));
                     ortherUser.setUserCity(userInfo.getString("userCity"));
                     ortherUser.setUserSex(userInfo.getString("userSex"));
-                    android.os.Message message = mainHandler.obtainMessage(600,"");
+                    Map<String,Object> map = new HashMap<>();
+                    map.put("view",view);
+                    map.put("user",ortherUser);
+                    android.os.Message message = mainHandler.obtainMessage(600,map);
                     mainHandler.sendMessage(message);
                 }
             }
@@ -169,7 +179,15 @@ public class ChartRoomMessageAdapter extends BaseAdapter {
             super.handleMessage(msg);
             switch (msg.what){
                 case 600:
-                    loadPortImage(headLeft,BASE_URL+ortherUser.getUserPortrait());
+                    Map<String,Object> map = (Map<String, Object>) msg.obj;
+                    View view = (View) map.get("view");
+                    ImageView headLeft = view.findViewById(R.id.head_left);
+                    TextView nickName = view.findViewById(R.id.nickname);
+                    User ortherUser = (User) map.get("user");
+                    //  if(headLeft.getTag()!=null && headLeft.getTag().equals(BASE_URL+ortherUser.getUserPortrait())){
+                        loadPortImage(headLeft,BASE_URL+ortherUser.getUserPortrait());
+                 //   }
+                    nickName.setText(ortherUser.getNickName());
                     break;
                 case 601:
                     break;
