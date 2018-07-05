@@ -164,12 +164,28 @@ public class SingleChartActivity extends AppCompatActivity {
                     options.setRetainOffline(true);//是否当对方用户不在线时让后台服务区保存这条消息的离线消息
                     options.setShowNotification(true);//是否让对方展示sdk默认的通知栏通知
                     options.setCustomNotificationEnabled(true);//是否需要自定义对方收到这条消息时sdk默认展示的通知栏中的文字
-                    options.setNotificationTitle(name);//自定义对方收到消息时通知栏展示的title
+                    options.setNotificationTitle(LoginInfo.user.getNickName());//自定义对方收到消息时通知栏展示的title
                     //options.setNotificationAtPrefix(mEt_customNotifyAtPrefix.getText().toString());//自定义对方收到消息时通知栏展示的@信息的前缀
                     options.setNotificationText(text);//自定义对方收到消息时通知栏展示的text
 
                     //发送消息
                     JMessageClient.sendMessage(message, options);
+
+                    UserConversation userConversation = new UserConversation();
+                    List<UserConversation> userConversationList =  DataSupport
+                            .where("userCode = ? and userConversationCode = ?", LoginInfo.user.getUserCode(),name)
+                            .find(UserConversation.class);
+                    if (null!=userConversationList&&userConversationList.size()>0){
+                      //  userConversation.setUnReadNum(userConversationList.get(0).getUnReadNum()+1);
+                        userConversation.setDate(new Date().getTime());
+                        userConversation.updateAll("userCode = ? and userConversationCode = ?", LoginInfo.user.getUserCode(),name);
+                    }else {
+                        userConversation.setUnReadNum(0);
+                        userConversation.setUserCode(LoginInfo.user.getUserCode());
+                        userConversation.setUserConversationCode(name);
+                        userConversation.setDate(new Date().getTime());
+                        userConversation.save();
+                    }
 
                     //在聊天界面上添加信息
                     singleMessageAdapter.addMessage(chatRecord);
