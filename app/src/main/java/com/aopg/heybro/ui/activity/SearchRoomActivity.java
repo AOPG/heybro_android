@@ -356,12 +356,12 @@ public class SearchRoomActivity extends Activity {
 
                                                                     } else if ("0".equals(msg.obj.toString())) {
 
-                                                                        window = new PopupWindow(viewRoomView, 850, 1000, true);
+                                                                        window = new PopupWindow(viewRoomView, 900, 1250, true);
                                                                         // 设置PopupWindow是否能响应外部点击事件
                                                                         window.setOutsideTouchable(false);
                                                                         // 设置PopupWindow是否能响应点击事件
                                                                         window.setTouchable(true);
-                                                                        window.showAtLocation(view, Gravity.LEFT, 20, -200);
+                                                                        window.showAtLocation(view, Gravity.LEFT, -150, -150);
                                                                         setBackgroundAlpha(SearchRoomActivity.this,0.5f);
                                                                         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
                                                                             @Override
