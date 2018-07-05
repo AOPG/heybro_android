@@ -2,10 +2,10 @@
 <!--四个角变为圆角-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="#7F9FF43C" />
-    <corners android:topLeftRadius="10dp"
-        android:topRightRadius="10dp"
-        android:bottomRightRadius="10dp"
-        android:bottomLeftRadius="10dp"/>
+    <corners android:topLeftRadius="5dp"
+        android:topRightRadius="5dp"
+        android:bottomRightRadius="5dp"
+        android:bottomLeftRadius="5dp"/>
     <gradient
         android:angle="0"
         android:endColor="#9FF43C"

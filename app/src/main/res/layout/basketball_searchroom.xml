@@ -2,41 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#323238"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#101010"
             android:orientation="horizontal">
             <!--需要下拉搜索提示框-->
             <SearchView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="55dp"
+                android:layout_width="match_parent"
                 android:id="@+id/searchroom"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="15dp"
                 android:layout_gravity="center"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:background="#716A6A"
+                android:layout_height="35dp"
+                android:background="#99ffffff"
                 android:queryHint="输入房间名" />
             <TextView
+                android:width="50dp"
+                android:gravity="right"
+                android:layout_marginRight="15dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
                 android:id="@+id/searchroom_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="取消"
                 android:textSize="15dp"
-                android:textColor="#ffffff"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="20dp"/>
-        </LinearLayout>
+                android:textColor="#ffffff" />
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#716A6A"
+            android:background="#1fffffff"
             android:orientation="vertical">
             <ListView
+                android:divider="#55ffffff"
+                android:dividerHeight="0.1dp"
                 android:id="@+id/roomlist"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

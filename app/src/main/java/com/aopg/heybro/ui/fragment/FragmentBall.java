@@ -41,6 +41,7 @@ import com.aopg.heybro.ui.room.RoomDate;
 import com.aopg.heybro.ui.room.RoomJoinAdapter;
 import com.aopg.heybro.ui.room.RoomUser;
 import com.aopg.heybro.utils.BaiduMapLocationUtil;
+import com.aopg.heybro.utils.Dp2px;
 import com.aopg.heybro.utils.HttpUtils;
 import com.aopg.heybro.utils.LoginInfo;
 import com.baidu.location.BDAbstractLocationListener;
@@ -784,12 +785,12 @@ public class FragmentBall extends Fragment{
 
                                                     }else if ("0".equals(msg.obj.toString())){
 
-                                                        window = new PopupWindow(viewRoomView, 850, 1000, true);
+                                                        window = new PopupWindow(viewRoomView, 1000,2000, true);
                                                         // 设置PopupWindow是否能响应外部点击事件
                                                         window.setOutsideTouchable(false);
                                                         // 设置PopupWindow是否能响应点击事件
                                                         window.setTouchable(true);
-                                                        window.showAtLocation(view, Gravity.LEFT, 20, -200);
+                                                        window.showAtLocation(rootView, Gravity.LEFT, -1000, -400);
                                                         setBackgroundAlpha(getActivity(),0.5f);
                                                         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
                                                             @Override
