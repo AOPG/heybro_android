@@ -79,6 +79,8 @@ public class AddFriendActivity extends Activity{
             @Override
             public void onClick(View v) {
                 friendView = getLayoutInflater().inflate(R.layout.search_friend_msg, null);
+                //friendView = getLayoutInflater().inflate(R.layout., null);
+                //friendView=findViewById(R.id.friend_lv);
                 System.out.println("测试");
                 if (v.getId() == R.id.search_ensure) {
                     user_code_txt = userCode.getText().toString();
@@ -126,6 +128,8 @@ public class AddFriendActivity extends Activity{
                             int userGrade= Integer.parseInt(((JSONObject) UserInfo.get(i)).getString("userGrade"));
                             String userCity=((JSONObject) UserInfo.get(i)).getString("userCity");
                             String userProvince=((JSONObject) UserInfo.get(i)).getString("userProvince");
+                            String userNickName=((JSONObject) UserInfo.get(i)).getString("userNickname");
+                            user.setNickName(userNickName);
                             user.setUserProvince(userProvince);
                             user.setUserCity(userCity);
                             user.setUserGrade(userGrade);

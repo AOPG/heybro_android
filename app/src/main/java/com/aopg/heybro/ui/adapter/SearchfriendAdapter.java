@@ -66,7 +66,7 @@ public class SearchfriendAdapter extends BaseAdapter {
                 .load(BASE_URL+ users.get(position).getUserPortrait())
                 .apply(options)
                 .into(userPortrait);
-        userName.setText(users.get(position).getUsername());
+        userName.setText(users.get(position).getNickName());
         userCode.setText(users.get(position).getUserCode());
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
