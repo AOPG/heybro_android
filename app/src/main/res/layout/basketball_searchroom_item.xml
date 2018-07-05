@@ -7,7 +7,7 @@
     <!--设想的是像讨论组一样多个人的头像变成小头像-->
     <com.aopg.heybro.utils.teamhead.view.SynthesizedImageView
         android:id="@+id/member_imgs"
-        android:layout_width="70dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/pic"
         android:layout_centerVertical="true"
@@ -30,13 +30,13 @@
         <!--房间实际人数-->
         <TextView
             android:id="@+id/roomRealNum"
-            android:layout_width="15dp"
+            android:layout_width="20dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="3"
             android:textColor="#bbbbbb"/>
         <TextView
-            android:layout_width="15dp"
+            android:layout_width="20dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="/"
@@ -44,7 +44,7 @@
         <!--房间总共容纳人数-->
         <TextView
             android:id="@+id/roomFullNum"
-            android:layout_width="15dp"
+            android:layout_width="20dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="6"
